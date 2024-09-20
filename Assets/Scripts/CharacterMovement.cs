@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -15,7 +16,7 @@ public class CharacterMovement : MonoBehaviour
     {
         GetComponent<SpriteRenderer>().color = Color.black;
         UpdateCharacterPosition(); // Đặt nhân vật vào vị trí hiện tại
-        HighlightMovableCells(); // Làm sáng các ô có thể di chuyển
+
     }
 
     void Update()
@@ -54,7 +55,7 @@ public class CharacterMovement : MonoBehaviour
                         currentCol = col;
                         Debug.Log(row + "-" + col);
                         UpdateCharacterPosition(); // Cập nhật vị trí mục tiêu
-                        HighlightMovableCells(); // Cập nhật các ô có thể di chuyển
+                        //HighlightMovableCells(); // Cập nhật các ô có thể di chuyển
                     }
                 }
             }
@@ -69,26 +70,30 @@ public class CharacterMovement : MonoBehaviour
         
     }
 
-    void HighlightMovableCells()
+    public Tuple<int,int> GetPos()
     {
-        // Reset màu sắc tất cả các ô
-        foreach (GameObject cell in gridController.grid)
-        {
-            cell.GetComponent<SpriteRenderer>().color = new Color(238/255f, 130 / 255f, 238 / 255f);
-        }
-
-        // Làm sáng các ô liền kề
-        HighlightCell(currentRow - 1, currentCol); // Ô trên
-        HighlightCell(currentRow + 1, currentCol); // Ô dưới
-        HighlightCell(currentRow, currentCol - 1); // Ô trái
-        HighlightCell(currentRow, currentCol + 1); // Ô phải
+        return Tuple.Create(currentRow, currentCol);
     }
+    //void HighlightMovableCells()
+    //{
+    //    // Reset màu sắc tất cả các ô
+    //    foreach (GameObject cell in gridController.grid)
+    //    {
+    //        cell.GetComponent<SpriteRenderer>().color = new Color(238/255f, 130 / 255f, 238 / 255f);
+    //    }
 
-    void HighlightCell(int row, int col)
-    {
-        if (row >= 0 && row < gridController.rows && col >= 0 && col < gridController.cols)
-        {
-            gridController.grid[row, col].GetComponent<SpriteRenderer>().color = Color.yellow;
-        }
-    }
+    //    // Làm sáng các ô liền kề
+    //    HighlightCell(currentRow - 1, currentCol); // Ô trên
+    //    HighlightCell(currentRow + 1, currentCol); // Ô dưới
+    //    HighlightCell(currentRow, currentCol - 1); // Ô trái
+    //    HighlightCell(currentRow, currentCol + 1); // Ô phải
+    //}
+
+    //void HighlightCell(int row, int col)
+    //{
+    //    if (row >= 0 && row < gridController.rows && col >= 0 && col < gridController.cols)
+    //    {
+    //        gridController.grid[row, col].GetComponent<SpriteRenderer>().color = Color.yellow;
+    //    }
+    //}
 }
