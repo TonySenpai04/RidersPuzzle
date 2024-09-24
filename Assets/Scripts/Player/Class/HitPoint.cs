@@ -6,6 +6,11 @@ public class HitPoint : IHitPoint
 {
     private float health;
     private float currentHealth;
+    public HitPoint(float health)
+    {
+        this.health = health;
+        this.currentHealth = health;
+    }
     public void Heal(int amount)
     {
         this.currentHealth += amount;
@@ -29,5 +34,6 @@ public class HitPoint : IHitPoint
     public void TakeDamage(int damage)
     {
         this.currentHealth -= damage;
+        Debug.Log(currentHealth);
     }
 }

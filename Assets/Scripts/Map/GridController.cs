@@ -13,7 +13,7 @@ public class GridController : MonoBehaviour
     public float spacing = 0.1f; // Khoảng cách giữa các ô
     public Vector2 centerOffset = new Vector2(0, 0); // Điểm trung tâm của lưới
     public GameObject[,] grid;
-    [SerializeField] private CharacterMovement character;
+    [SerializeField] private MovementController character;
     [SerializeField] private LevelManager levelManager;
     private void Awake()
     {

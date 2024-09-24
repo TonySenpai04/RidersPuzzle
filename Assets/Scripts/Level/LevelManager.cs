@@ -69,6 +69,7 @@ public class LevelManager : MonoBehaviour
             {
                 // Kích hoạt object ẩn
                 hiddenObjectInfo.objectPrefab.SetActive(true);
+                hiddenObjectInfo.objectPrefab.GetComponent<HiddenObject>().ActiveSkill();
                 Debug.Log("Kích hoạt object ẩn tại: " + row + ", " + col);
             }
         }

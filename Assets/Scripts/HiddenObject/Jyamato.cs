@@ -4,8 +4,9 @@ using UnityEngine;
 
 public class Jyamato : HiddenObject
 {
-    public override void ActiveSkil()
+    public override void ActiveSkill()
     {
-        Debug.Log("Yamato Skill Activated!");
+       PlayerController.instance.movementController.UndoLastMove();
+        PlayerController.instance.hitPoint.TakeDamage(1);
     }
 }

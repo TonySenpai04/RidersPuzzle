@@ -4,7 +4,7 @@ using UnityEngine;
 
 public abstract class HiddenObject : MonoBehaviour
 {
-
+    public string id;
     public virtual void Start()
     {
         Hide();
@@ -15,7 +15,7 @@ public abstract class HiddenObject : MonoBehaviour
     {
         this.gameObject.SetActive(false);
     }
-    public virtual void ActiveSkil()
+    public virtual void ActiveSkill()
     {
         Debug.Log("Skill Activated!");
     }
