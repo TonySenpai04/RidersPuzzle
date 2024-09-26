@@ -6,7 +6,11 @@ public class NumberOfMove : INumberOfMoves
 {
     private int moves;
     private int currentMoves;
-
+    public NumberOfMove(int move)
+    {
+        this.moves = move;
+        this.currentMoves = move;
+    }
     public float GetCurrentMove()
     {
         return currentMoves;

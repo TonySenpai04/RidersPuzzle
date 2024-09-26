@@ -12,10 +12,13 @@ public class MovementController : MonoBehaviour
     [SerializeField] private Vector3 targetPosition; 
     [SerializeField] private float moveSpeed = 5.0f;
     private IMoveHistory moveHistory;
+    public INumberOfMoves numberOfMoves;
     void Start()
     {
         moveHistory = new MoveHistory();
-        UpdateCharacterPosition(); 
+        UpdateCharacterPosition();
+        numberOfMoves = new NumberOfMove(16);
+        moveHistory.AddMove(currentRow, currentCol);
 
     }
 
@@ -39,40 +42,86 @@ public class MovementController : MonoBehaviour
 
     void MoveToCell(GameObject cell)
     {
-        // Lấy hàng và cột của ô được click
         for (int row = 0; row < gridController.rows; row++)
         {
             for (int col = 0; col < gridController.cols; col++)
             {
-                if (gridController.grid[row, col] == cell)
+                if (gridController.grid[row, col] == cell )
                 {
-                    // Kiểm tra có phải là ô liền kề không
-                    if (Mathf.Abs(row - currentRow) + Mathf.Abs(col - currentCol) == 1)
+                    if (Mathf.Abs(row - currentRow) + Mathf.Abs(col - currentCol) == 1 && numberOfMoves.GetCurrentMove() > 0)
                     {
                         moveHistory.AddMove(currentRow, currentCol);
                         currentRow = row;
                         currentCol = col;
-                        //Debug.Log(row + "-" + col);
-                        UpdateCharacterPosition(); // Cập nhật vị trí mục tiêu
+                        numberOfMoves.ReduceeMove(1);
+                        UpdateCharacterPosition(); 
                     }
                 }
             }
         }
     }
-    public void UndoLastMove()
+    public void UndoLastMove(int jumpSteps)
     {
-        if (moveHistory.HasHistory())
+        for (int i = 0; i < jumpSteps; i++)
         {
-            // Lấy vị trí cuối cùng từ lịch sử
-            Tuple<int, int> lastPosition = moveHistory.UndoMove();
+            if (moveHistory.HasHistory())
+            {
+                Tuple<int, int> lastPosition = moveHistory.UndoMove();
 
-            // Cập nhật vị trí nhân vật
-            currentRow = lastPosition.Item1;
-            currentCol = lastPosition.Item2;
+                currentRow = lastPosition.Item1;
+                currentCol = lastPosition.Item2;
 
-            UpdateCharacterPosition(); // Cập nhật vị trí mục tiêu
+                UpdateCharacterPosition(); 
+            }
+            else
+            {
+                break; 
+            }
         }
     }
+
+    private Vector2Int GetCurrentDirection()
+    {
+        int previousRow = 1;
+        int previousCol = 0;
+        if (moveHistory.HasHistory())
+        {
+            Tuple<int, int> lastPosition = moveHistory.UndoMove();
+
+            previousRow = lastPosition.Item1;
+            previousCol = lastPosition.Item2;
+        }
+        int deltaX = currentRow - previousRow;
+        int deltaY = currentCol - previousCol; 
+
+        return new Vector2Int(deltaX, deltaY); 
+    }
+
+    public void MoveForward(int steps)
+    {
+        Vector2Int direction = GetCurrentDirection();
+
+        for (int i = 0; i < steps; i++)
+        {
+            int newRow = currentRow + direction.x;
+            int newCol = currentCol + direction.y;
+
+            if (newRow >= 0 && newRow < gridController.rows && newCol >= 0 && newCol < gridController.cols)
+            {
+
+                currentRow = newRow;
+                currentCol = newCol;
+                UpdateCharacterPosition();
+
+            }
+            else
+            {
+                break; 
+            }
+        }
+    }
+
+
 
     void UpdateCharacterPosition()
     {

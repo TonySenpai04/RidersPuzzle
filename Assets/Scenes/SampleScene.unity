@@ -157,6 +157,18 @@ MonoBehaviour:
     - row: 2
       col: 2
       objectPrefab: {fileID: 6650335154616161099, guid: dc2e1ca7e569ffe42b854e497fa22a15, type: 3}
+    - row: 2
+      col: 3
+      objectPrefab: {fileID: 8062234285849621335, guid: 0df7af586b5a214499adcce48d277bac, type: 3}
+    - row: 2
+      col: 4
+      objectPrefab: {fileID: 7236192479581987873, guid: 760b03e2192d65e4c9d331a05c3f8e9c, type: 3}
+    - row: 3
+      col: 2
+      objectPrefab: {fileID: 1966272822269143411, guid: 0a6cea10c71f1194aaba1d375e047a9d, type: 3}
+    - row: 1
+      col: 2
+      objectPrefab: {fileID: 67316364751411743, guid: b2e9cba57b6309042a216081b5f97f2d, type: 3}
   currentLevelIndex: 1
 --- !u!4 &325954454
 Transform:

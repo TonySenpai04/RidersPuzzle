@@ -21,7 +21,9 @@ public class LevelManager : MonoBehaviour
 {
     public GridController gridController;
     public List<Level> levels;
-    public int currentLevelIndex = 1; 
+    public int currentLevelIndex = 1;
+
+    private Dictionary<Vector2Int, GameObject> hiddenObjectInstances = new Dictionary<Vector2Int, GameObject>();
 
     void Start()
     {
@@ -33,15 +35,18 @@ public class LevelManager : MonoBehaviour
         int lv = levelIndex - 1;
         if (lv >= 0 && lv < levels.Count)
         {
-          
             Level level = levels[lv];
             ClearHiddenObjects();
             foreach (HiddenObjectInfo hiddenObjectInfo in level.hiddenObjects)
             {
                 GameObject cell = gridController.grid[hiddenObjectInfo.row, hiddenObjectInfo.col];
                 GameObject hiddenObject = Instantiate(hiddenObjectInfo.objectPrefab, cell.transform.position, Quaternion.identity);
-                hiddenObject.transform.SetParent(cell.transform); 
-                hiddenObject.SetActive(false); 
+                hiddenObject.transform.SetParent(cell.transform);
+                hiddenObject.SetActive(false); // Ẩn object ban đầu
+
+                // Lưu instance của hidden object trong dictionary
+                Vector2Int positionKey = new Vector2Int(hiddenObjectInfo.row, hiddenObjectInfo.col);
+                hiddenObjectInstances[positionKey] = hiddenObject;
             }
         }
         else
@@ -49,30 +54,33 @@ public class LevelManager : MonoBehaviour
             Debug.LogWarning("Level index is out of range.");
         }
     }
+
     void ClearHiddenObjects()
     {
-        foreach (Transform child in gridController.transform)
+        // Dọn dẹp các hidden objects cũ
+        foreach (GameObject hiddenObject in hiddenObjectInstances.Values)
         {
-            HiddenObject hiddenObject = child.GetComponentInChildren<HiddenObject>();
-            if (hiddenObject != null)
-            {
-                Destroy(hiddenObject.gameObject);
-            }
+            Destroy(hiddenObject);
         }
+        hiddenObjectInstances.Clear(); // Xóa dictionary để chuẩn bị cho level mới
     }
+
     public void CheckForHiddenObject(int row, int col)
     {
-        // Lặp qua tất cả các hidden objects và kiểm tra xem có object nào ở vị trí (row, col) không
-        foreach (HiddenObjectInfo hiddenObjectInfo in levels[currentLevelIndex - 1].hiddenObjects)
+        // Kiểm tra xem vị trí (row, col) có object nào không
+        Vector2Int positionKey = new Vector2Int(row, col);
+        if (hiddenObjectInstances.ContainsKey(positionKey))
         {
-            if (hiddenObjectInfo.row == row && hiddenObjectInfo.col == col)
+            GameObject hiddenObject = hiddenObjectInstances[positionKey];
+            if (hiddenObject != null)
             {
-                // Kích hoạt object ẩn
-                hiddenObjectInfo.objectPrefab.SetActive(true);
-                hiddenObjectInfo.objectPrefab.GetComponent<HiddenObject>().ActiveSkill();
-                Debug.Log("Kích hoạt object ẩn tại: " + row + ", " + col);
+                hiddenObject.SetActive(true);
+                hiddenObject.GetComponent<HiddenObject>().ActiveSkill();
             }
+            
+            Debug.Log("Kích hoạt object ẩn tại: " + row + ", " + col);
         }
+  
     }
 }
 
