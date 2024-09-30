@@ -14,7 +14,7 @@ public class GridController : MonoBehaviour
     public Vector2 centerOffset = new Vector2(0, 0); // Điểm trung tâm của lưới
     public GameObject[,] grid;
     [SerializeField] private MovementController character;
-    [SerializeField] private LevelManager levelManager;
+
     private void Awake()
     {
         gridGenerator=new GridGenerator(this.gameObject,blockPrefab);
@@ -43,7 +43,11 @@ public class GridController : MonoBehaviour
         HighlightCell(currentRow + 1, currentCol); // Ô dưới
         HighlightCell(currentRow, currentCol - 1); // Ô trái
         HighlightCell(currentRow, currentCol + 1); // Ô phải
-        levelManager.CheckForHiddenObject(currentRow, currentCol);
+        GameObject hiddenObject= LevelManager.instance.CheckForHiddenObject(currentRow, currentCol);
+        if (hiddenObject != null)
+        {
+            hiddenObject.GetComponent<HiddenObject>().ActiveSkill();
+        }
     }
 
     void HighlightCell(int row, int col)

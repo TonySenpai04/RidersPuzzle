@@ -22,9 +22,12 @@ public class LevelManager : MonoBehaviour
     public GridController gridController;
     public List<Level> levels;
     public int currentLevelIndex = 1;
-
+    public static LevelManager instance;
     private Dictionary<Vector2Int, GameObject> hiddenObjectInstances = new Dictionary<Vector2Int, GameObject>();
-
+    private void Awake()
+    {
+        instance = this;
+    }
     void Start()
     {
         LoadLevel(currentLevelIndex);
@@ -42,9 +45,8 @@ public class LevelManager : MonoBehaviour
                 GameObject cell = gridController.grid[hiddenObjectInfo.row, hiddenObjectInfo.col];
                 GameObject hiddenObject = Instantiate(hiddenObjectInfo.objectPrefab, cell.transform.position, Quaternion.identity);
                 hiddenObject.transform.SetParent(cell.transform);
-                hiddenObject.SetActive(false); // Ẩn object ban đầu
+                hiddenObject.SetActive(false); 
 
-                // Lưu instance của hidden object trong dictionary
                 Vector2Int positionKey = new Vector2Int(hiddenObjectInfo.row, hiddenObjectInfo.col);
                 hiddenObjectInstances[positionKey] = hiddenObject;
             }
@@ -65,7 +67,7 @@ public class LevelManager : MonoBehaviour
         hiddenObjectInstances.Clear(); // Xóa dictionary để chuẩn bị cho level mới
     }
 
-    public void CheckForHiddenObject(int row, int col)
+    public GameObject CheckForHiddenObject(int row, int col)
     {
         // Kiểm tra xem vị trí (row, col) có object nào không
         Vector2Int positionKey = new Vector2Int(row, col);
@@ -75,12 +77,14 @@ public class LevelManager : MonoBehaviour
             if (hiddenObject != null)
             {
                 hiddenObject.SetActive(true);
-                hiddenObject.GetComponent<HiddenObject>().ActiveSkill();
+                return hiddenObject;
+                //hiddenObject.GetComponent<HiddenObject>().ActiveSkill();
             }
             
-            Debug.Log("Kích hoạt object ẩn tại: " + row + ", " + col);
+
         }
-  
+        return null;
+
     }
 }
 
