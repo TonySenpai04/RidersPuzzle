@@ -6,7 +6,8 @@ public interface IMoveHistory
 
     public Tuple<int, int> UndoMove();
 
-
+    public Tuple<int, int> GetLastMove(); // Lấy nhưng không xóa
+ 
     public bool HasHistory();
 
     public void ClearHistory();

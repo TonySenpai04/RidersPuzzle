@@ -6,6 +6,7 @@ public abstract class HiddenObject : MonoBehaviour
 {
     public string id;
     public ObjectType type;
+
     public enum ObjectType
     {
         PowerUp,   

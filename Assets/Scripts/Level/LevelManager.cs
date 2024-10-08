@@ -78,7 +78,7 @@ public class LevelManager : MonoBehaviour
             {
                 hiddenObject.SetActive(true);
                 return hiddenObject;
-                //hiddenObject.GetComponent<HiddenObject>().ActiveSkill();
+                
             }
             
 

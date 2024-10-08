@@ -38,7 +38,7 @@ public class GridGenerator : IGridGenerator
         // Tính toán điểm bắt đầu để tạo ô xung quanh tâm
         Vector3 startPosition = new Vector3(
             -gridWidth / 2f + centerOffset.x + (cellSize + spacing) / 2f,
-            gridHeight / 2f + centerOffset.y - (cellSize + spacing) / 2f,
+            gridHeight / 2f + centerOffset.y - (cellSize + spacing) / 2f+0.5f,
             0
         );
 

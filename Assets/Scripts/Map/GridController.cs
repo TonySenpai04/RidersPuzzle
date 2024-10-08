@@ -14,9 +14,14 @@ public class GridController : MonoBehaviour
     public Vector2 centerOffset = new Vector2(0, 0); // Điểm trung tâm của lưới
     public GameObject[,] grid;
     [SerializeField] private MovementController character;
+    public bool isActiveObject=true;
+    public int currentObjectRow;
+    public int currentObjectColumn;
+
 
     private void Awake()
     {
+
         gridGenerator=new GridGenerator(this.gameObject,blockPrefab);
         gridGenerator.GenerateGrid( rows,  cols,  cellSize,  spacing, centerOffset);
         grid= gridGenerator.Grid();
@@ -25,7 +30,8 @@ public class GridController : MonoBehaviour
     private void FixedUpdate()
     {
         HighlightMovableCells();
-        
+        ActiveHiddenObject();
+
     }
 
     void HighlightMovableCells()
@@ -43,11 +49,29 @@ public class GridController : MonoBehaviour
         HighlightCell(currentRow + 1, currentCol); // Ô dưới
         HighlightCell(currentRow, currentCol - 1); // Ô trái
         HighlightCell(currentRow, currentCol + 1); // Ô phải
-        GameObject hiddenObject= LevelManager.instance.CheckForHiddenObject(currentRow, currentCol);
-        if (hiddenObject != null)
+       
+      
+    }
+    public void ActiveHiddenObject()
+    {
+        int currentRow = character.GetPos().Item1;
+        int currentCol = character.GetPos().Item2;
+
+        GameObject hiddenObject = LevelManager.instance.CheckForHiddenObject(currentRow, currentCol);
+        if (hiddenObject != null  && isActiveObject)
         {
             hiddenObject.GetComponent<HiddenObject>().ActiveSkill();
+            currentObjectRow = character.GetPos().Item1;
+            currentObjectColumn = character.GetPos().Item2;
+            isActiveObject = false;
         }
+
+        if (currentObjectRow != currentRow || currentObjectColumn!= currentCol)
+        {
+            isActiveObject = true;
+        }
+        
+
     }
 
     void HighlightCell(int row, int col)

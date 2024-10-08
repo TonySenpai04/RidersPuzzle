@@ -13,5 +13,18 @@ public class PlayerController : MonoBehaviour
         instance = this;
         hitPoint = new HitPoint(5);
     }
-   
+    private void Update()
+    {
+        if (!GameManager.instance.isEnd) {
+            if (hitPoint.GetCurrentHealth() <= 0)
+            {
+                return;
+            }
+            else
+            {
+                movementController.Movement();
+            }
+        }
+               
+    }
 }

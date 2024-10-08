@@ -34,6 +34,7 @@ public class HitPoint : IHitPoint
     public void TakeDamage(int damage)
     {
         this.currentHealth -= damage;
-        Debug.Log(currentHealth);
+        if(currentHealth<=0)
+            currentHealth = 0;
     }
 }

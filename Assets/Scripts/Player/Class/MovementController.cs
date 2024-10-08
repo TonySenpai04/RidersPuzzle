@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Xml.Serialization;
 using UnityEngine;
 
 public class MovementController : MonoBehaviour
@@ -16,16 +17,18 @@ public class MovementController : MonoBehaviour
     void Start()
     {
         moveHistory = new MoveHistory();
-        UpdateCharacterPosition();
+      
         numberOfMoves = new NumberOfMove(16);
         moveHistory.AddMove(currentRow, currentCol);
+        UpdateCharacterPosition(currentRow,currentCol);
 
     }
 
-    void Update()
+ 
+    public void Movement()
     {
-        player.transform.position = 
-            Vector3.MoveTowards(player.transform.position, targetPosition, moveSpeed * Time.deltaTime);
+        player.transform.position =
+           Vector3.MoveTowards(player.transform.position, targetPosition, moveSpeed * Time.deltaTime);
 
         if (Input.GetMouseButtonDown(0))
         {
@@ -53,12 +56,17 @@ public class MovementController : MonoBehaviour
                         moveHistory.AddMove(currentRow, currentCol);
                         currentRow = row;
                         currentCol = col;
+      
                         numberOfMoves.ReduceeMove(1);
-                        UpdateCharacterPosition(); 
+                        UpdateCharacterPosition(currentRow, currentCol); 
                     }
                 }
             }
         }
+    }
+    public Tuple<int, int> GetLastMove()
+    {
+       return moveHistory.GetLastMove();
     }
     public void UndoLastMove(int jumpSteps)
     {
@@ -71,7 +79,7 @@ public class MovementController : MonoBehaviour
                 currentRow = lastPosition.Item1;
                 currentCol = lastPosition.Item2;
 
-                UpdateCharacterPosition(); 
+                UpdateCharacterPosition(currentRow,currentCol); 
             }
             else
             {
@@ -111,7 +119,7 @@ public class MovementController : MonoBehaviour
 
                 currentRow = newRow;
                 currentCol = newCol;
-                UpdateCharacterPosition();
+                UpdateCharacterPosition(currentRow, currentCol);
 
             }
             else
@@ -123,17 +131,32 @@ public class MovementController : MonoBehaviour
 
 
 
-    void UpdateCharacterPosition()
+    public void UpdateCharacterPosition(int currentRow,int currentCol)
     {
         targetPosition = new Vector3(gridController.grid[currentRow, currentCol].transform.position.x,
                                      gridController.grid[currentRow, currentCol].transform.position.y, 0);
         player.transform.position = targetPosition;
         
     }
+    public void MoveStartPoint()
+    {
+        UpdateCharacterPosition(5, 0);
+        currentRow = 5;
+        currentCol = 0;
 
+    }
+
+    public void MoveEndPoint()
+    {
+        UpdateCharacterPosition(0, 4);
+        currentRow = 0;
+        currentCol = 4;
+
+    }
     public Tuple<int,int> GetPos()
     {
         return Tuple.Create(currentRow, currentCol);
     }
+
 
 }

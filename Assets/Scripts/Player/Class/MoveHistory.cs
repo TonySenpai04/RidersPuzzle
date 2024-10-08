@@ -32,6 +32,14 @@ public class MoveHistory:IMoveHistory
     {
         return moveHistory.Count > 0;
     }
+    public Tuple<int, int> GetLastMove() // Lấy nhưng không xóa
+    {
+        if (moveHistory.Count > 0)
+        {
+            return moveHistory.Peek(); // Lấy vị trí cuối cùng nhưng không xóa nó khỏi stack
+        }
+        return null;
+    }
 
     // Xóa toàn bộ lịch sử di chuyển
     public void ClearHistory()
