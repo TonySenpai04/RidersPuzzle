@@ -38,4 +38,5 @@ public class GeatsSkill : ISkill
         }
         PlayerController.instance.movementController.numberOfMoves.IncreaseMove(1);
     }
+
 }

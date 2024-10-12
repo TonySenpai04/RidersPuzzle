@@ -11,7 +11,7 @@ public class PlayerController : MonoBehaviour
     private void Start()
     {
         instance = this;
-        hitPoint = new HitPoint(5);
+        hitPoint = new HitPoint(100);
     }
     private void Update()
     {

@@ -30,10 +30,10 @@ public class PandoraBox : HiddenObject
     {
         effects = new List<MovementEffect>
         {
-            new MovementEffect(0.2f, ReturnToStart),
-            new MovementEffect(0.0001f, MoveToDestination),
-            new MovementEffect(0.05f, MoveForward),
-            new MovementEffect(0.05f, MoveBackward)
+            new MovementEffect(0.05f, ReturnToStart),
+            new MovementEffect(0.05f, MoveToDestination),
+            new MovementEffect(0.45f, RandomPowerUp),
+            new MovementEffect(0.45f, RandomObstacle)
         };
     }
     public override void ActiveSkill()
@@ -43,41 +43,54 @@ public class PandoraBox : HiddenObject
     }
     public void ApplyEffects()
     {
-        effects.Sort((a, b) => b.probability.CompareTo(a.probability));
-
-        float random = UnityEngine.Random.value;
+        float random = UnityEngine.Random.value; 
+        float cumulativeProbability = 0f;
+        List<MovementEffect> validEffects = new List<MovementEffect>(); 
 
         foreach (var effect in effects)
         {
-            if (random <= effect.probability) 
+            cumulativeProbability += effect.probability;
+            if (random <= cumulativeProbability) 
             {
-                effect.ExecuteEffect(); 
-                break; 
+                validEffects.Add(effect); 
             }
+        }
+
+        if (validEffects.Count > 0)
+        {
+            int randomIndex = UnityEngine.Random.Range(0, validEffects.Count);
+            validEffects[randomIndex].ExecuteEffect(); 
         }
     }
 
     private void ReturnToStart()
     {
         PlayerController.instance.movementController.MoveStartPoint();
-        Debug.Log("Trở lại điểm xuất phát");
+        //Destroy(this.gameObject);
     }
 
     private void MoveToDestination()
     {
         PlayerController.instance.movementController.MoveEndPoint();
-        Debug.Log("Đi tới điểm đích");
+       // Destroy(this.gameObject);
     }
 
-    private void MoveForward()
+    private void RandomPowerUp()
     {
-        PlayerController.instance.movementController.MoveForward(1);
-        Debug.Log("Tiến về phía trước 1 ô");
+
+        HiddenObject objectRandom = Instantiate(HiddenObjectManager.instance.GetRandomPowerUp(),
+            transform.position, Quaternion.identity);
+        Debug.Log(objectRandom.name);
+        objectRandom.ActiveSkill();
+        
     }
 
-    private void MoveBackward()
+    private void RandomObstacle()
     {
-        PlayerController.instance.movementController.UndoLastMove(1);
-        Debug.Log("Lùi lại phía sau 1 ô");
+        HiddenObject objectRandom = Instantiate(HiddenObjectManager.instance.GetRandomObstacle(),
+            transform.position, Quaternion.identity);
+        Debug.Log(objectRandom.name);
+        objectRandom.ActiveSkill();
+        
     }
 }

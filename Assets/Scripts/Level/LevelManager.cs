@@ -86,5 +86,59 @@ public class LevelManager : MonoBehaviour
         return null;
 
     }
+    public List<GameObject> GetHiddenObjectsInRow(int row)
+    {
+        List<GameObject> objectsInRow = new List<GameObject>();
+
+        foreach (var entry in hiddenObjectInstances)
+        {
+            if (entry.Key.x == row) 
+            {
+                objectsInRow.Add(entry.Value); 
+            }
+        }
+
+        return objectsInRow;
+    }
+    public List<GameObject> GetHiddenObjectsInColumn(int col)
+    {
+        List<GameObject> objectsInColumn = new List<GameObject>();
+
+        foreach (var entry in hiddenObjectInstances)
+        {
+            if (entry.Key.y == col)
+            {
+                objectsInColumn.Add(entry.Value); 
+            }
+        }
+
+        return objectsInColumn;
+    }
+    public List<GameObject> GetHiddenObjectsAround(int row, int col)
+    {
+        List<GameObject> objectsAround = new List<GameObject>();
+
+        Vector2Int[] directions = {
+        new Vector2Int(-1, 0), // Ô trên
+        new Vector2Int(1, 0),  // Ô dưới
+        new Vector2Int(0, -1), // Ô bên trái
+        new Vector2Int(0, 1)   // Ô bên phải
+    };
+
+        foreach (var dir in directions)
+        {
+            int newRow = row + dir.x;
+            int newCol = col + dir.y;
+            Vector2Int positionKey = new Vector2Int(newRow, newCol);
+            if (hiddenObjectInstances.ContainsKey(positionKey))
+            {
+                objectsAround.Add(hiddenObjectInstances[positionKey]); 
+            }
+        }
+
+        return objectsAround;
+    }
+
+
 }
 
