@@ -24,8 +24,8 @@ public class NumberOfMove : INumberOfMoves
     public void IncreaseMove(int amount)
     {
         this.currentMoves += amount;
-        if (currentMoves > moves)
-            currentMoves = moves;
+        //if (currentMoves > moves)
+        //    currentMoves = moves;
     }
 
     public void ReduceeMove(int amount)

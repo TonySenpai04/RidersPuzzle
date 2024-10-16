@@ -3634,6 +3634,11 @@ MonoBehaviour:
   - {fileID: -1960464663617982371, guid: d880895d70cf53146b14bd160b0fbe9e, type: 3}
   - {fileID: 8101898487227231425, guid: bcb9eb28a0cf5f1448e306c3c5a72687, type: 3}
   - {fileID: -8508295066770132916, guid: 125ee23ab63969749953f8b0e36bbe8f, type: 3}
+  - {fileID: 5545686664795374432, guid: 375ae245ddd5a6a468c7ae77c3d2ba38, type: 3}
+  - {fileID: 6436068025854534992, guid: f6190d1fe2282ba4db90ba3220502612, type: 3}
+  - {fileID: -7929380860807917377, guid: 9d9698b3fa00cab4b84422406a0d960f, type: 3}
+  - {fileID: 3723956077048871618, guid: eb5aaf285dcf93742b032445a4dc06f2, type: 3}
+  - {fileID: -1211898106481113863, guid: 8dc6b4dff80d5cd43b74a0d95673d415, type: 3}
   powerUpObjects: []
   obstacleObjects: []
 --- !u!4 &1076175229

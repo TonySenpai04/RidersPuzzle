@@ -66,13 +66,13 @@ public class PandoraBox : HiddenObject
     private void ReturnToStart()
     {
         PlayerController.instance.movementController.MoveStartPoint();
-        //Destroy(this.gameObject);
+        Destroy(this.gameObject);
     }
 
     private void MoveToDestination()
     {
         PlayerController.instance.movementController.MoveEndPoint();
-       // Destroy(this.gameObject);
+        Destroy(this.gameObject);
     }
 
     private void RandomPowerUp()
@@ -82,7 +82,8 @@ public class PandoraBox : HiddenObject
             transform.position, Quaternion.identity);
         Debug.Log(objectRandom.name);
         objectRandom.ActiveSkill();
-        
+        Destroy(this.gameObject);
+
     }
 
     private void RandomObstacle()
@@ -91,6 +92,7 @@ public class PandoraBox : HiddenObject
             transform.position, Quaternion.identity);
         Debug.Log(objectRandom.name);
         objectRandom.ActiveSkill();
-        
+        Destroy(this.gameObject);
+
     }
 }
