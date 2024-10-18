@@ -10,11 +10,20 @@ public struct HiddenObjectInfo
     public int col;   
     public GameObject objectPrefab; 
 }
+[Serializable]
+public struct WallInfo
+{
+    public int row; 
+    public int col;  
+
+}
 
 [Serializable]
 public struct Level
 {
-    public List<HiddenObjectInfo> hiddenObjects; 
+    public List<HiddenObjectInfo> hiddenObjects;
+    public List<WallInfo> wallPositions;
+    public int key;
 }
 
 public class LevelManager : MonoBehaviour
@@ -23,7 +32,10 @@ public class LevelManager : MonoBehaviour
     public List<Level> levels;
     public int currentLevelIndex = 1;
     public static LevelManager instance;
-    private Dictionary<Vector2Int, GameObject> hiddenObjectInstances = new Dictionary<Vector2Int, GameObject>();
+    public GameObject wallPrefab;
+    public  Dictionary<Vector2Int, GameObject> hiddenObjectInstances = new Dictionary<Vector2Int, GameObject>();
+    private Dictionary<Vector2Int, GameObject> wallInstances = new Dictionary<Vector2Int, GameObject>();
+    private Dictionary<Vector2Int, BoxCollider2D> cellColliders = new Dictionary<Vector2Int, BoxCollider2D>();
     private void Awake()
     {
         instance = this;
@@ -39,24 +51,87 @@ public class LevelManager : MonoBehaviour
         if (lv >= 0 && lv < levels.Count)
         {
             Level level = levels[lv];
-            ClearHiddenObjects();
-            foreach (HiddenObjectInfo hiddenObjectInfo in level.hiddenObjects)
-            {
-                GameObject cell = gridController.grid[hiddenObjectInfo.row, hiddenObjectInfo.col];
-                GameObject hiddenObject = Instantiate(hiddenObjectInfo.objectPrefab, cell.transform.position, Quaternion.identity);
-                hiddenObject.transform.SetParent(cell.transform);
-                hiddenObject.SetActive(false); 
+            LoadObject(level);
+            LoadWall(level);
 
-                Vector2Int positionKey = new Vector2Int(hiddenObjectInfo.row, hiddenObjectInfo.col);
-                hiddenObjectInstances[positionKey] = hiddenObject;
-            }
+
         }
         else
         {
             Debug.LogWarning("Level index is out of range.");
         }
     }
+    private void LoadObject(Level level)
+    {
+        ClearHiddenObjects();
+        foreach (HiddenObjectInfo hiddenObjectInfo in level.hiddenObjects)
+        {
+            GameObject cell = gridController.grid[hiddenObjectInfo.row, hiddenObjectInfo.col];
+            GameObject hiddenObject = Instantiate(hiddenObjectInfo.objectPrefab, cell.transform.position, Quaternion.identity);
+            hiddenObject.transform.SetParent(cell.transform);
+            hiddenObject.SetActive(false);
 
+            Vector2Int positionKey = new Vector2Int(hiddenObjectInfo.row, hiddenObjectInfo.col);
+            hiddenObjectInstances[positionKey] = hiddenObject;
+        }
+    }
+    private void LoadWall(Level level)
+    {
+        ClearWalls();
+        foreach (WallInfo wallInfo in level.wallPositions)
+        {
+            GameObject cell = gridController.grid[wallInfo.row, wallInfo.col];
+            GameObject wallObject = Instantiate(wallPrefab, cell.transform.position, Quaternion.identity);
+            wallObject.transform.SetParent(cell.transform);
+            BoxCollider2D collider = wallObject.GetComponentInParent<BoxCollider2D>();
+            if (collider != null)
+            {
+                // Lưu collider vào cellColliders
+                Vector2Int positionKey = new Vector2Int(wallInfo.row, wallInfo.col);
+                cellColliders[positionKey] = collider; 
+                collider.enabled = false; // Tắt collider
+            }
+
+            Vector2Int wallPositionKey = new Vector2Int(wallInfo.row, wallInfo.col);
+            wallInstances[wallPositionKey] = wallObject;
+        }
+    }
+    void ClearWalls()
+    {
+
+        foreach (var entry in wallInstances)
+        {
+            Destroy(entry.Value);
+        }
+        wallInstances.Clear();
+
+        foreach (var entry in cellColliders)
+        {
+            if (entry.Value != null)
+            {
+                entry.Value.enabled = true; // Bật collider lại
+            }
+        }
+        cellColliders.Clear();
+
+        foreach (var colliderEntry in cellColliders)
+        {
+            if (colliderEntry.Value != null)
+            {
+                colliderEntry.Value.enabled = true; // Bật collider lại
+            }
+        }
+
+        //foreach (var entry in wallInstances)
+        //{
+        //    BoxCollider2D collider = entry.Value.GetComponentInParent<BoxCollider2D>();
+        //    if (collider != null)
+        //    {
+        //        collider.enabled = true; 
+        //    }
+        //}
+        wallInstances.Clear();
+    }
     void ClearHiddenObjects()
     {
         // Dọn dẹp các hidden objects cũ
@@ -66,7 +141,39 @@ public class LevelManager : MonoBehaviour
         }
         hiddenObjectInstances.Clear(); // Xóa dictionary để chuẩn bị cho level mới
     }
-
+    public int GetCurrentLevelKey()
+    {
+        int lv = currentLevelIndex - 1;
+        if (lv >= 0 && lv < levels.Count)
+        {
+            return levels[lv].key;
+        }
+        else
+        {
+            Debug.LogWarning("Level index is out of range.");
+            return -1; 
+        }
+    }
+    public void DecreaseLevelKey()
+    {
+        int lv = currentLevelIndex - 1;
+        Level currentLevel = levels[lv];
+        if (currentLevel.key > 0)
+        {
+            currentLevel.key--;
+        }
+        levels[lv] = currentLevel;
+    }
+    public void IncreaseLevelKey()
+    {
+        int lv = currentLevelIndex - 1;
+        Level currentLevel = levels[lv];
+        if (currentLevel.key > 0)
+        {
+            currentLevel.key++;
+        }
+        levels[lv] = currentLevel;
+    }
     public GameObject CheckForHiddenObject(int row, int col)
     {
         // Kiểm tra xem vị trí (row, col) có object nào không
@@ -137,6 +244,22 @@ public class LevelManager : MonoBehaviour
         }
 
         return objectsAround;
+    }
+   
+    public void AddHiddenObjectToCurrentLevel(int row, int col, GameObject prefab)
+    {
+        Level currentLevel = levels[currentLevelIndex - 1];
+
+        HiddenObjectInfo newHiddenObject = new HiddenObjectInfo
+        {
+            row = row,
+            col = col,
+            objectPrefab = prefab
+        };
+
+        currentLevel.hiddenObjects.Add(newHiddenObject);
+        Vector2Int positionKey = new Vector2Int(newHiddenObject.row, newHiddenObject.col);
+        hiddenObjectInstances[positionKey] = prefab;
     }
 
 

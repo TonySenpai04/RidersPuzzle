@@ -9,10 +9,15 @@ public class SkillManager : MonoBehaviour
     [SerializeField] private List<SkillData> skillsData;
     [SerializeField] private int currentIDHero;
     [SerializeField] private GridController gridController;
-   
+    public static SkillManager instance;
+    private void Awake()
+    {
+        instance = this;
+    }
+
     void Start()
     {
-        AddSkill(1001, new GeatsSkill(gridController));
+        AddSkill(1001, new GeatsSkill(gridController,1));
     }
 
     public void AddSkill(int id, ISkill skill)
@@ -36,6 +41,15 @@ public class SkillManager : MonoBehaviour
         ISkill skill= GetSkillById(currentIDHero);
         skill.ActivateSkill();
     }
+    public void IncreaseSkillUsesForCurrentHero(int amount)
+    {
+        ISkill skill = GetSkillById(currentIDHero);
+        if (skill != null)
+        {
+            skill.IncreaseUses(amount); 
+        }
+    }
+
 }
 [Serializable]
 public struct SkillData {

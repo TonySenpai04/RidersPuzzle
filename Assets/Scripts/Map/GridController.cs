@@ -27,7 +27,7 @@ public class GridController : MonoBehaviour
         grid= gridGenerator.Grid();
  
     }
-    private void FixedUpdate()
+    private void Update()
     {
         HighlightMovableCells();
         ActiveHiddenObject();

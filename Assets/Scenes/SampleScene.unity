@@ -1775,7 +1775,23 @@ MonoBehaviour:
     - row: 2
       col: 1
       objectPrefab: {fileID: 8927213396909374934, guid: ce5ce98799da13243b103f175d6c5d78, type: 3}
+    - row: 5
+      col: 1
+      objectPrefab: {fileID: 8927213396909374934, guid: c3a4a69985b13e742a3bddce2d791cef, type: 3}
+    - row: 2
+      col: 2
+      objectPrefab: {fileID: 8927213396909374934, guid: ca0f041f47fe909408b40bb44dc6d026, type: 3}
+    - row: 3
+      col: 3
+      objectPrefab: {fileID: 8927213396909374934, guid: c3a4a69985b13e742a3bddce2d791cef, type: 3}
+    wallPositions:
+    - row: 0
+      col: 2
+    - row: 1
+      col: 2
+    key: 0
   currentLevelIndex: 1
+  wallPrefab: {fileID: 986847572108710948, guid: 71bc618ca3b003444b00101a896b41c8, type: 3}
 --- !u!4 &325954454
 Transform:
   m_ObjectHideFlags: 0
@@ -3639,6 +3655,12 @@ MonoBehaviour:
   - {fileID: -7929380860807917377, guid: 9d9698b3fa00cab4b84422406a0d960f, type: 3}
   - {fileID: 3723956077048871618, guid: eb5aaf285dcf93742b032445a4dc06f2, type: 3}
   - {fileID: -1211898106481113863, guid: 8dc6b4dff80d5cd43b74a0d95673d415, type: 3}
+  - {fileID: 483692375014082932, guid: 17d6467f88dc24d46a909834e04a97d5, type: 3}
+  - {fileID: 6216745300359606100, guid: c3a4a69985b13e742a3bddce2d791cef, type: 3}
+  - {fileID: -7496155747718821182, guid: ca0f041f47fe909408b40bb44dc6d026, type: 3}
+  - {fileID: 4696227729677073849, guid: 18e410ecb472a1e4fbc4484504965050, type: 3}
+  - {fileID: 1101982533551577117, guid: 634ee2aa41c383c40a4f25d2ad130695, type: 3}
+  - {fileID: -4611138964240901131, guid: 09c4b125a6c4e2143b21a0fadd1f72c3, type: 3}
   powerUpObjects: []
   obstacleObjects: []
 --- !u!4 &1076175229
@@ -6342,6 +6364,51 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   movementController: {fileID: 1512594042}
+--- !u!1 &1685281876
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1685281878}
+  - component: {fileID: 1685281877}
+  m_Layer: 0
+  m_Name: GoldManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1685281877
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1685281876}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 13b65cc1bc3123c41b2e5f54e7036acc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  currentGold: 0
+--- !u!4 &1685281878
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1685281876}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -1.1, y: -3.25, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1706116627
 GameObject:
   m_ObjectHideFlags: 0
@@ -8386,3 +8453,4 @@ SceneRoots:
   - {fileID: 1441612068}
   - {fileID: 1076175229}
   - {fileID: 1787992544}
+  - {fileID: 1685281878}

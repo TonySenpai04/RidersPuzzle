@@ -4,39 +4,63 @@ using UnityEngine;
 
 public class GeatsSkill : ISkill
 {
+    private int maxSkillAmount;
+    private int skillAmount;
     private GridController gridController;
 
-    public GeatsSkill(GridController gridController)
+    public GeatsSkill(GridController gridController,int skillAmount)
     {
         this.gridController = gridController;
-  
+        this.maxSkillAmount = skillAmount;
+        skillAmount = maxSkillAmount;
+
+
     }
 
     public void ActivateSkill()
     {
-        int characterRow = PlayerController.instance.movementController.GetPos().Item1;
-        int characterCol = PlayerController.instance.movementController.GetPos().Item2;
-
-        // Xoá tất cả object trong phạm vi 3x3
-        for (int row = characterRow - 1; row <= characterRow + 1; row++)
+        if (skillAmount > 0)
         {
-            for (int col = characterCol - 1; col <= characterCol + 1; col++)
+            int characterRow = PlayerController.instance.movementController.GetPos().Item1;
+            int characterCol = PlayerController.instance.movementController.GetPos().Item2;
+
+            // Xoá tất cả object trong phạm vi 3x3
+            for (int row = characterRow - 1; row <= characterRow + 1; row++)
             {
-                if (row >= 0 && row < gridController.rows && col >= 0 && col < gridController.cols)
+                for (int col = characterCol - 1; col <= characterCol + 1; col++)
                 {
-                    GameObject cell = LevelManager.instance.CheckForHiddenObject(row, col);
-                    if (cell != null) 
+                    if (row >= 0 && row < gridController.rows && col >= 0 && col < gridController.cols)
                     {
-                        HiddenObject hiddenObjComponent = cell.GetComponent<HiddenObject>();
-                        if (hiddenObjComponent != null)
+                        GameObject cell = LevelManager.instance.CheckForHiddenObject(row, col);
+                        if (cell != null)
                         {
-                            hiddenObjComponent.DestroyObject(); 
+                            HiddenObject hiddenObjComponent = cell.GetComponent<HiddenObject>();
+                            if (hiddenObjComponent != null)
+                            {
+                                hiddenObjComponent.DestroyObject();
+                            }
                         }
                     }
                 }
             }
+            PlayerController.instance.movementController.numberOfMoves.IncreaseMove(1);
+            skillAmount--;
         }
-        PlayerController.instance.movementController.numberOfMoves.IncreaseMove(1);
     }
 
+    public void IncreaseUses(int amount)
+    {
+        skillAmount += amount;
+        if (skillAmount>maxSkillAmount)
+        {
+            skillAmount = maxSkillAmount;
+        }
+       
+       
+    }
+
+    public void SetNumberOfSkill(int amount)
+    {
+        this.skillAmount = amount;
+    }
 }

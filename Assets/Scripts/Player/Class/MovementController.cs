@@ -157,6 +157,21 @@ public class MovementController : MonoBehaviour
     {
         return Tuple.Create(currentRow, currentCol);
     }
+    public void MoveToBlock(int row,int col)
+    {
+        if (row >= 0 && row < gridController.rows && col >= 0 && col < gridController.cols)
+        {
+            // Cập nhật vị trí hiện tại của nhân vật
+            currentRow = row;
+            currentCol = col;
 
+            // Cập nhật vị trí mục tiêu cho nhân vật
+            UpdateCharacterPosition(currentRow, currentCol);
+
+            // Thêm ô hiện tại vào lịch sử di chuyển
+            moveHistory.AddMove(currentRow, currentCol);
+
+        }
+    }
 
 }
