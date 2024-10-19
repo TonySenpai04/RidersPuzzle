@@ -10,9 +10,9 @@ GameObject:
   m_Component:
   - component: {fileID: 6299323117791326168}
   - component: {fileID: 9004798092639264994}
-  - component: {fileID: -6684742591381293817}
+  - component: {fileID: 7218747492197014958}
   m_Layer: 0
-  m_Name: Wall
+  m_Name: FinalVent
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -85,7 +85,7 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!114 &-6684742591381293817
+--- !u!114 &7218747492197014958
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -94,8 +94,8 @@ MonoBehaviour:
   m_GameObject: {fileID: 8927213396909374934}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: cf39f0964d051f049bc3370422bba5bb, type: 3}
+  m_Script: {fileID: 11500000, guid: 29c1209d137e85046ae2d65da1b08a5b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  id: 2007
-  type: 1
+  id: 2011
+  type: 0

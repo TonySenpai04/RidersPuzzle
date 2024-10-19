@@ -14,6 +14,7 @@ public class MovementController : MonoBehaviour
     [SerializeField] private float moveSpeed = 5.0f;
     private IMoveHistory moveHistory;
     public INumberOfMoves numberOfMoves;
+    public IImmortal immortal;
     void Start()
     {
         moveHistory = new MoveHistory();
@@ -43,6 +44,7 @@ public class MovementController : MonoBehaviour
         }
     }
 
+    
     void MoveToCell(GameObject cell)
     {
         for (int row = 0; row < gridController.rows; row++)
@@ -56,8 +58,12 @@ public class MovementController : MonoBehaviour
                         moveHistory.AddMove(currentRow, currentCol);
                         currentRow = row;
                         currentCol = col;
-      
+                        
                         numberOfMoves.ReduceeMove(1);
+                        if (immortal != null)
+                        {
+                            immortal.OnMove();
+                        }
                         UpdateCharacterPosition(currentRow, currentCol); 
                     }
                 }
@@ -87,7 +93,7 @@ public class MovementController : MonoBehaviour
             }
         }
     }
-
+  
     private Vector2Int GetCurrentDirection()
     {
         int previousRow = 1;

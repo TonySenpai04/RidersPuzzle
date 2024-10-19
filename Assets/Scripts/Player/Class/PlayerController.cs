@@ -11,7 +11,8 @@ public class PlayerController : MonoBehaviour
     private void Start()
     {
         instance = this;
-        hitPoint = new HitPoint(100);
+        hitPoint = new HitPoint(10);
+        movementController.immortal=(IImmortal)hitPoint;
     }
     private void Update()
     {
@@ -25,6 +26,9 @@ public class PlayerController : MonoBehaviour
                 movementController.Movement();
             }
         }
-               
+        if (Input.GetKey(KeyCode.T))
+        {
+            hitPoint.TakeDamage(1);
+        }
     }
 }
