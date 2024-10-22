@@ -15,6 +15,7 @@ public class AttackRideC : HiddenObject
             HiddenObject hiddenObj = hiddenObject.GetComponent<HiddenObject>();
             if (hiddenObj != null && hiddenObj.type == ObjectType.Obstacle)
             {
+                hiddenObj.GetComponentInParent<BoxCollider2D>().enabled = true;
                 Destroy(hiddenObject);
             }
         }

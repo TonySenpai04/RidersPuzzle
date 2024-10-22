@@ -19,6 +19,7 @@ public class ColumnSweep : HiddenObject
         {
             if (obj != null)
             {
+                obj.GetComponentInParent<BoxCollider2D>().enabled = true;
                Destroy(obj);
             }
         }

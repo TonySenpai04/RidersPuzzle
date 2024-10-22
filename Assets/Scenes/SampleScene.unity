@@ -1754,6 +1754,12 @@ MonoBehaviour:
     - row: 2
       col: 2
       objectPrefab: {fileID: 8927213396909374934, guid: 51c6ef5ff8542404eb3c1b855d293473, type: 3}
+    - row: 3
+      col: 2
+      objectPrefab: {fileID: 8927213396909374934, guid: 307fbe9652dc20e4ca72e68a3bf2bb11, type: 3}
+    - row: 4
+      col: 2
+      objectPrefab: {fileID: 7094742857138356609, guid: 8cae250645a577a4ab804dc30a9daeae, type: 3}
     wallPositions:
     - row: 0
       col: 2

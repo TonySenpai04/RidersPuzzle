@@ -4,6 +4,10 @@ using UnityEngine;
 
 public class Tree : HiddenObject
 {
+    public override void Start()
+    {
+        GetComponentInParent<BoxCollider2D>().enabled = false;
+    }
     public override void ActiveSkill()
     {
         GetComponentInParent<BoxCollider2D>().enabled = false;

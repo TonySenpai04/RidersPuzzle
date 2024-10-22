@@ -19,7 +19,8 @@ public class RowSweep : HiddenObject
         {
             if (obj != null)
             {
-               Destroy(obj);
+                obj.GetComponentInParent<BoxCollider2D>().enabled = true;
+                Destroy(obj);
             }
         }
 

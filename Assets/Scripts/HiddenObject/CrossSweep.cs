@@ -21,7 +21,8 @@ public class CrossSweep : HiddenObject
         {
             if (obj != null)
             {
-              Destroy(obj);
+                obj.GetComponentInParent<BoxCollider2D>().enabled = true;
+                Destroy(obj);
             }
         }
 

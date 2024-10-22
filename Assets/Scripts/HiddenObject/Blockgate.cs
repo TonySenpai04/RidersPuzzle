@@ -4,7 +4,10 @@ using UnityEngine;
 
 public class Blockgate : HiddenObject
 {
- 
+    public override void Start()
+    {
+        GetComponentInParent<BoxCollider2D>().enabled = false;
+    }
     public override void ActiveSkill()
     {
 
