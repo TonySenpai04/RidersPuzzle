@@ -36,6 +36,7 @@ public class PandoraBox : HiddenObject
             new MovementEffect(0.45f, RandomObstacle)
         };
     }
+  
     public override void ActiveSkill()
     {
         

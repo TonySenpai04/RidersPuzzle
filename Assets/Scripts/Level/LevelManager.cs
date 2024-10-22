@@ -24,6 +24,7 @@ public struct Level
     public List<HiddenObjectInfo> hiddenObjects;
     public List<WallInfo> wallPositions;
     public int key;
+    public bool isActiveObject;
 }
 
 public class LevelManager : MonoBehaviour
@@ -69,10 +70,17 @@ public class LevelManager : MonoBehaviour
             GameObject cell = gridController.grid[hiddenObjectInfo.row, hiddenObjectInfo.col];
             GameObject hiddenObject = Instantiate(hiddenObjectInfo.objectPrefab, cell.transform.position, Quaternion.identity);
             hiddenObject.transform.SetParent(cell.transform);
-            hiddenObject.SetActive(false);
 
             Vector2Int positionKey = new Vector2Int(hiddenObjectInfo.row, hiddenObjectInfo.col);
             hiddenObjectInstances[positionKey] = hiddenObject;
+            if (!level.isActiveObject)
+            {
+                hiddenObject.SetActive(false);
+            }
+            else
+            {
+                hiddenObject.SetActive(true);
+            }
         }
     }
     private void LoadWall(Level level)

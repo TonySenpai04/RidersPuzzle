@@ -19,7 +19,7 @@ public class ColumnSweep : HiddenObject
         {
             if (obj != null)
             {
-                Destroy(obj);
+               Destroy(obj);
             }
         }
         PlayerController.instance.hitPoint.Heal(1);

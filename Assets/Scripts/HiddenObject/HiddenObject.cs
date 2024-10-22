@@ -14,7 +14,7 @@ public abstract class HiddenObject : MonoBehaviour
     }
     public virtual void Start()
     {
-        Hide();
+       // Show();
     }
 
 
