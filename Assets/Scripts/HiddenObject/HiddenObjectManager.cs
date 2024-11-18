@@ -37,8 +37,19 @@ public class HiddenObjectManager : MonoBehaviour
         }
         return null; 
     }
+    public HiddenObject GetById(string id)
+    {
+        foreach (var obj in allObjects)
+        {
+            if (obj.id == id) // So sánh id của đối tượng với id truyền vào
+            {
+                return obj; // Trả về đối tượng tìm thấy
+            }
+        }
+        return null;
+    }
 
- 
+
     public HiddenObject GetRandomObstacle()
     {
         if (obstacleObjects.Count > 0)

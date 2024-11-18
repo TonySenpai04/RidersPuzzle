@@ -1,8 +1,9 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-
+[Serializable]
 public class DataLevel
 {
     public int Stage;
@@ -15,7 +16,7 @@ public class DataLevel
 
 public class Loader : MonoBehaviour
 {
-    private List<DataLevel> dataLevels = new List<DataLevel>();
+    public List<DataLevel> dataLevels ;
     public List<DataLevel> GetData()
     {
         return dataLevels;

@@ -37,15 +37,48 @@ public class LevelManager : MonoBehaviour
     public  Dictionary<Vector2Int, GameObject> hiddenObjectInstances = new Dictionary<Vector2Int, GameObject>();
     private Dictionary<Vector2Int, GameObject> wallInstances = new Dictionary<Vector2Int, GameObject>();
     private Dictionary<Vector2Int, BoxCollider2D> cellColliders = new Dictionary<Vector2Int, BoxCollider2D>();
+    public CSVReader cSVReader;
+    public HiddenObjectManager HiddenObjectManager;
     private void Awake()
     {
         instance = this;
+       
     }
     void Start()
     {
+        LoadLevelData();
         LoadLevel(currentLevelIndex);
     }
+    public void LoadLevelData()
+    {
+        foreach (var levelData in cSVReader.levelData)
+        {
+            Level level = new Level();
+            level.hiddenObjects = new List<HiddenObjectInfo>(); // Khởi tạo hiddenObjects
+            level.isActiveObject = levelData.Value.isActive;
+            Debug.Log(levelData.Value.positions.Count);
+            foreach (var entry in levelData.Value.positions)
+            {
+                HiddenObjectInfo hiddenObjectInfo = new HiddenObjectInfo();
+                Vector2Int pos = entry.Key;
+                hiddenObjectInfo.row = pos.x;
+                hiddenObjectInfo.col = pos.y;
 
+               // Lấy đối tượng từ HiddenObjectManager
+               HiddenObject hiddenObject = HiddenObjectManager.GetById(entry.Value.ToString());
+                if (hiddenObject != null) // Kiểm tra đối tượng không null
+                {
+                    hiddenObjectInfo.objectPrefab = hiddenObject.gameObject;
+                    level.hiddenObjects.Add(hiddenObjectInfo);
+                }
+                else
+                {
+                    Debug.LogWarning($"Không tìm thấy HiddenObject với ID {entry.Value}");
+                }
+            }
+            levels.Add(level);
+        }
+    }
     void LoadLevel(int levelIndex)
     {
         int lv = levelIndex - 1;
@@ -53,8 +86,7 @@ public class LevelManager : MonoBehaviour
         {
             Level level = levels[lv];
             LoadObject(level);
-            LoadWall(level);
-
+            //LoadWall(level);
 
         }
         else
@@ -86,22 +118,25 @@ public class LevelManager : MonoBehaviour
     private void LoadWall(Level level)
     {
         ClearWalls();
-        foreach (WallInfo wallInfo in level.wallPositions)
+        if (level.wallPositions.Count > 0)
         {
-            GameObject cell = gridController.grid[wallInfo.row, wallInfo.col];
-            GameObject wallObject = Instantiate(wallPrefab, cell.transform.position, Quaternion.identity);
-            wallObject.transform.SetParent(cell.transform);
-            BoxCollider2D collider = wallObject.GetComponentInParent<BoxCollider2D>();
-            if (collider != null)
+            foreach (WallInfo wallInfo in level.wallPositions)
             {
-                // Lưu collider vào cellColliders
-                Vector2Int positionKey = new Vector2Int(wallInfo.row, wallInfo.col);
-                cellColliders[positionKey] = collider; 
-                collider.enabled = false; // Tắt collider
-            }
+                GameObject cell = gridController.grid[wallInfo.row, wallInfo.col];
+                GameObject wallObject = Instantiate(wallPrefab, cell.transform.position, Quaternion.identity);
+                wallObject.transform.SetParent(cell.transform);
+                BoxCollider2D collider = wallObject.GetComponentInParent<BoxCollider2D>();
+                if (collider != null)
+                {
+                    // Lưu collider vào cellColliders
+                    Vector2Int positionKey = new Vector2Int(wallInfo.row, wallInfo.col);
+                    cellColliders[positionKey] = collider;
+                    collider.enabled = false; // Tắt collider
+                }
 
-            Vector2Int wallPositionKey = new Vector2Int(wallInfo.row, wallInfo.col);
-            wallInstances[wallPositionKey] = wallObject;
+                Vector2Int wallPositionKey = new Vector2Int(wallInfo.row, wallInfo.col);
+                wallInstances[wallPositionKey] = wallObject;
+            }
         }
     }
     void ClearWalls()
