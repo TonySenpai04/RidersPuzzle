@@ -22,7 +22,7 @@ public class DarkIncense: HiddenObject
         };
         foreach (Vector2Int spawnPos in spawnPositions)
         {
-            GameObject cell = LevelManager.instance.gridController.grid[(int)spawnPos.x,(int) spawnPos.y];
+            GameObject cell = LevelManager.instance.GetGrid().grid[(int)spawnPos.x,(int) spawnPos.y];
 
             GameObject hiddenObject = Instantiate(jyamatoPrefab, cell.transform.position, Quaternion.identity);
             hiddenObject.SetActive(true);

@@ -1,59 +1,55 @@
 ﻿using System;
 using System.Collections.Generic;
 using UnityEngine;
-[Serializable]
-public class LevelDataInfo
+
+public class CSVReader : IReadData
 {
-    public Dictionary<Vector2Int, int> positions;  
-    public bool isActive;
-    public int move;
-    public Vector2 startPos;
-    public Vector2 endPos;
-}
-public class CSVReader : MonoBehaviour
-{
-    public TextAsset data;
-    public Dictionary<int, LevelDataInfo> levelData;
-     void Awake()
+  
+  
+    public CSVReader()
     {
-        if (data == null)
-        {
-            Debug.LogError("Dữ liệu CSV chưa được gán vào trường 'data' trong Inspector.");
-            return;
-        }
-
-        levelData = ReadLevelData(data);
-        if (levelData == null || levelData.Count == 0)
-        {
-            Debug.LogWarning("Không có dữ liệu trong levelData.");
-        }
-        else
-        {
-            foreach (var level in levelData)
-            {
-
-                Debug.Log($"Level: {level.Key}"); // Hiển thị tên level
-                Debug.Log(level.Value.positions.Count);
-
-                if (level.Value.positions.Count == 0)
-                {
-                    Debug.LogWarning($"Level {level.Key} không có đối tượng.");
-                }
-                else
-                {
-                    
-                    foreach (var entry in level.Value.positions)
-                    {
-                        // Debug vị trí và Object ID
-                        Debug.Log($"Tọa độ: {entry.Key}, Object ID: {entry.Value}");
-                    }
-                }
-
-                // Debug trạng thái isActive
-                Debug.Log($"Level {level.Key} isActive: {level.Value.isActive}");
-            }
-        }
+        
     }
+    // void Awake()
+    //{
+    //    if (data == null)
+    //    {
+    //        Debug.LogError("Dữ liệu CSV chưa được gán vào trường 'data' trong Inspector.");
+    //        return;
+    //    }
+
+    //    levelData = ReadLevelData(data);
+    //    if (levelData == null || levelData.Count == 0)
+    //    {
+    //        Debug.LogWarning("Không có dữ liệu trong levelData.");
+    //    }
+    //    else
+    //    {
+    //        foreach (var level in levelData)
+    //        {
+
+    //            Debug.Log($"Level: {level.Key}"); // Hiển thị tên level
+    //            Debug.Log(level.Value.positions.Count);
+
+    //            if (level.Value.positions.Count == 0)
+    //            {
+    //                Debug.LogWarning($"Level {level.Key} không có đối tượng.");
+    //            }
+    //            else
+    //            {
+                    
+    //                foreach (var entry in level.Value.positions)
+    //                {
+    //                    // Debug vị trí và Object ID
+    //                    Debug.Log($"Tọa độ: {entry.Key}, Object ID: {entry.Value}");
+    //                }
+    //            }
+
+    //            // Debug trạng thái isActive
+    //            Debug.Log($"Level {level.Key} isActive: {level.Value.isActive}");
+    //        }
+    //    }
+    //}
 
     //Dictionary<int, Dictionary<Vector2Int, int>> ReadLevelData(TextAsset csvData)
     //{
@@ -116,7 +112,7 @@ public class CSVReader : MonoBehaviour
 
     //    return levelData;
     //}
-    Dictionary<int, LevelDataInfo> ReadLevelData(TextAsset csvData)
+   public  Dictionary<int, LevelDataInfo> ReadLevelData(TextAsset csvData)
     {
         var levelData = new Dictionary<int, LevelDataInfo>();
 
@@ -177,12 +173,11 @@ public class CSVReader : MonoBehaviour
                 }
                 else
                 {
-                    Debug.LogWarning($"Invalid Object ID at Level: {level}, Coordinates: ({coord.x}, {coord.y})");
+  
                 }
             }
-           // bool isActive;
-            var headers2 = lines[1].Split(',');
-            int a = int.Parse(headers2[1]);
+
+            int a = int.Parse(values[1]);
             if (a == 1)
             {
                 levelInfo.isActive=true;
@@ -191,15 +186,12 @@ public class CSVReader : MonoBehaviour
             {
                 levelInfo.isActive = false;
             }
-            levelInfo.move = int.Parse(headers2[2]);
-            //if (bool.TryParse(headers2[1], out isActive))
-            //{
-            //    levelInfo.isActive = isActive;
-            //}
-            //else
-            //{
-            //    Debug.LogWarning($"Invalid isActive value at Level: {level}");
-            //}
+            levelInfo.move = int.Parse(values[2]);
+            var startPos = values[headers.Length - 3].Trim().Split(';');
+            levelInfo.startPos = new Vector2(float.Parse(startPos[0]), float.Parse(startPos[1]));
+            var endPos = values[headers.Length - 2].Trim().Split(';');
+            levelInfo.endPos = new Vector2(float.Parse(endPos[0]), float.Parse(endPos[1]));
+            Debug.Log(levelInfo.startPos+ "-" + levelInfo.endPos);
 
         }
 

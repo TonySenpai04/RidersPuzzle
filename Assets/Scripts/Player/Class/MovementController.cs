@@ -17,14 +17,19 @@ public class MovementController : MonoBehaviour
     public IImmortal immortal;
     void Start()
     {
-        moveHistory = new MoveHistory();
-      
-        numberOfMoves = new NumberOfMove(16);
-        moveHistory.AddMove(currentRow, currentCol);
-        UpdateCharacterPosition(currentRow,currentCol);
 
+        LoadMove();
     }
-
+    public void LoadMove()
+    {
+        moveHistory = new MoveHistory();
+        LevelDataInfo level = LevelManager.instance.GetCurrentLevelData();
+        numberOfMoves = new NumberOfMove(level.move);
+        currentRow = (int)level.startPos.x;
+        currentCol = (int)level.startPos.y;
+        moveHistory.AddMove(currentRow, currentCol);
+        UpdateCharacterPosition(currentRow, currentCol);
+    }
  
     public void Movement()
     {
@@ -42,9 +47,7 @@ public class MovementController : MonoBehaviour
                 MoveToCell(clickedCell);
             }
         }
-    }
-
-    
+    } 
     void MoveToCell(GameObject cell)
     {
         for (int row = 0; row < gridController.rows; row++)
@@ -107,19 +110,16 @@ public class MovementController : MonoBehaviour
         }
         int deltaX = currentRow - previousRow;
         int deltaY = currentCol - previousCol; 
-
         return new Vector2Int(deltaX, deltaY); 
     }
 
     public void MoveForward(int steps)
     {
         Vector2Int direction = GetCurrentDirection();
-
         for (int i = 0; i < steps; i++)
         {
             int newRow = currentRow + direction.x;
             int newCol = currentCol + direction.y;
-
             if (newRow >= 0 && newRow < gridController.rows && newCol >= 0 && newCol < gridController.cols)
             {
 
@@ -134,9 +134,6 @@ public class MovementController : MonoBehaviour
             }
         }
     }
-
-
-
     public void UpdateCharacterPosition(int currentRow,int currentCol)
     {
         targetPosition = new Vector3(gridController.grid[currentRow, currentCol].transform.position.x,
@@ -146,15 +143,16 @@ public class MovementController : MonoBehaviour
     }
     public void MoveStartPoint()
     {
-        UpdateCharacterPosition(5, 0);
+        LevelDataInfo level = LevelManager.instance.GetCurrentLevelData();
+        UpdateCharacterPosition((int)level.startPos.x, (int)level.startPos.y);
         currentRow = 5;
         currentCol = 0;
 
     }
-
     public void MoveEndPoint()
     {
-        UpdateCharacterPosition(0, 4);
+        LevelDataInfo level = LevelManager.instance.GetCurrentLevelData();
+        UpdateCharacterPosition((int)level.endPos.x,(int)level.endPos.y);
         currentRow = 0;
         currentCol = 4;
 
@@ -167,16 +165,10 @@ public class MovementController : MonoBehaviour
     {
         if (row >= 0 && row < gridController.rows && col >= 0 && col < gridController.cols)
         {
-            // Cập nhật vị trí hiện tại của nhân vật
             currentRow = row;
             currentCol = col;
-
-            // Cập nhật vị trí mục tiêu cho nhân vật
             UpdateCharacterPosition(currentRow, currentCol);
-
-            // Thêm ô hiện tại vào lịch sử di chuyển
             moveHistory.AddMove(currentRow, currentCol);
-
         }
     }
 

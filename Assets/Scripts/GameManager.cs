@@ -5,8 +5,8 @@ using UnityEngine;
 
 public class GameManager : MonoBehaviour
 {
-    [SerializeField] public int targetRow = 5; // Hàng chiến thắng (hàng 5)
-    [SerializeField] public int targetCol = 4; // Cột chiến thắng (cột 4)
+    [SerializeField] public int targetRow = 5; 
+    [SerializeField] public int targetCol = 4; 
     public TextMeshProUGUI txt;
 
     public MovementController movementController;
@@ -20,6 +20,9 @@ public class GameManager : MonoBehaviour
     }
     void Start()
     {
+        LevelDataInfo level = LevelManager.instance.GetCurrentLevelData();
+        targetRow = (int)level.endPos.x;
+        targetCol= (int)level.endPos.y;
         txt.gameObject.SetActive(false);
         Transform winPos = gridController.grid[targetRow, targetCol].transform;
         GameObject objectWin= Instantiate(winCellPrefab, winPos.transform.position, Quaternion.identity);
