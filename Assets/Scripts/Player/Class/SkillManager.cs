@@ -19,6 +19,10 @@ public class SkillManager : MonoBehaviour
     {
         AddSkill(1001, new GeatsSkill(gridController,1));
     }
+    public void LoadSkill()
+    {
+        GetSkillById(currentIDHero).SetNumberOfSkill(1);
+    }
 
     public void AddSkill(int id, ISkill skill)
     {

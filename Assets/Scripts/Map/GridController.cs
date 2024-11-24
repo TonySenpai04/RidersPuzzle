@@ -17,7 +17,7 @@ public class GridController : MonoBehaviour
     public bool isActiveObject=true;
     public int currentObjectRow;
     public int currentObjectColumn;
-
+    [SerializeField] private List<BoxCollider2D> cellColliders = new List<BoxCollider2D>();
 
     private void Awake()
     {
@@ -25,7 +25,9 @@ public class GridController : MonoBehaviour
         gridGenerator=new GridGenerator(this.gameObject,blockPrefab);
         gridGenerator.GenerateGrid( rows,  cols,  cellSize,  spacing, centerOffset);
         grid= gridGenerator.Grid();
- 
+        GetCollider();
+
+
     }
     private void Update()
     {
@@ -33,7 +35,28 @@ public class GridController : MonoBehaviour
         ActiveHiddenObject();
 
     }
+    public void GetCollider()
+    {
+        // Clear existing colliders
+        cellColliders.Clear();
 
+        // Lấy tất cả các BoxCollider2D từ grid
+        foreach (var cell in grid)
+        {
+            var collider = cell.GetComponent<BoxCollider2D>();
+            if (collider != null)
+            {
+                cellColliders.Add(collider);
+            }
+        }
+    }
+    public void ClearCollider()
+    {
+        foreach(var collider in cellColliders)
+        {
+            collider.enabled = true;
+        }
+    }
     void HighlightMovableCells()
     {
         int currentRow = character.GetPos().Item1;

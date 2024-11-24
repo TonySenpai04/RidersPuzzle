@@ -176,7 +176,7 @@ public class CSVReader : IReadData
   
                 }
             }
-
+            levelInfo.level=level;
             int a = int.Parse(values[1]);
             if (a == 1)
             {

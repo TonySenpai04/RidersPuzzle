@@ -34,6 +34,8 @@ public class HitPoint : IHitPoint, IImmortal
     public void SetHealth(float value)
     {
         this.health = value;
+        currentHealth
+            = value;
     }
     public void ActivateImmortalEffect()
     {

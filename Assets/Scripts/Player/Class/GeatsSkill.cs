@@ -12,7 +12,7 @@ public class GeatsSkill : ISkill
     {
         this.gridController = gridController;
         this.maxSkillAmount = skillAmount;
-        skillAmount = maxSkillAmount;
+        this.skillAmount = skillAmount;
 
 
     }

@@ -9,6 +9,7 @@ public interface IReadData
 [Serializable]
 public class LevelDataInfo
 {
+    public int level;
     public Dictionary<Vector2Int, int> positions;
     public bool isActive;
     public int move;

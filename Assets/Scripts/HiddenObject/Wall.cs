@@ -11,5 +11,10 @@ public class Wall : HiddenObject
 
 
     }
+    public override void DestroyObject()
+    {
+        GetComponentInParent<BoxCollider2D>().enabled = true;
+        base.DestroyObject();
+    }
 
 }

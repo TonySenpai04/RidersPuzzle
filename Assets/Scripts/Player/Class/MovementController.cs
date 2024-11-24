@@ -15,14 +15,17 @@ public class MovementController : MonoBehaviour
     private IMoveHistory moveHistory;
     public INumberOfMoves numberOfMoves;
     public IImmortal immortal;
+    private void Awake()
+    {
+        moveHistory = new MoveHistory();
+    }
     void Start()
     {
-
         LoadMove();
     }
     public void LoadMove()
     {
-        moveHistory = new MoveHistory();
+        moveHistory.ClearHistory();
         LevelDataInfo level = LevelManager.instance.GetCurrentLevelData();
         numberOfMoves = new NumberOfMove(level.move);
         currentRow = (int)level.startPos.x;

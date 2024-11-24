@@ -7,51 +7,79 @@ public class GameManager : MonoBehaviour
 {
     [SerializeField] public int targetRow = 5; 
     [SerializeField] public int targetCol = 4; 
-    public TextMeshProUGUI txt;
-
+    public GameObject panelWin;
+    public GameObject panelLose;
     public MovementController movementController;
     public GameObject winCellPrefab;
     public  GridController gridController;
     public static GameManager instance;
     public bool isEnd=false;
+    public GameObject playZone;
+    public TextMeshProUGUI stageTxt;
     private void Awake()
     {
         instance = this; 
     }
     void Start()
     {
+
+       LoadLevel();
+       playZone.gameObject.SetActive(false);
+    }
+    public void LoadLevel()
+    {
         LevelDataInfo level = LevelManager.instance.GetCurrentLevelData();
         targetRow = (int)level.endPos.x;
-        targetCol= (int)level.endPos.y;
-        txt.gameObject.SetActive(false);
+        targetCol = (int)level.endPos.y;
+        panelWin.gameObject.SetActive(false);
+        panelLose.gameObject.SetActive(false);
         Transform winPos = gridController.grid[targetRow, targetCol].transform;
-        GameObject objectWin= Instantiate(winCellPrefab, winPos.transform.position, Quaternion.identity);
+        GameObject objectWin = Instantiate(winCellPrefab, winPos.transform.position, Quaternion.identity);
         objectWin.transform.SetParent(gridController.grid[targetRow, targetCol].transform);
-        
-
+        stageTxt.text = "STAGE " + level.level;
     }
     public void FixedUpdate()
     {
         CheckWinCondition();
+       
     }
     public void CheckWinCondition()
     {
 
         if (movementController.GetPos().Item1 == targetRow && movementController.GetPos().Item2 == targetCol)
         {
-            txt.gameObject.SetActive(true);
+            panelWin.SetActive(true);
 
-            txt.text = "Chúc mừng! Bạn đã chiến thắng!";
+           // txt.text = "Chúc mừng! Bạn đã chiến thắng!";
             isEnd = true;
 
         }
         else if (movementController.numberOfMoves.GetCurrentMove() <= 0 
             || PlayerController.instance.hitPoint.GetCurrentHealth()<=0)
         {
-            txt.gameObject.SetActive(true);
-            txt.text = "Thua!";
-            isEnd = true; 
+            panelLose.gameObject.SetActive(true);
+           // txt.text = "Thua!";
+            isEnd = true;
 
         }
+        else
+        {
+            isEnd=false;
+        }
+    }
+    public void LoadNextLevel()
+    {
+        LevelManager.instance.LoadNextLevel();
+        LoadLevel();
+        PlayerController.instance.LoadLevel();
+        isEnd = false;
+    }
+    public void ReplayLevel()
+    {
+        LevelDataInfo level = LevelManager.instance.GetCurrentLevelData();
+        LevelManager.instance.LoadLevel(level.level);
+        LoadLevel();
+        PlayerController.instance.LoadLevel();
+        isEnd = false;
     }
 }
