@@ -9,9 +9,9 @@ public class ButtonStageController : MonoBehaviour
     [SerializeField] private ButtonStage stageButtonPrefab; 
     [SerializeField] private int totalLevels;
     [SerializeField] private Transform buttonParent;
-    [SerializeField] private GameObject playZone;
+    [SerializeField] private GameObject stageChracter;
     [SerializeField] private GameObject stageZone;
-
+    [SerializeField] private  LevelManager levelManager;
     void Start()
     {
         CreateButtons();
@@ -29,10 +29,11 @@ public class ButtonStageController : MonoBehaviour
 
     private void LoadLevel(int levelIndex)
     {
-        playZone.gameObject.SetActive(true);
-        LevelManager.instance.LoadLevel(levelIndex);
-        GameManager.instance.LoadLevel();
-        PlayerController.instance.LoadLevel();
+        stageChracter.gameObject.SetActive(true);
+        levelManager.SetLevel(levelIndex);
+        //LevelManager.instance.LoadLevel(levelIndex);
+        //GameManager.instance.LoadLevel();
+        //PlayerController.instance.LoadLevel();
         stageZone.gameObject.SetActive(false);
 
     }

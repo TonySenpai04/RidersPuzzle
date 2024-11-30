@@ -11,7 +11,8 @@ public class DarkIncense: HiddenObject
         var currentPos = PlayerController.instance.movementController.GetPos();
         int currentRow = currentPos.Item1;
         int currentCol = currentPos.Item2;
-
+        int mapRows = LevelManager.instance.GetGrid().rows; // Giả sử LevelManager cung cấp Rows
+        int mapCols = LevelManager.instance.GetGrid().cols;
         Vector2Int[] spawnPositions = new Vector2Int[]
        {
         new Vector2Int(  currentRow+1,currentCol),
@@ -22,12 +23,16 @@ public class DarkIncense: HiddenObject
         };
         foreach (Vector2Int spawnPos in spawnPositions)
         {
-            GameObject cell = LevelManager.instance.GetGrid().grid[(int)spawnPos.x,(int) spawnPos.y];
+            if (spawnPos.x >= 0 && spawnPos.x < mapRows && spawnPos.y >= 0 && spawnPos.y < mapCols)
+            {
+                GameObject cell = LevelManager.instance.GetGrid().grid[(int)spawnPos.x, (int)spawnPos.y];
 
-            GameObject hiddenObject = Instantiate(jyamatoPrefab, cell.transform.position, Quaternion.identity);
-            hiddenObject.SetActive(true);
-            LevelManager.instance.AddHiddenObjectToCurrentLevel(spawnPos.x,spawnPos.y, hiddenObject);
-            hiddenObject.transform.SetParent(cell.transform);
+                GameObject hiddenObject = Instantiate(jyamatoPrefab, cell.transform.position, Quaternion.identity);
+                hiddenObject.SetActive(true);
+                LevelManager.instance.AddHiddenObjectToCurrentLevel(spawnPos.x, spawnPos.y, hiddenObject);
+                hiddenObject.transform.SetParent(cell.transform);
+            }
+           
             
         }
  

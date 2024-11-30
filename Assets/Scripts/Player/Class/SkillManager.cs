@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using Unity.VisualScripting;
 using UnityEngine;
 
@@ -39,6 +40,18 @@ public class SkillManager : MonoBehaviour
         }
         Debug.LogWarning("Không tìm thấy kỹ năng cho ID: " + id);
         return null;
+    }
+    public void SetSkillId(int id)
+    {
+        if (skillsData.Any(skillData => skillData.id == id)) // Giả sử SkillData có thuộc tính Id
+        {
+            this.currentIDHero = id;
+        }
+        else
+        {
+            // Optional: In ra log nếu muốn biết id không tồn tại
+            Console.WriteLine($"Skill ID {id} không tồn tại trong danh sách.");
+        }
     }
     public void ActiveSkill()
     {

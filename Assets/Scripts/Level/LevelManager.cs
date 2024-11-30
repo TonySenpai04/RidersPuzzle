@@ -53,7 +53,7 @@ public class LevelManager : MonoBehaviour
     void Start()
     {
         LoadLevelData();
-        LoadLevel(currentLevelIndex);
+        LoadLevel();
     }
   
     public GridController GetGrid()
@@ -69,10 +69,10 @@ public class LevelManager : MonoBehaviour
     {
        return levelDataController.GetLevelData(levels, currentLevelIndex);
     }
-    public void LoadLevel(int levelIndex)
+    public void LoadLevel()
     {
-        currentLevelIndex = levelIndex;
-        int lv = levelIndex - 1;
+     //   currentLevelIndex = levelIndex;
+        int lv = currentLevelIndex - 1;
         if (lv >= 0 && lv < levels.Count)
         {
             Level level = levels[lv];
@@ -86,10 +86,14 @@ public class LevelManager : MonoBehaviour
             Debug.LogWarning("Level index is out of range.");
         }
     }
+    public void SetLevel(int index)
+    {
+        this.currentLevelIndex = index;
+    }
     public void LoadNextLevel()
     {
         currentLevelIndex++;
-        LoadLevel(currentLevelIndex);
+        LoadLevel();
     }
     private void LoadObject(Level level)
     {

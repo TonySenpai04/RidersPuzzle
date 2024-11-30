@@ -76,8 +76,8 @@ public class GameManager : MonoBehaviour
     }
     public void ReplayLevel()
     {
-        LevelDataInfo level = LevelManager.instance.GetCurrentLevelData();
-        LevelManager.instance.LoadLevel(level.level);
+      //  LevelDataInfo level = LevelManager.instance.GetCurrentLevelData();
+        LevelManager.instance.LoadLevel();
         LoadLevel();
         PlayerController.instance.LoadLevel();
         isEnd = false;

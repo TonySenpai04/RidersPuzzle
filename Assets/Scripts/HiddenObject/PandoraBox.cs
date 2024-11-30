@@ -81,6 +81,7 @@ public class PandoraBox : HiddenObject
 
         HiddenObject objectRandom = Instantiate(HiddenObjectManager.instance.GetRandomPowerUp(),
             transform.position, Quaternion.identity);
+        objectRandom.transform.SetParent(this.transform.parent);
         Debug.Log(objectRandom.name);
         objectRandom.ActiveSkill();
         Destroy(this.gameObject);
@@ -91,6 +92,7 @@ public class PandoraBox : HiddenObject
     {
         HiddenObject objectRandom = Instantiate(HiddenObjectManager.instance.GetRandomObstacle(),
             transform.position, Quaternion.identity);
+        objectRandom.transform.SetParent(this.transform.parent);
         Debug.Log(objectRandom.name);
         objectRandom.ActiveSkill();
         Destroy(this.gameObject);
