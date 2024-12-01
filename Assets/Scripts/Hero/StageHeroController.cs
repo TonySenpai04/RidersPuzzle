@@ -1,7 +1,15 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
+using UnityEngine.UI;
+
+[Serializable]
+public struct DataHero {
+    public int id;
+    public Sprite icon;
+}
 
 public class StageHeroController : MonoBehaviour
 {
@@ -11,7 +19,7 @@ public class StageHeroController : MonoBehaviour
     [SerializeField] private GameObject stageChracter;
     [SerializeField] private GameObject playZone;
     [SerializeField] private SkillManager skillManager;
-    [SerializeField] private List<int> heroID;
+    [SerializeField] private List<DataHero> heroID;
     [SerializeField] private int currentId;
     void Start()
     {
@@ -23,7 +31,8 @@ public class StageHeroController : MonoBehaviour
         for (int i = 0; i < heroID.Count; i++)
         {
             ButtonStage button = Instantiate(stageButtonPrefab, buttonParent);
-            button.Initialize(heroID[i], SetHeroID);
+            button.GetComponent<Image>().sprite = heroID[i].icon;
+            button.Initialize(heroID[i].id, SetHeroID);
         }
     }
     public void SetHeroID(int id)
@@ -34,7 +43,7 @@ public class StageHeroController : MonoBehaviour
 
     public void LoadLevel()
     {
-        if (heroID.Any(id => id == currentId))
+        if (heroID.Any(hero => hero.id == currentId))
         {
             playZone.gameObject.SetActive(true);
             LevelManager.instance.LoadLevel();

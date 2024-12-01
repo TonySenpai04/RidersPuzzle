@@ -4077,7 +4077,12 @@ MonoBehaviour:
   stageChracter: {fileID: 1431382635}
   playZone: {fileID: 252246640}
   skillManager: {fileID: 1170068202}
-  heroID: e9030000ea030000
+  heroID:
+  - id: 1001
+    icon: {fileID: 21300000, guid: 3c7d8bc53db7e2f42a2138837d1c2d2a, type: 3}
+  - id: 1002
+    icon: {fileID: 21300000, guid: fda97c97632190844b66da60983a67c6, type: 3}
+  currentId: 0
 --- !u!1 &1441612066
 GameObject:
   m_ObjectHideFlags: 0

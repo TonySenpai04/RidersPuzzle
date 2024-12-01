@@ -19,6 +19,7 @@ public class SkillManager : MonoBehaviour
     void Start()
     {
         AddSkill(1001, new GeatsSkill(gridController,1));
+        AddSkill(1002, new GavvSkill(gridController, 1));
     }
     public void LoadSkill()
     {
