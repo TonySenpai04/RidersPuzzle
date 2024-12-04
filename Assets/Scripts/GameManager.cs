@@ -28,6 +28,7 @@ public class GameManager : MonoBehaviour
     }
     public void LoadLevel()
     {
+        LevelManager.instance.LoadLevel();
         LevelDataInfo level = LevelManager.instance.GetCurrentLevelData();
         targetRow = (int)level.endPos.x;
         targetCol = (int)level.endPos.y;
@@ -37,6 +38,7 @@ public class GameManager : MonoBehaviour
         GameObject objectWin = Instantiate(winCellPrefab, winPos.transform.position, Quaternion.identity);
         objectWin.transform.SetParent(gridController.grid[targetRow, targetCol].transform);
         stageTxt.text = "STAGE " + level.level;
+        PlayerController.instance.LoadLevel();
     }
     public void FixedUpdate()
     {
@@ -71,15 +73,11 @@ public class GameManager : MonoBehaviour
     {
         LevelManager.instance.LoadNextLevel();
         LoadLevel();
-        PlayerController.instance.LoadLevel();
         isEnd = false;
     }
     public void ReplayLevel()
     {
-      //  LevelDataInfo level = LevelManager.instance.GetCurrentLevelData();
-        LevelManager.instance.LoadLevel();
         LoadLevel();
-        PlayerController.instance.LoadLevel();
         isEnd = false;
     }
 }

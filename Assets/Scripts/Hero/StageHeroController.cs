@@ -5,11 +5,7 @@ using System.Linq;
 using UnityEngine;
 using UnityEngine.UI;
 
-[Serializable]
-public struct DataHero {
-    public int id;
-    public Sprite icon;
-}
+
 
 public class StageHeroController : MonoBehaviour
 {
@@ -19,7 +15,7 @@ public class StageHeroController : MonoBehaviour
     [SerializeField] private GameObject stageChracter;
     [SerializeField] private GameObject playZone;
     [SerializeField] private SkillManager skillManager;
-    [SerializeField] private List<DataHero> heroID;
+    [SerializeField] private HeroManager heroManager;
     [SerializeField] private int currentId;
     void Start()
     {
@@ -28,11 +24,11 @@ public class StageHeroController : MonoBehaviour
 
     private void CreateButtons()
     {
-        for (int i = 0; i < heroID.Count; i++)
+        for (int i = 0; i < heroManager.heroDatas.Count; i++)
         {
             ButtonStage button = Instantiate(stageButtonPrefab, buttonParent);
-            button.GetComponent<Image>().sprite = heroID[i].icon;
-            button.Initialize(heroID[i].id, SetHeroID);
+            button.GetComponent<Image>().sprite = heroManager.heroDatas[i].icon;
+            button.Initialize(heroManager.heroDatas[i].id, SetHeroID);
         }
     }
     public void SetHeroID(int id)
@@ -43,12 +39,19 @@ public class StageHeroController : MonoBehaviour
 
     public void LoadLevel()
     {
-        if (heroID.Any(hero => hero.id == currentId))
+        if (heroManager.heroDatas.Any(hero => hero.id == currentId))
         {
             playZone.gameObject.SetActive(true);
-            LevelManager.instance.LoadLevel();
+            foreach (DataHero hero in heroManager.heroDatas)
+            {
+                if (hero.id == currentId)
+                {
+                    PlayerController.instance.SetCurrentData(hero);
+                    break;
+                }
+
+            }
             GameManager.instance.LoadLevel();
-            PlayerController.instance.LoadLevel();
             stageChracter.gameObject.SetActive(false);
         }
         else

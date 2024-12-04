@@ -8,6 +8,7 @@ public class PlayerController : MonoBehaviour
     public static PlayerController instance;
     public MovementController movementController;
     public IHitPoint hitPoint;
+    public DataHero currentHero;
 
     private void Awake()
     {
@@ -21,9 +22,14 @@ public class PlayerController : MonoBehaviour
 
         
     }
+    public void SetCurrentData(DataHero hero)
+    {
+        currentHero = hero;
+    }
     public void LoadLevel()
     {
-        hitPoint.SetHealth(10);
+        hitPoint.SetHealth(currentHero.hp);
+        hitPoint.Heal(currentHero.hp);
         movementController.LoadMove();
         SkillManager.instance.LoadSkill();
     }
