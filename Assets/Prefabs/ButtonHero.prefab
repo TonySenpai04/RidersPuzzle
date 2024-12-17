@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 1425248210377638966}
   - component: {fileID: 970829013913763581}
   - component: {fileID: 570319291178150176}
-  - component: {fileID: 7888154068674433694}
+  - component: {fileID: 1988280770376988469}
   m_Layer: 5
   m_Name: ButtonHero
   m_TagString: Untagged
@@ -122,7 +122,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls: []
---- !u!114 &7888154068674433694
+--- !u!114 &1988280770376988469
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -131,7 +131,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 3444877430052837171}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b4550beee723a654a901ad0e9b7a0d7b, type: 3}
+  m_Script: {fileID: 11500000, guid: 49b69e69a6927d448aff2fe49e375f8e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1 &7069465920430464100

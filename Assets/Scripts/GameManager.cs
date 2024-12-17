@@ -51,8 +51,7 @@ public class GameManager : MonoBehaviour
         if (movementController.GetPos().Item1 == targetRow && movementController.GetPos().Item2 == targetCol)
         {
             panelWin.SetActive(true);
-
-           // txt.text = "Chúc mừng! Bạn đã chiến thắng!";
+            LevelManager.instance.UnlockNextLevel();
             isEnd = true;
 
         }
@@ -60,7 +59,6 @@ public class GameManager : MonoBehaviour
             || PlayerController.instance.hitPoint.GetCurrentHealth()<=0)
         {
             panelLose.gameObject.SetActive(true);
-           // txt.text = "Thua!";
             isEnd = true;
 
         }

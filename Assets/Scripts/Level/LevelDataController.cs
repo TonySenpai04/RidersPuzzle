@@ -66,6 +66,9 @@ public class LevelDataController
             }
             levels.Add(level);
         }
+        Level tempLevel = levels[0]; 
+        tempLevel.isUnlock = true;   
+        levels[0] = tempLevel;
     }
 
     public Level GetLevel(List<Level> levels,int levelIndex)

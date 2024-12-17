@@ -10,7 +10,7 @@ using UnityEngine.UI;
 public class StageHeroController : MonoBehaviour
 {
 
-    [SerializeField] private ButtonStage stageButtonPrefab;
+    [SerializeField] private ButtonHero heroButtonPrefab;
     [SerializeField] private Transform buttonParent;
     [SerializeField] private GameObject stageChracter;
     [SerializeField] private GameObject playZone;
@@ -26,7 +26,7 @@ public class StageHeroController : MonoBehaviour
     {
         for (int i = 0; i < heroManager.heroDatas.Count; i++)
         {
-            ButtonStage button = Instantiate(stageButtonPrefab, buttonParent);
+            ButtonHero button = Instantiate(heroButtonPrefab, buttonParent);
             button.GetComponent<Image>().sprite = heroManager.heroDatas[i].icon;
             button.Initialize(heroManager.heroDatas[i].id, SetHeroID);
         }

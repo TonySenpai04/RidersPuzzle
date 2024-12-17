@@ -25,6 +25,8 @@ public struct Level
     public List<WallInfo> wallPositions;
     public int key;
     public bool isActiveObject;
+    public bool isComplete;
+    public bool isUnlock;
 }
 
 public class LevelManager : MonoBehaviour
@@ -38,7 +40,7 @@ public class LevelManager : MonoBehaviour
     public  Dictionary<Vector2Int, GameObject> hiddenObjectInstances = new Dictionary<Vector2Int, GameObject>();
     private Dictionary<Vector2Int, GameObject> wallInstances = new Dictionary<Vector2Int, GameObject>();
     //private Dictionary<Vector2Int, BoxCollider2D> cellColliders = new Dictionary<Vector2Int, BoxCollider2D>();
-   [SerializeField] private List< BoxCollider2D> cellColliders = new List<BoxCollider2D>();
+ // [SerializeField] private List< BoxCollider2D> cellColliders = new List<BoxCollider2D>();
     private IReadData cSVReader;
     private LevelDataController levelDataController;
     private HiddenObjectHandler hiddenObjectHandler;
@@ -63,7 +65,8 @@ public class LevelManager : MonoBehaviour
     public void LoadLevelData()
     {
         levelDataController.LoadLevelData(levels);
-       
+        
+
     }
     public  LevelDataInfo GetCurrentLevelData()
     {
@@ -73,6 +76,8 @@ public class LevelManager : MonoBehaviour
     {
      //   currentLevelIndex = levelIndex;
         int lv = currentLevelIndex - 1;
+        if (!levels[lv].isUnlock)
+            return;
         if (lv >= 0 && lv < levels.Count)
         {
             Level level = levels[lv];
@@ -86,6 +91,34 @@ public class LevelManager : MonoBehaviour
             Debug.LogWarning("Level index is out of range.");
         }
     }
+    public void UnlockNextLevel()
+    {
+        int lv = currentLevelIndex - 1;
+        Level tempLevel = levels[lv];
+        tempLevel.isComplete = true;
+        levels[lv] = tempLevel;
+        int nextLevelIndex = currentLevelIndex; 
+        if (nextLevelIndex < levels.Count) 
+        {
+            Level nextLevel = levels[nextLevelIndex];
+            nextLevel.isUnlock = true; 
+            levels[nextLevelIndex] = nextLevel;
+        }
+    }
+
+    public bool IsLevelUnlocked(int levelIndex)
+    {
+        int lv = levelIndex - 1;
+
+        if (lv >= 0 && lv < levels.Count)
+        {
+            return levels[lv].isUnlock;
+        }
+
+        return false; // Mặc định là chưa mở khóa nếu index không hợp lệ
+    }
+
+
     public void SetLevel(int index)
     {
         this.currentLevelIndex = index;

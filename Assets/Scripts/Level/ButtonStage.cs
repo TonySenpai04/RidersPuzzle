@@ -1,21 +1,33 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 public class ButtonStage : MonoBehaviour
 {
-    public int Index { get; private set; } 
+    [SerializeField] private Button button;
+    [SerializeField] private Image lockImage; // Ảnh khóa hiển thị
 
-    private Button button;
+    private int levelIndex;
+    private System.Action<int> onClick;
 
-    private void Awake()
+    public void Initialize(int index, System.Action<int> clickCallback, bool isUnlocked)
     {
-        button = GetComponent<Button>();
+        levelIndex = index;
+        onClick = clickCallback;
+        SetButtonState(isUnlocked);
+        button.onClick.AddListener(OnButtonClick);
     }
 
-    public void Initialize(int index, System.Action<int> onClickAction)
+    private void OnButtonClick()
     {
-        Index = index;
-        button.onClick.AddListener(() => onClickAction(Index)); 
+        onClick?.Invoke(levelIndex);
+    }
+
+    // Cập nhật trạng thái button
+    public void SetButtonState(bool isUnlocked)
+    {
+        button.interactable = isUnlocked; // Vô hiệu hóa button nếu chưa mở khóa
+        lockImage.gameObject.SetActive(!isUnlocked); // Hiển thị hình khóa nếu chưa mở khóa
     }
 }

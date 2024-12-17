@@ -6,12 +6,15 @@ using UnityEngine.UI;
 
 public class ButtonStageController : MonoBehaviour
 {
-    [SerializeField] private ButtonStage stageButtonPrefab; 
+    [SerializeField] private ButtonStage stageButtonPrefab;
     [SerializeField] private int totalLevels;
     [SerializeField] private Transform buttonParent;
     [SerializeField] private GameObject stageChracter;
     [SerializeField] private GameObject stageZone;
-    [SerializeField] private  LevelManager levelManager;
+    [SerializeField] private LevelManager levelManager;
+
+    private List<ButtonStage> buttons = new List<ButtonStage>(); // Danh sách các button
+
     void Start()
     {
         CreateButtons();
@@ -21,9 +24,25 @@ public class ButtonStageController : MonoBehaviour
     {
         for (int i = 0; i < totalLevels; i++)
         {
+            bool isUnlocked = levelManager.IsLevelUnlocked(i + 1);
             ButtonStage button = Instantiate(stageButtonPrefab, buttonParent);
-            button.GetComponentInChildren<TextMeshProUGUI>().text =  (i + 1).ToString();
-            button.Initialize(i + 1, LoadLevel);
+            button.GetComponentInChildren<TextMeshProUGUI>().text = (i + 1).ToString();
+            button.Initialize(i + 1, LoadLevel, isUnlocked);
+            buttons.Add(button);
+        }
+    }
+    private void FixedUpdate()
+    {
+        UpdateButtons();
+    }
+
+    public void UpdateButtons()
+    {
+        for (int i = 0; i < buttons.Count; i++)
+        {
+            bool isUnlocked = levelManager.IsLevelUnlocked(i + 1);
+
+            buttons[i].SetButtonState(isUnlocked);
         }
     }
 
@@ -31,12 +50,6 @@ public class ButtonStageController : MonoBehaviour
     {
         stageChracter.gameObject.SetActive(true);
         levelManager.SetLevel(levelIndex);
-        //LevelManager.instance.LoadLevel(levelIndex);
-        //GameManager.instance.LoadLevel();
-        //PlayerController.instance.LoadLevel();
         stageZone.gameObject.SetActive(false);
-
     }
-
-
 }

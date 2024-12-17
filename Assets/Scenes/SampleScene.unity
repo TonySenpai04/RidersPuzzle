@@ -1499,7 +1499,6 @@ MonoBehaviour:
   currentLevelIndex: 4
   data: {fileID: 4900000, guid: cf0b474c785668f4bae299dac659da40, type: 3}
   hiddenObjectManager: {fileID: 1076175228}
-  cellColliders: []
 --- !u!4 &325954454
 Transform:
   m_ObjectHideFlags: 0
@@ -4072,7 +4071,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e55ea420dbef532499c9abc7ca692264, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  stageButtonPrefab: {fileID: 7888154068674433694, guid: b74297e40dece1f4f97fbdf8e03ef2fa, type: 3}
+  heroButtonPrefab: {fileID: 1988280770376988469, guid: b74297e40dece1f4f97fbdf8e03ef2fa, type: 3}
   buttonParent: {fileID: 1895526352}
   stageChracter: {fileID: 1431382635}
   playZone: {fileID: 252246640}
