@@ -20,23 +20,27 @@ public class Teleport : HiddenObject
 
         foreach (var entry in LevelManager.instance.hiddenObjectInstances)
         {
-            Teleport hiddenObject = entry.Value.GetComponent<Teleport>();
-            if (hiddenObject != null && hiddenObject != this)
+            if (entry.Value != null)
             {
-                Vector2Int teleportPosition = new Vector2Int(entry.Key.x, entry.Key.y);
+                Teleport hiddenObject = entry.Value.GetComponent<Teleport>();
 
-
-                int deltaX = Mathf.Abs(currentPosition.x - lastPosition.x);
-                int deltaY = Mathf.Abs(currentPosition.y - lastPosition.y);
-                Debug.Log(deltaX + " " + deltaY);
-
-                if ((deltaX == 1 && deltaY == 0) || (deltaX == 0 && deltaY == 1))
+                if (hiddenObject != null && hiddenObject != this)
                 {
+                    Vector2Int teleportPosition = new Vector2Int(entry.Key.x, entry.Key.y);
 
-                    PlayerController.instance.movementController.MoveToBlock(teleportPosition.x,teleportPosition.y);
-                    return;
-                       
-                    
+
+                    int deltaX = Mathf.Abs(currentPosition.x - lastPosition.x);
+                    int deltaY = Mathf.Abs(currentPosition.y - lastPosition.y);
+                    Debug.Log(deltaX + " " + deltaY);
+
+                    if ((deltaX == 1 && deltaY == 0) || (deltaX == 0 && deltaY == 1))
+                    {
+
+                        PlayerController.instance.movementController.MoveToBlock(teleportPosition.x, teleportPosition.y);
+                        return;
+
+
+                    }
                 }
             }
         }
