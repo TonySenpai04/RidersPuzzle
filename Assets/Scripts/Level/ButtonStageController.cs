@@ -9,11 +9,11 @@ public class ButtonStageController : MonoBehaviour
     [SerializeField] private ButtonStage stageButtonPrefab;
     [SerializeField] private int totalLevels;
     [SerializeField] private Transform buttonParent;
-    [SerializeField] private GameObject stageChracter;
+    [SerializeField] private GameObject playZone;
     [SerializeField] private GameObject stageZone;
     [SerializeField] private LevelManager levelManager;
-
-    private List<ButtonStage> buttons = new List<ButtonStage>(); // Danh sách các button
+    [SerializeField] private StageHeroController stageHeroController;
+    private List<ButtonStage> buttons = new List<ButtonStage>(); 
 
     void Start()
     {
@@ -48,8 +48,13 @@ public class ButtonStageController : MonoBehaviour
 
     private void LoadLevel(int levelIndex)
     {
-        stageChracter.gameObject.SetActive(true);
-        levelManager.SetLevel(levelIndex);
-        stageZone.gameObject.SetActive(false);
+        if (stageHeroController.isHero())
+        {
+            playZone.gameObject.SetActive(true);
+            levelManager.SetLevel(levelIndex);
+            PlayerController.instance.SetCurrentData(stageHeroController.GetCurrentHeroData());
+            GameManager.instance.LoadLevel();
+            stageZone.gameObject.SetActive(false);
+        }
     }
 }

@@ -16,6 +16,7 @@ public class GameManager : MonoBehaviour
     public bool isEnd=false;
     public GameObject playZone;
     public TextMeshProUGUI stageTxt;
+    public BackgroundController backgroundController;
     private void Awake()
     {
         instance = this; 
@@ -38,6 +39,7 @@ public class GameManager : MonoBehaviour
         GameObject objectWin = Instantiate(winCellPrefab, winPos.transform.position, Quaternion.identity);
         objectWin.transform.SetParent(gridController.grid[targetRow, targetCol].transform);
         stageTxt.text = "STAGE " + level.level;
+        backgroundController.UpdateRandomArt();
         PlayerController.instance.LoadLevel();
     }
     public void FixedUpdate()

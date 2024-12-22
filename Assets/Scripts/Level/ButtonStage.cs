@@ -6,10 +6,13 @@ using UnityEngine.UI;
 public class ButtonStage : MonoBehaviour
 {
     [SerializeField] private Button button;
-    [SerializeField] private Image lockImage; // Ảnh khóa hiển thị
-
-    private int levelIndex;
+    [SerializeField] private Image Image;
+    [SerializeField] private Sprite lockImage;
+    [SerializeField] private Sprite UnlockImage;
+    [SerializeField] private int levelIndex;
+    [SerializeField] public bool isUnlocked;
     private System.Action<int> onClick;
+
 
     public void Initialize(int index, System.Action<int> clickCallback, bool isUnlocked)
     {
@@ -24,10 +27,19 @@ public class ButtonStage : MonoBehaviour
         onClick?.Invoke(levelIndex);
     }
 
-    // Cập nhật trạng thái button
     public void SetButtonState(bool isUnlocked)
     {
-        button.interactable = isUnlocked; // Vô hiệu hóa button nếu chưa mở khóa
-        lockImage.gameObject.SetActive(!isUnlocked); // Hiển thị hình khóa nếu chưa mở khóa
+       this.isUnlocked = isUnlocked;
+        Image.sprite = isUnlocked ? UnlockImage : lockImage;
+        button.onClick.RemoveAllListeners(); 
+
+        if (isUnlocked)
+        {
+            button.onClick.AddListener(OnButtonClick);
+        }
+        else
+        {
+            button.onClick.AddListener(() => Debug.Log($"Level {levelIndex} chưa được mở khóa!")); 
+        }
     }
 }

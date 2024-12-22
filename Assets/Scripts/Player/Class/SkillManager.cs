@@ -44,13 +44,13 @@ public class SkillManager : MonoBehaviour
     }
     public void SetSkillId(int id)
     {
-        if (skillsData.Any(skillData => skillData.id == id)) // Giả sử SkillData có thuộc tính Id
+        if (skillsData.Any(skillData => skillData.id == id)) 
         {
             this.currentIDHero = id;
         }
         else
         {
-            // Optional: In ra log nếu muốn biết id không tồn tại
+            
             Console.WriteLine($"Skill ID {id} không tồn tại trong danh sách.");
         }
     }

@@ -18,16 +18,31 @@ public class GridController : MonoBehaviour
     public int currentObjectRow;
     public int currentObjectColumn;
     [SerializeField] private List<BoxCollider2D> cellColliders = new List<BoxCollider2D>();
+    private List<SpriteRenderer> spriteRenderers = new List<SpriteRenderer>();
+    private List<Sprite> originalSprites = new List<Sprite>();
+    [SerializeField] private Sprite highlightSprites;
 
     private void Awake()
     {
-
         gridGenerator=new GridGenerator(this.gameObject,blockPrefab);
         gridGenerator.GenerateGrid( rows,  cols,  cellSize,  spacing, centerOffset);
         grid= gridGenerator.Grid();
         GetCollider();
 
-
+    }
+    public void GetSprite()
+    {
+        spriteRenderers.Clear();
+        originalSprites.Clear();
+        foreach (var cell in grid)
+        {
+            SpriteRenderer spriteRenderer = cell.GetComponent<SpriteRenderer>();
+            if (spriteRenderer != null)
+            {
+                spriteRenderers.Add(spriteRenderer);
+                originalSprites.Add(spriteRenderer.sprite);
+            }
+        }
     }
     private void Update()
     {
@@ -37,10 +52,7 @@ public class GridController : MonoBehaviour
     }
     public void GetCollider()
     {
-        // Clear existing colliders
         cellColliders.Clear();
-
-        // Lấy tất cả các BoxCollider2D từ grid
         foreach (var cell in grid)
         {
             var collider = cell.GetComponent<BoxCollider2D>();
@@ -61,13 +73,11 @@ public class GridController : MonoBehaviour
     {
         int currentRow = character.GetPos().Item1;
         int currentCol = character.GetPos().Item2;
-
-        foreach (GameObject cell in grid)
+        for (int i = 0; i < spriteRenderers.Count; i++)
         {
-            cell.GetComponent<SpriteRenderer>().color = new Color(238 / 255f, 130 / 255f, 238 / 255f);
+            spriteRenderers[i].sprite = originalSprites[i]; 
         }
 
-        // Làm sáng các ô liền kề
         HighlightCell(currentRow - 1, currentCol); // Ô trên
         HighlightCell(currentRow + 1, currentCol); // Ô dưới
         HighlightCell(currentRow, currentCol - 1); // Ô trái
@@ -101,7 +111,12 @@ public class GridController : MonoBehaviour
     {
         if (row >= 0 && row < rows && col >= 0 && col < cols)
         {
-            grid[row, col].GetComponent<SpriteRenderer>().color = Color.yellow;
+            SpriteRenderer spriteRenderer = spriteRenderers[row * cols + col]; 
+            if (spriteRenderer != null)
+            {
+                
+                spriteRenderer.sprite = highlightSprites;
+            }
         }
     }
 }

@@ -17,6 +17,8 @@ public class StageHeroController : MonoBehaviour
     [SerializeField] private SkillManager skillManager;
     [SerializeField] private HeroManager heroManager;
     [SerializeField] private int currentId;
+    [SerializeField] private PlayerController playerController;
+    [SerializeField] private List<ButtonHero> heroButtons = new List<ButtonHero>();
     void Start()
     {
         CreateButtons();
@@ -24,41 +26,84 @@ public class StageHeroController : MonoBehaviour
 
     private void CreateButtons()
     {
-        for (int i = 0; i < heroManager.heroDatas.Count; i++)
+        foreach (var heroData in heroManager.heroDatas)
         {
             ButtonHero button = Instantiate(heroButtonPrefab, buttonParent);
-            button.GetComponent<Image>().sprite = heroManager.heroDatas[i].icon;
-            button.Initialize(heroManager.heroDatas[i].id, SetHeroID);
+            button.Initialize(
+                heroData.id,
+                SetHeroID,
+                heroData.isUnlock,
+                false , heroData.icon
+            );
+
+            heroButtons.Add(button);
+        }
+ 
+    }
+    void FixedUpdate()
+    {
+        UpdateButtonStates();
+    }
+
+    private void UpdateButtonStates()
+    {
+        for (int i = 0; i < heroButtons.Count; i++)
+        {
+            bool isUnlockedInManager = heroManager.heroDatas[i].isUnlock;
+            if (heroButtons[i].isUnlocked != isUnlockedInManager)
+            {
+                heroButtons[i].UpdateButtonState(isUnlockedInManager, heroButtons[i].Index == currentId);
+            }
         }
     }
     public void SetHeroID(int id)
     {
+        var clickedButton = heroButtons.Find(button => button.Index == id);
+
+        if (clickedButton != null && !clickedButton.isUnlocked)
+        {
+            Debug.LogWarning($"Hero với ID {id} đang bị khóa, không thể chọn.");
+            return;
+        }
         skillManager.SetSkillId(id);
         currentId = id;
+        foreach (var button in heroButtons)
+        {
+            bool isSelected = button.Index == id;
+            button.UpdateButtonState(button.isUnlocked, isSelected);
+        }
     }
 
     public void LoadLevel()
     {
-        if (heroManager.heroDatas.Any(hero => hero.id == currentId))
+        if (isHero())
         {
-            playZone.gameObject.SetActive(true);
             foreach (DataHero hero in heroManager.heroDatas)
             {
                 if (hero.id == currentId)
                 {
-                    PlayerController.instance.SetCurrentData(hero);
+                    playerController.SetCurrentData(hero);
                     break;
                 }
 
             }
-            GameManager.instance.LoadLevel();
-            stageChracter.gameObject.SetActive(false);
         }
-        else
+    }
+    public bool isHero()
+    {
+        return heroManager.heroDatas.Any(hero => hero.id == currentId && hero.isUnlock);
+    }
+    public DataHero GetCurrentHeroData()
+    {
+        DataHero currentHero=new DataHero();
+        foreach (DataHero hero in heroManager.heroDatas)
         {
-            Debug.LogWarning($"Current ID {currentId} không nằm trong danh sách heroID!");
-
+            if (hero.id == currentId)
+            {
+                currentHero= hero;
+            }
 
         }
+        return currentHero;
     }
 }
