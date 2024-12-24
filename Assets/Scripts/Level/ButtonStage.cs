@@ -12,34 +12,48 @@ public class ButtonStage : MonoBehaviour
     [SerializeField] private int levelIndex;
     [SerializeField] public bool isUnlocked;
     private System.Action<int> onClick;
+    [SerializeField]
+    private ButtonStageController parentController;
 
 
-    public void Initialize(int index, System.Action<int> clickCallback, bool isUnlocked)
+    public void Initialize(int index, System.Action<int> clickCallback, bool isUnlocked,
+        ButtonStageController buttonStageController)
     {
         levelIndex = index;
         onClick = clickCallback;
         SetButtonState(isUnlocked);
+        this.parentController = buttonStageController;
         button.onClick.AddListener(OnButtonClick);
     }
 
     private void OnButtonClick()
     {
-        onClick?.Invoke(levelIndex);
+        if (isUnlocked)
+        {
+            onClick?.Invoke(levelIndex);
+        }
+        else
+        {
+            if (parentController != null)
+            {
+                parentController.ShowNotification($"Level {levelIndex} is locked!");
+            }
+        }
     }
 
     public void SetButtonState(bool isUnlocked)
     {
        this.isUnlocked = isUnlocked;
         Image.sprite = isUnlocked ? UnlockImage : lockImage;
-        button.onClick.RemoveAllListeners(); 
+        //button.onClick.RemoveAllListeners(); 
 
-        if (isUnlocked)
-        {
-            button.onClick.AddListener(OnButtonClick);
-        }
-        else
-        {
-            button.onClick.AddListener(() => Debug.Log($"Level {levelIndex} chưa được mở khóa!")); 
-        }
+        //if (isUnlocked)
+        //{
+        //    button.onClick.AddListener(OnButtonClick);
+        //}
+        //else
+        //{
+        //    button.onClick.AddListener(() => Debug.Log($"Level {levelIndex} chưa được mở khóa!")); 
+       // }
     }
 }

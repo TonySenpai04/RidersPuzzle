@@ -13,10 +13,12 @@ public class ButtonStageController : MonoBehaviour
     [SerializeField] private GameObject stageZone;
     [SerializeField] private LevelManager levelManager;
     [SerializeField] private StageHeroController stageHeroController;
-    private List<ButtonStage> buttons = new List<ButtonStage>(); 
-
+    [SerializeField] private List<ButtonStage> buttons = new List<ButtonStage>();
+    [SerializeField] private GameObject notiObject;
+    [SerializeField] private TextMeshProUGUI notiTxt;
     void Start()
     {
+        notiObject.gameObject.SetActive(false);
         CreateButtons();
     }
 
@@ -27,7 +29,7 @@ public class ButtonStageController : MonoBehaviour
             bool isUnlocked = levelManager.IsLevelUnlocked(i + 1);
             ButtonStage button = Instantiate(stageButtonPrefab, buttonParent);
             button.GetComponentInChildren<TextMeshProUGUI>().text = (i + 1).ToString();
-            button.Initialize(i + 1, LoadLevel, isUnlocked);
+            button.Initialize(i + 1, LoadLevel, isUnlocked,this);
             buttons.Add(button);
         }
     }
@@ -56,5 +58,21 @@ public class ButtonStageController : MonoBehaviour
             GameManager.instance.LoadLevel();
             stageZone.gameObject.SetActive(false);
         }
+        else
+        {
+            ShowNotification("Please select a character!");
+        }
+    }
+    public void ShowNotification(string message)
+    {
+        StopAllCoroutines();
+        notiObject.gameObject.SetActive(true);
+        notiTxt.text = message;
+        StartCoroutine(HideNotificationAfterDelay(1f));
+    }
+    private IEnumerator HideNotificationAfterDelay(float delay)
+    {
+        yield return new WaitForSeconds(delay);
+        notiObject.gameObject.SetActive(false);
     }
 }
