@@ -67,7 +67,10 @@ public class SkillManager : MonoBehaviour
             skill.IncreaseUses(amount); 
         }
     }
-
+    public ISkill GetCurrentSkill()
+    {
+        return GetSkillById(currentIDHero); 
+    }
 }
 [Serializable]
 public struct SkillData {

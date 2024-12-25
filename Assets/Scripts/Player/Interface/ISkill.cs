@@ -7,4 +7,5 @@ public interface ISkill
     void ActivateSkill();
     void SetNumberOfSkill(int amount);
     void IncreaseUses(int amount);
+    int GetNumberOfSkill();
 }

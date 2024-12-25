@@ -36,7 +36,7 @@ public class ButtonStage : MonoBehaviour
         {
             if (parentController != null)
             {
-                parentController.ShowNotification($"Level {levelIndex} is locked!");
+                parentController.ShowNotification("Not unlocked!");
             }
         }
     }

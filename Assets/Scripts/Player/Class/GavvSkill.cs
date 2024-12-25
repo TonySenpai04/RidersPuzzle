@@ -52,6 +52,11 @@ internal class GavvSkill : ISkill
         }
     }
 
+    public int GetNumberOfSkill()
+    {
+        return skillAmount;
+    }
+
     public void IncreaseUses(int amount)
     {
         skillAmount += amount;

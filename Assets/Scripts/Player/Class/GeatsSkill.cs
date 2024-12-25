@@ -58,7 +58,10 @@ public class GeatsSkill : ISkill
        
        
     }
-
+    public int GetNumberOfSkill()
+    {
+        return skillAmount;
+    }
     public void SetNumberOfSkill(int amount)
     {
         this.skillAmount = amount;
