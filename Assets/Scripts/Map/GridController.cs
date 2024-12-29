@@ -9,9 +9,9 @@ public class GridController : MonoBehaviour
     public GameObject blockPrefab;
     public int rows = 5; // Số hàng
     public int cols = 5; // Số cột
-    public float cellSize = 1.0f; // Kích thước mỗi ô (độ rộng và cao)
-    public float spacing = 0.1f; // Khoảng cách giữa các ô
-    public Vector2 centerOffset = new Vector2(0, 0); // Điểm trung tâm của lưới
+    public float cellSize = 1.0f; 
+    public float spacing = 0.1f; 
+    public Vector2 centerOffset = new Vector2(0, 0); 
     public GameObject[,] grid;
     [SerializeField] private MovementController character;
     public bool isActiveObject=true;
@@ -22,13 +22,61 @@ public class GridController : MonoBehaviour
     private List<Sprite> originalSprites = new List<Sprite>();
     [SerializeField] private Sprite highlightSprites;
 
+    [SerializeField] private Sprite arrowUpSprite;     // Mũi tên hướng lên
+    [SerializeField] private Sprite arrowDownSprite;   // Mũi tên hướng xuống
+    [SerializeField] private Sprite arrowLeftSprite;   // Mũi tên hướng trái
+    [SerializeField] private Sprite arrowRightSprite;  // Mũi tên hướng phải
+
+    private GameObject arrowUp, arrowDown, arrowLeft, arrowRight;
     private void Awake()
     {
-        gridGenerator=new GridGenerator(this.gameObject,blockPrefab);
+       
+        gridGenerator =new GridGenerator(this.gameObject,blockPrefab);
         gridGenerator.GenerateGrid( rows,  cols,  cellSize,  spacing, centerOffset);
         grid= gridGenerator.Grid();
         GetCollider();
+        CreateArrows();
 
+    }
+    private void CreateArrows()
+    {
+        arrowUp = CreateArrow(arrowUpSprite);
+        arrowDown = CreateArrow(arrowDownSprite);
+        arrowLeft = CreateArrow(arrowLeftSprite);
+        arrowRight = CreateArrow(arrowRightSprite);
+    }
+    private GameObject CreateArrow(Sprite arrowSprite)
+    {
+        GameObject arrow = new GameObject("Arrow");
+        arrow.transform.SetParent(this.transform);
+        arrow.AddComponent<SpriteRenderer>().sprite = arrowSprite;
+        arrow.GetComponent<SpriteRenderer>().sortingOrder = 3;
+        arrow.SetActive(false); 
+        return arrow;
+    }
+
+    private void UpdateArrowPositions()
+    {
+        int currentRow = character.GetPos().Item1;
+        int currentCol = character.GetPos().Item2;
+        UpdateArrow(arrowUp, currentRow - 1, currentCol);   // Mũi tên trên
+        UpdateArrow(arrowDown, currentRow + 1, currentCol); // Mũi tên dưới
+        UpdateArrow(arrowLeft, currentRow, currentCol - 1); // Mũi tên trái
+        UpdateArrow(arrowRight, currentRow, currentCol + 1);// Mũi tên phải
+    }
+    private void UpdateArrow(GameObject arrow, int row, int col)
+    {
+        if (row >= 0 && row < rows && col >= 0 && col < cols)
+        {
+            Vector3 cellPosition = grid[row, col].transform.position;
+            
+            arrow.transform.position = cellPosition;
+            arrow.SetActive(true);
+        }
+        else
+        {
+            arrow.SetActive(false);
+        }
     }
     public void GetSprite()
     {
@@ -46,8 +94,8 @@ public class GridController : MonoBehaviour
     }
     private void Update()
     {
-        HighlightMovableCells();
         ActiveHiddenObject();
+        UpdateArrowPositions();
 
     }
     public void GetCollider()
@@ -69,22 +117,22 @@ public class GridController : MonoBehaviour
             collider.enabled = true;
         }
     }
-    void HighlightMovableCells()
-    {
-        int currentRow = character.GetPos().Item1;
-        int currentCol = character.GetPos().Item2;
-        for (int i = 0; i < spriteRenderers.Count; i++)
-        {
-            spriteRenderers[i].sprite = originalSprites[i]; 
-        }
+    //void HighlightMovableCells()
+    //{
+    //    int currentRow = character.GetPos().Item1;
+    //    int currentCol = character.GetPos().Item2;
+    //    for (int i = 0; i < spriteRenderers.Count; i++)
+    //    {
+    //        spriteRenderers[i].sprite = originalSprites[i]; 
+    //    }
 
-        HighlightCell(currentRow - 1, currentCol); // Ô trên
-        HighlightCell(currentRow + 1, currentCol); // Ô dưới
-        HighlightCell(currentRow, currentCol - 1); // Ô trái
-        HighlightCell(currentRow, currentCol + 1); // Ô phải
+    //    HighlightCell(currentRow - 1, currentCol); // Ô trên
+    //    HighlightCell(currentRow + 1, currentCol); // Ô dưới
+    //    HighlightCell(currentRow, currentCol - 1); // Ô trái
+    //    HighlightCell(currentRow, currentCol + 1); // Ô phải
        
       
-    }
+    //}
     public void ActiveHiddenObject()
     {
         int currentRow = character.GetPos().Item1;
@@ -107,16 +155,16 @@ public class GridController : MonoBehaviour
 
     }
 
-    void HighlightCell(int row, int col)
-    {
-        if (row >= 0 && row < rows && col >= 0 && col < cols)
-        {
-            SpriteRenderer spriteRenderer = spriteRenderers[row * cols + col]; 
-            if (spriteRenderer != null)
-            {
+    //void HighlightCell(int row, int col)
+    //{
+    //    if (row >= 0 && row < rows && col >= 0 && col < cols)
+    //    {
+    //        SpriteRenderer spriteRenderer = spriteRenderers[row * cols + col]; 
+    //        if (spriteRenderer != null)
+    //        {
                 
-                spriteRenderer.sprite = highlightSprites;
-            }
-        }
-    }
+    //            spriteRenderer.sprite = highlightSprites;
+    //        }
+    //    }
+    //}
 }
