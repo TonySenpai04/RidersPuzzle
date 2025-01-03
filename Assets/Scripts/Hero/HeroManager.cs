@@ -9,6 +9,7 @@ public struct DataHero
     public int hp;
     public Sprite icon;
     public bool isUnlock;
+    public Sprite heroImage;
 }
 public class HeroManager : MonoBehaviour
 {

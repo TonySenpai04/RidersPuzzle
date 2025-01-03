@@ -9,7 +9,7 @@ public class GridController : MonoBehaviour
     public GameObject blockPrefab;
     public int rows = 5; // Số hàng
     public int cols = 5; // Số cột
-    public float cellSize = 1.0f; 
+    public float cellSize ; 
     public float spacing = 0.1f; 
     public Vector2 centerOffset = new Vector2(0, 0); 
     public GameObject[,] grid;
@@ -32,6 +32,8 @@ public class GridController : MonoBehaviour
     {
        
         gridGenerator =new GridGenerator(this.gameObject,blockPrefab);
+        float screenWidth = Camera.main.orthographicSize * 2 * Screen.width / Screen.height; // Chiều rộng thực tế trong thế giới 2D
+        cellSize = (screenWidth - spacing * (cols - 1)) / cols;
         gridGenerator.GenerateGrid( rows,  cols,  cellSize,  spacing, centerOffset);
         grid= gridGenerator.Grid();
         GetCollider();
@@ -59,18 +61,18 @@ public class GridController : MonoBehaviour
     {
         int currentRow = character.GetPos().Item1;
         int currentCol = character.GetPos().Item2;
-        UpdateArrow(arrowUp, currentRow - 1, currentCol);   // Mũi tên trên
-        UpdateArrow(arrowDown, currentRow + 1, currentCol); // Mũi tên dưới
-        UpdateArrow(arrowLeft, currentRow, currentCol - 1); // Mũi tên trái
-        UpdateArrow(arrowRight, currentRow, currentCol + 1);// Mũi tên phải
+        float offset = cellSize / 2-0.1f;
+        UpdateArrow(arrowUp, currentRow - 1, currentCol, new Vector2(0, -offset));    // Mũi tên trên, dịch xuống sát cạnh
+        UpdateArrow(arrowDown, currentRow + 1, currentCol, new Vector2(0, offset));   // Mũi tên dưới, dịch lên sát cạnh
+        UpdateArrow(arrowLeft, currentRow, currentCol - 1, new Vector2(offset, 0));   // Mũi tên trái, dịch qua phải sát cạnh
+        UpdateArrow(arrowRight, currentRow, currentCol + 1, new Vector2(-offset, 0));
     }
-    private void UpdateArrow(GameObject arrow, int row, int col)
+    private void UpdateArrow(GameObject arrow, int row, int col, Vector2 offset)
     {
         if (row >= 0 && row < rows && col >= 0 && col < cols)
         {
             Vector3 cellPosition = grid[row, col].transform.position;
-            
-            arrow.transform.position = cellPosition;
+            arrow.transform.position = new Vector3(cellPosition.x + offset.x, cellPosition.y + offset.y, cellPosition.z);
             arrow.SetActive(true);
         }
         else
@@ -78,6 +80,7 @@ public class GridController : MonoBehaviour
             arrow.SetActive(false);
         }
     }
+
     public void GetSprite()
     {
         spriteRenderers.Clear();
@@ -117,22 +120,7 @@ public class GridController : MonoBehaviour
             collider.enabled = true;
         }
     }
-    //void HighlightMovableCells()
-    //{
-    //    int currentRow = character.GetPos().Item1;
-    //    int currentCol = character.GetPos().Item2;
-    //    for (int i = 0; i < spriteRenderers.Count; i++)
-    //    {
-    //        spriteRenderers[i].sprite = originalSprites[i]; 
-    //    }
 
-    //    HighlightCell(currentRow - 1, currentCol); // Ô trên
-    //    HighlightCell(currentRow + 1, currentCol); // Ô dưới
-    //    HighlightCell(currentRow, currentCol - 1); // Ô trái
-    //    HighlightCell(currentRow, currentCol + 1); // Ô phải
-       
-      
-    //}
     public void ActiveHiddenObject()
     {
         int currentRow = character.GetPos().Item1;
@@ -154,17 +142,4 @@ public class GridController : MonoBehaviour
         
 
     }
-
-    //void HighlightCell(int row, int col)
-    //{
-    //    if (row >= 0 && row < rows && col >= 0 && col < cols)
-    //    {
-    //        SpriteRenderer spriteRenderer = spriteRenderers[row * cols + col]; 
-    //        if (spriteRenderer != null)
-    //        {
-                
-    //            spriteRenderer.sprite = highlightSprites;
-    //        }
-    //    }
-    //}
 }

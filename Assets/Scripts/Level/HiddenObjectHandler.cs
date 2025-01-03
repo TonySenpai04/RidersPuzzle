@@ -17,11 +17,15 @@ public class HiddenObjectHandler
         Dictionary<Vector2Int, GameObject> hiddenObjectInstances)
     {
         ClearHiddenObjects( hiddenObjectInstances);
+        float screenWidth = Camera.main.orthographicSize * 2 * Screen.width / Screen.height;
+        float cellSize =(float) (screenWidth - 0.1 * (6 - 1)) / 6;
+
         foreach (var hiddenObjectInfo in level.hiddenObjects)
         {
             Vector2Int positionKey = new Vector2Int(hiddenObjectInfo.row, hiddenObjectInfo.col);
             GameObject cell = gridController.grid[hiddenObjectInfo.row, hiddenObjectInfo.col];
             GameObject hiddenObject = Object.Instantiate(hiddenObjectInfo.objectPrefab, cell.transform.position, Quaternion.identity);
+            hiddenObject.transform.localScale = new Vector3(cellSize, cellSize, 1);
             hiddenObject.transform.SetParent(cell.transform);
             hiddenObject.SetActive(isActive);
             hiddenObjectInstances[positionKey] = hiddenObject;

@@ -27,6 +27,7 @@ public struct Level
     public bool isActiveObject;
     public bool isComplete;
     public bool isUnlock;
+    public string difficulty;
 }
 
 public class LevelManager : MonoBehaviour

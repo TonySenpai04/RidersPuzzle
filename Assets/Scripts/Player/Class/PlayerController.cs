@@ -29,6 +29,7 @@ public class PlayerController : MonoBehaviour
     {
         hitPoint.SetHealth(currentHero.hp);
         hitPoint.Heal(currentHero.hp);
+        GetComponent<SpriteRenderer>().sprite = currentHero.heroImage;
         movementController.LoadMove();
         SkillManager.instance.LoadSkill();
     }

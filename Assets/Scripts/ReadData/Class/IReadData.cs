@@ -15,4 +15,5 @@ public class LevelDataInfo
     public int move;
     public Vector2 startPos;
     public Vector2 endPos;
+    public  string difficulty;
 }

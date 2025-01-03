@@ -45,6 +45,7 @@ public class LevelDataController
             Level level = new Level();
             level.hiddenObjects = new List<HiddenObjectInfo>(); 
             level.isActiveObject = levelData.Value.isActive;
+            level.difficulty=levelData.Value.difficulty;
             Debug.Log(levelData.Value.positions.Count);
             foreach (var entry in levelData.Value.positions)
             {

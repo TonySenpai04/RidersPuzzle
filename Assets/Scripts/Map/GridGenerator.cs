@@ -41,7 +41,7 @@ public class GridGenerator : IGridGenerator
 
  
                 GameObject cell = GameObject.Instantiate(blockPrefab, cellPosition, Quaternion.identity, owner.transform);
-
+                cell.transform.localScale = new Vector3(cellSize, cellSize, 1);
                 grid[row, col] = cell; 
                 cell.name = "block:" + row + "-" + col;
             }
