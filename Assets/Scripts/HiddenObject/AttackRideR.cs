@@ -12,11 +12,14 @@ public class AttackRideR : HiddenObject
 
         foreach (var hiddenObject in hiddenObjectsInRow)
         {
-            HiddenObject hiddenObj = hiddenObject.GetComponent<HiddenObject>(); 
-            if (hiddenObj != null && hiddenObj.type==ObjectType.Obstacle)
+            if (hiddenObject != null)
             {
-                hiddenObj.GetComponentInParent<BoxCollider2D>().enabled = true;
-                Destroy(hiddenObject); 
+                HiddenObject hiddenObj = hiddenObject.GetComponent<HiddenObject>();
+                if (hiddenObj != null && hiddenObj.type == ObjectType.Obstacle)
+                {
+                    hiddenObj.GetComponentInParent<BoxCollider2D>().enabled = true;
+                    Destroy(hiddenObject);
+                }
             }
         }
         DestroyObject();

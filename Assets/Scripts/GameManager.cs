@@ -17,6 +17,7 @@ public class GameManager : MonoBehaviour
     public GameObject playZone;
     public TextMeshProUGUI stageTxt;
     public BackgroundController backgroundController;
+    GameObject objectWin;
     private void Awake()
     {
         instance = this; 
@@ -33,13 +34,22 @@ public class GameManager : MonoBehaviour
         LevelDataInfo level = LevelManager.instance.GetCurrentLevelData();
         targetRow = (int)level.endPos.x;
         targetCol = (int)level.endPos.y;
+
         panelWin.gameObject.SetActive(false);
         panelLose.gameObject.SetActive(false);
+
+        if (objectWin != null)
+        {
+            Destroy(objectWin);
+            objectWin = null; 
+        }
         Transform winPos = gridController.grid[targetRow, targetCol].transform;
-        GameObject objectWin = Instantiate(winCellPrefab, winPos.transform.position, Quaternion.identity);
+        objectWin = Instantiate(winCellPrefab, winPos.transform.position, Quaternion.identity);
         objectWin.transform.SetParent(gridController.grid[targetRow, targetCol].transform);
+
         stageTxt.text = "STAGE " + level.level;
         backgroundController.UpdateRandomArt();
+
         PlayerController.instance.LoadLevel();
     }
     public void FixedUpdate()

@@ -44,7 +44,7 @@ public class LevelManager : MonoBehaviour
  // [SerializeField] private List< BoxCollider2D> cellColliders = new List<BoxCollider2D>();
     private IReadData cSVReader;
     private LevelDataController levelDataController;
-    private HiddenObjectHandler hiddenObjectHandler;
+    public HiddenObjectHandler hiddenObjectHandler;
     public static LevelManager instance;
     private void Awake()
     {
@@ -58,7 +58,13 @@ public class LevelManager : MonoBehaviour
         LoadLevelData();
         LoadLevel();
     }
-  
+    public void ReplaceHiddenObject(Vector2Int position, GameObject newObject)
+    {
+        if (hiddenObjectInstances.ContainsKey(position))
+        {
+            hiddenObjectInstances[position] = newObject;
+        }
+    }
     public GridController GetGrid()
     {
         return this.gridController;
@@ -134,6 +140,7 @@ public class LevelManager : MonoBehaviour
         hiddenObjectHandler.LoadHiddenObjects(level, gridController, level.isActiveObject, hiddenObjectInstances);
        
     }
+
     public int GetCurrentLevelKey()
     {
         int lv = currentLevelIndex - 1;

@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 public class PandoraBox : HiddenObject
@@ -78,10 +79,21 @@ public class PandoraBox : HiddenObject
 
     private void RandomPowerUp()
     {
+        Vector2Int positionKey = LevelManager.instance.hiddenObjectInstances.FirstOrDefault(
+       kvp => kvp.Value == this.gameObject
+   ).Key;
+
+        if (positionKey == null)
+        {
+            Debug.LogWarning("Không tìm thấy key cho PandoraBox.");
+            return;
+        }
 
         HiddenObject objectRandom = Instantiate(HiddenObjectManager.instance.GetRandomPowerUp(),
             transform.position, Quaternion.identity);
+        objectRandom.transform.localScale = this.transform.localScale;
         objectRandom.transform.SetParent(this.transform.parent);
+        LevelManager.instance.hiddenObjectInstances[positionKey] = objectRandom.gameObject;
         Debug.Log(objectRandom.name);
         objectRandom.ActiveSkill();
         Destroy(this.gameObject);
@@ -90,9 +102,21 @@ public class PandoraBox : HiddenObject
 
     private void RandomObstacle()
     {
+        Vector2Int positionKey = LevelManager.instance.hiddenObjectInstances.FirstOrDefault(
+       kvp => kvp.Value == this.gameObject
+   ).Key;
+
+        if (positionKey == null)
+        {
+            Debug.LogWarning("Không tìm thấy key cho PandoraBox.");
+            return;
+        }
+
         HiddenObject objectRandom = Instantiate(HiddenObjectManager.instance.GetRandomObstacle(),
             transform.position, Quaternion.identity);
+        objectRandom.transform.localScale = this.transform.localScale;
         objectRandom.transform.SetParent(this.transform.parent);
+        LevelManager.instance.hiddenObjectInstances[positionKey] = objectRandom.gameObject;
         Debug.Log(objectRandom.name);
         objectRandom.ActiveSkill();
         Destroy(this.gameObject);

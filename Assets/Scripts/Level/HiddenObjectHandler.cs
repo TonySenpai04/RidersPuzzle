@@ -66,6 +66,8 @@ public class HiddenObjectHandler
 
         return objectsInColumn;
     }
+   
+
     public List<GameObject> GetHiddenObjectsAround(int row, int col, Dictionary<Vector2Int, GameObject> hiddenObjectInstances)
     {
         List<GameObject> objectsAround = new List<GameObject>();
