@@ -21,6 +21,8 @@ public class ButtonStageController : MonoBehaviour
     {
         notiObject.gameObject.SetActive(false);
         CreateButtons();
+        stageZone.SetActive(false);
+
     }
 
     private void CreateButtons()

@@ -33,7 +33,7 @@ public class GridController : MonoBehaviour
        
         gridGenerator =new GridGenerator(this.gameObject,blockPrefab);
         float screenWidth = Camera.main.orthographicSize * 2 * Screen.width / Screen.height; 
-        cellSize = (screenWidth - spacing * (cols - 1)) / cols -0.1f;
+        cellSize = (screenWidth - spacing * (cols - 1)) / cols -0.05f;
         gridGenerator.GenerateGrid( rows,  cols,  cellSize,  spacing, centerOffset);
         grid= gridGenerator.Grid();
         GetCollider();
