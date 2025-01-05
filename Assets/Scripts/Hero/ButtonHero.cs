@@ -10,6 +10,7 @@ public class ButtonHero:MonoBehaviour
     [SerializeField] private Image infoImage; // Hình ảnh thông tin
     [SerializeField] private Image selectedImage; // Hình ảnh đã chọn
     private Button button;
+    [SerializeField] private Button infoBtn;
     public bool isUnlocked { get; private set; }
 
     private void Awake()
@@ -20,9 +21,9 @@ public class ButtonHero:MonoBehaviour
     public void Initialize(int index, System.Action<int> onClickAction, bool isUnlocked, bool isSelected,Sprite heroIcon)
     {
         Index = index;
-       this.heroIcon.sprite=heroIcon;
+        this.heroIcon.sprite=heroIcon;
         UpdateButtonState(isUnlocked, isSelected);
-
+        infoBtn.onClick.AddListener(() => HeroInfoManager.instance.ShowInfo(this.Index, infoBtn.GetComponent<RectTransform>()));
         button.onClick.AddListener(() => onClickAction(Index));
     }
 

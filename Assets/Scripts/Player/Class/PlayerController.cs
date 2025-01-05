@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Runtime.CompilerServices;
 using Unity.VisualScripting;
 using UnityEngine;
 
@@ -9,17 +10,20 @@ public class PlayerController : MonoBehaviour
     public MovementController movementController;
     public IHitPoint hitPoint;
     public DataHero currentHero;
-
     private void Awake()
     {
         instance = this;
         hitPoint = new HitPoint(10);
         movementController.immortal = (IImmortal)hitPoint;
+        float screenWidth = Camera.main.orthographicSize * 2 * Screen.width / Screen.height; 
+         float cellSize =(float) (screenWidth - 0.1 * (6 - 1)) / 6 - 0.1f;
+        transform.localScale= new Vector3(cellSize, cellSize, 1);
+   
     }
     private void Start()
     {
-
         
+
     }
     public void SetCurrentData(DataHero hero)
     {
@@ -47,4 +51,5 @@ public class PlayerController : MonoBehaviour
         }
  
     }
+   
 }

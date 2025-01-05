@@ -11,6 +11,7 @@ public class ButtonStageController : MonoBehaviour
     [SerializeField] private Transform buttonParent;
     [SerializeField] private GameObject playZone;
     [SerializeField] private GameObject stageZone;
+    [SerializeField] private GameObject info;
     [SerializeField] private LevelManager levelManager;
     [SerializeField] private StageHeroController stageHeroController;
     [SerializeField] private List<ButtonStage> buttons = new List<ButtonStage>();
@@ -56,6 +57,8 @@ public class ButtonStageController : MonoBehaviour
             levelManager.SetLevel(levelIndex);
             PlayerController.instance.SetCurrentData(stageHeroController.GetCurrentHeroData());
             GameManager.instance.LoadLevel();
+            FirstPlayManager.instance.FirstPlay();
+            info.gameObject.SetActive(false);
             stageZone.gameObject.SetActive(false);
         }
         else

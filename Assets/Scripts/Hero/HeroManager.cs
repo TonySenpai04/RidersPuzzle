@@ -10,6 +10,7 @@ public struct DataHero
     public Sprite icon;
     public bool isUnlock;
     public Sprite heroImage;
+    public string skillDescription;
 }
 public class HeroManager : MonoBehaviour
 {
