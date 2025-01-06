@@ -18,7 +18,7 @@ public class HiddenObjectHandler
         Dictionary<Vector2Int, GameObject> hiddenObjectInstances)
     {
         ClearHiddenObjects( hiddenObjectInstances,gridController);
-        float screenWidth = Camera.main.orthographicSize * 2 * Screen.width / Screen.height;
+        float screenWidth = Camera.main.orthographicSize * 2 * 9f / 16f; 
         float cellSize =(float) (screenWidth - 0.1 * (6 - 1)) / 6-0.1f;
 
         foreach (var hiddenObjectInfo in level.hiddenObjects)
