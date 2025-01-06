@@ -16,7 +16,7 @@ public class PlayerController : MonoBehaviour
         hitPoint = new HitPoint(10);
         movementController.immortal = (IImmortal)hitPoint;
         float screenWidth = Camera.main.orthographicSize * 2 * Screen.width / Screen.height; 
-         float cellSize =(float) (screenWidth - 0.1 * (6 - 1)) / 6 - 0.1f;
+         float cellSize =(float) (screenWidth - 0.1 * (6 - 1)) / 6;
         transform.localScale= new Vector3(cellSize, cellSize, 1);
    
     }

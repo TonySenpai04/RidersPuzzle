@@ -4,19 +4,20 @@ using UnityEngine;
 
 public class HiddenObjectHandler 
 {
-    public void ClearHiddenObjects(Dictionary<Vector2Int, GameObject> hiddenObjectInstances)
+    public void ClearHiddenObjects(Dictionary<Vector2Int, GameObject> hiddenObjectInstances,GridController gridController)
     {
         foreach (var hiddenObject in hiddenObjectInstances.Values)
         {
            Object.Destroy(hiddenObject);
         }
+        gridController.StopAllCoroutines();
         hiddenObjectInstances.Clear();
     }
 
     public void LoadHiddenObjects(Level level, GridController gridController, bool isActive,
         Dictionary<Vector2Int, GameObject> hiddenObjectInstances)
     {
-        ClearHiddenObjects( hiddenObjectInstances);
+        ClearHiddenObjects( hiddenObjectInstances,gridController);
         float screenWidth = Camera.main.orthographicSize * 2 * Screen.width / Screen.height;
         float cellSize =(float) (screenWidth - 0.1 * (6 - 1)) / 6-0.1f;
 
@@ -29,7 +30,29 @@ public class HiddenObjectHandler
             hiddenObject.transform.SetParent(cell.transform);
             hiddenObject.SetActive(isActive);
             hiddenObjectInstances[positionKey] = hiddenObject;
+            gridController.StartCoroutine(AnimateScale(hiddenObject, 0.5f));
         }
+    }
+    private IEnumerator AnimateScale(GameObject obj, float duration)
+    {
+        Vector3 initialScale = Vector3.zero; 
+        Vector3 targetScale = obj.transform.localScale; 
+        float elapsedTime = 0f;
+
+        obj.transform.localScale = initialScale; 
+
+        while (elapsedTime < duration)
+        {
+            elapsedTime += Time.deltaTime;
+            float progress = Mathf.Clamp01(elapsedTime / duration);
+            if (obj != null)
+            {
+                obj.transform.localScale = Vector3.Lerp(initialScale, targetScale, progress);
+            }
+            yield return null;
+        }
+
+        obj.transform.localScale = targetScale; 
     }
 
     public GameObject GetHiddenObject(Vector2Int position,

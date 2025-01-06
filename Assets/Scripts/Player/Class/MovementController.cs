@@ -147,17 +147,19 @@ public class MovementController : MonoBehaviour
     public void MoveStartPoint()
     {
         LevelDataInfo level = LevelManager.instance.GetCurrentLevelData();
-        UpdateCharacterPosition((int)level.startPos.x, (int)level.startPos.y);
-        currentRow = 5;
-        currentCol = 0;
+        currentRow = (int)level.startPos.x;
+        currentCol = (int)level.startPos.y;
+        UpdateCharacterPosition(currentRow, currentCol);
+        
 
     }
     public void MoveEndPoint()
     {
         LevelDataInfo level = LevelManager.instance.GetCurrentLevelData();
-        UpdateCharacterPosition((int)level.endPos.x,(int)level.endPos.y);
-        currentRow = 0;
-        currentCol = 4;
+        currentRow = (int)level.endPos.x;
+        currentCol = (int)level.endPos.y;
+        UpdateCharacterPosition(currentRow, currentCol);
+
 
     }
     public Tuple<int,int> GetPos()

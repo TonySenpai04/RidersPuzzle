@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class Blockgate : HiddenObject
 {
@@ -26,6 +27,11 @@ public class Blockgate : HiddenObject
         }
 
 
+    }
+    public override void DestroyObject()
+    {
+        GetComponentInParent<BoxCollider2D>().enabled = true;
+        base.DestroyObject();
     }
     private void FixedUpdate()
     {

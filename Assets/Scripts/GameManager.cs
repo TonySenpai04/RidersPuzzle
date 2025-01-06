@@ -35,6 +35,9 @@ public class GameManager : MonoBehaviour
         targetRow = (int)level.endPos.x;
         targetCol = (int)level.endPos.y;
 
+        float screenWidth = Camera.main.orthographicSize * 2 * Screen.width / Screen.height;
+        float cellSize = (float)(screenWidth - 0.1 * (6 - 1)) / 6 - 0.1f;
+
         panelWin.gameObject.SetActive(false);
         panelLose.gameObject.SetActive(false);
 
@@ -45,12 +48,15 @@ public class GameManager : MonoBehaviour
         }
         Transform winPos = gridController.grid[targetRow, targetCol].transform;
         objectWin = Instantiate(winCellPrefab, winPos.transform.position, Quaternion.identity);
+        objectWin.transform.localScale = new Vector3(cellSize, cellSize, 1);
         objectWin.transform.SetParent(gridController.grid[targetRow, targetCol].transform);
 
         stageTxt.text = "STAGE " + level.level;
         backgroundController.UpdateRandomArt();
 
         PlayerController.instance.LoadLevel();
+
+        Time.timeScale = 1;
     }
     public void FixedUpdate()
     {
@@ -65,6 +71,7 @@ public class GameManager : MonoBehaviour
             panelWin.SetActive(true);
             LevelManager.instance.UnlockNextLevel();
             isEnd = true;
+            Time.timeScale = 0;
 
         }
         else if (movementController.numberOfMoves.GetCurrentMove() <= 0 
@@ -72,11 +79,13 @@ public class GameManager : MonoBehaviour
         {
             panelLose.gameObject.SetActive(true);
             isEnd = true;
+            Time.timeScale = 0;
 
         }
         else
         {
             isEnd=false;
+            Time.timeScale = 1;
         }
     }
     public void LoadNextLevel()
@@ -84,11 +93,13 @@ public class GameManager : MonoBehaviour
         LevelManager.instance.LoadNextLevel();
         LoadLevel();
         isEnd = false;
+        Time.timeScale = 1;
     }
     public void ReplayLevel()
     {
         LoadLevel();
         isEnd = false;
+        Time.timeScale = 1;
     }
     public void PauseGame()
     {

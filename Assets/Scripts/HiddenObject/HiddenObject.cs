@@ -33,7 +33,23 @@ public abstract class HiddenObject : MonoBehaviour
     }
     public virtual void DestroyObject()
     {
+        StartCoroutine(ShrinkAndDestroy(0.5f));
+    }
+    public IEnumerator ShrinkAndDestroy(float duration)
+    {
+        Vector3 initialScale = transform.localScale; 
+        float elapsedTime = 0f;
+
+        while (elapsedTime < duration)
+        {
+            elapsedTime += Time.deltaTime;
+            float progress = Mathf.Clamp01(elapsedTime / duration); 
+            transform.localScale = Vector3.Lerp(initialScale, Vector3.zero, progress); 
+            yield return null;
+        }
+
         Destroy(this.gameObject);
     }
-    
+
+
 }

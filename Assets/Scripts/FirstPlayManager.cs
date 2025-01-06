@@ -35,7 +35,7 @@ public class FirstPlayManager : MonoBehaviour
         startScreen.SetActive(true);
         noti.gameObject.SetActive(true);
         notiTxt.text = "Reach the girl to win!";
-        StartCoroutine(HideFirstStartAfterDelay(1f));
+        StartCoroutine(HideFirstStartAfterDelay(3f));
 
     }
     private IEnumerator HideFirstStartAfterDelay(float delay)
