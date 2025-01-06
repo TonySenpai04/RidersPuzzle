@@ -30,6 +30,7 @@ public class GameManager : MonoBehaviour
     }
     public void LoadLevel()
     {
+
         LevelManager.instance.LoadLevel();
         LevelDataInfo level = LevelManager.instance.GetCurrentLevelData();
         targetRow = (int)level.endPos.x;
@@ -56,7 +57,6 @@ public class GameManager : MonoBehaviour
 
         PlayerController.instance.LoadLevel();
 
-        Time.timeScale = 1;
     }
     public void FixedUpdate()
     {
@@ -70,22 +70,27 @@ public class GameManager : MonoBehaviour
         {
             panelWin.SetActive(true);
             LevelManager.instance.UnlockNextLevel();
+            LevelManager.instance.ClearObject();
+            Destroy(objectWin, 0.5f);
+            objectWin = null;
             isEnd = true;
-            Time.timeScale = 0;
+
+
 
         }
         else if (movementController.numberOfMoves.GetCurrentMove() <= 0 
             || PlayerController.instance.hitPoint.GetCurrentHealth()<=0)
         {
             panelLose.gameObject.SetActive(true);
+            LevelManager.instance.ClearObject();
+            Destroy(objectWin, 0.5f);
+            objectWin = null;
             isEnd = true;
-            Time.timeScale = 0;
 
         }
         else
         {
             isEnd=false;
-            Time.timeScale = 1;
         }
     }
     public void LoadNextLevel()
@@ -93,13 +98,11 @@ public class GameManager : MonoBehaviour
         LevelManager.instance.LoadNextLevel();
         LoadLevel();
         isEnd = false;
-        Time.timeScale = 1;
     }
     public void ReplayLevel()
     {
         LoadLevel();
         isEnd = false;
-        Time.timeScale = 1;
     }
     public void PauseGame()
     {
@@ -109,4 +112,6 @@ public class GameManager : MonoBehaviour
     {
         Time.timeScale = 1;
     }
+
+
 }

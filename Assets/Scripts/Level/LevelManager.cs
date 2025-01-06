@@ -34,7 +34,7 @@ public class LevelManager : MonoBehaviour
 {
     [SerializeField] private GridController gridController;
     [SerializeField] private List<Level> levels;
-    [SerializeField] private int currentLevelIndex = 1;
+    [SerializeField] public int currentLevelIndex = 1;
     [SerializeField] private TextAsset data;
     [SerializeField] private HiddenObjectManager hiddenObjectManager;
     // public GameObject wallPrefab;
@@ -135,12 +135,19 @@ public class LevelManager : MonoBehaviour
         currentLevelIndex++;
         LoadLevel();
     }
-    private void LoadObject(Level level)
+    public void LoadObject(Level level)
     {
-        hiddenObjectHandler.LoadHiddenObjects(level, gridController, level.isActiveObject, hiddenObjectInstances);
-       
-    }
+         hiddenObjectHandler.LoadHiddenObjects(level, gridController, level.isActiveObject, hiddenObjectInstances);
 
+    }
+    public void ClearObject()
+    {
+        hiddenObjectHandler.ClearHiddenObjects(hiddenObjectInstances, gridController);
+    }
+    public Level GetLevel(int level)
+    {
+        return levels[level];
+    }
     public int GetCurrentLevelKey()
     {
         int lv = currentLevelIndex - 1;

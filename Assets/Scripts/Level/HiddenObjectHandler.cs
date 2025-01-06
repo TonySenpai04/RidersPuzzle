@@ -8,7 +8,10 @@ public class HiddenObjectHandler
     {
         foreach (var hiddenObject in hiddenObjectInstances.Values)
         {
-           Object.Destroy(hiddenObject);
+            if (hiddenObject != null)
+            {
+                hiddenObject.GetComponent<HiddenObject>().DestroyObject();
+            }     /*      Object.Destroy(hiddenObject);*/
         }
         gridController.StopAllCoroutines();
         hiddenObjectInstances.Clear();

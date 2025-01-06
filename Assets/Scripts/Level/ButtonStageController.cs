@@ -1,4 +1,4 @@
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
@@ -59,7 +59,11 @@ public class ButtonStageController : MonoBehaviour
             levelManager.SetLevel(levelIndex);
             PlayerController.instance.SetCurrentData(stageHeroController.GetCurrentHeroData());
             GameManager.instance.LoadLevel();
-            FirstPlayManager.instance.FirstPlay();
+            levelManager.ClearObject();
+            FirstPlayManager.instance.FirstPlay(() =>
+            {
+                levelManager.LoadObject(levelManager.GetLevel(levelIndex-1));
+            });
             info.gameObject.SetActive(false);
             stageZone.gameObject.SetActive(false);
         }

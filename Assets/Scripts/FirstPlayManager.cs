@@ -15,20 +15,50 @@ public class FirstPlayManager : MonoBehaviour
         startScreen.SetActive(false);
         noti.gameObject.SetActive(false);
     }
-    public void FirstPlay()
+    public void FirstPlay(System.Action onDelayedAction)
     {
-        if (/*PlayerPrefs.GetInt("FirstPlay", 1) == 1*/isFirst)
+        if (isFirst)
         {
-            ShowStartScreen();
-            //PlayerPrefs.SetInt("FirstPlay", 0);
-           // PlayerPrefs.Save();
-           isFirst = false;
+            ShowStartScreen(onDelayedAction);
+            isFirst = false;
         }
         else
         {
-            startScreen.SetActive(false);
+            onDelayedAction?.Invoke();
         }
     }
+
+    private void ShowStartScreen(System.Action onDelayedAction)
+    {
+        startScreen.SetActive(true);
+        noti.gameObject.SetActive(true);
+        notiTxt.text = "Reach the girl to win!";
+        StartCoroutine(HideStartScreenAfterDelay(3f, onDelayedAction));
+    }
+
+    private IEnumerator HideStartScreenAfterDelay(float delay, System.Action onDelayedAction)
+    {
+        yield return new WaitForSeconds(delay);
+        startScreen.SetActive(false);
+        startScreen.gameObject.SetActive(false);
+        noti.gameObject.SetActive(false);
+        onDelayedAction?.Invoke();
+    }
+    //public void FirstPlay()
+    //{
+    //    if (/*PlayerPrefs.GetInt("FirstPlay", 1) == 1*/isFirst)
+    //    {
+    //        ShowStartScreen();
+    //        //PlayerPrefs.SetInt("FirstPlay", 0);
+    //       // PlayerPrefs.Save();
+    //        isFirst = false;
+          
+    //    }
+    //    else
+    //    {
+    //        startScreen.SetActive(false);
+    //    }
+    //}
 
     private void ShowStartScreen()
     {
