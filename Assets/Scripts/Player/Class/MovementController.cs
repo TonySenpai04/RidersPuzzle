@@ -119,6 +119,7 @@ public class MovementController : MonoBehaviour
     public void MoveForward(int steps)
     {
         Vector2Int direction = GetCurrentDirection();
+        moveHistory.AddMove(currentRow, currentCol);
         for (int i = 0; i < steps; i++)
         {
             int newRow = currentRow + direction.x;

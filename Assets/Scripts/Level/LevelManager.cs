@@ -34,6 +34,7 @@ public class LevelManager : MonoBehaviour
 {
     [SerializeField] private GridController gridController;
     [SerializeField] private List<Level> levels;
+    [SerializeField] private List<Level> levelsClone;
     [SerializeField] public int currentLevelIndex = 1;
     [SerializeField] private TextAsset data;
     [SerializeField] private HiddenObjectManager hiddenObjectManager;
@@ -72,7 +73,7 @@ public class LevelManager : MonoBehaviour
     public void LoadLevelData()
     {
         levelDataController.LoadLevelData(levels);
-        
+        levelDataController.LoadLevelData(levelsClone);
 
     }
     public  LevelDataInfo GetCurrentLevelData()
@@ -81,11 +82,18 @@ public class LevelManager : MonoBehaviour
     }
     public void LoadLevel()
     {
+        ResetObjectData();
      //   currentLevelIndex = levelIndex;
         int lv = currentLevelIndex - 1;
+
+        if (lv < 0 || lv >= levels.Count)
+        {
+            Debug.LogWarning("Level index is out of range.");
+            return;
+        }
         if (!levels[lv].isUnlock)
             return;
-        if (lv >= 0 && lv < levels.Count)
+        if (lv >= 0 && lv <= levels.Count)
         {
             Level level = levels[lv];
             gridController.ClearCollider();
@@ -97,10 +105,18 @@ public class LevelManager : MonoBehaviour
         {
             Debug.LogWarning("Level index is out of range.");
         }
+
+
     }
+
     public void UnlockNextLevel()
     {
         int lv = currentLevelIndex - 1;
+        if (lv < 0 || lv >= levels.Count)
+        {
+            Debug.LogWarning("Level index is out of range.");
+            return;
+        }
         Level tempLevel = levels[lv];
         tempLevel.isComplete = true;
         levels[lv] = tempLevel;
@@ -132,18 +148,31 @@ public class LevelManager : MonoBehaviour
     }
     public void LoadNextLevel()
     {
+
         currentLevelIndex++;
-        LoadLevel();
+        int lv=currentLevelIndex - 1;
+        if (lv < 0 || lv > levels.Count)
+        {
+            Debug.LogWarning("Level index is out of range.");
+            return;
+        }
+        Debug.Log(lv);
+       LoadLevel();
+    }
+    public bool isFinal()
+    {
+        return currentLevelIndex > levels.Count;
     }
     public void LoadObject(Level level)
-    {
+    {     
         hiddenObjectHandler.ClearHiddenObjectsNoCroutine(hiddenObjectInstances, gridController);
-         hiddenObjectHandler.LoadHiddenObjects(level, gridController, level.isActiveObject, hiddenObjectInstances);
+        hiddenObjectHandler.LoadHiddenObjects(level, gridController, level.isActiveObject, hiddenObjectInstances);
 
     }
     public void ClearObject()
     {
         hiddenObjectHandler.ClearHiddenObjects(hiddenObjectInstances, gridController);
+        
     }
     public Level GetLevel(int level)
     {
@@ -176,7 +205,7 @@ public class LevelManager : MonoBehaviour
     {
         int lv = currentLevelIndex - 1;
         Level currentLevel = levels[lv];
-        if (currentLevel.key > 0)
+        if (currentLevel.key >= 0)
         {
             currentLevel.key++;
         }
@@ -184,7 +213,6 @@ public class LevelManager : MonoBehaviour
     }
     public GameObject CheckForHiddenObject(int row, int col)
     {
-        // Kiểm tra xem vị trí (row, col) có object nào không
         Vector2Int positionKey = new Vector2Int(row, col);
         if (hiddenObjectInstances.ContainsKey(positionKey))
         {
@@ -245,6 +273,25 @@ public class LevelManager : MonoBehaviour
         }
     }
 
+    public void ResetObjectData()
+    {
+        if (levelsClone == null || levelsClone.Count != levels.Count)
+        {
+            Debug.LogWarning("LevelsClone data is not initialized or does not match levels.");
+            return;
+        }
+
+        for (int i = 0; i < levelsClone.Count; i++)
+        {
+            Level currentLevel = levels[i];
+            Level originalLevel = levelsClone[i];
+
+            currentLevel.hiddenObjects = new List<HiddenObjectInfo>(originalLevel.hiddenObjects);
+            levels[i] = currentLevel;
+        }
+
+        Debug.Log("Object data has been reset for all levels.");
+    }
 
 }
 

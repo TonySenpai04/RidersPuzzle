@@ -45,12 +45,15 @@ public class HiddenObjectHandler
         {
             Vector2Int positionKey = new Vector2Int(hiddenObjectInfo.row, hiddenObjectInfo.col);
             GameObject cell = gridController.grid[hiddenObjectInfo.row, hiddenObjectInfo.col];
-            GameObject hiddenObject = Object.Instantiate(hiddenObjectInfo.objectPrefab, cell.transform.position, Quaternion.identity);
-            hiddenObject.transform.localScale = new Vector3(cellSize, cellSize, 1);
-            hiddenObject.transform.SetParent(cell.transform);
-            hiddenObject.SetActive(isActive);
-            hiddenObjectInstances[positionKey] = hiddenObject;
-            gridController.StartCoroutine(AnimateScale(hiddenObject, 0.5f));
+            if (hiddenObjectInfo.objectPrefab != null)
+            {
+                GameObject hiddenObject = Object.Instantiate(hiddenObjectInfo.objectPrefab, cell.transform.position, Quaternion.identity);
+                hiddenObject.transform.localScale = new Vector3(cellSize, cellSize, 1);
+                hiddenObject.transform.SetParent(cell.transform);
+                hiddenObject.SetActive(isActive);
+                hiddenObjectInstances[positionKey] = hiddenObject;
+                gridController.StartCoroutine(AnimateScale(hiddenObject, 0.5f));
+            }
         }
     }
     private IEnumerator AnimateScale(GameObject obj, float duration)

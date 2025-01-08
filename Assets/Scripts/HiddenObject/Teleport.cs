@@ -33,7 +33,7 @@ public class Teleport : HiddenObject
                     int deltaY = Mathf.Abs(currentPosition.y - lastPosition.y);
                     Debug.Log(deltaX + " " + deltaY);
 
-                    if ((deltaX == 1 && deltaY == 0) || (deltaX == 0 && deltaY == 1))
+                    if ((deltaX == 1 && deltaY == 0) || (deltaX == 0 && deltaY == 1) || (deltaX == 2 && deltaY == 0) || (deltaX == 0 && deltaY == 2))
                     {
 
                         PlayerController.instance.movementController.MoveToBlock(teleportPosition.x, teleportPosition.y);

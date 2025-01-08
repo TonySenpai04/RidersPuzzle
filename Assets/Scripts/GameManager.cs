@@ -75,8 +75,6 @@ public class GameManager : MonoBehaviour
             objectWin = null;
             isEnd = true;
 
-
-
         }
         else if (movementController.numberOfMoves.GetCurrentMove() <= 0 
             || PlayerController.instance.hitPoint.GetCurrentHealth()<=0)
@@ -96,8 +94,17 @@ public class GameManager : MonoBehaviour
     public void LoadNextLevel()
     {
         LevelManager.instance.LoadNextLevel();
-        LoadLevel();
-        isEnd = false;
+        Debug.Log(LevelManager.instance.isFinal());
+        if (LevelManager.instance.isFinal())
+        {
+            return;
+        }
+        else
+        {
+            LoadLevel();
+            isEnd = false;
+        }
+
     }
     public void ReplayLevel()
     {

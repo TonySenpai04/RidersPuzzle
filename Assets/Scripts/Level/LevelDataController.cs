@@ -17,13 +17,13 @@ public class LevelDataController
     public LevelDataInfo GetLevelData(List<Level> levels,int levelIndex)
     {
         var levelDatas = csvReader.ReadLevelData(data);
-        if (levelIndex < 0 || levelIndex >= levels.Count)
+        if (levelIndex < 0 || levelIndex > levels.Count)
         {
             Debug.LogWarning("Level index is out of range.");
             return new LevelDataInfo(); 
         }
 
-        Level level = levels[levelIndex];
+        Level level = levels[levelIndex-1];
         LevelDataInfo levelDataInfo = new LevelDataInfo();
         foreach (var levelData in levelDatas)
         {
@@ -36,7 +36,6 @@ public class LevelDataController
         return levelDataInfo;
           
     }
-
     public void LoadLevelData(List<Level> levels)
     {
         var levelDatas = csvReader.ReadLevelData(data);

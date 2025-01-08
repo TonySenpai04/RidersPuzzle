@@ -17,6 +17,7 @@ public class ButtonStageController : MonoBehaviour
     [SerializeField] private List<ButtonStage> buttons = new List<ButtonStage>();
     [SerializeField] private GameObject notiObject;
     [SerializeField] private TextMeshProUGUI notiTxt;
+    [SerializeField] private GameObject transitionLevel;
     void Start()
     {
         notiObject.gameObject.SetActive(false);
@@ -55,6 +56,7 @@ public class ButtonStageController : MonoBehaviour
     {
         if (stageHeroController.isHero())
         {
+
             playZone.gameObject.SetActive(true);
             levelManager.SetLevel(levelIndex);
             PlayerController.instance.SetCurrentData(stageHeroController.GetCurrentHeroData());
@@ -85,3 +87,4 @@ public class ButtonStageController : MonoBehaviour
         notiObject.gameObject.SetActive(false);
     }
 }
+
