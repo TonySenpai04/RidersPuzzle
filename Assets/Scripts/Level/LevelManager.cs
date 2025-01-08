@@ -137,6 +137,7 @@ public class LevelManager : MonoBehaviour
     }
     public void LoadObject(Level level)
     {
+        hiddenObjectHandler.ClearHiddenObjectsNoCroutine(hiddenObjectInstances, gridController);
          hiddenObjectHandler.LoadHiddenObjects(level, gridController, level.isActiveObject, hiddenObjectInstances);
 
     }
@@ -233,6 +234,15 @@ public class LevelManager : MonoBehaviour
         currentLevel.hiddenObjects.Add(newHiddenObject);
         Vector2Int positionKey = new Vector2Int(newHiddenObject.row, newHiddenObject.col);
         hiddenObjectInstances[positionKey] = prefab;
+    }
+    public void UnlockAllLevels()
+    {
+        for (int i = 0; i < levels.Count; i++)
+        {
+            Level tempLevel = levels[i];
+            tempLevel.isUnlock = true;
+            levels[i] = tempLevel;
+        }
     }
 
 

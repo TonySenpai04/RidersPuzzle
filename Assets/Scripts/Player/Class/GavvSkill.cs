@@ -30,7 +30,7 @@ internal class GavvSkill : ISkill
             new Vector2Int(currentRow, currentCol + 1)
             };
 
-            // Duyệt qua các vị trí và xử lý
+
             foreach (Vector2Int pos in positions)
             {
                 if (pos.x >= 0 && pos.x < gridController.rows &&
@@ -42,6 +42,7 @@ internal class GavvSkill : ISkill
                         HiddenObject hiddenObjComponent = cell.GetComponent<HiddenObject>();
                         if (hiddenObjComponent != null)
                         {
+                            hiddenObjComponent.gameObject.SetActive(true);
                             hiddenObjComponent.DestroyObject();
                             PlayerController.instance.hitPoint.Heal(1);
                         }

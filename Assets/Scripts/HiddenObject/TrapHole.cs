@@ -10,4 +10,5 @@ public class TrapHole : HiddenObject
         PlayerController.instance.movementController.numberOfMoves.ReduceeMove(3);
         DestroyObject();
     }
+
 }

@@ -140,6 +140,7 @@ MonoBehaviour:
   UnlockImage: {fileID: 21300000, guid: 9cd7d66dc97c14b4b8d0c4bd8217f8d6, type: 3}
   levelIndex: 0
   isUnlocked: 0
+  parentController: {fileID: 0}
 --- !u!1 &9196374929734866598
 GameObject:
   m_ObjectHideFlags: 0
@@ -174,8 +175,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -74.3, y: 53.6}
-  m_SizeDelta: {x: 0, y: 0}
+  m_AnchoredPosition: {x: -80.62819, y: 62.954704}
+  m_SizeDelta: {x: -12.6564, y: -18.7094}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &6983164391179618078
 CanvasRenderer:
@@ -209,8 +210,8 @@ MonoBehaviour:
 
 '
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
-  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 11b25ba8499c15a439aae95d98e9d3e2, type: 2}
+  m_sharedMaterial: {fileID: 2629596213873530277, guid: 11b25ba8499c15a439aae95d98e9d3e2, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -234,8 +235,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 70
-  m_fontSizeBase: 70
+  m_fontSize: 80
+  m_fontSizeBase: 80
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18

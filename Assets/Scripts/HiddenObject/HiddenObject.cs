@@ -27,6 +27,7 @@ public abstract class HiddenObject : MonoBehaviour
     {
         this.gameObject.SetActive(true);
     }
+    
     public virtual void ActiveSkill()
     {
         Debug.Log("Skill Activated!");
@@ -47,6 +48,7 @@ public abstract class HiddenObject : MonoBehaviour
             transform.localScale = Vector3.Lerp(initialScale, Vector3.zero, progress); 
             yield return null;
         }
+        GetComponentInParent<BoxCollider2D>().enabled = true;
 
         Destroy(this.gameObject);
     }

@@ -24,7 +24,6 @@ public class GeatsSkill : ISkill
             int characterRow = PlayerController.instance.movementController.GetPos().Item1;
             int characterCol = PlayerController.instance.movementController.GetPos().Item2;
 
-            // Xoá tất cả object trong phạm vi 3x3
             for (int row = characterRow - 1; row <= characterRow + 1; row++)
             {
                 for (int col = characterCol - 1; col <= characterCol + 1; col++)

@@ -8,15 +8,32 @@ public class HiddenObjectHandler
     {
         foreach (var hiddenObject in hiddenObjectInstances.Values)
         {
-            if (hiddenObject != null)
+            if (hiddenObject != null && hiddenObject.activeSelf) 
             {
                 hiddenObject.GetComponent<HiddenObject>().DestroyObject();
-            }     /*      Object.Destroy(hiddenObject);*/
+            }
+            else if (hiddenObject != null) 
+            {
+                Object.Destroy(hiddenObject);
+            }
         }
         gridController.StopAllCoroutines();
         hiddenObjectInstances.Clear();
     }
+    public void ClearHiddenObjectsNoCroutine(Dictionary<Vector2Int, GameObject> hiddenObjectInstances, GridController gridController)
+    {
+        foreach (var hiddenObject in hiddenObjectInstances.Values)
+        {
 
+            if (hiddenObject != null)
+            {
+                Object.Destroy(hiddenObject);
+            }
+
+        }
+        gridController.StopAllCoroutines();
+        hiddenObjectInstances.Clear();
+    }
     public void LoadHiddenObjects(Level level, GridController gridController, bool isActive,
         Dictionary<Vector2Int, GameObject> hiddenObjectInstances)
     {

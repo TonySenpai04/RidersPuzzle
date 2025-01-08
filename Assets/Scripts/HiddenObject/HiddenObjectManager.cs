@@ -18,7 +18,7 @@ public class HiddenObjectManager : MonoBehaviour
 
         foreach (var obj in allObjects)
         {
-            if (obj.type== HiddenObject.ObjectType.PowerUp) // Điều kiện phân loại PowerUp
+            if (obj.type== HiddenObject.ObjectType.PowerUp) 
             {
                 powerUpObjects.Add(obj);
             }
@@ -41,9 +41,9 @@ public class HiddenObjectManager : MonoBehaviour
     {
         foreach (var obj in allObjects)
         {
-            if (obj.id == id) // So sánh id của đối tượng với id truyền vào
+            if (obj.id == id) 
             {
-                return obj; // Trả về đối tượng tìm thấy
+                return obj; 
             }
         }
         return null;
@@ -52,11 +52,12 @@ public class HiddenObjectManager : MonoBehaviour
 
     public HiddenObject GetRandomObstacle()
     {
+        
         if (obstacleObjects.Count > 0)
         {
             int randomIndex = Random.Range(0, obstacleObjects.Count);
             return obstacleObjects[randomIndex];
         }
-        return null; // Nếu không có Obstacle nào
+        return null; 
     }
 }
