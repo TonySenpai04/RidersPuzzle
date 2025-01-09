@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class HiddenObjectHandler 
 {
+    private int remainingObjects = 0;
+
     public void ClearHiddenObjects(Dictionary<Vector2Int, GameObject> hiddenObjectInstances,GridController gridController)
     {
         foreach (var hiddenObject in hiddenObjectInstances.Values)
@@ -41,6 +43,8 @@ public class HiddenObjectHandler
         float screenWidth = Camera.main.orthographicSize * 2 * 9f / 16f; 
         float cellSize =(float) (screenWidth - 0.1 * (6 - 1)) / 6-0.1f;
 
+        remainingObjects = level.hiddenObjects.Count;
+
         foreach (var hiddenObjectInfo in level.hiddenObjects)
         {
             Vector2Int positionKey = new Vector2Int(hiddenObjectInfo.row, hiddenObjectInfo.col);
@@ -52,7 +56,7 @@ public class HiddenObjectHandler
                 hiddenObject.transform.SetParent(cell.transform);
                 hiddenObject.SetActive(isActive);
                 hiddenObjectInstances[positionKey] = hiddenObject;
-                gridController.StartCoroutine(AnimateScale(hiddenObject, 0.5f));
+                gridController.StartCoroutine(AnimateScale(hiddenObject, 1f));
             }
         }
     }
@@ -75,9 +79,13 @@ public class HiddenObjectHandler
             yield return null;
         }
 
-        obj.transform.localScale = targetScale; 
+        obj.transform.localScale = targetScale;
+        remainingObjects--;
     }
-
+    public bool IsCompleteLoadObject()
+    {
+        return this.remainingObjects <= 0;
+    }
     public GameObject GetHiddenObject(Vector2Int position,
         Dictionary<Vector2Int, GameObject> hiddenObjectInstances)
     {

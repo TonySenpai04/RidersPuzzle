@@ -163,6 +163,10 @@ public class LevelManager : MonoBehaviour
     {
         return currentLevelIndex > levels.Count;
     }
+    public bool IsCompleteLoadObject()
+    {
+        return hiddenObjectHandler.IsCompleteLoadObject();
+    }
     public void LoadObject(Level level)
     {     
         hiddenObjectHandler.ClearHiddenObjectsNoCroutine(hiddenObjectInstances, gridController);

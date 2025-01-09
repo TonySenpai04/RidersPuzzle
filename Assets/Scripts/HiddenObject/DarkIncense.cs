@@ -25,12 +25,17 @@ public class DarkIncense: HiddenObject
         {
             if (LevelManager.instance.CheckForHiddenObject(spawnPos.x, spawnPos.y) == null)
             {
-                if (spawnPos.x >= 0 && spawnPos.x < mapRows && spawnPos.y >= 0 && spawnPos.y < mapCols)
+                if (spawnPos.x >= 0 && spawnPos.x < mapRows && spawnPos.y >= 0
+                    && spawnPos.y < mapCols && spawnPos !=LevelManager.instance.GetCurrentLevelData().endPos)
                 {
                     GameObject cell = LevelManager.instance.GetGrid().grid[(int)spawnPos.x, (int)spawnPos.y];
 
                     GameObject hiddenObject = Instantiate(jyamatoPrefab, cell.transform.position, Quaternion.identity);
+                    
                     hiddenObject.SetActive(true);
+                    float screenWidth = Camera.main.orthographicSize * 2 * 9f / 16f;
+                    float cellSize = (float)(screenWidth - 0.1 * (6 - 1)) / 6 - 0.1f;
+                    hiddenObject.transform.localScale = new Vector3(cellSize, cellSize, 1);
                     LevelManager.instance.AddHiddenObjectToCurrentLevel(spawnPos.x, spawnPos.y, hiddenObject);
                     hiddenObject.transform.SetParent(cell.transform);
                 }

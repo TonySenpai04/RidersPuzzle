@@ -36,10 +36,12 @@ public class MovementController : MonoBehaviour
  
     public void Movement()
     {
+        if (!LevelManager.instance.IsCompleteLoadObject())
+            return;
         player.transform.position =
            Vector3.MoveTowards(player.transform.position, targetPosition, moveSpeed * Time.deltaTime);
 
-        if (Input.GetMouseButtonDown(0) && Time.timeScale!=0)
+        if (Input.GetMouseButtonDown(0) && Time.timeScale!=0 )
         {
             Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
             RaycastHit2D hit = Physics2D.Raycast(Camera.main.ScreenToWorldPoint(Input.mousePosition), Vector2.zero);

@@ -58,6 +58,8 @@ public class ButtonStageController : MonoBehaviour
         {
 
             playZone.gameObject.SetActive(true);
+            transitionLevel.gameObject.SetActive(true);
+            levelManager.StartCoroutine(HideAfterDelay(1f));
             levelManager.SetLevel(levelIndex);
             PlayerController.instance.SetCurrentData(stageHeroController.GetCurrentHeroData());
             GameManager.instance.LoadLevel();
@@ -85,6 +87,11 @@ public class ButtonStageController : MonoBehaviour
     {
         yield return new WaitForSeconds(delay);
         notiObject.gameObject.SetActive(false);
+    }
+    private IEnumerator HideAfterDelay(float delay)
+    {
+        yield return new WaitForSeconds(delay);
+        transitionLevel.gameObject.SetActive(false);
     }
 }
 
