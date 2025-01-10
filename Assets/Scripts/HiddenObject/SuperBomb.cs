@@ -6,6 +6,7 @@ public class SuperBomb : HiddenObject
 {
     public override void ActiveSkill()
     {
+        PlaySFX();
         PlayerController.instance.hitPoint.TakeDamage(10);
         DestroyObject();
     }

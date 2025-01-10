@@ -40,7 +40,7 @@ public class PandoraBox : HiddenObject
   
     public override void ActiveSkill()
     {
-        
+        PlaySFX();
         ApplyEffects();
     }
     public void ApplyEffects()
@@ -121,5 +121,9 @@ public class PandoraBox : HiddenObject
         objectRandom.ActiveSkill();
         Destroy(this.gameObject);
 
+    }
+    public override void PlaySFX()
+    {
+        SoundManager.instance.PlaySFX("Touch Pandora");
     }
 }

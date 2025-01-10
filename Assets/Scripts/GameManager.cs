@@ -18,6 +18,10 @@ public class GameManager : MonoBehaviour
     public TextMeshProUGUI stageTxt;
     public BackgroundController backgroundController;
     GameObject objectWin;
+    public bool isMainActive = true; 
+
+
+  
     private void Awake()
     {
         instance = this; 
@@ -28,9 +32,17 @@ public class GameManager : MonoBehaviour
        LoadLevel();
        playZone.gameObject.SetActive(false);
     }
+    public void DisableMain()
+    {
+        isMainActive = false;
+    }
     public void LoadLevel()
     {
-
+        SoundManager.instance.StopSFX();
+        if (!isMainActive)
+        {
+            SoundManager.instance.PlaySFX("Stage Start");
+        }
         LevelManager.instance.LoadLevel();
         LevelDataInfo level = LevelManager.instance.GetCurrentLevelData();
         targetRow = (int)level.endPos.x;
@@ -68,6 +80,7 @@ public class GameManager : MonoBehaviour
 
         if (movementController.GetPos().Item1 == targetRow && movementController.GetPos().Item2 == targetCol)
         {
+            SoundManager.instance.PlaySFX("Stage Clear");
             panelWin.SetActive(true);
             LevelManager.instance.UnlockNextLevel();
             LevelManager.instance.ClearObject();
@@ -79,6 +92,7 @@ public class GameManager : MonoBehaviour
         else if (movementController.numberOfMoves.GetCurrentMove() <= 0 
             || PlayerController.instance.hitPoint.GetCurrentHealth()<=0)
         {
+            SoundManager.instance.PlaySFX("Stage Failed");
             panelLose.gameObject.SetActive(true);
             LevelManager.instance.ClearObject();
             Destroy(objectWin, 0.5f);
@@ -93,6 +107,7 @@ public class GameManager : MonoBehaviour
     }
     public void LoadNextLevel()
     {
+        SoundManager.instance.StopSFX();
         LevelManager.instance.LoadNextLevel();
         Debug.Log(LevelManager.instance.isFinal());
         if (LevelManager.instance.isFinal())
@@ -108,6 +123,7 @@ public class GameManager : MonoBehaviour
     }
     public void ReplayLevel()
     {
+        SoundManager.instance.StopSFX();
         LoadLevel();
         isEnd = false;
     }

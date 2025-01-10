@@ -7,7 +7,7 @@ public class Teleport : HiddenObject
 {
     public override void ActiveSkill()
     {
-   
+        PlaySFX();
         Tuple<int, int> lastMove = PlayerController.instance.movementController.GetLastMove();
         if (lastMove == null)
         {

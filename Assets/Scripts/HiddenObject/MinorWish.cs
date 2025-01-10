@@ -6,6 +6,7 @@ public class MinorWish : HiddenObject
 {
     public override void ActiveSkill()
     {
+        PlaySFX();
         PlayerController.instance.hitPoint.Heal(1);
         PlayerController.instance.movementController.numberOfMoves.IncreaseMove(1);
         DestroyObject();

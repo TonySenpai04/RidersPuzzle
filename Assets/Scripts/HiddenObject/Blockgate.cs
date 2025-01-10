@@ -11,7 +11,7 @@ public class Blockgate : HiddenObject
     }
     public override void ActiveSkill()
     {
-
+        PlaySFX();
         if (LevelManager.instance.GetCurrentLevelKey() > 0)
         {
             

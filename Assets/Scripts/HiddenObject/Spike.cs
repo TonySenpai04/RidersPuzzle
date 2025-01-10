@@ -6,8 +6,8 @@ public class Spike : HiddenObject
 {
     public override void ActiveSkill()
     {
- 
-         PlayerController.instance.hitPoint.TakeDamage(1);
+        PlaySFX();
+        PlayerController.instance.hitPoint.TakeDamage(1);
  
     }
 }

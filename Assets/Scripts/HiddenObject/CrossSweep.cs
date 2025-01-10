@@ -6,6 +6,7 @@ public class CrossSweep : HiddenObject
 {
     public override void ActiveSkill()
     {
+        PlaySFX();
         ClearSurroundingAndHeal();
         DestroyObject();
 

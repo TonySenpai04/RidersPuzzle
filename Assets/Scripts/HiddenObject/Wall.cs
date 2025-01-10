@@ -4,8 +4,15 @@ using UnityEngine;
 
 public class Wall : HiddenObject
 {
+    public override void Start()
+    {
+        GetComponentInParent<BoxCollider2D>().enabled = false;
+    }
+
+
     public override void ActiveSkill()
     {
+        PlaySFX();
         GetComponentInParent<BoxCollider2D>().enabled = false;
         PlayerController.instance.movementController.UndoLastMove(1);
 

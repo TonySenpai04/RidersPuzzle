@@ -6,6 +6,7 @@ public class AttackRideR : HiddenObject
 {
     public override void ActiveSkill()
     {
+        PlaySFX();
         var currentPos = PlayerController.instance.movementController.GetPos();
         int currentRow = currentPos.Item1;
         List<GameObject> hiddenObjectsInRow =  LevelManager.instance.GetHiddenObjectsInRow(currentRow);

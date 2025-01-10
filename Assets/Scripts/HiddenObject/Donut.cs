@@ -6,6 +6,7 @@ public class Donut : HiddenObject
 {
     public override void ActiveSkill()
     {
+        PlaySFX();
         PlayerController.instance.hitPoint.Heal(1);
         DestroyObject();
 

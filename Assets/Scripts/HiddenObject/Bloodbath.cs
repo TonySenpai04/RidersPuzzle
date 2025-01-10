@@ -6,6 +6,7 @@ public class Bloodbath : HiddenObject
 {
     public override void ActiveSkill()
     {
+        PlaySFX();
         PlayerController.instance.hitPoint.TakeDamage(2);
         PlayerController.instance.movementController.numberOfMoves.IncreaseMove(4);
         DestroyObject();

@@ -6,6 +6,7 @@ public class TrapHole : HiddenObject
 {
     public override void ActiveSkill()
     {
+        PlaySFX();
         PlayerController.instance.hitPoint.TakeDamage(3);
         PlayerController.instance.movementController.numberOfMoves.ReduceeMove(3);
         DestroyObject();

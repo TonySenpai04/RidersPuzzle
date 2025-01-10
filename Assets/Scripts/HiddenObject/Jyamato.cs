@@ -6,7 +6,7 @@ public class Jyamato : HiddenObject
 {
     public override void ActiveSkill()
     {
-        
+        PlaySFX();
         PlayerController.instance.hitPoint.TakeDamage(3);
         DestroyObject();
     }

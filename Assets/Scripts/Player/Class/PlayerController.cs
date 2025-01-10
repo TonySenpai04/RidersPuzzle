@@ -10,6 +10,8 @@ public class PlayerController : MonoBehaviour
     public MovementController movementController;
     public IHitPoint hitPoint;
     public DataHero currentHero;
+    private string currentHPState = "";
+
     private void Awake()
     {
         instance = this;
@@ -49,7 +51,36 @@ public class PlayerController : MonoBehaviour
                 movementController.Movement();
             }
         }
- 
+        CheckHPAndPlayMusic();
+
     }
-   
+    private void CheckHPAndPlayMusic()
+    {
+        float currentHealth = hitPoint.GetCurrentHealth();
+        float maxHealth = hitPoint.GetHealth();
+        float healthPercentage = (currentHealth / maxHealth) * 100;
+
+        string newHPState;
+
+        if (healthPercentage < 30)
+        {
+            newHPState = "HP < 30%";
+        }
+        else if (healthPercentage >= 30 && healthPercentage <= 59)
+        {
+            newHPState = "HP 30-59%";
+        }
+        else
+        {
+            newHPState = "HP > 60%";
+        }
+
+        if (newHPState != currentHPState)
+        {
+            currentHPState = newHPState;
+            SoundManager.instance.PlayMusic(currentHPState);
+        }
+    }
+
+
 }

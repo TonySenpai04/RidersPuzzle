@@ -15,9 +15,10 @@ public class SliderController : MonoBehaviour
     {
         slider.gameObject.SetActive(true);
         btnStart.SetActive(false);
+       
         isRunning = true;
     }
-
+    
     void Update()
     {
         if (isRunning)

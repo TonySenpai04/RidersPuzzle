@@ -6,6 +6,7 @@ public class FinalVent : HiddenObject
 {
     public override void ActiveSkill()
     {
+        PlaySFX();
         PlayerController.instance.movementController.immortal.ActivateImmortalEffect();
         DestroyObject();
 

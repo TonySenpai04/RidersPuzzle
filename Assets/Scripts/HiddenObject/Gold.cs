@@ -6,6 +6,7 @@ public class Gold : HiddenObject
 {
     public override void ActiveSkill()
     {
+        PlaySFX();
         GoldManager.instance.AddGold(3);
         DestroyObject();
     }

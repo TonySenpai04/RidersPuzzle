@@ -6,6 +6,7 @@ public class Key : HiddenObject
 {
     public override void ActiveSkill()
     {
+        PlaySFX();
         LevelManager.instance.IncreaseLevelKey();
         DestroyObject();
     }

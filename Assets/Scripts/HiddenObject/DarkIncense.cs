@@ -8,6 +8,7 @@ public class DarkIncense: HiddenObject
 
     public override void ActiveSkill()
     {
+        PlaySFX();
         var currentPos = PlayerController.instance.movementController.GetPos();
         int currentRow = currentPos.Item1;
         int currentCol = currentPos.Item2;

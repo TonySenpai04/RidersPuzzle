@@ -10,6 +10,7 @@ public class Grass : HiddenObject
     }
     public override void ActiveSkill()
     {
+        PlaySFX();
         GetComponentInParent<BoxCollider2D>().enabled = false;
         PlayerController.instance.movementController.UndoLastMove(1);
     }

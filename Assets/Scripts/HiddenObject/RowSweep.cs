@@ -6,6 +6,7 @@ public class RowSweep : HiddenObject
 {
     public override void ActiveSkill()
     {
+        PlaySFX();
         ClearRowAndHeal();
         DestroyObject();
     }

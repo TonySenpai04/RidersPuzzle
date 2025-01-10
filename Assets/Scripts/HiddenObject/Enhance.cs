@@ -6,6 +6,7 @@ public class Enhance : HiddenObject
 {
     public override void ActiveSkill()
     {
+        PlaySFX();
         SkillManager.instance.IncreaseSkillUsesForCurrentHero(1);
         DestroyObject();
     }

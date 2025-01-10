@@ -18,6 +18,7 @@ public class ButtonStageController : MonoBehaviour
     [SerializeField] private GameObject notiObject;
     [SerializeField] private TextMeshProUGUI notiTxt;
     [SerializeField] private GameObject transitionLevel;
+    
     void Start()
     {
         notiObject.gameObject.SetActive(false);
@@ -40,8 +41,16 @@ public class ButtonStageController : MonoBehaviour
     private void FixedUpdate()
     {
         UpdateButtons();
+        
     }
-
+    private void OnEnable()
+    {
+        if (!GameManager.instance.isMainActive)
+        {
+            SoundManager.instance.PlayMusic("Home Screen");
+        }
+       
+    }
     public void UpdateButtons()
     {
         for (int i = 0; i < buttons.Count; i++)
@@ -51,12 +60,12 @@ public class ButtonStageController : MonoBehaviour
             buttons[i].SetButtonState(isUnlocked);
         }
     }
-
+  
     private void LoadLevel(int levelIndex)
     {
         if (stageHeroController.isHero())
         {
-
+            SoundManager.instance.PlaySFX("Click Sound");
             playZone.gameObject.SetActive(true);
             transitionLevel.gameObject.SetActive(true);
             levelManager.StartCoroutine(HideAfterDelay(1f));

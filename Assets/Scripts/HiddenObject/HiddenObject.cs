@@ -52,6 +52,17 @@ public abstract class HiddenObject : MonoBehaviour
 
         Destroy(this.gameObject);
     }
+    public virtual void PlaySFX()
+    {
+        if (type == ObjectType.PowerUp)
+        {
+            SoundManager.instance.PlaySFX("Touch Positive Object");
+        }
+        else
+        {
+            SoundManager.instance.PlaySFX("Touch Negative Object");
+        }
+    }
 
 
 }

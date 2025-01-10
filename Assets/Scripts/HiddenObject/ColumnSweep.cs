@@ -6,6 +6,7 @@ public class ColumnSweep : HiddenObject
 {
     public override void ActiveSkill()
     {
+        PlaySFX();
         ClearColumnAndHeal();
         DestroyObject();
     }

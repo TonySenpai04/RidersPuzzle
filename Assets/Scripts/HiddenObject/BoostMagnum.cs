@@ -6,6 +6,7 @@ public class BoostMagnum : HiddenObject
 {
     public override void ActiveSkill()
     {
+        PlaySFX();
         PlayerController.instance.movementController.numberOfMoves.IncreaseMove(2);
         DestroyObject();
 
