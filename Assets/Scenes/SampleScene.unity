@@ -11771,6 +11771,65 @@ MonoBehaviour:
   currentCol: 0
   targetPosition: {x: 0, y: 0, z: 0}
   moveSpeed: 5
+--- !u!1 &1519185841
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1519185843}
+  - component: {fileID: 1519185842}
+  - component: {fileID: 1519185844}
+  m_Layer: 0
+  m_Name: LocalizeManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1519185842
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1519185841}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 15b26ca780aed2d44acd8bf654331f04, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  loading: {fileID: 1751505225}
+  start: {fileID: 1162493642}
+--- !u!4 &1519185843
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1519185841}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1519185844
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1519185841}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 47a833b720ff1d14c8a882ff22616d23, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1531124529
 GameObject:
   m_ObjectHideFlags: 0
@@ -13800,7 +13859,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Loading.....
+  m_text: Loading...
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8433b8665e851d34fb9a789ae2e5b594, type: 2}
   m_sharedMaterial: {fileID: -6222080744421034076, guid: 8433b8665e851d34fb9a789ae2e5b594, type: 2}
@@ -17192,6 +17251,7 @@ SceneRoots:
   m_ObjectHideFlags: 0
   m_Roots:
   - {fileID: 519420032}
+  - {fileID: 1519185843}
   - {fileID: 1087957752}
   - {fileID: 40820109}
   - {fileID: 252246641}

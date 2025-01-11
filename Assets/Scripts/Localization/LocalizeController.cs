@@ -39,16 +39,19 @@ public class LocalizeController : MonoBehaviour
             var lines = csvText.Split("\n");
             for (int i = 1; i < lines.Length; i++)
             {
-                var segments = lines[i].Split(';');
+                var segments = lines[i].Split(',');
                 if (segments.Length > 0)
                 {
-                    var localizeOrigin = segments[0];
+                    var localizeOrigin = segments[2];
+                    Debug.LogWarning((int)language);
                     var localizeText = segments[(int)language + 3];
                     var richText = segments[5];
 
                     this.localizedTexts.Add(localizeOrigin, localizeText);
-                    this.localizedTexts.Add(localizeOrigin, richText);
-                    
+                    this.richText.Add(localizeOrigin, richText);
+                    Debug.LogWarning(localizeOrigin);
+                    Debug.LogWarning(localizeText);
+                    Debug.LogWarning(richText);
                   
                 }
             }
