@@ -72,6 +72,7 @@ public class StageHeroController : MonoBehaviour
             bool isSelected = button.Index == id;
             button.UpdateButtonState(button.isUnlocked, isSelected);
         }
+        SoundManager.instance.PlayHeroSFX(id);
     }
 
     public void LoadLevel()

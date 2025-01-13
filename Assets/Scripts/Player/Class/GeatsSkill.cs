@@ -7,20 +7,22 @@ public class GeatsSkill : ISkill
     private int maxSkillAmount;
     private int skillAmount;
     private GridController gridController;
+    private int id;
 
-    public GeatsSkill(GridController gridController,int skillAmount)
+    public GeatsSkill(GridController gridController,int skillAmount, int id)
     {
         this.gridController = gridController;
         this.maxSkillAmount = skillAmount;
         this.skillAmount = skillAmount;
 
-
+        this.id = id;
     }
 
     public void ActivateSkill()
     {
         if (skillAmount > 0)
         {
+            SoundManager.instance.PlayHeroSFX(id);
             int characterRow = PlayerController.instance.movementController.GetPos().Item1;
             int characterCol = PlayerController.instance.movementController.GetPos().Item2;
 

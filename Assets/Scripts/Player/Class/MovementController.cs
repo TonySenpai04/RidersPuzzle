@@ -12,16 +12,20 @@ public class MovementController : MonoBehaviour
     [SerializeField] private int currentCol = 0; 
     [SerializeField] private Vector3 targetPosition; 
     [SerializeField] private float moveSpeed = 5.0f;
+    [SerializeField] private AnimationController animationController;
     private IMoveHistory moveHistory;
     public INumberOfMoves numberOfMoves;
     public IImmortal immortal;
     private void Awake()
     {
         moveHistory = new MoveHistory();
+
+
     }
     void Start()
     {
         LoadMove();
+
     }
     public void LoadMove()
     {
@@ -32,6 +36,7 @@ public class MovementController : MonoBehaviour
         currentCol = (int)level.startPos.y;
         moveHistory.AddMove(currentRow, currentCol);
         UpdateCharacterPosition(currentRow, currentCol);
+        animationController.SetY(player);
     }
  
     public void Movement()
@@ -50,9 +55,11 @@ public class MovementController : MonoBehaviour
             {
                 GameObject clickedCell = hit.collider.gameObject;
                 MoveToCell(clickedCell);
+                
             }
         }
-    } 
+    }
+
     void MoveToCell(GameObject cell)
     {
         for (int row = 0; row < gridController.rows; row++)
@@ -68,11 +75,13 @@ public class MovementController : MonoBehaviour
                         currentCol = col;
                         
                         numberOfMoves.ReduceeMove(1);
+                        SoundManager.instance.PlaySFX("Click Sound");
                         if (immortal != null)
                         {
                             immortal.OnMove();
                         }
-                        UpdateCharacterPosition(currentRow, currentCol); 
+                        UpdateCharacterPosition(currentRow, currentCol);
+                  
                     }
                 }
             }
@@ -94,6 +103,7 @@ public class MovementController : MonoBehaviour
                 currentCol = lastPosition.Item2;
 
                 UpdateCharacterPosition(currentRow,currentCol); 
+
             }
             else
             {
@@ -129,9 +139,19 @@ public class MovementController : MonoBehaviour
             if (newRow >= 0 && newRow < gridController.rows && newCol >= 0 && newCol < gridController.cols)
             {
 
-                currentRow = newRow;
-                currentCol = newCol;
-                UpdateCharacterPosition(currentRow, currentCol);
+                Collider2D newCellCollider = gridController.grid[newRow, newCol].GetComponent<Collider2D>();
+
+                if (newCellCollider != null && newCellCollider.enabled) 
+                {
+                    currentRow = newRow;
+                    currentCol = newCol;
+                    UpdateCharacterPosition(currentRow, currentCol);
+                }
+                else
+                {
+                   
+                    break;  
+                }
 
             }
             else
@@ -145,7 +165,8 @@ public class MovementController : MonoBehaviour
         targetPosition = new Vector3(gridController.grid[currentRow, currentCol].transform.position.x,
                                      gridController.grid[currentRow, currentCol].transform.position.y, 0);
         player.transform.position = targetPosition;
-        
+        animationController.SetY(player);
+
     }
     public void MoveStartPoint()
     {

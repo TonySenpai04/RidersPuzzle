@@ -5,12 +5,14 @@ internal class GavvSkill : ISkill
     private int maxSkillAmount;
     private int skillAmount;
     private GridController gridController;
+    private int id;
 
-    public GavvSkill(GridController gridController, int skillAmount)
+    public GavvSkill(GridController gridController, int skillAmount,int id)
     {
         this.gridController = gridController;
         this.maxSkillAmount = skillAmount;
         this.skillAmount = skillAmount;
+        this.id = id;
 
 
     }
@@ -19,6 +21,7 @@ internal class GavvSkill : ISkill
     {
         if (skillAmount > 0)
         {
+            SoundManager.instance.PlayHeroSFX(id);
             int currentRow = PlayerController.instance.movementController.GetPos().Item1;
             int currentCol = PlayerController.instance.movementController.GetPos().Item2;
 

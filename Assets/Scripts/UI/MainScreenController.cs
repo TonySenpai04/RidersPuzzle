@@ -11,6 +11,7 @@ public class MainScreenController : MonoBehaviour
     public GameManager gameManager;
     private void Start()
     {
+        SoundManager.instance.PlayMusic("Start Screen");
         btnStart.onClick.AddListener(() => HideMainScreen());
     }
     public void HideMainScreen()

@@ -18,10 +18,11 @@ public class GameManager : MonoBehaviour
     public TextMeshProUGUI stageTxt;
     public BackgroundController backgroundController;
     GameObject objectWin;
-    public bool isMainActive = true; 
+    public bool isMainActive = true;
+    private bool hasPlayedWinSound = false; 
+    private bool hasPlayedLoseSound = false;
 
 
-  
     private void Awake()
     {
         instance = this; 
@@ -80,7 +81,11 @@ public class GameManager : MonoBehaviour
 
         if (movementController.GetPos().Item1 == targetRow && movementController.GetPos().Item2 == targetCol)
         {
-            SoundManager.instance.PlaySFX("Stage Clear");
+            if (!hasPlayedWinSound) 
+            {
+                SoundManager.instance.PlaySFX("Stage Clear");
+                hasPlayedWinSound = true; 
+            }
             panelWin.SetActive(true);
             LevelManager.instance.UnlockNextLevel();
             LevelManager.instance.ClearObject();
@@ -92,7 +97,11 @@ public class GameManager : MonoBehaviour
         else if (movementController.numberOfMoves.GetCurrentMove() <= 0 
             || PlayerController.instance.hitPoint.GetCurrentHealth()<=0)
         {
-            SoundManager.instance.PlaySFX("Stage Failed");
+            if (!hasPlayedLoseSound) // Chỉ phát âm thanh nếu chưa phát
+            {
+                SoundManager.instance.PlaySFX("Stage Failed");
+                hasPlayedLoseSound = true; // Đánh dấu đã phát
+            }
             panelLose.gameObject.SetActive(true);
             LevelManager.instance.ClearObject();
             Destroy(objectWin, 0.5f);
@@ -103,6 +112,8 @@ public class GameManager : MonoBehaviour
         else
         {
             isEnd=false;
+            hasPlayedWinSound = false;
+            hasPlayedLoseSound = false;
         }
     }
     public void LoadNextLevel()

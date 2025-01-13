@@ -1,4 +1,4 @@
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
 using System.Runtime.CompilerServices;
 using Unity.VisualScripting;
@@ -11,20 +11,21 @@ public class PlayerController : MonoBehaviour
     public IHitPoint hitPoint;
     public DataHero currentHero;
     private string currentHPState = "";
-
+    [SerializeField] private float fadeDuration = 1.0f;
+    private Coroutine fadeCoroutine;
     private void Awake()
     {
         instance = this;
         hitPoint = new HitPoint(10);
         movementController.immortal = (IImmortal)hitPoint;
-        float screenWidth = Camera.main.orthographicSize * 2 * 9f/16f; 
-         float cellSize =(float) (screenWidth - 0.1 * (6 - 1)) / 6;
-        transform.localScale= new Vector3(cellSize, cellSize, 1);
-   
+        float screenWidth = Camera.main.orthographicSize * 2 * 9f / 16f;
+        float cellSize = (float)(screenWidth - 0.1 * (6 - 1)) / 6;
+        transform.localScale = new Vector3(cellSize, cellSize, 1);
+
     }
     private void Start()
     {
-        
+
 
     }
     public void SetCurrentData(DataHero hero)
@@ -41,7 +42,8 @@ public class PlayerController : MonoBehaviour
     }
     private void Update()
     {
-        if (!GameManager.instance.isEnd) {
+        if (!GameManager.instance.isEnd)
+        {
             if (hitPoint.GetCurrentHealth() <= 0)
             {
                 return;
@@ -78,9 +80,30 @@ public class PlayerController : MonoBehaviour
         if (newHPState != currentHPState)
         {
             currentHPState = newHPState;
-            SoundManager.instance.PlayMusic(currentHPState);
+            if (fadeCoroutine != null)
+            {
+                StopCoroutine(fadeCoroutine);
+            }
+            StartCoroutine(TransitionMusic(currentHPState));
+            // SoundManager.instance.PlayMusic(currentHPState);
         }
     }
+    private IEnumerator TransitionMusic(string newMusic)
+    {
+        while (SoundManager.instance.musicSource.volume > 0)
+        {
+            SoundManager.instance.musicSource.volume -= Time.deltaTime / fadeDuration;
+            yield return null;
+        }
+
+        SoundManager.instance.PlayMusic(newMusic);
+
+        while (SoundManager.instance.musicSource.volume < 0.5f)
+        {
+            SoundManager.instance.musicSource.volume += Time.deltaTime / fadeDuration;
+            yield return null;
+        }
 
 
+    }
 }
