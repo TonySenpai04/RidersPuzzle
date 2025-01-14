@@ -39,7 +39,7 @@ public class LocalizeController : MonoBehaviour
             var lines = csvText.Split("\n");
             for (int i = 1; i < lines.Length; i++)
             {
-                var segments = lines[i].Split(',');
+                var segments = lines[i].Split(';');
                 if (segments.Length > 0)
                 {
                     var localizeKey = segments[1];
