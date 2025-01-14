@@ -42,16 +42,17 @@ public class LocalizeController : MonoBehaviour
                 var segments = lines[i].Split(',');
                 if (segments.Length > 0)
                 {
+                    var localizeKey = segments[1];
                     var localizeOrigin = segments[2];
                     Debug.LogWarning((int)language);
                     var localizeText = segments[(int)language + 3];
                     var richText = segments[5];
 
-                    this.localizedTexts.Add(localizeOrigin, localizeText);
-                    this.richText.Add(localizeOrigin, richText);
-                    Debug.LogWarning(localizeOrigin);
-                    Debug.LogWarning(localizeText);
-                    Debug.LogWarning(richText);
+                    this.localizedTexts.Add(localizeKey, localizeText);
+                    this.richText.Add(localizeKey, richText);
+                    //Debug.LogWarning(localizeOrigin);
+                    //Debug.LogWarning(localizeText);
+                    //Debug.LogWarning(richText);
                   
                 }
             }
