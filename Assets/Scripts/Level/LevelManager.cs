@@ -74,7 +74,37 @@ public class LevelManager : MonoBehaviour
     {
         levelDataController.LoadLevelData(levels);
         levelDataController.LoadLevelData(levelsClone);
+        for (int i = 0; i < levels.Count; i++)
+        {
 
+            string unlockKey = "level" + (i + 1) + "_unlocked";
+            string completeKey = "level" + (i + 1) + "_complete";
+
+            // Kiểm tra trạng thái unlock và complete từ PlayerPrefs
+            bool isUnlocked = PlayerPrefs.GetInt(unlockKey, 0) == 1;
+            bool isComplete = PlayerPrefs.GetInt(completeKey, 0) == 1;
+
+            // Cập nhật trạng thái của level
+            Level tempLevel = levels[i];
+            if (i == 0)
+            {
+                tempLevel.isUnlock = true;
+            }
+            else
+            {
+                tempLevel.isUnlock = isUnlocked;
+            }
+            tempLevel.isComplete = isComplete;
+            levels[i] = tempLevel;
+        }
+
+    }
+    private void Update()
+    {
+        if (Input.GetKey(KeyCode.R))
+        {
+            ResetAllLevels();
+        }
     }
     public  LevelDataInfo GetCurrentLevelData()
     {
@@ -105,8 +135,9 @@ public class LevelManager : MonoBehaviour
         {
             Debug.LogWarning("Level index is out of range.");
         }
+       
 
-
+       
     }
 
     public void UnlockNextLevel()
@@ -126,7 +157,10 @@ public class LevelManager : MonoBehaviour
             Level nextLevel = levels[nextLevelIndex];
             nextLevel.isUnlock = true; 
             levels[nextLevelIndex] = nextLevel;
+            SaveGameManager.instance.SaveLevelProgress(lv, tempLevel.isUnlock, tempLevel.isComplete);
+            SaveGameManager.instance.SaveLevelProgress(nextLevelIndex, nextLevel.isUnlock, nextLevel.isComplete);
         }
+      
     }
 
     public bool IsLevelUnlocked(int levelIndex)
@@ -295,6 +329,30 @@ public class LevelManager : MonoBehaviour
         }
 
         Debug.Log("Object data has been reset for all levels.");
+    }
+    
+    public void ResetAllLevels()
+    {
+        for (int i = 0; i < levels.Count; i++)
+        {
+            // Đánh dấu tất cả các màn chơi là chưa mở khóa và chưa hoàn thành
+            Level tempLevel = levels[i];
+            if (i == 0)
+            {
+                tempLevel.isUnlock = true;
+            }
+            else
+            {
+                tempLevel.isUnlock = false;
+            }
+            tempLevel.isComplete = false;
+            levels[i] = tempLevel;
+
+            // Lưu lại trạng thái vào PlayerPrefs
+         SaveGameManager.instance.SaveLevelProgress(i, tempLevel.isUnlock, tempLevel.isComplete);
+        }
+
+        Debug.Log("All levels have been reset.");
     }
 
 }

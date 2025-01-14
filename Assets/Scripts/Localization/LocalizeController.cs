@@ -19,7 +19,7 @@ public class LocalizeController : MonoBehaviour
 
     public void Setup()
     {
-        LoadLanguage(Language.Vietnamese);
+        LoadLanguage(Language.English);
     }
 
     public void ChangeLanguage(int languageCode)

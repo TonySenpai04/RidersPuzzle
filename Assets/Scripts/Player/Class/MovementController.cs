@@ -36,9 +36,10 @@ public class MovementController : MonoBehaviour
         currentCol = (int)level.startPos.y;
         moveHistory.AddMove(currentRow, currentCol);
         UpdateCharacterPosition(currentRow, currentCol);
-        animationController.SetY(player);
+        animationController.SetPos(player);
     }
- 
+
+
     public void Movement()
     {
         if (!LevelManager.instance.IsCompleteLoadObject())
@@ -165,7 +166,7 @@ public class MovementController : MonoBehaviour
         targetPosition = new Vector3(gridController.grid[currentRow, currentCol].transform.position.x,
                                      gridController.grid[currentRow, currentCol].transform.position.y, 0);
         player.transform.position = targetPosition;
-        animationController.SetY(player);
+        animationController.SetPos(player);
 
     }
     public void MoveStartPoint()

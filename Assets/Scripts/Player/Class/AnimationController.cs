@@ -4,36 +4,29 @@ using UnityEngine;
 
 public class AnimationController : MonoBehaviour
 {
-    [SerializeField] private float bounceHeight = 0.1f; 
-    [SerializeField] private float bounceSpeed = 0.5f;
-    [SerializeField] private float originalY;
-    [SerializeField] private bool isBouncing = true;
-    public Transform player;
-    public void SetY(Transform transform)
+    public float bounceHeight = 0.1f;  // Độ cao nhún
+    public float bounceSpeed = 2f;     // Tốc độ nhún
+
+    private Vector3 originalPosition;
+
+    void Start()
     {
-        originalY = transform.position.y;
+        originalPosition = transform.position;  // Lưu vị trí ban đầu của nhân vật
+        StartCoroutine(BounceEffect());  // Bắt đầu hiệu ứng nhún
     }
 
-    private void Update()
+    IEnumerator BounceEffect()
     {
-        if (isBouncing)
+        while (true)
         {
-            float elapsedTime = Mathf.PingPong(Time.time * bounceSpeed, bounceHeight);
-           transform.position = new Vector3(transform.position.x, originalY + elapsedTime, transform.position.z);
+            // Tạo hiệu ứng nhún lên xuống
+            float newY = Mathf.Sin(Time.time * bounceSpeed) * bounceHeight;
+            transform.position = new Vector3(originalPosition.x, originalPosition.y + newY, originalPosition.z);
+            yield return null;
         }
     }
-    public void StartBounce()
+    public void SetPos(Transform transform)
     {
-        isBouncing = true;
-    }
-    public void StopBounce()
-    {
-        isBouncing = false;
-      transform.position = new Vector3(transform.position.x, originalY, transform.position.z); // Trả về vị trí gốc
-    }
-    public void SetBounceParams(float height, float speed)
-    {
-        bounceHeight = height;
-        bounceSpeed = speed;
+        originalPosition= transform.position;
     }
 }

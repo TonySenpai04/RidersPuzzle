@@ -45,7 +45,9 @@ public class LevelDataController
             level.hiddenObjects = new List<HiddenObjectInfo>(); 
             level.isActiveObject = levelData.Value.isActive;
             level.difficulty=levelData.Value.difficulty;
-            Debug.Log(levelData.Value.positions.Count);
+            string key = "level" + (levelData.Value.level + 1) + "_unlocked";
+            bool isUnlocked = PlayerPrefs.GetInt(key, 0) == 1;
+            level.isUnlock = isUnlocked;
             foreach (var entry in levelData.Value.positions)
             {
                 HiddenObjectInfo hiddenObjectInfo = new();
