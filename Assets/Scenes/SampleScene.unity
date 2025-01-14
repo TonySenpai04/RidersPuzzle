@@ -827,11 +827,11 @@ RectTransform:
   - {fileID: 1956280770}
   m_Father: {fileID: 1356539130}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.5, y: 0.5}
-  m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -429, y: 720}
+  m_AnchorMin: {x: 0.5, y: 1}
+  m_AnchorMax: {x: 0.5, y: 1}
+  m_AnchoredPosition: {x: -64, y: -317}
   m_SizeDelta: {x: 100, y: 100}
-  m_Pivot: {x: 0.5, y: 0.5}
+  m_Pivot: {x: 0.5, y: 1}
 --- !u!114 &101116699
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6055,6 +6055,18 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
+      - m_Target: {fileID: 1252351879}
+        m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
+        m_MethodName: SetActive
+        m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 1
+        m_CallState: 2
       - m_Target: {fileID: 1655659014}
         m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
         m_MethodName: SetActive
@@ -10498,6 +10510,7 @@ RectTransform:
   m_Children:
   - {fileID: 422276928}
   - {fileID: 561325070}
+  - {fileID: 101116698}
   - {fileID: 645484797}
   - {fileID: 1813818044}
   - {fileID: 1178841093}
@@ -10511,7 +10524,6 @@ RectTransform:
   - {fileID: 2118807880}
   - {fileID: 1252351880}
   - {fileID: 1655659015}
-  - {fileID: 101116698}
   - {fileID: 1637595639}
   m_Father: {fileID: 252246641}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -11485,9 +11497,9 @@ MonoBehaviour:
   - name: Stage Start
     clip: {fileID: 8300000, guid: 40dc5ada86f72cc4d80d5a62e9b90314, type: 3}
   - name: Stage Clear
-    clip: {fileID: 8300000, guid: 7b2d3c3a2b6f7db44bffaf8f9941209e, type: 3}
+    clip: {fileID: 8300000, guid: 025144d313cda20488d11aa02bc4442e, type: 3}
   - name: Stage Failed
-    clip: {fileID: 8300000, guid: 2cdc036052b07f74ebadfc941ce3893c, type: 3}
+    clip: {fileID: 8300000, guid: d02e94b837ba5d74cb09d408e2c7230c, type: 3}
   - name: HP > 60%
     clip: {fileID: 8300000, guid: f6b480e39282de740beb5d70670566e1, type: 3}
   - name: HP 30-59%
@@ -11817,7 +11829,7 @@ MonoBehaviour:
   currentCol: 0
   targetPosition: {x: 0, y: 0, z: 0}
   moveSpeed: 5
-  animationController: {fileID: 1889163682}
+  animationController: {fileID: 1653752349}
 --- !u!1 &1519185841
 GameObject:
   m_ObjectHideFlags: 0
@@ -13145,6 +13157,7 @@ GameObject:
   - component: {fileID: 1653752344}
   - component: {fileID: 1653752346}
   - component: {fileID: 1653752348}
+  - component: {fileID: 1653752349}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -13269,6 +13282,23 @@ MonoBehaviour:
     heroImage: {fileID: 0}
     skillDescription: 
   fadeDuration: 1
+--- !u!114 &1653752349
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1653752342}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: aa9604c7e8de51d459bb8ee2b45e4fad, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  bounceHeight: 0.1
+  bounceSpeed: 0.3
+  originalY: 0
+  isBouncing: 1
+  player: {fileID: 1653752345}
 --- !u!1 &1655659014
 GameObject:
   m_ObjectHideFlags: 0
@@ -15617,13 +15647,15 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1889163680}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: aa9604c7e8de51d459bb8ee2b45e4fad, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   bounceHeight: 0.1
   bounceSpeed: 0.3
+  originalY: 0
+  isBouncing: 1
   player: {fileID: 1653752345}
 --- !u!1 &1894623451
 GameObject:
@@ -16135,7 +16167,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 0.5}
   m_AnchorMax: {x: 1, y: 0.5}
-  m_AnchoredPosition: {x: 109, y: -7.1374974}
+  m_AnchoredPosition: {x: 109, y: -7.137512}
   m_SizeDelta: {x: 200, y: 85.725}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1956280771

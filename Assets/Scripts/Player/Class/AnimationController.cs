@@ -5,9 +5,9 @@ using UnityEngine;
 public class AnimationController : MonoBehaviour
 {
     [SerializeField] private float bounceHeight = 0.1f; 
-    [SerializeField] private float bounceSpeed = 0.5f; 
-    private float originalY; 
-    private bool isBouncing = true;
+    [SerializeField] private float bounceSpeed = 0.5f;
+    [SerializeField] private float originalY;
+    [SerializeField] private bool isBouncing = true;
     public Transform player;
     public void SetY(Transform transform)
     {
@@ -19,7 +19,7 @@ public class AnimationController : MonoBehaviour
         if (isBouncing)
         {
             float elapsedTime = Mathf.PingPong(Time.time * bounceSpeed, bounceHeight);
-            player.transform.position = new Vector3(player.transform.position.x, originalY + elapsedTime, transform.position.z);
+           transform.position = new Vector3(transform.position.x, originalY + elapsedTime, transform.position.z);
         }
     }
     public void StartBounce()
@@ -29,7 +29,7 @@ public class AnimationController : MonoBehaviour
     public void StopBounce()
     {
         isBouncing = false;
-        transform.position = new Vector3(transform.position.x, originalY, transform.position.z); // Trả về vị trí gốc
+      transform.position = new Vector3(transform.position.x, originalY, transform.position.z); // Trả về vị trí gốc
     }
     public void SetBounceParams(float height, float speed)
     {

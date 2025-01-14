@@ -54,6 +54,7 @@ public abstract class HiddenObject : MonoBehaviour
     }
     public virtual void PlaySFX()
     {
+        SoundManager.instance.StopSFX();
         if (type == ObjectType.PowerUp)
         {
             SoundManager.instance.PlaySFX("Touch Positive Object");
