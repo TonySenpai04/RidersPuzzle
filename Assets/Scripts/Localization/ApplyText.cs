@@ -27,7 +27,7 @@ public class ApplyText : MonoBehaviour, ILocalizeObject
     [SerializeField] private TMP_Text setting_language_1;
     [SerializeField] private TMP_Text setting_language_2;
     [SerializeField] private TMP_Text setting_privacy_policy;
-    [SerializeField] private TMP_Text button_view;
+    [SerializeField] private TMP_Text[] button_view;
     [SerializeField] private TMP_Text setting_term_of_condition;
     [SerializeField] private TMP_Text setting_credit;
     [SerializeField] private TMP_Text title_notification;
@@ -36,7 +36,7 @@ public class ApplyText : MonoBehaviour, ILocalizeObject
     [SerializeField] private TMP_Text popup_detail_credit;
     [SerializeField] private TMP_Text button_yes;
     [SerializeField] private TMP_Text button_no;
-    [SerializeField] private TMP_Text button_ok;
+    [SerializeField] private TMP_Text[] button_ok;
 
     void ILocalizeObject.ApplyText(ref Dictionary<string, string> localizedRichText, ref Dictionary<string, string> localizedTexts)
     {
@@ -61,7 +61,10 @@ public class ApplyText : MonoBehaviour, ILocalizeObject
         this.setting_language_1.SetText(localizedRichText["setting_language_1"] + localizedTexts["setting_language_1"]);
         this.setting_language_2.SetText(localizedRichText["setting_language_2"] + localizedTexts["setting_language_2"]);
         this.setting_privacy_policy.SetText(localizedRichText["setting_privacy_policy"] + localizedTexts["setting_privacy_policy"]);
-        this.button_view.SetText(localizedRichText["button_view"] + localizedTexts["button_view"]);
+        foreach (var buttonview in button_view)
+        {
+            buttonview.SetText(localizedRichText["button_view"] + localizedTexts["button_view"]);
+        }
         this.setting_term_of_condition.SetText(localizedRichText["setting_term_of_condition"] + localizedTexts["setting_term_of_condition"]);
         this.setting_credit.SetText(localizedRichText["setting_credit"] + localizedTexts["setting_credit"]);
         this.title_notification.SetText(localizedRichText["title_notification"] + localizedTexts["title_notification"]);
@@ -70,7 +73,11 @@ public class ApplyText : MonoBehaviour, ILocalizeObject
         this.popup_detail_credit.SetText(localizedRichText["popup_detail_credit"] + localizedTexts["popup_detail_credit"]);
         this.button_yes.SetText(localizedRichText["button_yes"] + localizedTexts["button_yes"]);
         this.button_no.SetText(localizedRichText["button_no"] + localizedTexts["button_no"]);
-        this.button_ok.SetText(localizedRichText["button_ok"] + localizedTexts["button_ok"]);
+        foreach (var buttonok in button_ok)
+        {
+            buttonok.SetText(localizedRichText["button_ok"] + localizedTexts["button_ok"]);
+        }
+      
 
 
     }
