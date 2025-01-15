@@ -74,28 +74,17 @@ public class LevelManager : MonoBehaviour
     {
         levelDataController.LoadLevelData(levels);
         levelDataController.LoadLevelData(levelsClone);
-        for (int i = 0; i < levels.Count; i++)
+        List<LevelProgressData> allProgress = SaveGameManager.instance.LoadAllProgress();
+        foreach (var progress in allProgress)
         {
-
-            string unlockKey = "level" + (i + 1) + "_unlocked";
-            string completeKey = "level" + (i + 1) + "_complete";
-
-            // Kiểm tra trạng thái unlock và complete từ PlayerPrefs
-            bool isUnlocked = PlayerPrefs.GetInt(unlockKey, 0) == 1;
-            bool isComplete = PlayerPrefs.GetInt(completeKey, 0) == 1;
-
-            // Cập nhật trạng thái của level
-            Level tempLevel = levels[i];
-            if (i == 0)
+            int lv = progress.levelIndex;
+            if (lv >= 0 && lv < levels.Count)
             {
-                tempLevel.isUnlock = true;
+                Level tempLevel = levels[lv];
+                tempLevel.isUnlock = progress.isUnlocked;
+                tempLevel.isComplete = progress.isComplete;
+                levels[lv] = tempLevel;
             }
-            else
-            {
-                tempLevel.isUnlock = isUnlocked;
-            }
-            tempLevel.isComplete = isComplete;
-            levels[i] = tempLevel;
         }
 
     }

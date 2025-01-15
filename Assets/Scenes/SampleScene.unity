@@ -6019,7 +6019,7 @@ MonoBehaviour:
   m_Padding:
     m_Left: 0
     m_Right: 0
-    m_Top: 0
+    m_Top: 30
     m_Bottom: 0
   m_ChildAlignment: 1
   m_StartCorner: 0
@@ -11861,7 +11861,7 @@ MonoBehaviour:
   - name: Start Screen
     clip: {fileID: 8300000, guid: 5601c7d5f3ed15f4684fdd4e21c7efae, type: 3}
   - name: Touch Negative Object
-    clip: {fileID: 8300000, guid: e8116995a3cfc834a81024b9f9974666, type: 3}
+    clip: {fileID: 8300000, guid: cb3f19ae161336d4db7e21820b3fb12b, type: 3}
   heroSounds:
   - id: 1001
     clip:
@@ -16273,8 +16273,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 80
-  m_fontSizeBase: 80
+  m_fontSize: 60
+  m_fontSizeBase: 60
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18

@@ -1,26 +1,104 @@
-﻿using System.Collections;
+﻿//using System.Collections;
+//using System.Collections.Generic;
+//using UnityEngine;
+
+//public class SaveGameManager : MonoBehaviour
+//{
+//   public static SaveGameManager instance;
+//    void Awake()
+//    {
+//        instance = this;
+
+
+//    }
+
+//    public void SaveLevelProgress(int levelIndex, bool isUnlocked, bool isComplete)
+//    {
+//        string unlockKey = "level" + (levelIndex + 1) + "_unlocked";
+//        string completeKey = "level" + (levelIndex + 1) + "_complete";
+
+//        // Lưu trạng thái mở khóa và hoàn thành của màn
+//        PlayerPrefs.SetInt(unlockKey, isUnlocked ? 1 : 0);
+//        PlayerPrefs.SetInt(completeKey, isComplete ? 1 : 0);
+//        PlayerPrefs.Save();
+//    }
+
+//}
+
 using System.Collections.Generic;
+using System;
+using System.IO;
 using UnityEngine;
+
+[Serializable]
+public class LevelProgressData
+{
+    public int levelIndex;
+    public bool isUnlocked;
+    public bool isComplete;
+}
+
 
 public class SaveGameManager : MonoBehaviour
 {
-   public static SaveGameManager instance;
-    void Awake()
+    public static SaveGameManager instance;
+
+    private string saveFilePath;
+
+    private void Awake()
     {
         instance = this;
-
-
+        saveFilePath = Path.Combine(Application.persistentDataPath, "savegame.json");
     }
 
     public void SaveLevelProgress(int levelIndex, bool isUnlocked, bool isComplete)
     {
-        string unlockKey = "level" + (levelIndex + 1) + "_unlocked";
-        string completeKey = "level" + (levelIndex + 1) + "_complete";
+        LevelProgressData progressData = new LevelProgressData
+        {
+            levelIndex = levelIndex,
+            isUnlocked = isUnlocked,
+            isComplete = isComplete
+        };
 
-        // Lưu trạng thái mở khóa và hoàn thành của màn
-        PlayerPrefs.SetInt(unlockKey, isUnlocked ? 1 : 0);
-        PlayerPrefs.SetInt(completeKey, isComplete ? 1 : 0);
-        PlayerPrefs.Save();
+        // Đọc dữ liệu cũ (nếu có)
+        List<LevelProgressData> allProgress = LoadAllProgress();
+
+        // Cập nhật dữ liệu cho level hiện tại
+        int index = allProgress.FindIndex(p => p.levelIndex == levelIndex);
+        if (index >= 0)
+        {
+            allProgress[index] = progressData;
+        }
+        else
+        {
+            allProgress.Add(progressData);
+        }
+
+        // Lưu lại toàn bộ dữ liệu vào file
+        string jsonData = JsonUtility.ToJson(new SerializableList<LevelProgressData>(allProgress), true);
+        File.WriteAllText(saveFilePath, jsonData);
     }
 
+    public List<LevelProgressData> LoadAllProgress()
+    {
+        if (File.Exists(saveFilePath))
+        {
+            string jsonData = File.ReadAllText(saveFilePath);
+            SerializableList<LevelProgressData> progressList = JsonUtility.FromJson<SerializableList<LevelProgressData>>(jsonData);
+            return progressList.data;
+        }
+
+        return new List<LevelProgressData>();
+    }
+}
+
+[Serializable]
+public class SerializableList<T>
+{
+    public List<T> data;
+
+    public SerializableList(List<T> data)
+    {
+        this.data = data;
+    }
 }

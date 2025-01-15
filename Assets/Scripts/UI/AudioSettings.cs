@@ -10,7 +10,7 @@ public class AudioSettings : MonoBehaviour
 
     private void Start()
     {
-        bool isMuted = SoundManager.instance.musicSource.mute;
+        bool isMuted = SoundManager.instance.IsAudioOn();
         toggleOn.isOn = !isMuted;
         toggleOff.isOn = isMuted;
 

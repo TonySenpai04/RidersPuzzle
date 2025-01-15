@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.IO;
 using UnityEngine;
 [Serializable]
 public class Sound
@@ -14,16 +15,42 @@ public class HeroSound
     public int id;
     public List<AudioClip> clip;
 }
+[System.Serializable]
+public class SoundData
+{
+    public bool isMute;
+}
 public class SoundManager : MonoBehaviour
 {
+    private string soundDataPath => Path.Combine(Application.persistentDataPath , "SoundData.json");
     [SerializeField] private List<Sound> sounds;
     [SerializeField] private List<HeroSound> heroSounds;
     [SerializeField] public AudioSource musicSource;
     [SerializeField] public AudioSource sFXSource;
     public static SoundManager instance;
+    private bool isMute;
     private void Awake()
     {
         instance = this;
+        LoadData();
+        musicSource.mute = isMute;
+        sFXSource.mute = isMute;
+    }
+    public void SaveData()
+    {
+        var data=new SoundData { isMute = this.isMute };
+        string json=JsonUtility.ToJson(data,true);
+        File.WriteAllText(soundDataPath, json);
+    }
+    public void LoadData()
+    {
+        if (File.Exists(soundDataPath))
+        {
+            string json = File.ReadAllText(soundDataPath);
+            var data=JsonUtility.FromJson<SoundData>(json);
+            this.isMute = data.isMute;
+
+        }
     }
     private Sound GetSound(string name)
     {
@@ -102,13 +129,12 @@ public class SoundManager : MonoBehaviour
     {
         musicSource.mute = !isOn;
         sFXSource.mute = !isOn;
-
-        //PlayerPrefs.SetInt("AudioMuted", isOn ? 0 : 1); // 0 = bật, 1 = tắt
-        //PlayerPrefs.Save();
+        this.isMute = !isOn;
+        SaveData();
     }
 
     public bool IsAudioOn()
     {
-        return PlayerPrefs.GetInt("AudioMuted", 0) == 0; // Mặc định là bật âm thanh
+        return isMute;
     }
 }

@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class AnimationController : MonoBehaviour
@@ -14,7 +15,10 @@ public class AnimationController : MonoBehaviour
         originalPosition = transform.position;  // Lưu vị trí ban đầu của nhân vật
         StartCoroutine(BounceEffect());  // Bắt đầu hiệu ứng nhún
     }
-
+   void OnEnable() { 
+        StopAllCoroutines();
+        StartCoroutine(BounceEffect());
+    }
     IEnumerator BounceEffect()
     {
         while (true)
