@@ -12218,7 +12218,7 @@ MonoBehaviour:
   title_rider_information: {fileID: 1052777514}
   hp_hero_1001: {fileID: 200392303}
   hp_hero_1002: {fileID: 200392303}
-  skill_info_hero_1001: {fileID: 1335151489}
+  skill_info_hero_1001: {fileID: 924966248}
   skill_info_hero_1002: {fileID: 1335151489}
   button_skill: {fileID: 1716528411}
   button_replay: {fileID: 1834365800}

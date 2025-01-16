@@ -1,22 +1,45 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.IO;
 using UnityEngine;
-
+[Serializable]
+public class GoldData
+{
+    public int amount;
+}
 public class GoldManager : MonoBehaviour
 {
+    public string goldPath=>Path.Combine(Application.persistentDataPath, "GoldData.json");
     public int currentGold;
     public static GoldManager instance;
     private void Start()
     {
         instance = this;
+        LoadData();
     }
+    public void SaveGold()
+    {
+        var data = new GoldData { amount = currentGold };
+        string json=JsonUtility.ToJson(data);
+        File.WriteAllText(goldPath, json);
 
+    }
+    public void LoadData()
+    {
+        if(File.Exists(goldPath))
+        {
+            string json=File.ReadAllText(goldPath);
+            var gold=JsonUtility.FromJson<GoldData>(json);
+            this.currentGold = gold.amount;
+        }
+    }
     public void AddGold(int amount)
     {
         if (amount > 0)
         {
             currentGold += amount;
+            SaveGold();
         }
         else
         {
@@ -29,8 +52,10 @@ public class GoldManager : MonoBehaviour
         if (amount > 0 && currentGold >= amount)
         {
             currentGold -= amount;
- 
-           
+            SaveGold();
+
+
+
         }
         if(currentGold < 0)
         {
@@ -47,5 +72,6 @@ public class GoldManager : MonoBehaviour
     public void ResetGold(int newGoldAmount)
     {
         currentGold = newGoldAmount;
+        SaveGold();
     }
 }
