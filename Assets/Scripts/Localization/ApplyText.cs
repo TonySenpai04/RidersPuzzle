@@ -77,8 +77,40 @@ public class ApplyText : MonoBehaviour, ILocalizeObject
         {
             buttonok.SetText(localizedRichText["button_ok"] + localizedTexts["button_ok"]);
         }
-      
+    }
 
-
+    void ILocalizeObject.ApplyFont(ref Dictionary<string, TMP_FontAsset> localizedFonts)
+    {
+        this.loading.font = localizedFonts["loading"];
+        this.loading.font = localizedFonts["button_start"];
+        this.loading.font = localizedFonts["title_choose_a_stage"];
+        this.loading.font = localizedFonts["warning_not_unlocked"];
+        this.loading.font = localizedFonts["warning_coming_soon"];
+        this.loading.font = localizedFonts["title_stage"];
+        this.loading.font = localizedFonts["guide_game_rule"];
+        this.loading.font = localizedFonts["title_rider_information"];
+        this.loading.font = localizedFonts["hp_hero_1001"];
+        this.loading.font = localizedFonts["hp_hero_1002"];
+        this.loading.font = localizedFonts["skill_info_hero_1001"];
+        this.loading.font = localizedFonts["skill_info_hero_1002"];
+        this.loading.font = localizedFonts["button_skill"];
+        this.loading.font = localizedFonts["button_replay"];
+        this.loading.font = localizedFonts["title_setting"];
+        this.loading.font = localizedFonts["setting_sound"];
+        this.loading.font = localizedFonts["setting_sound_on"];
+        this.loading.font = localizedFonts["setting_sound_off"];
+        this.loading.font = localizedFonts["setting_language"];
+        this.loading.font = localizedFonts["setting_language_1"];
+        this.loading.font = localizedFonts["setting_language_2"];
+        this.loading.font = localizedFonts["setting_privacy_policy"];
+        this.loading.font = localizedFonts["setting_term_of_condition"];
+        this.loading.font = localizedFonts["setting_credit"];
+        this.loading.font = localizedFonts["title_notification"];
+        this.loading.font = localizedFonts["popup_detail_quit"];
+        this.loading.font = localizedFonts["popup_detail_language_change"];
+        this.loading.font = localizedFonts["popup_detail_credit"];
+        this.loading.font = localizedFonts["button_yes"];
+        this.loading.font = localizedFonts["button_no"];
+        this.loading.font = localizedFonts["button_ok"];
     }
 }

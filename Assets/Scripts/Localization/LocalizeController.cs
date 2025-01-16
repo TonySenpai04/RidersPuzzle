@@ -1,10 +1,13 @@
 using System.Collections.Generic;
 using System.Linq;
+using TMPro;
 using UnityEngine;
 
 public class LocalizeController : MonoBehaviour
 {
     private Dictionary<string, string> localizedTexts;
+    private Dictionary<string, TMP_FontAsset> localizedFonts;
+    private Dictionary<string, TMP_FontAsset> loadedFonts;
     private Dictionary<string, string> richText;
     private void Awake()
     {
@@ -31,6 +34,8 @@ public class LocalizeController : MonoBehaviour
     {
         this.localizedTexts.Clear();
         this.richText.Clear();
+        this.localizedFonts.Clear();
+        this.loadedFonts.Clear();
 
         var fileCsv = Resources.Load<TextAsset>($"Localization/Localize");
         if (fileCsv != null)
@@ -43,17 +48,28 @@ public class LocalizeController : MonoBehaviour
                 if (segments.Length > 0)
                 {
                     var localizeKey = segments[1];
-                    var localizeOrigin = segments[2];
-                    Debug.LogWarning((int)language);
+                    var localizeOrigin = segments[2];                    
                     var localizeText = segments[(int)language + 3];
                     var richText = segments[5];
+                    var fontName = segments[6];
+
+                    Debug.LogWarning((int)language);
 
                     this.localizedTexts.Add(localizeKey, localizeText);
                     this.richText.Add(localizeKey, richText);
+
+                    if (this.loadedFonts.ContainsKey(fontName) == false)
+                    {
+                        var loadedFont = Resources.Load<TMP_FontAsset>($"Fonts/{fontName}");
+                        this.loadedFonts.Add(fontName, loadedFont);
+                    }
+
+                    this.localizedFonts.Add(localizeKey, this.loadedFonts[fontName]);
+
                     //Debug.LogWarning(localizeOrigin);
                     //Debug.LogWarning(localizeText);
                     //Debug.LogWarning(richText);
-                  
+
                 }
             }
 
@@ -61,6 +77,7 @@ public class LocalizeController : MonoBehaviour
             foreach (var aplier in appliers)
             {
                 aplier.ApplyText(ref this.richText, ref this.localizedTexts);
+                aplier.ApplyFont(ref this.localizedFonts);
             }
         }
         else
