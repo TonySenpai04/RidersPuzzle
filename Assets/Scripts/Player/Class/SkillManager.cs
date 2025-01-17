@@ -54,6 +54,13 @@ public class SkillManager : MonoBehaviour
             Console.WriteLine($"Skill ID {id} không tồn tại trong danh sách.");
         }
     }
+    private void Update()
+    {
+        if (Input.GetKey(KeyCode.S))
+        {
+            ActiveSkill();
+        }
+    }
     public void ActiveSkill()
     {
         ISkill skill= GetSkillById(currentIDHero);

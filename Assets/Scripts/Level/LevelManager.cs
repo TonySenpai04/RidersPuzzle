@@ -88,13 +88,7 @@ public class LevelManager : MonoBehaviour
         }
 
     }
-    private void Update()
-    {
-        if (Input.GetKey(KeyCode.R))
-        {
-            ResetAllLevels();
-        }
-    }
+
     public  LevelDataInfo GetCurrentLevelData()
     {
        return levelDataController.GetLevelData(levels, currentLevelIndex);

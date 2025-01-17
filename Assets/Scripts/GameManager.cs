@@ -79,7 +79,8 @@ public class GameManager : MonoBehaviour
     public void CheckWinCondition()
     {
 
-        if (movementController.GetPos().Item1 == targetRow && movementController.GetPos().Item2 == targetCol)
+        if (movementController.GetPos().Item1 == targetRow && movementController.GetPos().Item2 == targetCol 
+            && PlayerController.instance.hitPoint.GetCurrentHealth() > 0) 
         {
             if (!hasPlayedWinSound) 
             {

@@ -6,6 +6,11 @@ public class CrossSweep : HiddenObject
 {
     public override void ActiveSkill()
     {
+        if (isDestroying)
+        {
+            Debug.Log("Không thể kích hoạt skill vì đối tượng đang biến mất.");
+            return;
+        }
         PlaySFX();
         ClearSurroundingAndHeal();
         DestroyObject();

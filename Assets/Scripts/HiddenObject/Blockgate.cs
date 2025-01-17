@@ -1,4 +1,4 @@
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
@@ -11,6 +11,11 @@ public class Blockgate : HiddenObject
     }
     public override void ActiveSkill()
     {
+        if (isDestroying) // Kiểm tra nếu đối tượng đang biến mất
+        {
+            Debug.Log("Không thể kích hoạt skill vì đối tượng đang biến mất.");
+            return;
+        }
         PlaySFX();
         if (LevelManager.instance.GetCurrentLevelKey() > 0)
         {

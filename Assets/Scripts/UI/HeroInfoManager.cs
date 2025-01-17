@@ -51,6 +51,6 @@ public class HeroInfoManager : MonoBehaviour
         Vector3 objectPositionInTooltip = panelInfo.GetComponent<RectTransform>().InverseTransformPoint(clickedObject.position);
 
         // Cập nhật vị trí của mũi tên
-        arrow.anchoredPosition = new Vector2(objectPositionInTooltip.x+70,-170);
+        arrow.anchoredPosition = new Vector2(objectPositionInTooltip.x+70,-230);
     }
 }

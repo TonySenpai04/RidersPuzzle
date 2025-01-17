@@ -1,4 +1,4 @@
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -6,6 +6,7 @@ public abstract class HiddenObject : MonoBehaviour
 {
     public string id;
     public ObjectType type;
+    public bool isDestroying = false;
 
     public enum ObjectType
     {
@@ -34,7 +35,12 @@ public abstract class HiddenObject : MonoBehaviour
     }
     public virtual void DestroyObject()
     {
-        StartCoroutine(ShrinkAndDestroy(0.5f));
+        if (!isDestroying) // Đảm bảo chỉ gọi một lần
+        {
+            isDestroying = true; // Đặt trạng thái là đang biến mất
+            StartCoroutine(ShrinkAndDestroy(0.5f));
+        }
+       // StartCoroutine(ShrinkAndDestroy(0.5f));
     }
     public IEnumerator ShrinkAndDestroy(float duration)
     {
