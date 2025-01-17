@@ -16,6 +16,13 @@ public class MoveHistory:IMoveHistory
     {
         moveHistory.Push(Tuple.Create(row, col));
     }
+    public void GetAllHistory()
+    {
+        foreach (var item in moveHistory)
+        {
+            Debug.Log(item);
+        }
+    }
 
     // Truy xuất vị trí cuối cùng và xóa khỏi lịch sử
     public Tuple<int, int> UndoMove()

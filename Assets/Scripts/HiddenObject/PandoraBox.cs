@@ -98,6 +98,7 @@ public class PandoraBox : HiddenObject
             transform.position, Quaternion.identity);
         objectRandom.transform.localScale = this.transform.localScale;
         objectRandom.transform.SetParent(this.transform.parent);
+        objectRandom.isPandora = true;
         LevelManager.instance.hiddenObjectInstances[positionKey] = objectRandom.gameObject;
         Debug.Log(objectRandom.name);
         objectRandom.ActiveSkill();
@@ -121,6 +122,7 @@ public class PandoraBox : HiddenObject
             transform.position, Quaternion.identity);
         objectRandom.transform.localScale = this.transform.localScale;
         objectRandom.transform.SetParent(this.transform.parent);
+        objectRandom.isPandora = true;
         LevelManager.instance.hiddenObjectInstances[positionKey] = objectRandom.gameObject;
         Debug.Log(objectRandom.name);
         objectRandom.ActiveSkill();

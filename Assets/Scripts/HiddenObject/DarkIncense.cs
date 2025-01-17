@@ -17,7 +17,7 @@ public class DarkIncense: HiddenObject
         var currentPos = PlayerController.instance.movementController.GetPos();
         int currentRow = currentPos.Item1;
         int currentCol = currentPos.Item2;
-        int mapRows = LevelManager.instance.GetGrid().rows; // Giả sử LevelManager cung cấp Rows
+        int mapRows = LevelManager.instance.GetGrid().rows;
         int mapCols = LevelManager.instance.GetGrid().cols;
         Vector2Int[] spawnPositions = new Vector2Int[]
        {

@@ -11,4 +11,5 @@ public interface IMoveHistory
     public bool HasHistory();
 
     public void ClearHistory();
+    public void GetAllHistory();
 }

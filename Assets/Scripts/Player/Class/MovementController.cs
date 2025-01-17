@@ -6,7 +6,7 @@ using UnityEngine;
 
 public class MovementController : MonoBehaviour
 {
-    [SerializeField] private GridController gridController;
+    [SerializeField] public GridController gridController;
     [SerializeField] private Transform player;
     [SerializeField] private int currentRow = 0; 
     [SerializeField] private int currentCol = 0; 
@@ -60,6 +60,10 @@ public class MovementController : MonoBehaviour
             }
         }
     }
+    public void GetAllHis()
+    {
+        moveHistory.GetAllHistory();
+    }
 
     void MoveToCell(GameObject cell)
     {
@@ -82,7 +86,8 @@ public class MovementController : MonoBehaviour
                             immortal.OnMove();
                         }
                         UpdateCharacterPosition(currentRow, currentCol);
-                  
+
+                        Debug.Log(GetLastMove());
                     }
                 }
             }
@@ -99,7 +104,7 @@ public class MovementController : MonoBehaviour
             if (moveHistory.HasHistory())
             {
                 Tuple<int, int> lastPosition = moveHistory.UndoMove();
-
+           
                 currentRow = lastPosition.Item1;
                 currentCol = lastPosition.Item2;
 
@@ -113,13 +118,13 @@ public class MovementController : MonoBehaviour
         }
     }
   
-    private Vector2Int GetCurrentDirection()
+    public  Vector2Int GetCurrentDirection()
     {
         int previousRow = 1;
         int previousCol = 0;
         if (moveHistory.HasHistory())
         {
-            Tuple<int, int> lastPosition = moveHistory.UndoMove();
+            Tuple<int, int> lastPosition = moveHistory.GetLastMove();
 
             previousRow = lastPosition.Item1;
             previousCol = lastPosition.Item2;

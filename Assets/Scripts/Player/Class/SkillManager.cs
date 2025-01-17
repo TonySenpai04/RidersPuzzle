@@ -14,12 +14,14 @@ public class SkillManager : MonoBehaviour
     private void Awake()
     {
         instance = this;
+        AddSkill(1001, new GeatsSkill(gridController, 1, 1001));
+        AddSkill(1002, new GavvSkill(gridController, 1, 1002));
+
     }
 
     void Start()
     {
-        AddSkill(1001, new GeatsSkill(gridController,1,1001));
-        AddSkill(1002, new GavvSkill(gridController, 1,1002));
+       
     }
     public void LoadSkill()
     {

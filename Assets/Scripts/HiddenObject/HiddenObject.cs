@@ -7,6 +7,7 @@ public abstract class HiddenObject : MonoBehaviour
     public string id;
     public ObjectType type;
     public bool isDestroying = false;
+    public bool isPandora=false;
 
     public enum ObjectType
     {

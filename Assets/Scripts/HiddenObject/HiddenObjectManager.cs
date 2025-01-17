@@ -52,12 +52,18 @@ public class HiddenObjectManager : MonoBehaviour
 
     public HiddenObject GetRandomObstacle()
     {
-        
-        if (obstacleObjects.Count > 0)
+        foreach(var obj in allObjects)
         {
-            int randomIndex = Random.Range(0, obstacleObjects.Count);
-            return obstacleObjects[randomIndex];
+            if (obj.id == "2007")
+            {
+                return obj;
+            }
         }
+        //if (obstacleObjects.Count > 0)
+        //{
+        //    int randomIndex = Random.Range(0, obstacleObjects.Count);
+        //    return obstacleObjects[randomIndex];
+        //}
         return null; 
     }
 }

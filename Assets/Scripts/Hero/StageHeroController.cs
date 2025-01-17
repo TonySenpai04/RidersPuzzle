@@ -28,6 +28,7 @@ public class StageHeroController : MonoBehaviour
         CreateButtons();
 
         SetHeroID(currentId);
+        skillManager.SetSkillId(currentId);
     }
 
     private void CreateButtons()
