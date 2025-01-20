@@ -1958,7 +1958,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &217652766
 RectTransform:
   m_ObjectHideFlags: 0
@@ -2961,8 +2961,8 @@ MonoBehaviour:
   gridController: {fileID: 1200757503}
   levels: []
   levelsClone: []
-  currentLevelIndex: 4
-  data: {fileID: 4900000, guid: cf0b474c785668f4bae299dac659da40, type: 3}
+  currentLevelIndex: 1
+  data: {fileID: 4900000, guid: bcd89c2745345e54284cdc024f381ca7, type: 3}
   hiddenObjectManager: {fileID: 1076175228}
 --- !u!4 &325954454
 Transform:

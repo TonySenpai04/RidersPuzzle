@@ -136,6 +136,8 @@ public class GameManager : MonoBehaviour
     }
     public void ReplayLevel()
     {
+        if (isEnd)
+            return;
         SoundManager.instance.StopSFX();
         LoadLevel();
         isEnd = false;

@@ -59,6 +59,10 @@ public class LevelManager : MonoBehaviour
         LoadLevelData();
         LoadLevel();
     }
+    public int  GetTotalLevel()
+    {
+        return levels.Count;
+    }
     public void ReplaceHiddenObject(Vector2Int position, GameObject newObject)
     {
         if (hiddenObjectInstances.ContainsKey(position))

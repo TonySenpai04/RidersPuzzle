@@ -29,6 +29,7 @@ public class ButtonStageController : MonoBehaviour
 
     private void CreateButtons()
     {
+        totalLevels = levelManager.GetTotalLevel();
         for (int i = 0; i < totalLevels; i++)
         {
             bool isUnlocked = levelManager.IsLevelUnlocked(i + 1);
