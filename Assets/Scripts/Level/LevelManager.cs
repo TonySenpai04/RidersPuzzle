@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using UnityEditor;
 using UnityEngine;
 
 [Serializable]
@@ -89,6 +90,22 @@ public class LevelManager : MonoBehaviour
                 tempLevel.isComplete = progress.isComplete;
                 levels[lv] = tempLevel;
             }
+        }
+        int highestCompleteLevel = -1; 
+        for (int i = 0; i < levels.Count; i++)
+        {
+            if (levels[i].isUnlock && levels[i].isComplete)
+            {
+                highestCompleteLevel = i;
+            }
+        }
+
+
+        if (highestCompleteLevel + 1 < levels.Count)
+        {
+            Level tempLevel = levels[highestCompleteLevel+1];
+            tempLevel.isUnlock = true;
+            levels[highestCompleteLevel + 1] = tempLevel;
         }
 
     }

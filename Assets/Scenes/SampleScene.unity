@@ -1958,7 +1958,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &217652766
 RectTransform:
   m_ObjectHideFlags: 0
@@ -7582,7 +7582,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 1441612067}
         m_TargetAssemblyTypeName: GameManager, Assembly-CSharp
-        m_MethodName: ReplayLevel
+        m_MethodName: ReplayLevelWhenEnd
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -9928,7 +9928,7 @@ SpriteRenderer:
   m_Size: {x: 4.3, y: 9.32}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
-  m_WasSpriteAssigned: 1
+  m_WasSpriteAssigned: 0
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
 --- !u!1 &1296252521

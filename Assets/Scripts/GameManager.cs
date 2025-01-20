@@ -142,6 +142,13 @@ public class GameManager : MonoBehaviour
         LoadLevel();
         isEnd = false;
     }
+    public void ReplayLevelWhenEnd()
+    {
+
+        SoundManager.instance.StopSFX();
+        LoadLevel();
+        isEnd = false;
+    }
     public void PauseGame()
     {
         Time.timeScale = 0;
