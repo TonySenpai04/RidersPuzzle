@@ -49,9 +49,9 @@ public class LocalizeController : MonoBehaviour
                 {
                     var localizeKey = segments[1];
                     var localizeOrigin = segments[2];                    
-                    var localizeText = segments[(int)language + 3];
-                    var richText = segments[5];
-                    var fontName = segments[6];
+                    var localizeText = segments[(int)language];
+                    var richText = segments[7];
+                    var fontName = segments[(int)language + 1];
 
                     Debug.LogWarning((int)language);
 
@@ -88,7 +88,7 @@ public class LocalizeController : MonoBehaviour
 
     public enum Language
     {
-        English,
-        Vietnamese
+        English = 3,
+        Vietnamese = 5
     }
 }
