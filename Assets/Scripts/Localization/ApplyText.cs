@@ -1,4 +1,4 @@
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
@@ -15,8 +15,8 @@ public class ApplyText : MonoBehaviour, ILocalizeObject
     [SerializeField] private TMP_Text title_rider_information;
     [SerializeField] private TMP_Text hp_hero_1001;
     [SerializeField] private TMP_Text hp_hero_1002;
-    [SerializeField] private TMP_Text skill_info_hero_1001;
-    [SerializeField] private TMP_Text skill_info_hero_1002;
+    [SerializeField] private TMP_Text skill_info_hero_stage;
+    [SerializeField] private TMP_Text skill_info_hero_onstage;
     [SerializeField] private TMP_Text button_skill;
     [SerializeField] private TMP_Text button_replay;
     [SerializeField] private TMP_Text title_setting;
@@ -38,10 +38,66 @@ public class ApplyText : MonoBehaviour, ILocalizeObject
     [SerializeField] private TMP_Text button_no;
     [SerializeField] private TMP_Text[] button_ok;
 
+    public static ApplyText instance;
+    private void Awake()
+    {
+        instance = this;
+    }
+    public void UpdateSkillInfoOnStage(int heroId)
+    {
+        var localizedRichText = LocalizeController.instance.GetLocalizedRichText();
+        var localizedTexts = LocalizeController.instance.GetLocalizedTexts();
+
+        // Tạo key từ heroId
+        string skillInfoKey = $"skill_info_hero_{heroId}";
+
+        // Kiểm tra và cập nhật thông tin kỹ năng
+        if (localizedRichText.ContainsKey(skillInfoKey) && localizedTexts.ContainsKey(skillInfoKey))
+        {
+            skill_info_hero_onstage.SetText(localizedRichText[skillInfoKey] + localizedTexts[skillInfoKey]);
+        }
+        else
+        {
+            Debug.LogWarning($"Không tìm thấy thông tin kỹ năng cho hero ID {heroId}.");
+            skill_info_hero_onstage.SetText("Thông tin kỹ năng không khả dụng.");
+        }
+    }
+    public void UpdateSkillInfo(int heroId)
+    {
+        var localizedRichText = LocalizeController.instance.GetLocalizedRichText();
+        var localizedTexts = LocalizeController.instance.GetLocalizedTexts();
+
+        // Tạo key từ heroId
+        string skillInfoKey = $"skill_info_hero_{heroId}";
+
+        // Kiểm tra và cập nhật thông tin kỹ năng
+        if (localizedRichText.ContainsKey(skillInfoKey) && localizedTexts.ContainsKey(skillInfoKey))
+        {
+            skill_info_hero_stage.SetText(localizedRichText[skillInfoKey] + localizedTexts[skillInfoKey]);
+        }
+        else
+        {
+            Debug.LogWarning($"Không tìm thấy thông tin kỹ năng cho hero ID {heroId}.");
+            skill_info_hero_stage.SetText("Thông tin kỹ năng không khả dụng.");
+        }
+    }
+    public void UpdateTitleStage(int level)
+    {
+        var localizedRichText = LocalizeController.instance.GetLocalizedRichText();
+        var localizedTexts = LocalizeController.instance.GetLocalizedTexts();
+        if (localizedRichText.ContainsKey("title_stage") && localizedTexts.ContainsKey("title_stage"))
+        {
+            this.title_stage.SetText(localizedRichText["title_stage"] + localizedTexts["title_stage"] + " "+level);
+        }
+        
+
+    }
+
     void ILocalizeObject.ApplyText(ref Dictionary<string, string> localizedRichText, ref Dictionary<string, string> localizedTexts)
     {
         this.loading.SetText(localizedRichText["loading"] + localizedTexts["loading"]);
         this.button_start.SetText(localizedRichText["button_start"] + localizedTexts["button_start"]);
+        this.title_stage.SetText(localizedRichText["title_stage"] + localizedTexts["title_stage"]);
         this.title_choose_a_stage.SetText(localizedRichText["title_choose_a_stage"] + localizedTexts["title_choose_a_stage"]);
         this.warning_not_unlocked.SetText(localizedRichText["warning_not_unlocked"] + localizedTexts["warning_not_unlocked"]);
         this.warning_coming_soon.SetText(localizedRichText["warning_coming_soon"] + localizedTexts["warning_coming_soon"]);
@@ -49,10 +105,10 @@ public class ApplyText : MonoBehaviour, ILocalizeObject
         this.title_rider_information.SetText(localizedRichText["title_rider_information"] + localizedTexts["title_rider_information"]);
         this.hp_hero_1001.SetText(localizedRichText["hp_hero_1001"] + localizedTexts["hp_hero_1001"]);
         this.hp_hero_1002.SetText(localizedRichText["hp_hero_1002"] + localizedTexts["hp_hero_1002"]);
-        this.skill_info_hero_1001.SetText(localizedRichText["skill_info_hero_1001"] + localizedTexts["skill_info_hero_1001"]);
-        this.skill_info_hero_1002.SetText(localizedRichText["skill_info_hero_1002"] + localizedTexts["skill_info_hero_1002"]);
+        this.skill_info_hero_stage.SetText(localizedRichText["skill_info_hero_1001"] + localizedTexts["skill_info_hero_1001"]);
+        this.skill_info_hero_onstage.SetText(localizedRichText["skill_info_hero_1002"] + localizedTexts["skill_info_hero_1002"]);
         this.button_skill.SetText(localizedRichText["button_skill"] + localizedTexts["button_skill"]);
-        this.button_replay.SetText(localizedRichText["button_replay"] + localizedTexts["button_start"]);
+        this.button_replay.SetText(localizedRichText["button_replay"] + localizedTexts["button_replay"]);
         this.title_setting.SetText(localizedRichText["title_setting"] + localizedTexts["title_setting"]);
         this.setting_sound.SetText(localizedRichText["setting_sound"] + localizedTexts["setting_sound"]);
         this.setting_sound_on.SetText(localizedRichText["setting_sound_on"] + localizedTexts["setting_sound_on"]);

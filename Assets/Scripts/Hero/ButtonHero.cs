@@ -24,7 +24,9 @@ public class ButtonHero:MonoBehaviour
         this.heroIcon.sprite=heroIcon;
         UpdateButtonState(isUnlocked, isSelected);
         infoBtn.onClick.AddListener(() => HeroInfoManager.instance.ShowInfo(this.Index, infoBtn.GetComponent<RectTransform>()));
+        infoBtn.onClick.AddListener(() => SoundManager.instance.PlaySFX("Click Sound"));
         button.onClick.AddListener(() => onClickAction(Index));
+        button.onClick.AddListener(() => SoundManager.instance.PlaySFX("Click Sound"));
     }
 
     public void UpdateButtonState(bool isUnlocked, bool isSelected)
@@ -32,6 +34,7 @@ public class ButtonHero:MonoBehaviour
         this.isUnlocked = isUnlocked;
         lockImage.gameObject.SetActive(!isUnlocked); 
         infoImage.gameObject.SetActive(isUnlocked);
-        selectedImage.gameObject.SetActive(isSelected && isUnlocked); 
+        selectedImage.gameObject.SetActive(isSelected && isUnlocked);
+         
     }
 }

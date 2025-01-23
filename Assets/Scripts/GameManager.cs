@@ -65,7 +65,7 @@ public class GameManager : MonoBehaviour
         objectWin.transform.localScale = new Vector3(cellSize, cellSize, 1);
         objectWin.transform.SetParent(gridController.grid[targetRow, targetCol].transform);
 
-        stageTxt.text = "STAGE " + level.level;
+        ApplyText.instance.UpdateTitleStage(level.level);
         backgroundController.UpdateRandomArt();
 
         PlayerController.instance.LoadLevel();
@@ -138,13 +138,16 @@ public class GameManager : MonoBehaviour
     {
         if (isEnd)
             return;
+        if (Time.timeScale == 0)
+            return;
         SoundManager.instance.StopSFX();
         LoadLevel();
         isEnd = false;
     }
     public void ReplayLevelWhenEnd()
     {
-
+        if (Time.timeScale == 0)
+            return;
         SoundManager.instance.StopSFX();
         LoadLevel();
         isEnd = false;
