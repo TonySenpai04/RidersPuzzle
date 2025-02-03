@@ -241,6 +241,8 @@ public class LevelManager : MonoBehaviour
         {
             currentLevel.key--;
         }
+        if (currentLevel.key < 0)
+            currentLevel.key = 0; 
         levels[lv] = currentLevel;
     }
     public void IncreaseLevelKey()

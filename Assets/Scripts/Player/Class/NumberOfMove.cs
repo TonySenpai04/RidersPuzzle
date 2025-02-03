@@ -31,6 +31,8 @@ public class NumberOfMove : INumberOfMoves
     public void ReduceeMove(int amount)
     {
         this.currentMoves -= amount;
+        if (currentMoves < 0)
+            currentMoves = 0;
     }
 
     public void SetMove(int value)
