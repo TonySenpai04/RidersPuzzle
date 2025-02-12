@@ -1,11 +1,13 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 [Serializable]
 public struct DataHero
 {
     public int id;
+    public string name;
     public int hp;
     public Sprite icon;
     public bool isUnlock;
@@ -20,6 +22,16 @@ public class HeroManager : MonoBehaviour
      {
         instance = this;
      }
+    public DataHero GetHero(int id)
+    {
+        return heroDatas.FirstOrDefault(h => h.id == id);
+    }
+    public string HeroOwner()
+    {
+        int unlockedCount = heroDatas.Count(hero => hero.isUnlock);
+        int totalCount = heroDatas.Count;
+        return $"{unlockedCount}/{totalCount}";
+    }
 
 
 }

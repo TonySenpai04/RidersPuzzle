@@ -66,4 +66,8 @@ public class HiddenObjectManager : MonoBehaviour
         }
         return null; 
     }
+    public int ObjectQuantity()
+    {
+        return allObjects.Count;
+    }
 }

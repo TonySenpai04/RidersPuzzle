@@ -15,7 +15,12 @@ public struct ButtonFotter
 
 public class FooterController : MonoBehaviour
 {
-   public List<ButtonFotter> buttons;
+    public static FooterController instance;
+    public List<ButtonFotter> buttons;
+    private void Awake()
+    {
+        instance = this;
+    }
     private void Start()
     {
       foreach (var button in buttons)
