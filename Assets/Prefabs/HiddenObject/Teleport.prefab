@@ -100,6 +100,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   id: 2006
   type: 0
+  isDestroying: 0
+  isPandora: 0
+  sprite: {fileID: 21300000, guid: 28c3d4cdcccaa124faf308f3bb54d659, type: 3}
 --- !u!95 &-5588582065996409096
 Animator:
   serializedVersion: 5

@@ -100,6 +100,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   id: 2015
   type: 1
+  isDestroying: 0
+  isPandora: 0
+  sprite: {fileID: 21300000, guid: 126b059bf2780144da6d3210bbb858f0, type: 3}
   jyamatoPrefab: {fileID: 6650335154616161099, guid: dc2e1ca7e569ffe42b854e497fa22a15, type: 3}
 --- !u!95 &2719077866241497339
 Animator:

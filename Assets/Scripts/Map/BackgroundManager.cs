@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using static HiddenObject;
+
 [System.Serializable]
 public class SpritePair
 {
@@ -9,13 +11,24 @@ public class SpritePair
     public Sprite sprite2;
 }
 
-public class BackgroundController : MonoBehaviour
+public class BackgroundManager : MonoBehaviour
 {
     [SerializeField] private Image background;
     [SerializeField] private GridController gridController;
     [SerializeField] private List<Sprite> backgroundArts;
     [SerializeField] private List<SpritePair> gridArts ;
     private SpritePair selectedPair;
+    [SerializeField] private Image libraryBg;
+    [SerializeField] private Sprite heroBg;
+    [SerializeField] private Sprite objectPowerUpBg;
+    [SerializeField] private Sprite objObstacleBg;
+    [SerializeField] private Sprite pandoraboxBg;
+    [SerializeField] private Sprite defaultBg;
+    public static BackgroundManager instance;
+    private void Awake()
+    {
+        instance = this;
+    }
     private void Start()
     {
         UpdateRandomArt();
@@ -25,6 +38,35 @@ public class BackgroundController : MonoBehaviour
         UpdateBackgroundArt();
         UpdateGridArt();
         gridController.GetSprite();
+    }
+    public void SetDefaultBg()
+    {
+        libraryBg.sprite = defaultBg;
+    }
+    public void SetHeroBg()
+    {
+        libraryBg.sprite = heroBg;
+    }
+    public void SetObjectBg(string id)
+    {
+        HiddenObject hiddenObject = HiddenObjectManager.instance.GetById(id);
+        if (hiddenObject != null)
+        {
+            switch (hiddenObject.type)
+            {
+                case ObjectType.PowerUp:
+                    libraryBg.sprite = objectPowerUpBg;
+                    break;
+                case ObjectType.Obstacle:
+                    libraryBg.sprite = objObstacleBg;
+                    break;
+                case ObjectType.Pandora:
+                    libraryBg.sprite = pandoraboxBg;
+                    break;
+            }
+           
+        }
+       
     }
     private void UpdateGridArt()
     {

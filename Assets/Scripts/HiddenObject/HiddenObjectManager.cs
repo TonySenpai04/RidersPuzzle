@@ -8,6 +8,9 @@ public class HiddenObjectManager : MonoBehaviour
     [SerializeField] private List<HiddenObject> powerUpObjects;
     [SerializeField] private List<HiddenObject> obstacleObjects;
     public static HiddenObjectManager instance;
+
+    public List<HiddenObject> AllObjects { get => allObjects; set => allObjects = value; }
+
     private void Awake()
     {
         instance = this;
@@ -16,7 +19,7 @@ public class HiddenObjectManager : MonoBehaviour
     private void SplitObjects()
     {
 
-        foreach (var obj in allObjects)
+        foreach (var obj in AllObjects)
         {
             if (obj.type== HiddenObject.ObjectType.PowerUp) 
             {
@@ -39,7 +42,7 @@ public class HiddenObjectManager : MonoBehaviour
     }
     public HiddenObject GetById(string id)
     {
-        foreach (var obj in allObjects)
+        foreach (var obj in AllObjects)
         {
             if (obj.id == id) 
             {
@@ -68,6 +71,6 @@ public class HiddenObjectManager : MonoBehaviour
     }
     public int ObjectQuantity()
     {
-        return allObjects.Count;
+        return AllObjects.Count;
     }
 }

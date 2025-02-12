@@ -16,7 +16,7 @@ public class GameManager : MonoBehaviour
     public bool isEnd=false;
     public GameObject playZone;
     public TextMeshProUGUI stageTxt;
-    public BackgroundController backgroundController;
+    public BackgroundManager backgroundController;
     GameObject objectWin;
     public bool isMainActive = true;
     private bool hasPlayedWinSound = false; 

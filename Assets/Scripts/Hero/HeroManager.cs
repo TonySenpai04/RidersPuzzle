@@ -22,15 +22,14 @@ public class HeroManager : MonoBehaviour
      {
         instance = this;
      }
-    public DataHero GetHero(int id)
+    public DataHero? GetHero(int id)
     {
         return heroDatas.FirstOrDefault(h => h.id == id);
     }
-    public string HeroOwner()
+    public int HeroOwnedQuantity()
     {
         int unlockedCount = heroDatas.Count(hero => hero.isUnlock);
-        int totalCount = heroDatas.Count;
-        return $"{unlockedCount}/{totalCount}";
+        return unlockedCount;
     }
 
 

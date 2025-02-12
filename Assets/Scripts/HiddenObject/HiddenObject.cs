@@ -8,11 +8,13 @@ public abstract class HiddenObject : MonoBehaviour
     public ObjectType type;
     public bool isDestroying = false;
     public bool isPandora=false;
+    public Sprite sprite;
 
     public enum ObjectType
     {
         PowerUp,   
-        Obstacle     
+        Obstacle,
+        Pandora
     }
     public virtual void Start()
     {

@@ -48,6 +48,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   id: 2005
   type: 0
+  isDestroying: 0
+  isPandora: 0
+  sprite: {fileID: 21300000, guid: 5a917a46d078d0e40b0d7f9ae06f9d8e, type: 3}
 --- !u!212 &-2275447492726824419
 SpriteRenderer:
   m_ObjectHideFlags: 0

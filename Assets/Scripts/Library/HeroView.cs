@@ -22,11 +22,14 @@ public class HeroView : MonoBehaviour
     public void SetHero(int id, Sprite heroSprite, string name)
     {
         this.id = id;
+        var hero = HeroManager.instance.GetHero(this.id);
+        if (hero == null)
+            return;
         this.heroImage.sprite = heroSprite;
         this.heroTxt.text = $"{id} {name}";
-        DataHero hero = HeroManager.instance.GetHero(this.id);
-        this.hpTxt.text = "HP:" + hero.hp;
-        this.skillTxt.text = "Skill:" + hero.skillDescription;
+        
+        this.hpTxt.text = "HP:" + hero.Value.hp;
+        this.skillTxt.text = "Skill:" + hero.Value.skillDescription;
 
     }
     public void ToParty()
