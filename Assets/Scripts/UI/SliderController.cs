@@ -10,6 +10,8 @@ public class SliderController : MonoBehaviour
     public float speed = 0.5f;
     float time = 0f;
     public GameObject btnStart;
+    public GameObject toturial;
+    bool isShow = true;
 
     void Start()
     {
@@ -42,6 +44,7 @@ public class SliderController : MonoBehaviour
         {
             CompleteSlider();
 
+
         }
     }
 
@@ -49,6 +52,11 @@ public class SliderController : MonoBehaviour
     {
         btnStart.SetActive(true);
         slider.gameObject.SetActive(false);
+        if (FirstPlayManager.instance.isFirst && isShow)
+        {
+            toturial.gameObject.SetActive(true);
+            isShow = false;
+        }
     }
 
 }

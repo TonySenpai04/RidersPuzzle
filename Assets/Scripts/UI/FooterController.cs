@@ -44,6 +44,7 @@ public class FooterController : MonoBehaviour
                 buttonImage.sprite = button.unselected;
             }
         }
+        BackgroundManager.instance.SetDefaultBg();
     }
     public void SelectButton(string name)
     {
@@ -58,6 +59,9 @@ public class FooterController : MonoBehaviour
             {
                 buttonImage.sprite = button.unselected;
             }
+            
         }
+        BackgroundManager.instance.SetDefaultBg();
+
     }
 }
