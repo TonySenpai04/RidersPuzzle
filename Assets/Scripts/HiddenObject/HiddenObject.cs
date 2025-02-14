@@ -9,6 +9,7 @@ public abstract class HiddenObject : MonoBehaviour
     public bool isDestroying = false;
     public bool isPandora=false;
     public Sprite sprite;
+    public bool isSeen;
 
     public enum ObjectType
     {

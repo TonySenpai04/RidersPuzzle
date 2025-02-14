@@ -1,6 +1,18 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using System.IO;
+using System.Linq;
 using UnityEngine;
+[System.Serializable]
+public class SeenObjectsData
+{
+    public List<string> seenObjectIds;
+
+    public SeenObjectsData(List<string> ids)
+    {
+        seenObjectIds = ids;
+    }
+}
 
 public class HiddenObjectManager : MonoBehaviour
 {
@@ -14,6 +26,7 @@ public class HiddenObjectManager : MonoBehaviour
     private void Awake()
     {
         instance = this;
+        LoadSeenObjects();
         SplitObjects();
     }
     private void SplitObjects()
@@ -30,6 +43,16 @@ public class HiddenObjectManager : MonoBehaviour
                 obstacleObjects.Add(obj);
             }
         }
+    }
+    public void  SetSeenObjectById(string id)
+    {
+         allObjects.FirstOrDefault(h=>h.id==id).isSeen = true;
+        SaveSeenObjects();
+    }
+    public List<HiddenObject> GetSeenObject()
+    {
+        return allObjects.Where(h => h.isSeen).ToList();
+
     }
     public HiddenObject GetRandomPowerUp()
     {
@@ -52,6 +75,25 @@ public class HiddenObjectManager : MonoBehaviour
         return null;
     }
 
+    public void SaveSeenObjects()
+    {
+        List<string> seenObjectIds = allObjects.Where(h => h.isSeen).Select(h => h.id).ToList();
+        string json = JsonUtility.ToJson(new SeenObjectsData(seenObjectIds));
+        File.WriteAllText(Application.persistentDataPath + "/seenObjects.json", json);
+    }
+    public void LoadSeenObjects()
+    {
+        string path = Application.persistentDataPath + "/seenObjects.json";
+        if (File.Exists(path))
+        {
+            string json = File.ReadAllText(path);
+            SeenObjectsData data = JsonUtility.FromJson<SeenObjectsData>(json);
+            foreach (string id in data.seenObjectIds)
+            {
+                SetSeenObjectById(id);
+            }
+        }
+    }
 
     public HiddenObject GetRandomObstacle()
     {

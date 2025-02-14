@@ -51,6 +51,7 @@ MonoBehaviour:
   isDestroying: 0
   isPandora: 0
   sprite: {fileID: 21300000, guid: 31e092ee743f5824d9b5d2e80219796e, type: 3}
+  isSeen: 0
 --- !u!212 &3821804338522509279
 SpriteRenderer:
   m_ObjectHideFlags: 0

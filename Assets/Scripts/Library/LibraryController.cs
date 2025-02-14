@@ -17,7 +17,8 @@ public class LibraryController : MonoBehaviour
     private void Start()
     {
         heroTxt.text = HeroManager.instance.HeroOwnedQuantity()+"/11";
-        objectTxt.text = HiddenObjectManager.instance.ObjectQuantity() + "/" + HiddenObjectManager.instance.ObjectQuantity();
+        objectTxt.text = HiddenObjectManager.instance.GetSeenObject().Count
+            + "/" + HiddenObjectManager.instance.ObjectQuantity();
     }
     private void OnEnable()
     {
@@ -28,5 +29,7 @@ public class LibraryController : MonoBehaviour
         toturialView.SetActive(false);
         riderView.SetActive(false);
         heroTxt.text = HeroManager.instance.HeroOwnedQuantity() + "/11" ;
+        objectTxt.text = HiddenObjectManager.instance.GetSeenObject().Count
+            + "/" + HiddenObjectManager.instance.ObjectQuantity();
     }
 }

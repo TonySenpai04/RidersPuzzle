@@ -103,6 +103,7 @@ MonoBehaviour:
   isDestroying: 0
   isPandora: 0
   sprite: {fileID: 21300000, guid: 6573705cb159f62449c8be0cab6ace52, type: 3}
+  isSeen: 0
 --- !u!95 &5837241029973376494
 Animator:
   serializedVersion: 5

@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class ToturialController : MonoBehaviour
+public class TutorialController : MonoBehaviour
 {
     [SerializeField] private List<GameObject> images;
     [SerializeField] private List<Image> circles; 
@@ -12,14 +12,28 @@ public class ToturialController : MonoBehaviour
     [SerializeField] private int currentIndex = 0;
     [SerializeField] private Button next;
     [SerializeField] private Button prev;
-
+    [SerializeField] public Button close;
+    [SerializeField] private GameObject menuLib;
     void Start()
     {
         UpdateUI();
         prev.onClick.AddListener(() => PreviousImage());
         next.onClick.AddListener(() => NextImage());
+        close.onClick.AddListener(() => Close());
     }
+    public void Close()
+    {
+        if (FirstPlayManager.instance.isFirst)
+        {
+            this.gameObject.SetActive(false);
 
+        }
+        else
+        {
+            this.gameObject.SetActive(false);
+            menuLib.SetActive(true);
+        }
+    }
     public void NextImage()
     {
         if (currentIndex < images.Count - 1) 

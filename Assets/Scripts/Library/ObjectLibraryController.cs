@@ -1,4 +1,4 @@
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
@@ -13,7 +13,7 @@ public class ObjectLibraryController : MonoBehaviour
     [SerializeField] private List<ObjectLibrary> objectLibraries;
     [SerializeField] private TextMeshProUGUI objectSeenTxt;
 
-    public List<ObjectLibrary> HeroLibraries { get => objectLibraries; set => objectLibraries = value; }
+    public List<ObjectLibrary> ObjectLibraries { get => objectLibraries; set => objectLibraries = value; }
 
     void Start()
     {
@@ -23,17 +23,40 @@ public class ObjectLibraryController : MonoBehaviour
             ObjectLibrary objectLib = Instantiate(ObjectLibraryPrefabs, content.transform);
             objectLib.SetObject(HiddenObjectManager.instance.AllObjects[i].id, 
                 HiddenObjectManager.instance.AllObjects[i].sprite);
-            objectLib.GetComponent<Button>().onClick.AddListener(() => SetObjectView(objectLib.Id));
-
-
+            var hiddenObject = HiddenObjectManager.instance.GetById(objectLib.Id);
+            if (hiddenObject.isSeen)
+            {
+                objectLib.GetComponent<Button>().onClick.AddListener(() => SetObjectView(objectLib.Id));
+            }
+            objectLibraries.Add(objectLib);
 
         }
 
-        objectSeenTxt.text = "Seen:"+HiddenObjectManager.instance.ObjectQuantity() ;
+        objectSeenTxt.text = "Seen:"+HiddenObjectManager.instance.GetSeenObject().Count ;
+        UpdateSeenOject();
     }
     private void OnEnable()
     {
-        
+        UpdateSeenOject();
+    }
+  
+    public void UpdateSeenOject()
+    {
+        foreach (var obj in objectLibraries)
+        {
+            var hiddenObject = HiddenObjectManager.instance.GetById(obj.Id);
+            if (hiddenObject.isSeen)
+            {
+                obj.SetSeenObject(true);
+                obj.UpdateVisibility();
+                obj.GetComponent<Button>().onClick.AddListener(() => SetObjectView(obj.Id));
+
+            }
+            else
+            {
+                obj.GetComponent<Button>().onClick.RemoveAllListeners();
+            }
+        }
     }
     public void SetObjectView(string id)
     {

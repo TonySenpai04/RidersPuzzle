@@ -11,15 +11,15 @@ public class ObjectLibrary : MonoBehaviour
     [SerializeField] private Image obejctImage;
     [SerializeField] private TextMeshProUGUI txtID;
     [SerializeField] private TextMeshProUGUI txtID2;
+ 
     //[SerializeField] private HeroView heroView;
 
     public string Id { get => id; set => id = value; }
 
     private void Start()
     {
-        
-       txtID.gameObject.SetActive(false);
-       obejctImage.gameObject.SetActive(true);
+
+        UpdateVisibility();
 
     }
 
@@ -33,8 +33,31 @@ public class ObjectLibrary : MonoBehaviour
     }
     private void OnEnable()
     {
-        
-       
 
+        UpdateVisibility();
+
+    }
+    public void UpdateVisibility()
+    {
+        var hiddenObject = HiddenObjectManager.instance.GetById(this.Id);
+        if (hiddenObject != null && hiddenObject.isSeen)
+        {
+            txtID.gameObject.SetActive(false);
+            obejctImage.gameObject.SetActive(true);
+            obejctImage.sprite = hiddenObject.sprite;
+        }
+        else
+        {
+            txtID.gameObject.SetActive(true);
+            obejctImage.gameObject.SetActive(false);
+        }
+    }
+    public void SetSeenObject(bool isSeen)
+    {
+        var hiddenObject = HiddenObjectManager.instance.GetById(this.Id);
+        if (hiddenObject != null )
+        {
+            hiddenObject.isSeen = isSeen;
+        }
     }
 }

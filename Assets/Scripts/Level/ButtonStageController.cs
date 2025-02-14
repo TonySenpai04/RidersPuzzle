@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -18,7 +19,9 @@ public class ButtonStageController : MonoBehaviour
     [SerializeField] private GameObject notiObject;
     [SerializeField] private TextMeshProUGUI notiTxt;
     [SerializeField] private GameObject transitionLevel;
-    
+    [SerializeField] private TutorialController tutorial;
+    [SerializeField] private ObjectLibraryController objectLibraryController;
+
     void Start()
     {
         notiObject.gameObject.SetActive(false);
@@ -62,29 +65,67 @@ public class ButtonStageController : MonoBehaviour
         }
     }
   
-    private void LoadLevel(int levelIndex)
+    public void LoadLevel(int levelIndex)
     {
         if (stageHeroController.isHero())
         {
             SoundManager.instance.PlaySFX("Click Sound");
-            playZone.gameObject.SetActive(true);
-            transitionLevel.gameObject.SetActive(true);
-            levelManager.StartCoroutine(HideAfterDelay(1f));
-            levelManager.SetLevel(levelIndex);
-            PlayerController.instance.SetCurrentData(stageHeroController.GetCurrentHeroData());
-            GameManager.instance.LoadLevel();
-            levelManager.ClearObject();
-            FirstPlayManager.instance.FirstPlay(() =>
+            if (FirstPlayManager.instance.isFirst)
             {
-                levelManager.LoadObject(levelManager.GetLevel(levelIndex-1));
-            });
-            info.gameObject.SetActive(false);
-            stageZone.gameObject.SetActive(false);
+                // Hiển thị tutorial và gán sự kiện đóng để load level
+                if (tutorial != null)
+                {
+                    tutorial.gameObject.SetActive(true);
+                    tutorial.close.onClick.AddListener(() => StartLevel(levelIndex));
+                    return;
+                }
+            }
+
+            // Nếu không phải lần đầu, load level ngay
+            StartLevel(levelIndex);
+            //playZone.gameObject.SetActive(true);
+            //transitionLevel.gameObject.SetActive(true);
+            //levelManager.StartCoroutine(HideAfterDelay(1f));
+            //levelManager.SetLevel(levelIndex);
+            //PlayerController.instance.SetCurrentData(stageHeroController.GetCurrentHeroData());
+            //GameManager.instance.LoadLevel();
+            //levelManager.ClearObject();
+            //FirstPlayManager.instance.FirstPlay(() =>
+            //{
+            //    levelManager.LoadObject(levelManager.GetLevel(levelIndex-1));
+            //});
+            //info.gameObject.SetActive(false);
+            //stageZone.gameObject.SetActive(false);
         }
         else
         {
             ShowNotification("Please select a character!");
         }
+    }
+    private void StartLevel(int levelIndex)
+    {
+        playZone.gameObject.SetActive(true);
+        transitionLevel.gameObject.SetActive(true);
+        levelManager.StartCoroutine(HideAfterDelay(1f));
+        levelManager.SetLevel(levelIndex);
+        PlayerController.instance.SetCurrentData(stageHeroController.GetCurrentHeroData());
+        GameManager.instance.LoadLevel();
+        levelManager.ClearObject();
+        FirstPlayManager.instance.FirstPlay(() =>
+        {
+            levelManager.LoadObject(levelManager.GetLevel(levelIndex - 1));
+        });
+        Level level= levelManager.GetLevel(levelIndex);
+
+        foreach(var levelData in level.hiddenObjects)
+        {
+            HiddenObjectManager.instance.SetSeenObjectById(levelData.objectPrefab.GetComponent<HiddenObject>().id);
+        }  
+        info.gameObject.SetActive(false);
+        tutorial.close.onClick.RemoveAllListeners();
+        tutorial.close.onClick.AddListener(() => tutorial.Close());
+        stageZone.gameObject.SetActive(false);
+  
     }
     public void ShowNotification(string message)
     {
