@@ -55,7 +55,7 @@ public class LevelDataController
                 hiddenObjectInfo.row = pos.x;
                 hiddenObjectInfo.col = pos.y;
 
-                HiddenObject hiddenObject = hiddenObjectManager.GetById(entry.Value.ToString());
+                HiddenObject hiddenObject = hiddenObjectManager.GetById(entry.Value);
                 if (hiddenObject != null)
                 {
                     hiddenObjectInfo.objectPrefab = hiddenObject.gameObject;

@@ -47,7 +47,7 @@ public class BackgroundManager : MonoBehaviour
     {
         libraryBg.sprite = heroBg;
     }
-    public void SetObjectBg(string id)
+    public void SetObjectBg(int id)
     {
         HiddenObject hiddenObject = HiddenObjectManager.instance.GetById(id);
         if (hiddenObject != null)

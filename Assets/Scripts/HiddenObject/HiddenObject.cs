@@ -4,7 +4,7 @@ using UnityEngine;
 
 public abstract class HiddenObject : MonoBehaviour
 {
-    public string id;
+    public int id;
     public ObjectType type;
     public bool isDestroying = false;
     public bool isPandora=false;

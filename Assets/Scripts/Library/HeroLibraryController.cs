@@ -23,10 +23,9 @@ public class HeroLibraryController : MonoBehaviour
             HeroLibrary hero = Instantiate(HeroLibraryPrefabs, content.transform);
             hero.SetHero(HeroManager.instance.heroDatas[i].id, HeroManager.instance.heroDatas[i].heroImage);
             var heroData = HeroManager.instance.GetHero(hero.Id);
-            if (heroData.HasValue && heroData.Value.isUnlock)
-            {
-                hero.GetComponent<Button>().onClick.AddListener(() => SetHeroView(hero.Id));
-            }
+
+            hero.GetComponent<Button>().onClick.AddListener(() => SetHeroView(hero.Id));
+            
             HeroLibraries.Add(hero);
 
 
@@ -48,14 +47,9 @@ public class HeroLibraryController : MonoBehaviour
             var heroData = HeroManager.instance.GetHero(hero.Id);
             if (heroData.HasValue && heroData.Value.isUnlock)
             {
-                HeroView.SetHero(heroData.Value.id, heroData.Value.heroImage, heroData.Value.name);
-                hero.GetComponent<Button>().onClick.AddListener(() => SetHeroView(hero.Id));
-            }
-            else
-            {
-                hero.GetComponent<Button>().onClick.RemoveAllListeners();
-
-
+                HeroView.SetHero(heroData.Value.id, heroData.Value.heroImage,
+                    heroData.Value.name,heroData.Value.isUnlock);
+           
             }
             
         }
@@ -65,7 +59,7 @@ public class HeroLibraryController : MonoBehaviour
         var hero = HeroManager.instance.GetHero(id);
         if (hero == null)
             return;
-        HeroView.SetHero(id, hero.Value.heroImage, hero.Value.name);
+        HeroView.SetHero(id, hero.Value.heroImage, hero.Value.name,hero.Value.isUnlock);
         this.HeroView.gameObject.SetActive(true);
         heroParent.gameObject.SetActive(false);
         BackgroundManager.instance.SetHeroBg();

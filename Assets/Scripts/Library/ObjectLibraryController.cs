@@ -58,7 +58,7 @@ public class ObjectLibraryController : MonoBehaviour
             }
         }
     }
-    public void SetObjectView(string id)
+    public void SetObjectView(int id)
     {
 
         HiddenObject hiddenObject = HiddenObjectManager.instance.GetById(id);

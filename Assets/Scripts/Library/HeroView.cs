@@ -14,12 +14,21 @@ public class HeroView : MonoBehaviour
     [SerializeField] private GameObject library;
     [SerializeField] private GameObject map;
     [SerializeField] private StageHeroController stageHeroController;
+    [SerializeField] private Image disableParty;
+    [SerializeField] private Image enableParty;
+    [SerializeField] private Image disableShop;
+    [SerializeField] private Image enableShop;
+    [SerializeField] private bool isUnlock;
+    [SerializeField] private TextMeshProUGUI shopTxt;
+    [SerializeField] private TextMeshProUGUI partyTxt;
+    [SerializeField] private Button toShop;
+    [SerializeField] private Button toParty;
 
     void Start()
     {
         
     }
-    public void SetHero(int id, Sprite heroSprite, string name)
+    public void SetHero(int id, Sprite heroSprite, string name, bool isUnlock)
     {
         this.id = id;
         var hero = HeroManager.instance.GetHero(this.id);
@@ -30,7 +39,32 @@ public class HeroView : MonoBehaviour
         
         this.hpTxt.text = "HP:" + hero.Value.hp;
         this.skillTxt.text = "Skill:" + hero.Value.skillDescription;
+        this.isUnlock=isUnlock;
+        if (this.isUnlock)
+        {
 
+            enableParty.gameObject.SetActive(true);
+            disableParty.gameObject.SetActive(false);
+            enableShop.gameObject.SetActive(false);
+            disableShop.gameObject.SetActive(true);
+            toParty.interactable = true;
+            toShop.interactable = false;
+            shopTxt.color = ColorUtility.TryParseHtmlString("#556169", out Color disableShopColor) ? disableShopColor : Color.white;
+            partyTxt.color = ColorUtility.TryParseHtmlString("#25AAFE", out Color enablePartyColor) ? enablePartyColor : Color.white; 
+        }
+        else
+        {
+            enableParty.gameObject.SetActive(false);
+            disableParty.gameObject.SetActive(true);
+            enableShop.gameObject.SetActive(true);
+            disableShop.gameObject.SetActive(false);
+            toParty.interactable = false;
+            toShop.interactable = true;
+            partyTxt.color = ColorUtility.TryParseHtmlString("#556169", out Color disablePartyColor) ? disablePartyColor : Color.white;
+            shopTxt.color = ColorUtility.TryParseHtmlString("#25AAFE", out Color enableShopColor) ? enableShopColor : Color.white;
+
+
+        }
     }
     public void ToParty()
     {

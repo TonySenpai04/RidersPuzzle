@@ -7,14 +7,14 @@ using UnityEngine.UI;
 public class ObjectLibrary : MonoBehaviour
 {
 
-    [SerializeField] private string id;
+    [SerializeField] private int id;
     [SerializeField] private Image obejctImage;
     [SerializeField] private TextMeshProUGUI txtID;
     [SerializeField] private TextMeshProUGUI txtID2;
  
     //[SerializeField] private HeroView heroView;
 
-    public string Id { get => id; set => id = value; }
+    public int Id { get => id; set => id = value; }
 
     private void Start()
     {
@@ -23,7 +23,7 @@ public class ObjectLibrary : MonoBehaviour
 
     }
 
-    public void SetObject(string id, Sprite objectSprite)
+    public void SetObject(int id, Sprite objectSprite)
     {
         this.Id = id;
         this.obejctImage.sprite = objectSprite;

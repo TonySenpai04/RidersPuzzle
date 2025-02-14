@@ -115,7 +115,7 @@ public class ButtonStageController : MonoBehaviour
         {
             levelManager.LoadObject(levelManager.GetLevel(levelIndex - 1));
         });
-        Level level= levelManager.GetLevel(levelIndex);
+        Level level= levelManager.GetLevel(levelIndex-1);
 
         foreach(var levelData in level.hiddenObjects)
         {

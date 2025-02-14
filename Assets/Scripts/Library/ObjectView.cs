@@ -6,7 +6,7 @@ using UnityEngine.UI;
 
 public class ObjectView : MonoBehaviour
 {
-    [SerializeField] private string id;
+    [SerializeField] private int id;
     [SerializeField] private Image objectImage;
     [SerializeField] private TextMeshProUGUI txtName;
 
@@ -14,7 +14,7 @@ public class ObjectView : MonoBehaviour
     {
 
     }
-    public void SetObject(string id, Sprite objectImage,string name)
+    public void SetObject(int id, Sprite objectImage,string name)
     {
         this.id = id;
         this.objectImage.sprite= objectImage;

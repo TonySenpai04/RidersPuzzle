@@ -6,9 +6,9 @@ using UnityEngine;
 [System.Serializable]
 public class SeenObjectsData
 {
-    public List<string> seenObjectIds;
+    public List<int> seenObjectIds;
 
-    public SeenObjectsData(List<string> ids)
+    public SeenObjectsData(List<int> ids)
     {
         seenObjectIds = ids;
     }
@@ -26,8 +26,18 @@ public class HiddenObjectManager : MonoBehaviour
     private void Awake()
     {
         instance = this;
+        SortObjects();
         LoadSeenObjects();
         SplitObjects();
+    }
+    private void SortObjects()
+    {
+        AllObjects.Sort((a, b) =>
+        {
+            if (a.id == 3000) return -1;
+            if (b.id == 3000) return 1;
+            return a.id.CompareTo(b.id);
+        });
     }
     private void SplitObjects()
     {
@@ -44,7 +54,7 @@ public class HiddenObjectManager : MonoBehaviour
             }
         }
     }
-    public void  SetSeenObjectById(string id)
+    public void  SetSeenObjectById(int id)
     {
          allObjects.FirstOrDefault(h=>h.id==id).isSeen = true;
         SaveSeenObjects();
@@ -63,7 +73,7 @@ public class HiddenObjectManager : MonoBehaviour
         }
         return null; 
     }
-    public HiddenObject GetById(string id)
+    public HiddenObject GetById(int id)
     {
         foreach (var obj in AllObjects)
         {
@@ -77,7 +87,7 @@ public class HiddenObjectManager : MonoBehaviour
 
     public void SaveSeenObjects()
     {
-        List<string> seenObjectIds = allObjects.Where(h => h.isSeen).Select(h => h.id).ToList();
+        List<int> seenObjectIds = allObjects.Where(h => h.isSeen).Select(h => h.id).ToList();
         string json = JsonUtility.ToJson(new SeenObjectsData(seenObjectIds));
         File.WriteAllText(Application.persistentDataPath + "/seenObjects.json", json);
     }
@@ -88,7 +98,7 @@ public class HiddenObjectManager : MonoBehaviour
         {
             string json = File.ReadAllText(path);
             SeenObjectsData data = JsonUtility.FromJson<SeenObjectsData>(json);
-            foreach (string id in data.seenObjectIds)
+            foreach (int id in data.seenObjectIds)
             {
                 SetSeenObjectById(id);
             }
