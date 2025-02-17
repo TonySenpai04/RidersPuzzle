@@ -26,7 +26,7 @@ public class HeroLibraryController : MonoBehaviour
 
             hero.GetComponent<Button>().onClick.AddListener(() => SetHeroView(hero.Id));
             hero.GetComponent<Button>().onClick.AddListener(() => SoundManager.instance
-            .PlayHeroSFX(HeroManager.instance.heroDatas[i].id));
+            .PlayHeroSFX(hero.Id));
             HeroLibraries.Add(hero);
 
 

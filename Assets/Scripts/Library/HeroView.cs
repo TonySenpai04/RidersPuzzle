@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
 public class HeroView : MonoBehaviour
@@ -26,7 +27,17 @@ public class HeroView : MonoBehaviour
 
     void Start()
     {
-        
+        PlaySoundHero();
+    }
+    public void PlaySoundHero()
+    {
+        EventTrigger trigger = heroImage.gameObject.AddComponent<EventTrigger>();
+
+        EventTrigger.Entry entry = new EventTrigger.Entry();
+        entry.eventID = EventTriggerType.PointerClick;
+        entry.callback.AddListener((eventData) => SoundManager.instance.PlayHeroSFX(id));
+
+        trigger.triggers.Add(entry);
     }
     public void SetHero(int id, Sprite heroSprite, string name, bool isUnlock)
     {
