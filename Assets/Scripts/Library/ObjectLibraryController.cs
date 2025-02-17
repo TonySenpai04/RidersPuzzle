@@ -27,6 +27,7 @@ public class ObjectLibraryController : MonoBehaviour
             if (hiddenObject.isSeen)
             {
                 objectLib.GetComponent<Button>().onClick.AddListener(() => SetObjectView(objectLib.Id));
+                objectLib.GetComponent<Button>().onClick.AddListener(() => SoundManager.instance.PlaySFX("Click Sound"));
             }
             objectLibraries.Add(objectLib);
 
