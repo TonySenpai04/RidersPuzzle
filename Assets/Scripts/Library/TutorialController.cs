@@ -17,22 +17,24 @@ public class TutorialController : MonoBehaviour
     void Start()
     {
         UpdateUI();
+
         prev.onClick.AddListener(() => PreviousImage());
         next.onClick.AddListener(() => NextImage());
         close.onClick.AddListener(() => Close());
     }
     public void Close()
     {
-        if (FirstPlayManager.instance.isFirst)
-        {
-            this.gameObject.SetActive(false);
+        
+         this.gameObject.SetActive(false);
+         menuLib.SetActive(true);
+        
+    }
+    public void CloseFirst()
+    {
 
-        }
-        else
-        {
-            this.gameObject.SetActive(false);
-            menuLib.SetActive(true);
-        }
+        this.gameObject.SetActive(false);
+
+
     }
     public void NextImage()
     {
@@ -51,7 +53,10 @@ public class TutorialController : MonoBehaviour
             UpdateUI();
         }
     }
-
+    private void OnEnable()
+    {
+        
+    }
     void UpdateUI()
     {
         for (int i = 0; i < images.Count; i++)

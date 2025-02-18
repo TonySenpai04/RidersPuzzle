@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
 public class SliderController : MonoBehaviour
@@ -10,6 +11,8 @@ public class SliderController : MonoBehaviour
     public float speed = 0.5f;
     float time = 0f;
     public GameObject btnStart;
+    public GameObject panelTransition;
+  
 
 
     void Start()
@@ -19,7 +22,7 @@ public class SliderController : MonoBehaviour
        
         isRunning = true;
     }
-    
+   
     void Update()
     {
         if (isRunning)

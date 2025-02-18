@@ -72,30 +72,19 @@ public class ButtonStageController : MonoBehaviour
             SoundManager.instance.PlaySFX("Click Sound");
             if (FirstPlayManager.instance.isFirst)
             {
-                // Hiển thị tutorial và gán sự kiện đóng để load level
                 if (tutorial != null)
                 {
                     tutorial.gameObject.SetActive(true);
+                    
+                    tutorial.GetComponent<Image>().enabled = true;
+                    tutorial.close.onClick.RemoveAllListeners();
                     tutorial.close.onClick.AddListener(() => StartLevel(levelIndex));
+                    tutorial.close.onClick.AddListener(() => tutorial.CloseFirst());
                     return;
                 }
             }
 
-            // Nếu không phải lần đầu, load level ngay
             StartLevel(levelIndex);
-            //playZone.gameObject.SetActive(true);
-            //transitionLevel.gameObject.SetActive(true);
-            //levelManager.StartCoroutine(HideAfterDelay(1f));
-            //levelManager.SetLevel(levelIndex);
-            //PlayerController.instance.SetCurrentData(stageHeroController.GetCurrentHeroData());
-            //GameManager.instance.LoadLevel();
-            //levelManager.ClearObject();
-            //FirstPlayManager.instance.FirstPlay(() =>
-            //{
-            //    levelManager.LoadObject(levelManager.GetLevel(levelIndex-1));
-            //});
-            //info.gameObject.SetActive(false);
-            //stageZone.gameObject.SetActive(false);
         }
         else
         {
@@ -123,6 +112,7 @@ public class ButtonStageController : MonoBehaviour
         }  
         info.gameObject.SetActive(false);
         tutorial.close.onClick.RemoveAllListeners();
+        tutorial.GetComponent<Image>().enabled = false;
         tutorial.close.onClick.AddListener(() => tutorial.Close());
         stageZone.gameObject.SetActive(false);
   

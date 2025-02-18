@@ -9,16 +9,34 @@ public class MainScreenController : MonoBehaviour
     public GameObject SelectZone;
     public Button btnStart;
     public GameManager gameManager;
+    public GameObject panelTransition;
     private void Start()
     {
         SoundManager.instance.PlayMusic("Start Screen");
-        btnStart.onClick.AddListener(() => HideMainScreen());
+        btnStart.onClick.AddListener(() => Transition());
+    }
+    public void Transition()
+    {
+        panelTransition.gameObject.SetActive(true);
+        SelectZone.SetActive(true);
+        mainScreen.SetActive(false);
+        ShowTransition();
+    }
+    public void ShowTransition()
+    {
+        StopAllCoroutines();
+
+        StartCoroutine(HideTransitionAfterDelay(1f));
+    }
+    private IEnumerator HideTransitionAfterDelay(float delay)
+    {
+        yield return new WaitForSeconds(delay);
+        HideMainScreen();
     }
     public void HideMainScreen()
     {
         gameManager.DisableMain();
-        SelectZone.SetActive(true);
-     
-        mainScreen.SetActive(false);
+        panelTransition.gameObject.SetActive(false);
+
     }
 }

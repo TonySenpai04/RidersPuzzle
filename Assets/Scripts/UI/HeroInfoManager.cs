@@ -32,7 +32,7 @@ public class HeroInfoManager : MonoBehaviour
             txtHealth.text = hero.hp.ToString();
             ApplyText.instance.UpdateSkillInfo(id);
             //   txtSkill.text = hero.skillDescription;
-            UpdateArrowPosition(clickedObject);
+          //  UpdateArrowPosition(clickedObject);
 
 
         }

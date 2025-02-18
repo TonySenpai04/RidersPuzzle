@@ -125,6 +125,7 @@ public class GameManager : MonoBehaviour
         Debug.Log(LevelManager.instance.isFinal());
         if (LevelManager.instance.isFinal())
         {
+            NotiManager.instance.ShowNotificationInGame("Complete all current stages");
             return;
         }
         else
@@ -154,11 +155,31 @@ public class GameManager : MonoBehaviour
     }
     public void PauseGame()
     {
+        StopAllCoroutines();
         Time.timeScale = 0;
     }
     public void ResumeGame()
     {
+        StopAllCoroutines();
         Time.timeScale = 1;
+    }
+    public void PauseGameAfterDelay()
+    {
+        StartCoroutine(PauseGameAfterDelay(1));
+    }
+    public void ResumaGameAfterDelay()
+    {
+        StartCoroutine(ResumeGameAfterDelay(1));
+    }
+    private IEnumerator ResumeGameAfterDelay(float delay)
+    {
+        yield return new WaitForSeconds(delay);
+        ResumeGame();
+    }
+    private IEnumerator PauseGameAfterDelay(float delay)
+    {
+        yield return new WaitForSeconds(delay);
+        PauseGame();
     }
 
 
