@@ -230,7 +230,7 @@ public class LevelManager : MonoBehaviour
         else
         {
             Debug.LogWarning("Level index is out of range.");
-            return -1; 
+            return 0; 
         }
     }
     public void DecreaseLevelKey()
