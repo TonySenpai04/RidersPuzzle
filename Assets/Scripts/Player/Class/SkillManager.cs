@@ -7,74 +7,64 @@ using UnityEngine;
 
 public class SkillManager : MonoBehaviour
 {
-    [SerializeField] private List<SkillData> skillsData;
+    //[SerializeField] private List<SkillData> skillsDataPVE;
+    //[SerializeField] private List<SkillData> skillsDataPVP;
     [SerializeField] private int currentIDHero;
     [SerializeField] private GridController gridController;
     public static SkillManager instance;
+    public SkillPVEController skillPVEController;
+    public SkillPVPController skillPVPController;
     private void Awake()
     {
         instance = this;
-        AddSkill(1001, new GeatsSkill(gridController, 1, 1001));
-        AddSkill(1002, new GavvSkill(gridController, 1, 1002));
+        InitSkill();
 
+
+    }
+    public void InitSkill()
+    {
+        skillPVEController = new SkillPVEController(gridController);
+        skillPVPController = new SkillPVPController(gridController);
     }
 
     void Start()
     {
        
     }
-    public void LoadSkill()
+    public void LoadSkillPVE()
     {
-        GetSkillById(currentIDHero).SetNumberOfSkill(1);
+        GetSkillPVEById(currentIDHero).SetNumberOfSkill(1);
     }
 
-    public void AddSkill(int id, ISkill skill)
+    public void AddSkillPVE(int id, ISkill skill)
     {
-        skillsData.Add(new SkillData(id, skill));
+        skillPVEController.AddSkillPVE(id, skill);
     }
-    public ISkill GetSkillById(int id)
+    public void AddSkillPVP(int id, ISkill skill)
     {
-        foreach (SkillData skillData in skillsData)
-        {
-            if (skillData.id == id)
-            {
-                return skillData.skill;
-            }
-        }
-        Debug.LogWarning("Không tìm thấy kỹ năng cho ID: " + id);
-        return null;
+        skillPVPController.AddSkillPVP(id, skill);
+    }
+    public ISkill GetSkillPVEById(int id)
+    {
+        return skillPVEController.GetSkillPVEById(id);
     }
     public void SetSkillId(int id)
     {
-        if (skillsData.Any(skillData => skillData.id == id)) 
-        {
-            this.currentIDHero = id;
-        }
-        else
-        {
-            
-            Console.WriteLine($"Skill ID {id} không tồn tại trong danh sách.");
-        }
+        skillPVEController.SetSkillId(id);
+
     }
 
-    public void ActiveSkill()
+    public void ActiveSkillPVE()
     {
-        if (GameManager.instance.isEnd)
-            return;
-        ISkill skill= GetSkillById(currentIDHero);
-        skill.ActivateSkill();
+        skillPVEController.ActiveSkillPVE();
     }
     public void IncreaseSkillUsesForCurrentHero(int amount)
     {
-        ISkill skill = GetSkillById(currentIDHero);
-        if (skill != null)
-        {
-            skill.IncreaseUses(amount); 
-        }
+        skillPVEController.IncreaseSkillUsesForCurrentHero(amount);
     }
     public ISkill GetCurrentSkill()
     {
-        return GetSkillById(currentIDHero); 
+        return GetSkillPVEById(currentIDHero); 
     }
 }
 [Serializable]

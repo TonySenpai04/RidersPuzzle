@@ -1,21 +1,24 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 
 public class GameManager : MonoBehaviour
 {
+    [Header("Game Settings")]
     [SerializeField] public int targetRow = 5; 
     [SerializeField] public int targetCol = 4; 
     public GameObject panelWin;
     public GameObject panelLose;
-    public MovementController movementController;
+    public GameObject playZone;
+    public TextMeshProUGUI stageTxt;
     public GameObject winCellPrefab;
+    [Header("References")]
+    public MovementController movementController;
     public  GridController gridController;
     public static GameManager instance;
     public bool isEnd=false;
-    public GameObject playZone;
-    public TextMeshProUGUI stageTxt;
     public BackgroundManager backgroundController;
     GameObject objectWin;
     public bool isMainActive = true;
@@ -33,154 +36,171 @@ public class GameManager : MonoBehaviour
        LoadLevel();
        playZone.gameObject.SetActive(false);
     }
-    public void DisableMain()
-    {
-        isMainActive = false;
-    }
+    private void FixedUpdate() => CheckWinCondition();
+
+    #region Level Management
     public void LoadLevel()
     {
-        SoundManager.instance.StopSFX();
-        if (!isMainActive)
-        {
-            SoundManager.instance.PlaySFX("Stage Start");
-        }
+        ResetLevelState();
         LevelManager.instance.LoadLevel();
-        LevelDataInfo level = LevelManager.instance.GetCurrentLevelData();
+
+        var level = LevelManager.instance.GetCurrentLevelData();
         targetRow = (int)level.endPos.x;
         targetCol = (int)level.endPos.y;
 
-        float screenWidth = Camera.main.orthographicSize * 2 * Screen.width / Screen.height;
-        float cellSize = (float)(screenWidth - 0.1 * (6 - 1)) / 6 - 0.1f;
-
-        panelWin.gameObject.SetActive(false);
-        panelLose.gameObject.SetActive(false);
-
-        if (objectWin != null)
-        {
-            Destroy(objectWin);
-            objectWin = null; 
-        }
-        Transform winPos = gridController.grid[targetRow, targetCol].transform;
-        objectWin = Instantiate(winCellPrefab, winPos.transform.position, Quaternion.identity);
-        objectWin.transform.localScale = new Vector3(cellSize, cellSize, 1);
-        objectWin.transform.SetParent(gridController.grid[targetRow, targetCol].transform);
-
+        SetupWinCell();
         ApplyText.instance.UpdateTitleStage(level.level);
         backgroundController.UpdateRandomArt();
-
         PlayerController.instance.LoadLevel();
-
     }
-    public void FixedUpdate()
-    {
-        CheckWinCondition();
-       
-    }
-    public void CheckWinCondition()
-    {
 
-        if (movementController.GetPos().Item1 == targetRow && movementController.GetPos().Item2 == targetCol 
-            && PlayerController.instance.hitPoint.GetCurrentHealth() > 0) 
-        {
-            if (!hasPlayedWinSound) 
-            {
-                SoundManager.instance.PlaySFX("Stage Clear");
-                hasPlayedWinSound = true; 
-            }
-           SaveGameManager.instance.SaveLevelProgress(LevelManager.instance.GetCurrentLevelData().level, true,true);
-            panelWin.SetActive(true);
-            LevelManager.instance.UnlockNextLevel();
-            LevelManager.instance.ClearObject();
-            Destroy(objectWin, 0.5f);
-            objectWin = null;
-            isEnd = true;
-
-        }
-        else if (movementController.numberOfMoves.GetCurrentMove() <= 0 
-            || PlayerController.instance.hitPoint.GetCurrentHealth()<=0)
-        {
-            if (!hasPlayedLoseSound) // Chỉ phát âm thanh nếu chưa phát
-            {
-                SoundManager.instance.PlaySFX("Stage Failed");
-                hasPlayedLoseSound = true; // Đánh dấu đã phát
-            }
-            panelLose.gameObject.SetActive(true);
-            LevelManager.instance.ClearObject();
-            Destroy(objectWin, 0.5f);
-            objectWin = null;
-            isEnd = true;
-
-        }
-        else
-        {
-            isEnd=false;
-            hasPlayedWinSound = false;
-            hasPlayedLoseSound = false;
-        }
-    }
     public void LoadNextLevel()
     {
         SoundManager.instance.StopSFX();
         LevelManager.instance.LoadNextLevel();
-        Debug.Log(LevelManager.instance.isFinal());
+
         if (LevelManager.instance.isFinal())
         {
             NotiManager.instance.ShowNotificationInGame("Complete all current stages");
-            return;
         }
         else
         {
             LoadLevel();
             isEnd = false;
         }
-
     }
+
     public void ReplayLevel()
     {
-        if (isEnd)
-            return;
-        if (Time.timeScale == 0)
-            return;
-        SoundManager.instance.StopSFX();
-        LoadLevel();
-        isEnd = false;
+        if (isEnd || Time.timeScale == 0) return;
+        ReloadLevel();
     }
+
     public void ReplayLevelWhenEnd()
     {
-        if (Time.timeScale == 0)
-            return;
+        if (Time.timeScale == 0) return;
+        ReloadLevel();
+    }
+
+    private void ReloadLevel()
+    {
         SoundManager.instance.StopSFX();
         LoadLevel();
         isEnd = false;
     }
+
+    private void ResetLevelState()
+    {
+        SoundManager.instance.StopSFX();
+        if (!isMainActive) SoundManager.instance.PlaySFX("Stage Start");
+        panelWin.SetActive(false);
+        panelLose.SetActive(false);
+        if (objectWin != null) Destroy(objectWin);
+    }
+
+    private void SetupWinCell()
+    {
+        Transform winPos = gridController.grid[targetRow, targetCol].transform;
+        float screenWidth = Camera.main.orthographicSize * 2 * Screen.width / Screen.height;
+        float cellSize = (screenWidth - 0.1f * (6 - 1)) / 6 - 0.1f;
+
+        objectWin = Instantiate(winCellPrefab, winPos.position, Quaternion.identity);
+        objectWin.transform.localScale = new Vector3(cellSize, cellSize, 1);
+        objectWin.transform.SetParent(winPos);
+    }
+    #endregion
+
+    #region Game State Checks
+    private void CheckWinCondition()
+    {
+        if (HasPlayerReachedTarget() && PlayerController.instance.hitPoint.GetCurrentHealth() > 0)
+            HandleWin();
+        else if (IsPlayerOutOfMovesOrHealth())
+            HandleLose();
+        else
+            ResetEndState();
+    }
+
+    private bool HasPlayerReachedTarget()
+    {
+        return movementController.GetPos().Item1 == targetRow && movementController.GetPos().Item2 == targetCol;
+    }
+
+    private bool IsPlayerOutOfMovesOrHealth() =>
+        movementController.numberOfMoves.GetCurrentMove() <= 0 ||
+        PlayerController.instance.hitPoint.GetCurrentHealth() <= 0;
+
+    private void HandleWin()
+    {
+        if (!hasPlayedWinSound)
+        {
+            SoundManager.instance.PlaySFX("Stage Clear");
+            hasPlayedWinSound = true;
+        }
+
+        SaveGameManager.instance.SaveLevelProgress(LevelManager.instance.GetCurrentLevelData().level, true, true);
+        panelWin.SetActive(true);
+        LevelManager.instance.UnlockNextLevel();
+        LevelManager.instance.ClearObject();
+        Destroy(objectWin, 0.5f);
+        objectWin = null;
+        isEnd = true;
+    }
+
+    private void HandleLose()
+    {
+        if (!hasPlayedLoseSound)
+        {
+            SoundManager.instance.PlaySFX("Stage Failed");
+            hasPlayedLoseSound = true;
+        }
+
+        panelLose.SetActive(true);
+        LevelManager.instance.ClearObject();
+        Destroy(objectWin, 0.5f);
+        objectWin = null;
+        isEnd = true;
+    }
+
+    private void ResetEndState()
+    {
+        isEnd = false;
+        hasPlayedWinSound = false;
+        hasPlayedLoseSound = false;
+    }
+    #endregion
+
+    #region Game Control
     public void PauseGame()
     {
         StopAllCoroutines();
         Time.timeScale = 0;
     }
+
     public void ResumeGame()
     {
         StopAllCoroutines();
         Time.timeScale = 1;
     }
-    public void PauseGameAfterDelay()
-    {
-        StartCoroutine(PauseGameAfterDelay(1));
-    }
-    public void ResumaGameAfterDelay()
-    {
-        StartCoroutine(ResumeGameAfterDelay(1));
-    }
-    private IEnumerator ResumeGameAfterDelay(float delay)
-    {
-        yield return new WaitForSeconds(delay);
-        ResumeGame();
-    }
-    private IEnumerator PauseGameAfterDelay(float delay)
+
+    public void PauseGameAfterDelay(float delay = 1) => StartCoroutine(PauseGameAfterDelayCoroutine(delay));
+
+    public void ResumeGameAfterDelay(float delay = 1) => StartCoroutine(ResumeGameAfterDelayCoroutine(delay));
+
+    private IEnumerator PauseGameAfterDelayCoroutine(float delay)
     {
         yield return new WaitForSeconds(delay);
         PauseGame();
     }
+
+    private IEnumerator ResumeGameAfterDelayCoroutine(float delay)
+    {
+        yield return new WaitForSeconds(delay);
+        ResumeGame();
+    }
+    #endregion
+
+    public void DisableMain() => isMainActive = false;
 
 
 }

@@ -1,13 +1,13 @@
 ﻿using UnityEngine;
 
-internal class GavvSkill : ISkill
+internal class NigoutoSkill : ISkill
 {
     private int maxSkillAmount;
     private int skillAmount;
     private GridController gridController;
     private int id;
 
-    public GavvSkill(GridController gridController, int skillAmount,int id)
+    public NigoutoSkill(GridController gridController, int skillAmount,int id)
     {
         this.gridController = gridController;
         this.maxSkillAmount = skillAmount;

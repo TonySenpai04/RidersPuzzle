@@ -2,14 +2,14 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class GeatsSkill : ISkill
+public class ItsuiSkill : ISkill
 {
     private int maxSkillAmount;
     private int skillAmount;
     private GridController gridController;
     private int id;
 
-    public GeatsSkill(GridController gridController,int skillAmount, int id)
+    public ItsuiSkill(GridController gridController,int skillAmount, int id)
     {
         this.gridController = gridController;
         this.maxSkillAmount = skillAmount;

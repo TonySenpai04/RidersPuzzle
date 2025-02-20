@@ -17,8 +17,12 @@ public class HeroLibraryController : MonoBehaviour
 
     void Start()
     {
-        int count=HeroManager.instance.heroDatas.Count;
-        for(int i=0;i<count; i++)
+        Init();
+    }
+    public void Init()
+    {
+        int count = HeroManager.instance.heroDatas.Count;
+        for (int i = 0; i < count; i++)
         {
             HeroLibrary hero = Instantiate(HeroLibraryPrefabs, content.transform);
             hero.SetHero(HeroManager.instance.heroDatas[i].id, HeroManager.instance.heroDatas[i].heroImage);
@@ -34,7 +38,7 @@ public class HeroLibraryController : MonoBehaviour
         for (int i = 1; i < 10; i++)
         {
             HeroLibrary hero = Instantiate(HeroLibraryPrefabs, content.transform);
-            hero.SetHero(1002+i,null);
+            hero.SetHero(1000 + i + count, null);
             HeroLibraries.Add(hero);
 
         }
@@ -48,8 +52,7 @@ public class HeroLibraryController : MonoBehaviour
             var heroData = HeroManager.instance.GetHero(hero.Id);
             if (heroData.HasValue && heroData.Value.isUnlock)
             {
-                HeroView.SetHero(heroData.Value.id, heroData.Value.heroImage,
-                    heroData.Value.name,heroData.Value.isUnlock);
+                HeroView.SetHero(heroData.Value.id);
            
             }
             
@@ -57,10 +60,8 @@ public class HeroLibraryController : MonoBehaviour
     }
     public void SetHeroView(int id)
     {
-        var hero = HeroManager.instance.GetHero(id);
-        if (hero == null)
-            return;
-        HeroView.SetHero(id, hero.Value.heroImage, hero.Value.name,hero.Value.isUnlock);
+
+        HeroView.SetHero(id);
         this.HeroView.gameObject.SetActive(true);
         heroParent.gameObject.SetActive(false);
         BackgroundManager.instance.SetHeroBg();

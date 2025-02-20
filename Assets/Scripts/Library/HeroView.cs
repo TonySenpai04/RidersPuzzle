@@ -24,6 +24,7 @@ public class HeroView : MonoBehaviour
     [SerializeField] private TextMeshProUGUI partyTxt;
     [SerializeField] private Button toShop;
     [SerializeField] private Button toParty;
+    [SerializeField] private TextMeshProUGUI storyTxt;
 
     void Start()
     {
@@ -39,18 +40,19 @@ public class HeroView : MonoBehaviour
 
         trigger.triggers.Add(entry);
     }
-    public void SetHero(int id, Sprite heroSprite, string name, bool isUnlock)
+    public void SetHero(int id)
     {
         this.id = id;
         var hero = HeroManager.instance.GetHero(this.id);
         if (hero == null)
             return;
-        this.heroImage.sprite = heroSprite;
-        this.heroTxt.text = $"{id} {name}";
+        this.heroImage.sprite = hero.Value.heroImage;
+        this.heroTxt.text = $"{id} {hero.Value.name}";
         
         this.hpTxt.text = "HP:" + hero.Value.hp;
         this.skillTxt.text = "Skill:" + hero.Value.skillDescription;
-        this.isUnlock=isUnlock;
+        this.isUnlock=hero.Value.isUnlock;
+        storyTxt.text = hero.Value.story;
         if (this.isUnlock)
         {
 

@@ -38,7 +38,7 @@ public class PlayerController : MonoBehaviour
         hitPoint.Heal(currentHero.hp);
         GetComponent<SpriteRenderer>().sprite = currentHero.heroImage;
         movementController.LoadMove();
-        SkillManager.instance.LoadSkill();
+        SkillManager.instance.LoadSkillPVE();
     }
     private void Update()
     {
@@ -59,7 +59,7 @@ public class PlayerController : MonoBehaviour
     private void CheckHPAndPlayMusic()
     {
         float currentHealth = hitPoint.GetCurrentHealth();
-        float maxHealth = hitPoint.GetHealth();
+        float maxHealth = hitPoint.GetMaxHealth();
         float healthPercentage = (currentHealth / maxHealth) * 100;
 
         string newHPState;

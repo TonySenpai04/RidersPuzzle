@@ -7,12 +7,14 @@ using UnityEngine;
 public struct DataHero
 {
     public int id;
+    public int price;
     public string name;
     public int hp;
     public Sprite icon;
     public bool isUnlock;
     public Sprite heroImage;
     public string skillDescription;
+    public string story;
 }
 public class HeroManager : MonoBehaviour
 {

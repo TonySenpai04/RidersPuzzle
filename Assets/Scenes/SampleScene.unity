@@ -2817,12 +2817,12 @@ MonoBehaviour:
       - m_Target: {fileID: 1441612067}
         m_TargetAssemblyTypeName: GameManager, Assembly-CSharp
         m_MethodName: PauseGameAfterDelay
-        m_Mode: 1
+        m_Mode: 4
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
-          m_FloatArgument: 0
+          m_FloatArgument: 1
           m_StringArgument: 
           m_BoolArgument: 1
         m_CallState: 2
@@ -7841,6 +7841,7 @@ MonoBehaviour:
   partyTxt: {fileID: 180917294}
   toShop: {fileID: 609058623}
   toParty: {fileID: 1986695029}
+  storyTxt: {fileID: 906469393}
 --- !u!95 &520706007
 Animator:
   serializedVersion: 5
@@ -10269,7 +10270,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 1170068202}
         m_TargetAssemblyTypeName: SkillManager, Assembly-CSharp
-        m_MethodName: ActiveSkill
+        m_MethodName: ActiveSkillPVE
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -16077,7 +16078,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4e5651435e7eccf4589180a121d253a0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  skillsData: []
   currentIDHero: 1001
   gridController: {fileID: 1200757503}
 --- !u!4 &1170068203
@@ -20433,12 +20433,12 @@ MonoBehaviour:
   targetCol: 4
   panelWin: {fileID: 1573014135}
   panelLose: {fileID: 642365684}
-  movementController: {fileID: 1512594042}
-  winCellPrefab: {fileID: 8206346077416481700, guid: ea7a39dcc99b1384f9b6cfbb40cdc058, type: 3}
-  gridController: {fileID: 1200757503}
-  isEnd: 0
   playZone: {fileID: 252246640}
   stageTxt: {fileID: 1178841095}
+  winCellPrefab: {fileID: 8206346077416481700, guid: ea7a39dcc99b1384f9b6cfbb40cdc058, type: 3}
+  movementController: {fileID: 1512594042}
+  gridController: {fileID: 1200757503}
+  isEnd: 0
   backgroundController: {fileID: 1630870846}
   isMainActive: 1
 --- !u!4 &1441612068
@@ -22654,12 +22654,12 @@ MonoBehaviour:
       - m_Target: {fileID: 1441612067}
         m_TargetAssemblyTypeName: GameManager, Assembly-CSharp
         m_MethodName: PauseGameAfterDelay
-        m_Mode: 1
+        m_Mode: 4
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
-          m_FloatArgument: 0
+          m_FloatArgument: 1
           m_StringArgument: 
           m_BoolArgument: 1
         m_CallState: 2
@@ -23682,12 +23682,14 @@ MonoBehaviour:
   movementController: {fileID: 1512594042}
   currentHero:
     id: 0
+    price: 0
     name: 
     hp: 0
     icon: {fileID: 0}
     isUnlock: 0
     heroImage: {fileID: 0}
     skillDescription: 
+    story: 
   fadeDuration: 1
 --- !u!114 &1653752349
 MonoBehaviour:
@@ -27274,15 +27276,19 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   heroDatas:
   - id: 1001
-    name: GEATS
+    price: 0
+    name: Itsui
     hp: 5
     icon: {fileID: 21300000, guid: d2deced4e423b8d4d89e5959524325e5, type: 3}
     isUnlock: 1
     heroImage: {fileID: 21300000, guid: 87739e5e884bd284180ca5851abadabd, type: 3}
     skillDescription: Delete all objects within a 3x3 square, centered on the character.
       And increases the player's move by 1 move.
+    story: Itsui always says, "Let's start drawing miracles!", but he's better at
+      destroying things than anyone.
   - id: 1002
-    name: BUILD
+    price: 0
+    name: Nigouto
     hp: 7
     icon: {fileID: 21300000, guid: e8aa979cde5c5de4ca1c58800a529172, type: 3}
     isUnlock: 1
@@ -27290,6 +27296,17 @@ MonoBehaviour:
     skillDescription: Absorb all cells in a 3x3 cross shape, centered on the character.
       After that, restore HP corresponding to the number of objects in the absorbed
       cells. Not affected by harmful objects in the absorption cells.
+    story: A man who often jokes around, but still has a strong fighting spirit and
+      is willing to sacrifice for justice.
+  - id: 1003
+    price: 9999
+    name: Skulz
+    hp: 6
+    icon: {fileID: 21300000, guid: 1da4970e07482834db5dc34c080253db, type: 3}
+    isUnlock: 0
+    heroImage: {fileID: 21300000, guid: 6df6b1b0e05455b4788ae6e05c092a1e, type: 3}
+    skillDescription: Restores all HP to the character and increases 2 moves
+    story: A hard-boiled detective who determines to pursue justice to the end.
 --- !u!4 &1904546905
 Transform:
   m_ObjectHideFlags: 0

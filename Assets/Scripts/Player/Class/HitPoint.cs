@@ -22,7 +22,7 @@ public class HitPoint : IHitPoint, IImmortal
         if (currentHealth > health)
             currentHealth = health;
     }
-    public float GetHealth()
+    public float GetMaxHealth()
     {
         return health;
     }
