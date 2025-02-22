@@ -49,8 +49,8 @@ public class HeroView : MonoBehaviour
         this.heroImage.sprite = hero.Value.heroImage;
         this.heroTxt.text = $"{id} {hero.Value.name}";
         
-        this.hpTxt.text = "HP:" + hero.Value.hp;
-        this.skillTxt.text = "Skill:" + hero.Value.skillDescription;
+        this.hpTxt.text =  hero.Value.hp.ToString();
+        ApplyText.instance.UpdateSkillInfoLib(id);
         this.isUnlock=hero.Value.isUnlock;
         storyTxt.text = hero.Value.story;
         if (this.isUnlock)

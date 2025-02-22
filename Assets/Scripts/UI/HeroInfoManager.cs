@@ -30,7 +30,7 @@ public class HeroInfoManager : MonoBehaviour
             DataHero hero = heroManager.heroDatas.FirstOrDefault(h => h.id == id);
             panelInfo.gameObject.SetActive (true);
             txtHealth.text = hero.hp.ToString();
-            ApplyText.instance.UpdateSkillInfo(id);
+            ApplyText.instance.UpdateSkillInfoStage(id);
             //   txtSkill.text = hero.skillDescription;
           //  UpdateArrowPosition(clickedObject);
 

@@ -112,7 +112,7 @@ public class LocalizeController : MonoBehaviour
             var appliers = Object.FindObjectsOfType<MonoBehaviour>().OfType<ILocalizeObject>();
             foreach (var aplier in appliers)
             {
-                aplier.ApplyText(ref this.richText, ref this.localizedTexts);
+                aplier.ApplyText1(ref this.richText, ref this.localizedTexts);
                 aplier.ApplyFont(ref this.localizedFonts);
             }
         }
@@ -126,7 +126,7 @@ public class LocalizeController : MonoBehaviour
         var appliers = Object.FindObjectsOfType<MonoBehaviour>().OfType<ILocalizeObject>();
         foreach (var aplier in appliers)
         {
-            aplier.ApplyText(ref this.richText, ref this.localizedTexts);
+            aplier.ApplyText1(ref this.richText, ref this.localizedTexts);
             aplier.ApplyFont(ref this.localizedFonts);
         }
     }

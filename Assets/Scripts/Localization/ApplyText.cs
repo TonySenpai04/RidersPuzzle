@@ -17,7 +17,7 @@ public class ApplyText : MonoBehaviour, ILocalizeObject
     [SerializeField] private TMP_Text hp_hero_1002;
     [SerializeField] private TMP_Text skill_info_hero_stage;
     [SerializeField] private TMP_Text skill_info_hero_onstage;
-    [SerializeField] private TMP_Text button_skill;
+    [SerializeField] private TMP_Text[] button_skill;
     [SerializeField] private TMP_Text button_replay;
     [SerializeField] private TMP_Text title_setting;
     [SerializeField] private TMP_Text setting_sound;
@@ -37,136 +37,91 @@ public class ApplyText : MonoBehaviour, ILocalizeObject
     [SerializeField] private TMP_Text button_yes;
     [SerializeField] private TMP_Text button_no;
     [SerializeField] private TMP_Text[] button_ok;
-
+    [SerializeField] private TMP_Text skill_info_hero_lib;
     public static ApplyText instance;
-    private void Awake()
-    {
-        instance = this;
-    }
-    public void UpdateSkillInfoOnStage(int heroId)
-    {
-        var localizedRichText = LocalizeController.instance.GetLocalizedRichText();
-        var localizedTexts = LocalizeController.instance.GetLocalizedTexts();
 
-        // Tạo key từ heroId
-        string skillInfoKey = $"skill_info_hero_{heroId}";
+    private void Awake() => instance = this;
+    public void UpdateSkillInfo(int heroId, TMP_Text targetText)
+    {
+        var richText = LocalizeController.instance.GetLocalizedRichText();
+        var plainText = LocalizeController.instance.GetLocalizedTexts();
+        string key = $"skill_info_hero_{heroId}";
 
-        // Kiểm tra và cập nhật thông tin kỹ năng
-        if (localizedRichText.ContainsKey(skillInfoKey) && localizedTexts.ContainsKey(skillInfoKey))
-        {
-            skill_info_hero_onstage.SetText(localizedRichText[skillInfoKey] + localizedTexts[skillInfoKey]);
-        }
+        if (richText.ContainsKey(key) && plainText.ContainsKey(key))
+            targetText.SetText($"{richText[key]}{plainText[key]}");
         else
-        {
-            Debug.LogWarning($"Không tìm thấy thông tin kỹ năng cho hero ID {heroId}.");
-            skill_info_hero_onstage.SetText("Thông tin kỹ năng không khả dụng.");
-        }
+            targetText.SetText("Thông tin kỹ năng không khả dụng.");
     }
-    public void UpdateSkillInfo(int heroId)
-    {
-        var localizedRichText = LocalizeController.instance.GetLocalizedRichText();
-        var localizedTexts = LocalizeController.instance.GetLocalizedTexts();
 
-        // Tạo key từ heroId
-        string skillInfoKey = $"skill_info_hero_{heroId}";
+    public void UpdateSkillInfoOnStage(int heroId) => UpdateSkillInfo(heroId, skill_info_hero_onstage);
+    public void UpdateSkillInfoStage(int heroId) => UpdateSkillInfo(heroId, skill_info_hero_stage);
+    public void UpdateSkillInfoLib(int heroId) => UpdateSkillInfo(heroId, skill_info_hero_lib);
 
-        // Kiểm tra và cập nhật thông tin kỹ năng
-        if (localizedRichText.ContainsKey(skillInfoKey) && localizedTexts.ContainsKey(skillInfoKey))
-        {
-            skill_info_hero_stage.SetText(localizedRichText[skillInfoKey] + localizedTexts[skillInfoKey]);
-        }
-        else
-        {
-            Debug.LogWarning($"Không tìm thấy thông tin kỹ năng cho hero ID {heroId}.");
-            skill_info_hero_stage.SetText("Thông tin kỹ năng không khả dụng.");
-        }
-    }
     public void UpdateTitleStage(int level)
     {
         var localizedRichText = LocalizeController.instance.GetLocalizedRichText();
         var localizedTexts = LocalizeController.instance.GetLocalizedTexts();
         if (localizedRichText.ContainsKey("title_stage") && localizedTexts.ContainsKey("title_stage"))
         {
-            this.title_stage.SetText(localizedRichText["title_stage"] + localizedTexts["title_stage"] + " "+level);
-        }
-        
-
-    }
-
-    void ILocalizeObject.ApplyText(ref Dictionary<string, string> localizedRichText, ref Dictionary<string, string> localizedTexts)
-    {
-        this.loading.SetText(localizedRichText["loading"] + localizedTexts["loading"]);
-        this.button_start.SetText(localizedRichText["button_start"] + localizedTexts["button_start"]);
-        this.title_stage.SetText(localizedRichText["title_stage"] + localizedTexts["title_stage"]);
-        this.title_choose_a_stage.SetText(localizedRichText["title_choose_a_stage"] + localizedTexts["title_choose_a_stage"]);
-        this.warning_not_unlocked.SetText(localizedRichText["warning_not_unlocked"] + localizedTexts["warning_not_unlocked"]);
-        this.warning_coming_soon.SetText(localizedRichText["warning_coming_soon"] + localizedTexts["warning_coming_soon"]);
-        this.guide_game_rule.SetText(localizedRichText["guide_game_rule"] + localizedTexts["guide_game_rule"]);
-        this.title_rider_information.SetText(localizedRichText["title_rider_information"] + localizedTexts["title_rider_information"]);
-        this.hp_hero_1001.SetText(localizedRichText["hp_hero_1001"] + localizedTexts["hp_hero_1001"]);
-        this.hp_hero_1002.SetText(localizedRichText["hp_hero_1002"] + localizedTexts["hp_hero_1002"]);
-        this.skill_info_hero_stage.SetText(localizedRichText["skill_info_hero_1001"] + localizedTexts["skill_info_hero_1001"]);
-        this.skill_info_hero_onstage.SetText(localizedRichText["skill_info_hero_1002"] + localizedTexts["skill_info_hero_1002"]);
-        this.button_skill.SetText(localizedRichText["button_skill"] + localizedTexts["button_skill"]);
-        this.button_replay.SetText(localizedRichText["button_replay"] + localizedTexts["button_replay"]);
-        this.title_setting.SetText(localizedRichText["title_setting"] + localizedTexts["title_setting"]);
-        this.setting_sound.SetText(localizedRichText["setting_sound"] + localizedTexts["setting_sound"]);
-        this.setting_sound_on.SetText(localizedRichText["setting_sound_on"] + localizedTexts["setting_sound_on"]);
-        this.setting_sound_off.SetText(localizedRichText["setting_sound_off"] + localizedTexts["setting_sound_off"]);
-        this.setting_language.SetText(localizedRichText["setting_language"] + localizedTexts["setting_language"]);
-        this.setting_language_1.SetText(localizedRichText["setting_language_1"] + localizedTexts["setting_language_1"]);
-        this.setting_language_2.SetText(localizedRichText["setting_language_2"] + localizedTexts["setting_language_2"]);
-        this.setting_privacy_policy.SetText(localizedRichText["setting_privacy_policy"] + localizedTexts["setting_privacy_policy"]);
-        foreach (var buttonview in button_view)
-        {
-            buttonview.SetText(localizedRichText["button_view"] + localizedTexts["button_view"]);
-        }
-        this.setting_term_of_condition.SetText(localizedRichText["setting_term_of_condition"] + localizedTexts["setting_term_of_condition"]);
-        this.setting_credit.SetText(localizedRichText["setting_credit"] + localizedTexts["setting_credit"]);
-        this.title_notification.SetText(localizedRichText["title_notification"] + localizedTexts["title_notification"]);
-        this.popup_detail_quit.SetText(localizedRichText["popup_detail_quit"] + localizedTexts["popup_detail_quit"]);
-        this.popup_detail_language_change.SetText(localizedRichText["popup_detail_language_change"] + localizedTexts["popup_detail_language_change"]);
-        this.popup_detail_credit.SetText(localizedRichText["popup_detail_credit"] + localizedTexts["popup_detail_credit"]);
-        this.button_yes.SetText(localizedRichText["button_yes"] + localizedTexts["button_yes"]);
-        this.button_no.SetText(localizedRichText["button_no"] + localizedTexts["button_no"]);
-        foreach (var buttonok in button_ok)
-        {
-            buttonok.SetText(localizedRichText["button_ok"] + localizedTexts["button_ok"]);
+            this.title_stage.SetText(localizedRichText["title_stage"] + localizedTexts["title_stage"] + " " + level);
         }
     }
 
-    void ILocalizeObject.ApplyFont(ref Dictionary<string, TMP_FontAsset> localizedFonts)
+    public void ApplyText1(ref Dictionary<string, string> localizedRichText, ref Dictionary<string, string> localizedTexts)
     {
-        this.loading.font = localizedFonts["loading"];
-        this.loading.font = localizedFonts["button_start"];
-        this.loading.font = localizedFonts["title_choose_a_stage"];
-        this.loading.font = localizedFonts["warning_not_unlocked"];
-        this.loading.font = localizedFonts["warning_coming_soon"];
-        this.loading.font = localizedFonts["title_stage"];
-        this.loading.font = localizedFonts["guide_game_rule"];
-        this.loading.font = localizedFonts["title_rider_information"];
-        this.loading.font = localizedFonts["hp_hero_1001"];
-        this.loading.font = localizedFonts["hp_hero_1002"];
-        this.loading.font = localizedFonts["skill_info_hero_1001"];
-        this.loading.font = localizedFonts["skill_info_hero_1002"];
-        this.loading.font = localizedFonts["button_skill"];
-        this.loading.font = localizedFonts["button_replay"];
-        this.loading.font = localizedFonts["title_setting"];
-        this.loading.font = localizedFonts["setting_sound"];
-        this.loading.font = localizedFonts["setting_sound_on"];
-        this.loading.font = localizedFonts["setting_sound_off"];
-        this.loading.font = localizedFonts["setting_language"];
-        this.loading.font = localizedFonts["setting_language_1"];
-        this.loading.font = localizedFonts["setting_language_2"];
-        this.loading.font = localizedFonts["setting_privacy_policy"];
-        this.loading.font = localizedFonts["setting_term_of_condition"];
-        this.loading.font = localizedFonts["setting_credit"];
-        this.loading.font = localizedFonts["title_notification"];
-        this.loading.font = localizedFonts["popup_detail_quit"];
-        this.loading.font = localizedFonts["popup_detail_language_change"];
-        this.loading.font = localizedFonts["popup_detail_credit"];
-        this.loading.font = localizedFonts["button_yes"];
-        this.loading.font = localizedFonts["button_no"];
-        this.loading.font = localizedFonts["button_ok"];
+        var textLocalizer = new TextLocalizer(localizedRichText, localizedTexts);
+
+        textLocalizer.SetLocalizedText("loading", loading);
+        textLocalizer.SetLocalizedText("button_start", button_start);
+        textLocalizer.SetLocalizedText("title_stage", title_stage);
+        textLocalizer.SetLocalizedText("title_choose_a_stage", title_choose_a_stage);
+        textLocalizer.SetLocalizedText("warning_not_unlocked", warning_not_unlocked);
+        textLocalizer.SetLocalizedText("warning_coming_soon", warning_coming_soon);
+        textLocalizer.SetLocalizedText("guide_game_rule", guide_game_rule);
+        textLocalizer.SetLocalizedText("title_rider_information", title_rider_information);
+        textLocalizer.SetLocalizedText("hp_hero_1001", hp_hero_1001);
+        textLocalizer.SetLocalizedText("hp_hero_1002", hp_hero_1002);
+        textLocalizer.SetLocalizedText("skill_info_hero_1001", skill_info_hero_stage);
+        textLocalizer.SetLocalizedText("skill_info_hero_1002", skill_info_hero_onstage);
+        textLocalizer.SetLocalizedText("button_skill", button_skill);
+        textLocalizer.SetLocalizedText("button_replay", button_replay);
+        textLocalizer.SetLocalizedText("title_setting", title_setting);
+        textLocalizer.SetLocalizedText("setting_sound", setting_sound);
+        textLocalizer.SetLocalizedText("setting_language", setting_language);
+        textLocalizer.SetLocalizedText("setting_privacy_policy", setting_privacy_policy);
+        textLocalizer.SetLocalizedText("setting_credit", setting_credit);
+        textLocalizer.SetLocalizedText("title_notification", title_notification);
+        textLocalizer.SetLocalizedText("popup_detail_quit", popup_detail_quit);
+        textLocalizer.SetLocalizedText("button_yes", button_yes);
+        textLocalizer.SetLocalizedText("button_no", button_no);
+        textLocalizer.SetLocalizedText("setting_language_1", setting_language_1);
+        textLocalizer.SetLocalizedText("setting_language_2", setting_language_2);
+        textLocalizer.SetLocalizedText("setting_sound_on", setting_sound_on);
+        textLocalizer.SetLocalizedText("setting_sound_off", setting_sound_off);
+        textLocalizer.SetLocalizedText("button_view", button_view);
+        textLocalizer.SetLocalizedText("button_ok", button_ok);
+        textLocalizer.SetLocalizedText("title_notification", title_notification);
+    }
+
+    public void ApplyFont(ref Dictionary<string, TMP_FontAsset> localizedFonts)
+    {
+        var fontLocalizer = new FontLocalizer(localizedFonts);
+        TMP_Text[] allTexts =
+        {
+            loading, button_start, title_stage, title_choose_a_stage, warning_not_unlocked, warning_coming_soon,
+            guide_game_rule, title_rider_information, hp_hero_1001, hp_hero_1002, skill_info_hero_stage,
+            skill_info_hero_onstage, skill_info_hero_lib, button_replay, title_setting,
+            setting_sound, setting_sound_on, setting_sound_off, setting_language, setting_language_1,
+            setting_language_2, setting_privacy_policy, setting_term_of_condition, setting_credit,
+            title_notification, popup_detail_quit, popup_detail_language_change, popup_detail_credit,
+            button_yes, button_no
+        };
+
+        foreach (var text in allTexts)
+            fontLocalizer.SetLocalizedFont(text.name, text);
+
+        fontLocalizer.SetLocalizedFont("button_view", button_view);
+        fontLocalizer.SetLocalizedFont("button_ok", button_ok);
+        fontLocalizer.SetLocalizedFont("button_skill", button_skill);
     }
 }

@@ -17,6 +17,7 @@ public class MainScreenController : MonoBehaviour
     }
     public void Transition()
     {
+        gameManager.DisableMain();
         panelTransition.gameObject.SetActive(true);
         SelectZone.SetActive(true);
         mainScreen.SetActive(false);
@@ -35,7 +36,6 @@ public class MainScreenController : MonoBehaviour
     }
     public void HideMainScreen()
     {
-        gameManager.DisableMain();
         panelTransition.gameObject.SetActive(false);
 
     }
