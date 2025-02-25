@@ -51,6 +51,8 @@ public class ApplyText : MonoBehaviour, ILocalizeObject
             targetText.SetText($"{richText[key]}{plainText[key]}");
         else
             targetText.SetText("Thông tin kỹ năng không khả dụng.");
+        if (heroId == 1003)
+            targetText.SetText("Restores all HP to the character and increases 2 moves");
     }
 
     public void UpdateSkillInfoOnStage(int heroId) => UpdateSkillInfo(heroId, skill_info_hero_onstage);
