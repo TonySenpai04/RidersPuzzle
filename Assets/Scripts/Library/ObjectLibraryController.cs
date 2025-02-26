@@ -33,7 +33,7 @@ public class ObjectLibraryController : MonoBehaviour
 
         }
 
-        objectSeenTxt.text = "Seen:"+HiddenObjectManager.instance.GetSeenObject().Count ;
+        objectSeenTxt.text = HiddenObjectManager.instance.GetSeenObject().Count.ToString() ;
         UpdateSeenOject();
     }
     private void OnEnable()
@@ -67,5 +67,6 @@ public class ObjectLibraryController : MonoBehaviour
         this.obejctView.gameObject.SetActive(true);
         objectParent.gameObject.SetActive(false);
         BackgroundManager.instance.SetObjectBg(id);
+        ApplyText.instance.UpdateObjectInfo(id);
     }
 }

@@ -19,7 +19,7 @@ public class LanguageSetting : MonoBehaviour
     }
     public void LoadLanguage()
     {
-        currentLanguage = LocalizeController.instance.GetCurrentLangaue();
+        currentLanguage = LocalizationManager.instance.GetCurrentLangaue();
         if (currentLanguage == 3)
         {
             eng.isOn = true;
@@ -31,6 +31,7 @@ public class LanguageSetting : MonoBehaviour
             vn.isOn = true;
         }
     }
+
     private void EngToggleOnChanged(bool isOn)
     {
         if (isOn)
@@ -54,7 +55,7 @@ public class LanguageSetting : MonoBehaviour
     }
     public void SetLangaue()
     {
-        LocalizeController.instance.ChangeLanguage(temp);
+        LocalizationManager.instance.ChangeLanguage(temp);
         Application.Quit();
 
     }

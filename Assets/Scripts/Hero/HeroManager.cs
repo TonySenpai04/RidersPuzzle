@@ -33,6 +33,9 @@ public class HeroManager : MonoBehaviour
         int unlockedCount = heroDatas.Count(hero => hero.isUnlock);
         return unlockedCount;
     }
-
+    public List<DataHero> GetUnlockHero()
+    {
+        return heroDatas.Where(h=>h.isUnlock).ToList();
+    }
 
 }

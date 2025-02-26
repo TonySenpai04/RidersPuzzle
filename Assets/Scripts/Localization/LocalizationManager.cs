@@ -1,81 +1,116 @@
 ﻿using System.Collections.Generic;
 using System.IO;
+using TMPro;
 using UnityEngine;
 
 public class LocalizationManager : MonoBehaviour
 {
-    public static LocalizationManager Instance { get; private set; }
-
-    private Dictionary<string, string> localizedText;
-    private string currentLanguage = "vi"; // Mặc định là tiếng Việt
-
-    private void Awake()
+    public string languagePath => Path.Combine(Application.persistentDataPath, "Language.json");
+    public static LocalizationManager instance;
+    private Dictionary<string, string> localizedTexts;
+    private Dictionary<string, TMP_FontAsset> localizedFonts;
+    [SerializeField] private TextAsset riderAsset;
+    [SerializeField] private TextAsset objectAsset;
+    [SerializeField] private TextAsset commonAsset;
+    [SerializeField] private ApplyText applyTextScript;
+    private Dictionary<string, string> richText;
+    private int currentLanguage;
+    private IReadDataLocalize readCSVLocalizeRider;
+    private IReadDataLocalize readCSVLocalizeObject;
+    private IReadDataLocalize readCSVLocalizeCommon;
+    void Awake()
     {
-        if (Instance == null)
+        instance = this;
+        InitData();
+        LoadData();
+
+    }
+    public void InitData()
+    {
+        localizedTexts = new Dictionary<string, string>();
+        localizedFonts = new Dictionary<string, TMP_FontAsset>();
+        this.richText = new Dictionary<string, string>();
+
+        readCSVLocalizeRider = new ReadCSVLocalizeRider();
+        readCSVLocalizeObject = new ReadCSVLocalizeObject();
+        readCSVLocalizeCommon = new ReadCSVLocalizeCommon();
+    }
+
+    public void LoadData()
+    {
+
+
+        LoadLanguage();
+        LoadLocalization();
+        ApplyLocalizedTexts();
+    }
+    public int GetCurrentLangaue()
+    {
+        return currentLanguage;
+    }
+
+    void LoadLocalization()
+    {
+        readCSVLocalizeRider.LoadLocalization(currentLanguage,localizedTexts, localizedFonts,riderAsset,richText);
+       readCSVLocalizeObject.LoadLocalization(currentLanguage, localizedTexts, localizedFonts, objectAsset, richText);
+        readCSVLocalizeCommon.LoadLocalization(currentLanguage, localizedTexts, localizedFonts, commonAsset, richText);
+        foreach (var text in localizedTexts)
         {
-            Instance = this;
-            DontDestroyOnLoad(gameObject);
+            Debug.Log(text.Key + "-" + text.Value);
+        }
+
+    }
+
+    void ApplyLocalizedTexts()
+    {
+        if (applyTextScript != null)
+        {
+            applyTextScript.ApplyText1(ref  richText, ref this.localizedTexts);
+            applyTextScript.ApplyFont(ref localizedFonts);
+        }
+    }
+
+    public string GetLocalizedText(string key)
+    {
+        return localizedTexts.ContainsKey(key) ? localizedTexts[key] : key;
+    }
+
+    public TMP_FontAsset GetLocalizedFont(string key)
+    {
+        return localizedFonts.ContainsKey(key) ? localizedFonts[key] : null;
+    }
+    public Dictionary<string, string> GetLocalizedRichText() => richText;
+
+    public Dictionary<string, string> GetLocalizedTexts() => localizedTexts;
+    public void SaveLanguage()
+    {
+        var data = new LanguageData { languageCode = currentLanguage };
+        string json = JsonUtility.ToJson(data);
+        File.WriteAllText(languagePath, json);
+
+    }
+    public void LoadLanguage()
+    {
+        if (File.Exists(languagePath))
+        {
+            string json = File.ReadAllText(languagePath);
+            var language = JsonUtility.FromJson<LanguageData>(json);
+            this.currentLanguage = language.languageCode;
         }
         else
         {
-            Destroy(gameObject);
-        }
-
-        LoadLocalizationData();
-    }
-
-    private void LoadLocalizationData()
-    {
-        localizedText = new Dictionary<string, string>();
-
-        // Đường dẫn file CSV trong Resources
-        TextAsset csvFile = Resources.Load<TextAsset>($"Localization/Localize");
-        if (csvFile == null)
-        {
-            Debug.LogError("Localization file not found!");
-            return;
-        }
-
-        // Đọc từng dòng trong CSV
-        using (StringReader reader = new StringReader(csvFile.text))
-        {
-            string line;
-            bool isHeader = true;
-
-            while ((line = reader.ReadLine()) != null)
-            {
-                // Bỏ qua header
-                if (isHeader)
-                {
-                    isHeader = false;
-                    continue;
-                }
-
-                string[] entries = line.Split(';');
-                if (entries.Length >= 5) // Đảm bảo đúng cấu trúc
-                {
-                    string key = entries[1]; // Key
-                    string languageText = currentLanguage == "vi" ? entries[4] : entries[3]; // Chọn ngôn ngữ
-                    localizedText[key] = languageText;
-                }
-            }
+            currentLanguage = 3;
         }
     }
-
-    public string GetLocalizedValue(string key)
+    public void ChangeLanguage(int languageCode)
     {
-        if (localizedText.TryGetValue(key, out string value))
-        {
-            return value;
-        }
-
-        Debug.LogWarning($"Key {key} not found in localization data.");
-        return key;
+        this.currentLanguage = languageCode;
+        SaveLanguage();
+        // LoadLanguage((Language)(languageCode));
     }
-
-    public void SetLanguage(string language)
+    public enum Language
     {
-        currentLanguage = language;
-        LoadLocalizationData();
+        English = 3,
+        Vietnamese = 5
     }
 }

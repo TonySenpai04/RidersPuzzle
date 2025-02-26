@@ -30,29 +30,126 @@ public class ApplyText : MonoBehaviour, ILocalizeObject
     [SerializeField] private TMP_Text[] button_view;
     [SerializeField] private TMP_Text setting_term_of_condition;
     [SerializeField] private TMP_Text setting_credit;
-    [SerializeField] private TMP_Text title_notification;
+    [SerializeField] private TMP_Text[] title_notification;
     [SerializeField] private TMP_Text popup_detail_quit;
     [SerializeField] private TMP_Text popup_detail_language_change;
     [SerializeField] private TMP_Text popup_detail_credit;
-    [SerializeField] private TMP_Text button_yes;
-    [SerializeField] private TMP_Text button_no;
+    [SerializeField] private TMP_Text[] button_yes;
+    [SerializeField] private TMP_Text[] button_no;
     [SerializeField] private TMP_Text[] button_ok;
     [SerializeField] private TMP_Text skill_info_hero_lib;
+    [Header("Object")]
+    [SerializeField] private TMP_Text objectName;
+    [SerializeField] private TMP_Text objectStory;
+    [SerializeField] private TMP_Text objectBattle;
+    [SerializeField] private TMP_Text libraryObjectStory;
+    [SerializeField] private TMP_Text libraryObjectBattleInfor;
+    [Header("Rider")]
+    [SerializeField] private TMP_Text riderNameLib;
+    [SerializeField] private TMP_Text riderStory;
+    [SerializeField] private TMP_Text riderWeight;
+    [SerializeField] private TMP_Text riderHeight;
+    [SerializeField] private TMP_Text riderPunch;
+    [SerializeField] private TMP_Text riderKick;
+    [Header("Lib")]
+    [SerializeField] private TMP_Text libraryFeatureName;
+    [SerializeField] private TMP_Text libraryButtonTutorial;
+    [SerializeField] private TMP_Text libraryRiderSectionTitle;
+    [SerializeField] private TMP_Text libraryObjectSectionTitle;
+    [SerializeField] private TMP_Text libraryRiderTitle;
+    [SerializeField] private TMP_Text libraryObjectTitle;
+    [SerializeField] private TMP_Text libraryRiderAmount;
+    [SerializeField] private TMP_Text libraryObjectAmount;
+    [SerializeField] private TMP_Text libraryRiderStory;
+    [SerializeField] private TMP_Text libraryRiderBattleInfor;
+    [SerializeField] private TMP_Text libraryRiderForm;
+    [SerializeField] private TMP_Text libraryRiderWeight;
+    [SerializeField] private TMP_Text libraryRiderHeight;
+    [SerializeField] private TMP_Text libraryRiderPunchPower;
+    [SerializeField] private TMP_Text libraryRiderKickPower;
+    [Header("Toturial")]
+    [SerializeField] private TMP_Text tutorial_how_to_win;
+    [SerializeField] private TMP_Text tutorial_how_to_win_explain;
+    [SerializeField] private TMP_Text tutorial_how_to_move;
+    [SerializeField] private TMP_Text tutorial_how_to_move_explain;
+    [SerializeField] private TMP_Text tutorial_use_skill;
+    [SerializeField] private TMP_Text tutorial_use_skill_explain;
+    [SerializeField] private TMP_Text tutorial_replay;
+    [SerializeField] private TMP_Text tutorial_replay_explain;
+
     public static ApplyText instance;
 
     private void Awake() => instance = this;
-    public void UpdateSkillInfo(int heroId, TMP_Text targetText)
+    private void Start()
     {
-        var richText = LocalizeController.instance.GetLocalizedRichText();
-        var plainText = LocalizeController.instance.GetLocalizedTexts();
-        string key = $"skill_info_hero_{heroId}";
-
+        UpdateLibInfo();
+        UpdateToturialInfo();
+    }
+    private void SetInfo(string key, TMP_Text targetText, Dictionary<string, string> richText, Dictionary<string, string> plainText)
+    {
         if (richText.ContainsKey(key) && plainText.ContainsKey(key))
-            targetText.SetText($"{richText[key]}{plainText[key]}");
+            targetText.SetText(plainText[key]);
         else
             targetText.SetText("Thông tin kỹ năng không khả dụng.");
-        if (heroId == 1003)
-            targetText.SetText("Restores all HP to the character and increases 2 moves");
+    }
+    public void UpdateLibInfo()
+    {
+        var richText = LocalizationManager.instance.GetLocalizedRichText();
+        var plainText = LocalizationManager.instance.GetLocalizedTexts();
+        SetInfo("library_feature_name", libraryFeatureName, richText, plainText);
+        SetInfo("library_button_tutorial", libraryButtonTutorial, richText, plainText);
+        SetInfo("library_rider_section_title", libraryRiderSectionTitle, richText, plainText);
+        SetInfo("library_object_section_title", libraryObjectSectionTitle, richText, plainText);
+        SetInfo("library_rider_section_title", libraryRiderTitle, richText, plainText);
+        SetInfo("library_object_section_title", libraryObjectTitle, richText, plainText);
+        SetInfo("library_rider_amount", libraryRiderAmount, richText, plainText );
+        SetInfo("library_object_amount", libraryObjectAmount, richText, plainText);
+        SetInfo("library_rider_story", libraryRiderStory, richText, plainText);
+        SetInfo("library_rider_battle infor", libraryRiderBattleInfor, richText, plainText);
+        SetInfo("library_rider_story", libraryObjectStory, richText, plainText);
+        SetInfo("library_rider_battle infor", libraryObjectBattleInfor, richText, plainText);
+        SetInfo("library_rider_form", libraryRiderForm, richText, plainText);
+        SetInfo("library_rider_weight", libraryRiderWeight, richText, plainText);
+        SetInfo("library_rider_height", libraryRiderHeight, richText, plainText);
+        SetInfo("library_rider_punch_power", libraryRiderPunchPower, richText, plainText);
+        SetInfo("library_rider_kick_power", libraryRiderKickPower, richText, plainText);
+
+
+    }
+    public void UpdateToturialInfo()
+    {
+        var richText = LocalizationManager.instance.GetLocalizedRichText();
+        var plainText = LocalizationManager.instance.GetLocalizedTexts();
+        SetInfo("tutorial_how_to_win", tutorial_how_to_win, richText, plainText);
+        SetInfo("tutorial_how_to_win_explain", tutorial_how_to_win_explain, richText, plainText);
+        SetInfo("tutorial_how_to_move", tutorial_how_to_move, richText, plainText);
+        SetInfo("tutorial_how_to_move_explain", tutorial_how_to_move_explain, richText, plainText);
+        SetInfo("tutorial_use_skill", tutorial_use_skill, richText, plainText);
+        SetInfo("tutorial_use_skill_explain", tutorial_use_skill_explain, richText, plainText);
+        SetInfo("tutorial_replay", tutorial_replay, richText, plainText);
+        SetInfo("tutorial_replay_explain", tutorial_replay_explain, richText, plainText);
+
+    }
+    public void UpdateSkillInfo(int heroId, TMP_Text targetText)
+    {
+        var richText = LocalizationManager.instance.GetLocalizedRichText();
+        var plainText = LocalizationManager.instance.GetLocalizedTexts();
+
+        SetInfo($"skill_info_hero_{heroId}", targetText, richText, plainText);
+        SetInfo($"hero_story_{heroId}", riderStory, richText, plainText);
+        SetInfo($"hero_weight_{heroId}", riderWeight, richText,plainText);
+        SetInfo($"hero_height_{heroId}", riderHeight, richText, plainText);
+        SetInfo($"hero_punch_{heroId}", riderPunch, richText, plainText);
+        SetInfo($"hero_kick_{heroId}", riderKick, richText, plainText);
+    }
+    public void UpdateObjectInfo(int objectId)
+    {
+        var richText = LocalizationManager.instance.GetLocalizedRichText();
+        var plainText = LocalizationManager.instance.GetLocalizedTexts();
+        SetInfo($"object_name_{objectId}", objectName, richText, plainText);
+        SetInfo($"object_story_{objectId}", objectStory, richText, plainText);
+        SetInfo($"object_battle_info_{objectId}", objectBattle, richText, plainText);
+
     }
 
     public void UpdateSkillInfoOnStage(int heroId) => UpdateSkillInfo(heroId, skill_info_hero_onstage);
@@ -61,11 +158,12 @@ public class ApplyText : MonoBehaviour, ILocalizeObject
 
     public void UpdateTitleStage(int level)
     {
-        var localizedRichText = LocalizeController.instance.GetLocalizedRichText();
-        var localizedTexts = LocalizeController.instance.GetLocalizedTexts();
-        if (localizedRichText.ContainsKey("title_stage") && localizedTexts.ContainsKey("title_stage"))
+        var localizedRichText = LocalizationManager.instance.GetLocalizedRichText();
+        var localizedTexts = LocalizationManager.instance.GetLocalizedTexts();
+  
+        if ( localizedTexts.ContainsKey("title_stage"))
         {
-            this.title_stage.SetText(localizedRichText["title_stage"] + localizedTexts["title_stage"] + " " + level);
+            this.title_stage.SetText( localizedTexts["title_stage"] + " " + level);
         }
     }
 
@@ -103,6 +201,7 @@ public class ApplyText : MonoBehaviour, ILocalizeObject
         textLocalizer.SetLocalizedText("button_view", button_view);
         textLocalizer.SetLocalizedText("button_ok", button_ok);
         textLocalizer.SetLocalizedText("title_notification", title_notification);
+        textLocalizer.SetLocalizedText("popup_detail_language_change", popup_detail_language_change);
     }
 
     public void ApplyFont(ref Dictionary<string, TMP_FontAsset> localizedFonts)
@@ -114,9 +213,9 @@ public class ApplyText : MonoBehaviour, ILocalizeObject
             guide_game_rule, title_rider_information, hp_hero_1001, hp_hero_1002, skill_info_hero_stage,
             skill_info_hero_onstage, skill_info_hero_lib, button_replay, title_setting,
             setting_sound, setting_sound_on, setting_sound_off, setting_language, setting_language_1,
-            setting_language_2, setting_privacy_policy, setting_term_of_condition, setting_credit,
-            title_notification, popup_detail_quit, popup_detail_language_change, popup_detail_credit,
-            button_yes, button_no
+            setting_language_2, setting_privacy_policy, setting_term_of_condition, setting_credit
+           , popup_detail_quit, popup_detail_language_change, popup_detail_credit,
+         
         };
 
         foreach (var text in allTexts)
@@ -124,6 +223,9 @@ public class ApplyText : MonoBehaviour, ILocalizeObject
 
         fontLocalizer.SetLocalizedFont("button_view", button_view);
         fontLocalizer.SetLocalizedFont("button_ok", button_ok);
+        fontLocalizer.SetLocalizedFont("button_no", button_no);
+        fontLocalizer.SetLocalizedFont("button_yes", button_yes);
         fontLocalizer.SetLocalizedFont("button_skill", button_skill);
+        fontLocalizer.SetLocalizedFont("title_notification", title_notification);
     }
 }

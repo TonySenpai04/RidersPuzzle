@@ -15,7 +15,7 @@ internal class TextLocalizer:ITextLocalizer
     public void SetLocalizedText(string key, TMP_Text text)
     {
         if (_richText.ContainsKey(key) && _plainText.ContainsKey(key))
-            text.SetText(_richText[key] + _plainText[key]);
+            text.SetText(_plainText[key]);
         else
             text.SetText("Thông tin không khả dụng.");
     }

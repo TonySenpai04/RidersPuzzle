@@ -42,11 +42,11 @@ public class HeroLibraryController : MonoBehaviour
             HeroLibraries.Add(hero);
 
         }
-        heroOwnerTxt.text = "Owned:" + HeroManager.instance.HeroOwnedQuantity() + "/" + heroLibraries.Count;
+        heroOwnerTxt.text = HeroManager.instance.HeroOwnedQuantity() + "/" + heroLibraries.Count;
     }
     private void OnEnable()
     {
-        heroOwnerTxt.text ="Owned:"+HeroManager.instance.HeroOwnedQuantity() + "/" + heroLibraries.Count;
+        heroOwnerTxt.text =HeroManager.instance.HeroOwnedQuantity() + "/" + heroLibraries.Count;
         foreach (var hero in HeroLibraries)
         {
             var heroData = HeroManager.instance.GetHero(hero.Id);
@@ -65,6 +65,7 @@ public class HeroLibraryController : MonoBehaviour
         this.HeroView.gameObject.SetActive(true);
         heroParent.gameObject.SetActive(false);
         BackgroundManager.instance.SetHeroBg();
+       
     }
     // Update is called once per frame
     void Update()

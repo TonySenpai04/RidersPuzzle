@@ -25,10 +25,18 @@ public class HeroView : MonoBehaviour
     [SerializeField] private Button toShop;
     [SerializeField] private Button toParty;
     [SerializeField] private TextMeshProUGUI storyTxt;
-
+    [SerializeField] private List<DataHero> onwedHero;
+    [SerializeField] private int currentIndex;
+    private ISwipeDetector swipeDetector;
     void Start()
     {
         PlaySoundHero();
+        onwedHero = HeroManager.instance.GetUnlockHero();
+        swipeDetector = new SwipeDetector(NextHero, PreviousHero);
+    }
+    private void Update()
+    {
+        swipeDetector.DetectSwipe();
     }
     public void PlaySoundHero()
     {
@@ -52,7 +60,7 @@ public class HeroView : MonoBehaviour
         this.hpTxt.text =  hero.Value.hp.ToString();
         ApplyText.instance.UpdateSkillInfoLib(id);
         this.isUnlock=hero.Value.isUnlock;
-        storyTxt.text = hero.Value.story;
+        currentIndex = onwedHero.FindIndex(o => o.id == id);
         if (this.isUnlock)
         {
 
@@ -79,6 +87,11 @@ public class HeroView : MonoBehaviour
 
         }
     }
+    private void OnEnable()
+    {
+        onwedHero.Clear();
+        onwedHero = HeroManager.instance.GetUnlockHero();
+    }
     public void ToParty()
     {
         this.gameObject.SetActive(false);
@@ -88,5 +101,31 @@ public class HeroView : MonoBehaviour
         FooterController.instance.SelectButton("map");
         stageHeroController.gameObject.SetActive(true);
         stageHeroController.SetHeroID(this.id);
+    }
+    private void LoadObject(int index)
+    {
+        if (index >= 0 && index < onwedHero.Count)
+        {
+            DataHero obj = onwedHero[index];
+            SetHero(obj.id);
+
+
+        }
+    }
+    public void NextHero()
+    {
+        if (currentIndex < onwedHero.Count - 1)
+        {
+            currentIndex++;
+            LoadObject(currentIndex);
+        }
+    }
+    public void PreviousHero()
+    {
+        if (currentIndex > 0)
+        {
+            currentIndex--;
+            LoadObject(currentIndex);
+        }
     }
 }

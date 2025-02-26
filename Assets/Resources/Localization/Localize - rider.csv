@@ -1,0 +1,25 @@
+Is_duplicated,key,Origin,English (en),Font,Vietnamese (vi),Font
+FALSE,hero_name_1001,ITSUI,ITSUI,Roboto-Regular SDF,ITSUI,Roboto-Regular SDF
+FALSE,hp_hero_1001,5,5,Roboto-Regular SDF,5,Roboto-Regular SDF
+FALSE,hero_story_1001,"Itsui always says, ""Let's start drawing miracles!"", but he's better at destroying things than anyone.","Itsui always says, ""Let's start drawing miracles!"", but he's better at destroying things than anyone.",Roboto-Regular SDF,"Itsui lúc nào cũng nói: ""Bắt đầu vẽ lên những kỳ tích nào!"", nhưng cậu ấy giỏi phá hoại hơn bất kỳ ai.",Roboto-Regular SDF
+FALSE,skill_info_hero_1001,"Delete all objects within a 3x3 square, centered on the character. And increases the player's move by 1 move.","Delete all objects within a 3x3 square, centered on the character. And increases the player's move by 1 move.",Roboto-Regular SDF,"Xoá tất cả thực thể trong phạm vi hình vuông 3x3, tâm là nhân vật. Và tăng thêm 1 move cho người chơi.",Roboto-Regular SDF
+FALSE,hero_weight_1001,100 kg,100 kg,Roboto-Regular SDF,100 kg,Roboto-Regular SDF
+FALSE,hero_height_1001,1.9 m,1.9 m,Roboto-Regular SDF,1.9 m,Roboto-Regular SDF
+FALSE,hero_punch_1001,1.5 t,1.5 t,Roboto-Regular SDF,1.5 tấn,Roboto-Regular SDF
+FALSE,hero_kick_1001,5 t,5 t,Roboto-Regular SDF,5 tấn,Roboto-Regular SDF
+FALSE,hero_name_1002,NIGOUTO,NIGOUTO,Roboto-Regular SDF,NIGOUTO,Roboto-Regular SDF
+FALSE,hp_hero_1002,7,7,Roboto-Regular SDF,7,Roboto-Regular SDF
+FALSE,hero_story_1002,"A man who often jokes around, but still has a strong fighting spirit and is willing to sacrifice for justice.","A man who often jokes around, but still has a strong fighting spirit and is willing to sacrifice for justice.",Roboto-Regular SDF,"Một người thường pha trò, nhưng vẫn có tinh thần chiến đấu kiên cường và sẵn sàng hy sinh vì công lý.",Roboto-Regular SDF
+FALSE,skill_info_hero_1002,"Absorb all cells in a 3x3 cross shape, centered on the character. After that, restore HP corresponding to the number of objects in the absorbed cells. Not affected by harmful objects in the absorption cells.","Absorb all cells in a 3x3 cross shape, centered on the character. After that, restore HP corresponding to the number of objects in the absorbed cells. Not affected by harmful objects in the absorption cells.",Roboto-Regular SDF,"Hấp thụ tất cả các ô theo hình chữ thập kích thước 3x3, tâm là nhân vật. Sau đó, hồi phục HP tương ứng với số lượng thực thể có trong các ô đã hấp thụ. Không bị ảnh hưởng bởi đối tượng có hại trong các ô hấp thụ.",Roboto-Regular SDF
+FALSE,hero_weight_1002,150 kg,150 kg,Roboto-Regular SDF,150 kg,Roboto-Regular SDF
+FALSE,hero_height_1002,1.8 m,1.8 m,Roboto-Regular SDF,1.8 m,Roboto-Regular SDF
+FALSE,hero_punch_1002,3.5 t,3.5 t,Roboto-Regular SDF,3.5 tấn,Roboto-Regular SDF
+FALSE,hero_kick_1002,5.5 t,5.5 t,Roboto-Regular SDF,5.5 tấn,Roboto-Regular SDF
+FALSE,hero_name_1003,SKULZ,SKULZ,Roboto-Regular SDF,SKULZ,Roboto-Regular SDF
+FALSE,hp_hero_1003,8,8,Roboto-Regular SDF,8,Roboto-Regular SDF
+FALSE,hero_story_1003,A hard-boiled detective who determines to pursue justice to the end.,A hard-boiled detective who determines to pursue justice to the end.,Roboto-Regular SDF,"Một thám tử cứng rắn và rất nghiêm khắc, quyết tâm theo đuổi công lý đến cùng. ",Roboto-Regular SDF
+FALSE,skill_info_hero_1003,Restores all HP to the character and increases 2 moves,Restores all HP to the character and increases 2 moves,Roboto-Regular SDF,Hồi phục lại tất cả HP cho nhân vật,Roboto-Regular SDF
+FALSE,hero_weight_1003,92 kg,92 kg,Roboto-Regular SDF,92 kg,Roboto-Regular SDF
+FALSE,hero_height_1003,1.95 m,1.95 m,Roboto-Regular SDF,1.95 m,Roboto-Regular SDF
+FALSE,hero_punch_1003,2.5 t,2.5 t,Roboto-Regular SDF,2.5 tấn,Roboto-Regular SDF
+FALSE,hero_kick_1003,6 t,6 t,Roboto-Regular SDF,6 tấn,Roboto-Regular SDF

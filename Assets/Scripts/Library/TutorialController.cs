@@ -14,14 +14,27 @@ public class TutorialController : MonoBehaviour
     [SerializeField] private Button prev;
     [SerializeField] public Button close;
     [SerializeField] private GameObject menuLib;
+    
+    private Vector2 startTouchPosition;
+    private Vector2 endTouchPosition;
+    private bool isSwiping = false;
+    private float swipeThreshold = 50f;
+    [SerializeField] private ISwipeDetector swipeDetector;
     void Start()
     {
+        swipeDetector= new SwipeDetector(NextImage, PreviousImage);
         UpdateUI();
 
         prev.onClick.AddListener(() => PreviousImage());
         next.onClick.AddListener(() => NextImage());
         close.onClick.AddListener(() => Close());
     }
+    void Update()
+    {
+        swipeDetector.DetectSwipe();
+    }
+
+
     public void Close()
     {
         
