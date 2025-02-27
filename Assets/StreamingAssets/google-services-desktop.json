@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "356590522049",
+    "project_id": "budgamesproject-14d6b",
+    "storage_bucket": "budgamesproject-14d6b.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:356590522049:android:c61b9b1eef7f604c4f4e40",
+        "android_client_info": {
+          "package_name": "com.riderspuzzle.kazudwonderteam"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyA675fPEP9sqCXgH9NffNFGDQyGhjCF_e4"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
