@@ -98,7 +98,7 @@ public class HeroView : MonoBehaviour
         library.SetActive(false);
         map.gameObject.SetActive(true);
 
-        FooterController.instance.SelectButton("map");
+        FooterController.instance.SelectButton("Map");
         stageHeroController.gameObject.SetActive(true);
         stageHeroController.SetHeroID(this.id);
     }

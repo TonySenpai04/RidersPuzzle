@@ -53,7 +53,12 @@ public class GameManager : MonoBehaviour
         backgroundController.UpdateRandomArt();
         PlayerController.instance.LoadLevel();
     }
-
+    public void LoadLangue()
+    {
+        var level = LevelManager.instance.GetCurrentLevelData();
+        ApplyText.instance.UpdateTitleStage(level.level);
+    }
+   
     public void LoadNextLevel()
     {
         SoundManager.instance.StopSFX();

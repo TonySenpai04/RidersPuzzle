@@ -51,12 +51,14 @@ public class SkillManager : MonoBehaviour
     public void SetSkillId(int id)
     {
         skillPVEController.SetSkillId(id);
+        currentIDHero = id;
 
     }
 
     public void ActiveSkillPVE()
     {
         skillPVEController.ActiveSkillPVE();
+        Debug.Log(GetCurrentSkill().GetNumberOfSkill());
     }
     public void IncreaseSkillUsesForCurrentHero(int amount)
     {
@@ -64,7 +66,7 @@ public class SkillManager : MonoBehaviour
     }
     public ISkill GetCurrentSkill()
     {
-        return GetSkillPVEById(currentIDHero); 
+        return skillPVEController.GetCurrentSkill();
     }
 }
 [Serializable]

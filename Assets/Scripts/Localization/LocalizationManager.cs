@@ -60,7 +60,16 @@ public class LocalizationManager : MonoBehaviour
         }
 
     }
-
+    public void LoadLanague()
+    {
+        localizedTexts.Clear();
+        localizedFonts.Clear();
+        richText.Clear();
+        LoadLocalization();
+        ApplyLocalizedTexts();
+        applyTextScript.LoadLangue();
+        GameManager.instance.LoadLangue();
+    }
     void ApplyLocalizedTexts()
     {
         if (applyTextScript != null)

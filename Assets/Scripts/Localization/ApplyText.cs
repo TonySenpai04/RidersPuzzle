@@ -85,6 +85,12 @@ public class ApplyText : MonoBehaviour, ILocalizeObject
         UpdateLibInfo();
         UpdateToturialInfo();
     }
+    public void LoadLangue()
+    {
+        UpdateLibInfo();
+        UpdateToturialInfo();
+
+    }
     private void SetInfo(string key, TMP_Text targetText, Dictionary<string, string> richText, Dictionary<string, string> plainText)
     {
         if (richText.ContainsKey(key) && plainText.ContainsKey(key))

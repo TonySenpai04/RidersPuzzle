@@ -68,7 +68,8 @@ public class TutorialController : MonoBehaviour
     }
     private void OnEnable()
     {
-        
+        currentIndex = 0;
+        UpdateUI();
     }
     void UpdateUI()
     {

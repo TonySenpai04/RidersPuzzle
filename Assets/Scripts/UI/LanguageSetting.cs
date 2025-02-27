@@ -56,7 +56,7 @@ public class LanguageSetting : MonoBehaviour
     public void SetLangaue()
     {
         LocalizationManager.instance.ChangeLanguage(temp);
-        Application.Quit();
+        LocalizationManager.instance.LoadLanague();
 
     }
   
