@@ -197,6 +197,7 @@ public class ApplyText : MonoBehaviour, ILocalizeObject
         textLocalizer.SetLocalizedText("setting_privacy_policy", setting_privacy_policy);
         textLocalizer.SetLocalizedText("setting_credit", setting_credit);
         textLocalizer.SetLocalizedText("title_notification", title_notification);
+        textLocalizer.SetLocalizedText("setting_term_of_condition", setting_term_of_condition);
         textLocalizer.SetLocalizedText("popup_detail_quit", popup_detail_quit);
         textLocalizer.SetLocalizedText("button_yes", button_yes);
         textLocalizer.SetLocalizedText("button_no", button_no);
