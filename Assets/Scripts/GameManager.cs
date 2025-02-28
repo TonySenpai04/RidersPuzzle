@@ -33,7 +33,7 @@ public class GameManager : MonoBehaviour
     void Start()
     {
 
-       LoadLevel();
+    //   LoadLevel();
        playZone.gameObject.SetActive(false);
     }
     private void FixedUpdate() => CheckWinCondition();
