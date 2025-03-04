@@ -17,7 +17,7 @@ public class HeroLibrary : MonoBehaviour
     private void Start()
     {
         var hero = HeroManager.instance.GetHero(this.Id);
-        if (hero.HasValue && hero.Value.isUnlock)
+        if (hero != null && hero.Value.hp>0)
         {
             txtID.gameObject.SetActive(false);
             heroImage.gameObject.SetActive(true);
@@ -41,7 +41,7 @@ public class HeroLibrary : MonoBehaviour
     private void OnEnable()
     {
         var hero = HeroManager.instance.GetHero(this.Id);
-        if (hero.HasValue && hero.Value.isUnlock) 
+        if (hero!=null ) 
         {
             txtID.gameObject.SetActive(false);
             heroImage.gameObject.SetActive(true);

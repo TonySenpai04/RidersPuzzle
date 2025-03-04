@@ -46,7 +46,13 @@ public class GoldManager : MonoBehaviour
             Console.WriteLine("Số vàng thêm phải lớn hơn 0.");
         }
     }
-
+    private void Update()
+    {
+        if(Input.GetKey(KeyCode.G))
+        {
+            AddGold(1000000);
+        }
+    }
     public void SpendGold(int amount)
     {
         if (amount > 0 && currentGold >= amount)

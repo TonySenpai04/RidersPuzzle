@@ -6,7 +6,7 @@ using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
-public class HeroShopItem : MonoBehaviour,IPointerClickHandler
+public class HeroShopItem : MonoBehaviour
 {
     [SerializeField] private int heroId;
     [SerializeField] private Image heroImage;
@@ -14,9 +14,17 @@ public class HeroShopItem : MonoBehaviour,IPointerClickHandler
     [SerializeField] private TextMeshProUGUI priceTxt;
     [SerializeField] private TextMeshProUGUI onwed;
     public Action<int> OnHeroSelected;
-
+    [SerializeField] private Button exchangeBtn;
+    [SerializeField] private Button buyBtn;
     public int HeroId { get => heroId; set => heroId = value; }
+    public Button BuyBtn { get => buyBtn; set => buyBtn = value; }
+    public Button ExchangeBtn { get => exchangeBtn; set => exchangeBtn = value; }
+    private void Start()
+    {
+        exchangeBtn.gameObject.SetActive(false); 
 
+       
+    }
     private void OnEnable()
     {
         UpdateHero();
@@ -40,6 +48,7 @@ public class HeroShopItem : MonoBehaviour,IPointerClickHandler
                 onwed.gameObject.SetActive(false);
                 priceTxt.gameObject.SetActive(true);
                 priceTxt.text = hero.Value.price.ToString();
+
             }
             heroImage.sprite = hero.Value.heroImage;
         }

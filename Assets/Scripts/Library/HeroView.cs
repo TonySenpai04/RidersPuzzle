@@ -102,7 +102,7 @@ public class HeroView : MonoBehaviour
         stageHeroController.gameObject.SetActive(true);
         stageHeroController.SetHeroID(this.id);
     }
-    private void LoadObject(int index)
+    private void LoadHero(int index)
     {
         if (index >= 0 && index < onwedHero.Count)
         {
@@ -117,7 +117,7 @@ public class HeroView : MonoBehaviour
         if (currentIndex < onwedHero.Count - 1)
         {
             currentIndex++;
-            LoadObject(currentIndex);
+            LoadHero(currentIndex);
         }
     }
     public void PreviousHero()
@@ -125,7 +125,7 @@ public class HeroView : MonoBehaviour
         if (currentIndex > 0)
         {
             currentIndex--;
-            LoadObject(currentIndex);
+            LoadHero(currentIndex);
         }
     }
 }
