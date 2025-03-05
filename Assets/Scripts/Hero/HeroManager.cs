@@ -78,6 +78,12 @@ public class HeroManager : MonoBehaviour
         {
             string json = File.ReadAllText(path);
             UnlockHeroData data = JsonUtility.FromJson<UnlockHeroData>(json);
+            if (data.seenHeroIds.Count == 0)
+            {
+                data.seenHeroIds.Add(1001);
+
+                data.seenHeroIds.Add(1002);
+            }
             foreach (int id in data.seenHeroIds)
             {
                 UnlockHero(id);

@@ -27,7 +27,7 @@ public class StageHeroController : MonoBehaviour
 
         CreateButtons();
 
-        SetHeroID(currentId);
+        LoadHeroID(currentId);
         skillManager.SetSkillId(currentId);
     }
 
@@ -83,7 +83,26 @@ public class StageHeroController : MonoBehaviour
         }
         SoundManager.instance.PlayHeroSFX(id);
     }
+    public void LoadHeroID(int id)
+    {
+        var clickedButton = heroButtons.Find(button => button.Index == id);
 
+        if (clickedButton != null && !clickedButton.isUnlocked)
+        {
+            Debug.LogWarning($"Hero với ID {id} đang bị khóa, không thể chọn.");
+            return;
+        }
+        skillManager.SetSkillId(id);
+        currentId = id;
+
+        SaveHeroData();
+        foreach (var button in heroButtons)
+        {
+            bool isSelected = button.Index == id;
+            button.UpdateButtonState(button.isUnlocked, isSelected);
+        }
+
+    }
     public void LoadLevel()
     {
         if (isHero())

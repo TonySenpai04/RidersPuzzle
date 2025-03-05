@@ -95,10 +95,6 @@ public class FirstPlayManager : MonoBehaviour
         noti.gameObject.SetActive(false);
     }
 
-    private void OnDisable()
-    {
-        ResetUI(); 
-    }
     private void SaveFirstPlayData()
     {
         var data = new FirstPlayData { isFirst = this.isFirst };

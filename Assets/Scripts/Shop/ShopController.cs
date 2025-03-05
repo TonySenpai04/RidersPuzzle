@@ -14,7 +14,11 @@ public class ShopController : MonoBehaviour
     [SerializeField]private Sprite selectedBtn;
     [SerializeField] private Sprite unSelectedBtn;
     [SerializeField] private Sprite selectedZone;
-
+    [SerializeField] private GameObject Tutorial;
+    [SerializeField] private GameObject receiveHero;
+    [SerializeField] private GameObject heroView;
+    [SerializeField] private bool isHeroShop; 
+    [SerializeField] private GameObject receiveGift;
     private void Start()
     {
         goldTxt.text=GoldManager.instance.GetGold().ToString();
@@ -30,12 +34,23 @@ public class ShopController : MonoBehaviour
     }
     private void OnEnable()
     {
-        
+        Tutorial.SetActive(false);
+        receiveHero.SetActive(false);
+        receiveGift.SetActive(false);
+        heroView.SetActive(false);
+        heroBtn.gameObject.SetActive(true);
+        dailyBtn.gameObject.SetActive(true);
+        if (!isHeroShop)
+        {
+            ToDailyShop();
+        }
     }
     public void ToHeroShop()
     {
+        isHeroShop=true;
         SetSelectedButton(heroBtn);
- 
+        isHeroShop = false;
+
     }
     public void ToDailyShop()
     {

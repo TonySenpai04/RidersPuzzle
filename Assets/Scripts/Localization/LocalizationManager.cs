@@ -54,10 +54,10 @@ public class LocalizationManager : MonoBehaviour
         readCSVLocalizeRider.LoadLocalization(currentLanguage,localizedTexts, localizedFonts,riderAsset,richText);
        readCSVLocalizeObject.LoadLocalization(currentLanguage, localizedTexts, localizedFonts, objectAsset, richText);
         readCSVLocalizeCommon.LoadLocalization(currentLanguage, localizedTexts, localizedFonts, commonAsset, richText);
-        foreach (var text in localizedTexts)
-        {
-            Debug.Log(text.Key + "-" + text.Value);
-        }
+        //foreach (var text in localizedTexts)
+        //{
+        //    Debug.Log(text.Key + "-" + text.Value);
+        //}
 
     }
     public void LoadLanague()

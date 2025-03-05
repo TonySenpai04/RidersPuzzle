@@ -17,6 +17,7 @@ public class RiderShopController : MonoBehaviour
     [SerializeField] private GameObject gold;
     [SerializeField] private GameObject buyPopup;
     [SerializeField] private Button buyBtn;
+    [SerializeField] private ReceiveHero receivedHero;
     void Start()
     {
         Init();
@@ -38,6 +39,7 @@ public class RiderShopController : MonoBehaviour
             {
                 ShowExchangeBtn(hero);
                 hero.ExchangeBtn.onClick.AddListener(()=> ShowBuyPopup(hero));
+                hero.ExchangeBtn.onClick.AddListener(() =>  SoundManager.instance.PlaySFX("Click Sound"));
             }
             hero.GetComponent<Button>().onClick.AddListener(()=>SoundManager.instance
              .PlaySFX("Click Sound"));
@@ -58,7 +60,15 @@ public class RiderShopController : MonoBehaviour
 
         hero.BuyBtn.onClick.AddListener(() =>
         {
+            SoundManager.instance.PlaySFX("Click Sound");
             hero.ExchangeBtn.gameObject.SetActive(!hero.ExchangeBtn.gameObject.activeSelf);
+            foreach(var heroItem in heroShops)
+            {
+                if (heroItem != hero)
+                {
+                    heroItem.ExchangeBtn.gameObject.SetActive(false);
+                }
+            }
             if (hero.ExchangeBtn.gameObject.activeSelf)
 
                 grid.spacing = new Vector2(grid.spacing.x, 140);
@@ -66,6 +76,7 @@ public class RiderShopController : MonoBehaviour
             else
                 grid.spacing = new Vector2(grid.spacing.x, 50);
         });
+    
     }
     public void BuyHero(int id,HeroShopItem heroShopitem)
     {
@@ -82,6 +93,11 @@ public class RiderShopController : MonoBehaviour
 
         if (currentGold >= heroPrice )
         {
+            receivedHero.gameObject.SetActive(true);
+            receivedHero.SetData(id);
+            heroShopitem.ExchangeBtn.gameObject.SetActive(false);
+            heroShopitem.ExchangeBtn.onClick.RemoveAllListeners();
+            heroShopitem.BuyBtn.onClick.RemoveAllListeners();
             GoldManager.instance.SpendGold( heroPrice);
 
             HeroManager.instance.UnlockHero(id);
