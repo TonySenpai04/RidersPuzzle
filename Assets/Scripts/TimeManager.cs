@@ -41,7 +41,7 @@ public class TimeManager : MonoBehaviour
             }
             else
             {
-                Debug.LogError("Lỗi lấy thời gian từ server!");
+                Debug.Log("Lỗi lấy thời gian từ server!");
             }
         }
     }

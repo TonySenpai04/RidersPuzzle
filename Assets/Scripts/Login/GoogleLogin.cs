@@ -9,9 +9,10 @@ using UnityEngine.SocialPlatforms;
 public class GoogleLogin : MonoBehaviour
 {
     public TextMeshProUGUI text;
-    private static string path = Application.persistentDataPath + "/loginData.json";
+    private  string path => Path.Combine(Application.persistentDataPath, "LoginData.json");
     void Start()
     {
+
         if (LoadLoginState())
         {
             PlayGamesPlatform.Instance.Authenticate(ProcessAuthentication);
@@ -36,14 +37,14 @@ public class GoogleLogin : MonoBehaviour
         }
     }
 
-    public static void SaveLoginState(bool isLoggedIn)
+    public  void SaveLoginState(bool isLoggedIn)
     {
         LoginData data = new LoginData { isLoggedIn = isLoggedIn };
         string json = JsonUtility.ToJson(data);
         File.WriteAllText(path, json);
     }
 
-    public static bool LoadLoginState()
+    public  bool LoadLoginState()
     {
         if (File.Exists(path))
         {
