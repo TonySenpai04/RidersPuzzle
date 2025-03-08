@@ -18,19 +18,37 @@ public class RiderShopController : MonoBehaviour
     [SerializeField] private GameObject buyPopup;
     [SerializeField] private Button buyBtn;
     [SerializeField] private ReceiveHero receivedHero;
+    private List<DataHero> sortedHeroes;
+    [SerializeField] private Button sortDefaultBtn;
+    [SerializeField] private Button sortByIdBtn;
+    [SerializeField] private Button sortByPriceBtn;
     void Start()
     {
         Init();
+        sortDefaultBtn.onClick.AddListener(() => SortHeroes(SortMode.Default));
+        sortByIdBtn.onClick.AddListener(() => SortHeroes(SortMode.ById));
+        sortByPriceBtn.onClick.AddListener(() => SortHeroes(SortMode.ByPrice));
     }
 
     public void Init()
     {
         List<DataHero> allHeroes = HeroManager.instance.heroDatas;
         List<DataHero> unlockedHeroes = HeroManager.instance.GetUnlockHero();
-
         List<DataHero> lockedHeroes = allHeroes.Where(h => !unlockedHeroes.Any(u => u.id == h.id)).ToList();
 
-        List<DataHero> sortedHeroes = lockedHeroes.Concat(unlockedHeroes).ToList();
+        sortedHeroes = lockedHeroes.Concat(unlockedHeroes).ToList();
+        GenerateHeroShopItems();
+    }
+
+    private void GenerateHeroShopItems()
+    {
+        // Xóa các hero hiện có trước khi cập nhật lại danh sách
+        foreach (var hero in heroShops)
+        {
+            Destroy(hero.gameObject);
+        }
+        heroShops.Clear();
+
         foreach (var heroData in sortedHeroes)
         {
             HeroShopItem hero = Instantiate(heroShopItemPrefabs, content.transform);
@@ -38,16 +56,33 @@ public class RiderShopController : MonoBehaviour
             if (!heroData.isUnlock)
             {
                 ShowExchangeBtn(hero);
-                hero.ExchangeBtn.onClick.AddListener(()=> ShowBuyPopup(hero));
-                hero.ExchangeBtn.onClick.AddListener(() =>  SoundManager.instance.PlaySFX("Click Sound"));
+                hero.ExchangeBtn.onClick.AddListener(() => ShowBuyPopup(hero));
+                hero.ExchangeBtn.onClick.AddListener(() => SoundManager.instance.PlaySFX("Click Sound"));
             }
-            hero.GetComponent<Button>().onClick.AddListener(()=>SoundManager.instance
-             .PlaySFX("Click Sound"));
-            hero.GetComponent<Button>().onClick.AddListener(()=>SetHeroView(hero.HeroId));
+            hero.GetComponent<Button>().onClick.AddListener(() => SoundManager.instance.PlaySFX("Click Sound"));
+            hero.GetComponent<Button>().onClick.AddListener(() => SetHeroView(hero.HeroId));
             heroShops.Add(hero);
         }
-       
     }
+
+    public void SortHeroes(SortMode mode)
+    {
+        switch (mode)
+        {
+            case SortMode.Default:
+                Init();
+                break;
+            case SortMode.ById:
+                sortedHeroes = sortedHeroes.OrderByDescending(h => h.id).ToList();
+                GenerateHeroShopItems();
+                break;
+            case SortMode.ByPrice:
+                sortedHeroes = sortedHeroes.OrderBy(h => h.price).ToList();
+                GenerateHeroShopItems();
+                break;
+        }
+    }
+
     public void ShowBuyPopup(HeroShopItem hero)
     {
 
@@ -121,5 +156,11 @@ public class RiderShopController : MonoBehaviour
         title.gameObject.SetActive(false);
         gold.gameObject.SetActive(false);
     }
-
+   
+}
+public  enum SortMode
+{
+    Default,
+    ById,
+    ByPrice
 }

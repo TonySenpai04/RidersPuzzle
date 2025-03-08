@@ -25,6 +25,7 @@ public class GoogleLogin : MonoBehaviour
             Debug.Log("Đăng nhập thành công: " + Social.localUser.userName);
             text.text = "Chào " + Social.localUser.userName;
             SaveLoginState(true);
+          //  LevelManager.instance.LoadLevelData();
         }
         else
         {
