@@ -36,7 +36,7 @@ public class ButtonStage : MonoBehaviour
         {
             if (parentController != null)
             {
-                parentController.ShowNotification("Not unlocked!");
+                NotiManager.instance.ShowNotification("Not unlocked!");
             }
         }
     }

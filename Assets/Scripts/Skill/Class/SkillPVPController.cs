@@ -20,6 +20,7 @@ public class SkillPVPController
         AddSkillPVP(1001, new ItsuiSkill(gridController, 1, 1001));
         AddSkillPVP(1002, new NigoutoSkill(gridController, 1, 1002));
         AddSkillPVP(1003, new SkulzSkill(gridController, 1, 1003));
+        AddSkillPVP(1003, new AkaleSkill(gridController, 1, 1004));
     }
 
     public void LoadSkill()

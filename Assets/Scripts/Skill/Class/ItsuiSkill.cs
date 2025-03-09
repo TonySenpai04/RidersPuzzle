@@ -2,12 +2,9 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ItsuiSkill : ISkill
+public class ItsuiSkill : BaseSkill
 {
-    private int maxSkillAmount;
-    private int skillAmount;
-    private GridController gridController;
-    private int id;
+    
 
     public ItsuiSkill(GridController gridController,int skillAmount, int id)
     {
@@ -18,7 +15,7 @@ public class ItsuiSkill : ISkill
         this.id = id;
     }
 
-    public void ActivateSkill()
+    public override void ActivateSkill()
     {
         if (skillAmount > 0)
         {
@@ -49,22 +46,5 @@ public class ItsuiSkill : ISkill
         }
     }
 
-    public void IncreaseUses(int amount)
-    {
-        skillAmount += amount;
-        if (skillAmount>maxSkillAmount)
-        {
-            skillAmount = maxSkillAmount;
-        }
-       
-       
-    }
-    public int GetNumberOfSkill()
-    {
-        return skillAmount;
-    }
-    public void SetNumberOfSkill(int amount)
-    {
-        this.skillAmount = amount;
-    }
+  
 }

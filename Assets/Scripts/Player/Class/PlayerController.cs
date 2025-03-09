@@ -16,12 +16,16 @@ public class PlayerController : MonoBehaviour
     private void Awake()
     {
         instance = this;
+        Init();
+
+    }
+    private void Init()
+    {
         hitPoint = new HitPoint(10);
         movementController.immortal = (IImmortal)hitPoint;
         float screenWidth = Camera.main.orthographicSize * 2 * 9f / 16f;
         float cellSize = (float)(screenWidth - 0.1 * (6 - 1)) / 6;
         transform.localScale = new Vector3(cellSize, cellSize, 1);
-
     }
     private void Start()
     {

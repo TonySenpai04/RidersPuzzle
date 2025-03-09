@@ -1,11 +1,8 @@
 ﻿using UnityEngine;
 
-internal class NigoutoSkill : ISkill
+internal class NigoutoSkill : BaseSkill
 {
-    private int maxSkillAmount;
-    private int skillAmount;
-    private GridController gridController;
-    private int id;
+
 
     public NigoutoSkill(GridController gridController, int skillAmount,int id)
     {
@@ -17,7 +14,7 @@ internal class NigoutoSkill : ISkill
 
     }
 
-    public void ActivateSkill()
+    public override void ActivateSkill()
     {
         if (skillAmount > 0)
         {
@@ -56,24 +53,5 @@ internal class NigoutoSkill : ISkill
         }
     }
 
-    public int GetNumberOfSkill()
-    {
-        return skillAmount;
-    }
-
-    public void IncreaseUses(int amount)
-    {
-        skillAmount += amount;
-        if (skillAmount > maxSkillAmount)
-        {
-            skillAmount = maxSkillAmount;
-        }
-
-
-    }
-
-    public void SetNumberOfSkill(int amount)
-    {
-        this.skillAmount = amount;
-    }
+ 
 }

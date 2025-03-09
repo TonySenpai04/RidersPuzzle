@@ -22,8 +22,8 @@ public class ShopController : MonoBehaviour
     private void Start()
     {
         goldTxt.text=GoldManager.instance.GetGold().ToString();
-        heroBtn.onClick.AddListener(() => SetSelectedButton(heroBtn));
-        dailyBtn.onClick.AddListener(() => SetSelectedButton(dailyBtn));
+        heroBtn.onClick.AddListener(() => ToHeroShop());
+        dailyBtn.onClick.AddListener(() => ToDailyShop());
 
 
        // ToDailyShop();
@@ -48,7 +48,8 @@ public class ShopController : MonoBehaviour
     public void ToHeroShop()
     {
         isHeroShop=true;
-        SetSelectedButton(heroBtn);
+        NotiManager.instance.ShowNotification("Cooming soon");
+      //  SetSelectedButton(heroBtn);
         isHeroShop = false;
 
     }
