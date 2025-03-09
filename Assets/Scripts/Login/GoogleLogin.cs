@@ -23,7 +23,7 @@ public class GoogleLogin : MonoBehaviour
         if (status == SignInStatus.Success)
         {
             Debug.Log("Đăng nhập thành công: " + Social.localUser.userName);
-            text.text = "Chào " + Social.localUser.userName;
+            text.text = "Hello " + Social.localUser.userName;
             SaveLoginState(true);
           //  LevelManager.instance.LoadLevelData();
         }
@@ -31,7 +31,7 @@ public class GoogleLogin : MonoBehaviour
         {
 
             Debug.LogError("Đăng nhập thất bại! Lỗi: " );
-            text.text = "Đăng nhập thất bại!\nLỗi: " ;
+            text.text = "Error! " ;
             // Disable your integration with Play Games Services or show a login button
             // to ask users to sign-in. Clicking it should call
             // PlayGamesPlatform.Instance.ManuallyAuthenticate(ProcessAuthentication).
