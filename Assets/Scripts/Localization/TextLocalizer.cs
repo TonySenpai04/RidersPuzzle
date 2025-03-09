@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using TMPro;
 
-internal class TextLocalizer:ITextLocalizer
+public class TextLocalizer:ITextLocalizer
 {
     private readonly Dictionary<string, string> _richText;
     private readonly Dictionary<string, string> _plainText;

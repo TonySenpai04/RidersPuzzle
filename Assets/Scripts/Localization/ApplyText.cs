@@ -76,9 +76,44 @@ public class ApplyText : MonoBehaviour, ILocalizeObject
     [SerializeField] private TMP_Text tutorial_use_skill_explain;
     [SerializeField] private TMP_Text tutorial_replay;
     [SerializeField] private TMP_Text tutorial_replay_explain;
+    [Header("Shop")]
+    [SerializeField] private TMP_Text shop_title;
+    [SerializeField] private TMP_Text shop_daily_pack_title;
+    //[SerializeField] private TMP_Text shop_daily_pack_title_receive;
+    [SerializeField] private TMP_Text shop_daily_pack_tag_free;
+    [SerializeField] private TMP_Text[] button_exchange;
+    [SerializeField] private TMP_Text shop_help_money_1_title;
+    [SerializeField] private TMP_Text shop_help_money_1_content;
+    [SerializeField] private TMP_Text shop_help_hot_deal_title;
+    [SerializeField] private TMP_Text shop_help_hot_deal_content;
+    [SerializeField] private TMP_Text shop_help_rider_shop_title;
+    [SerializeField] private TMP_Text shop_help_rider_shop_content;
+    [SerializeField] private TMP_Text button_shop_hot_deal;
+    [SerializeField] private TMP_Text button_shop_rider;
+  //  [SerializeField] private TMP_Text shop_owned_rider;
+    [SerializeField] private TMP_Text shop_noti_buy_rider;
+    [SerializeField] private TMP_Text shop_congratulation;
+    [SerializeField] private TMP_Text shop_congratulation_rider_get;
+    [SerializeField] private TMP_Text shop_sort_default;
+    [SerializeField] private TMP_Text shop_sort_day;
+    [SerializeField] private TMP_Text shop_sort_price;
 
+    [SerializeField] private TMP_Text libraryRiderStoryShop;
+    [SerializeField] private TMP_Text libraryRiderBattleInforShop;
+    [SerializeField] private TMP_Text libraryRiderFormShop;
+    [SerializeField] private TMP_Text libraryRiderWeightShop;
+    [SerializeField] private TMP_Text libraryRiderHeightShop;
+    [SerializeField] private TMP_Text libraryRiderPunchPowerShop;
+    [SerializeField] private TMP_Text libraryRiderKickPowerShop;
+    [SerializeField] private TMP_Text riderSkillShop;
+    [SerializeField] private TMP_Text riderNameLibShop;
+    [SerializeField] private TMP_Text riderStoryShop;
+    [SerializeField] private TMP_Text riderWeightShop;
+    [SerializeField] private TMP_Text riderHeightShop;
+    [SerializeField] private TMP_Text riderPunchShop;
+    [SerializeField] private TMP_Text riderKickShop;
     public static ApplyText instance;
-
+    public  TextLocalizer textLocalizer;
     private void Awake() => instance = this;
     private void Start()
     {
@@ -113,12 +148,20 @@ public class ApplyText : MonoBehaviour, ILocalizeObject
         SetInfo("library_rider_story", libraryRiderStory, richText, plainText);
         SetInfo("library_rider_battle infor", libraryRiderBattleInfor, richText, plainText);
         SetInfo("library_rider_story", libraryObjectStory, richText, plainText);
-        SetInfo("library_rider_battle infor", libraryObjectBattleInfor, richText, plainText);
+        SetInfo("library_rider_battle infor", libraryRiderBattleInfor, richText, plainText);
         SetInfo("library_rider_form", libraryRiderForm, richText, plainText);
         SetInfo("library_rider_weight", libraryRiderWeight, richText, plainText);
         SetInfo("library_rider_height", libraryRiderHeight, richText, plainText);
         SetInfo("library_rider_punch_power", libraryRiderPunchPower, richText, plainText);
         SetInfo("library_rider_kick_power", libraryRiderKickPower, richText, plainText);
+
+        SetInfo("library_rider_story", libraryObjectStory, richText, plainText);
+        SetInfo("library_rider_battle infor", libraryRiderBattleInforShop, richText, plainText);
+        SetInfo("library_rider_form", libraryRiderFormShop, richText, plainText);
+        SetInfo("library_rider_weight", libraryRiderWeightShop, richText, plainText);
+        SetInfo("library_rider_height", libraryRiderHeightShop, richText, plainText);
+        SetInfo("library_rider_punch_power", libraryRiderPunchPowerShop, richText, plainText);
+        SetInfo("library_rider_kick_power", libraryRiderKickPowerShop, richText, plainText);
 
 
     }
@@ -147,6 +190,14 @@ public class ApplyText : MonoBehaviour, ILocalizeObject
         SetInfo($"hero_height_{heroId}", riderHeight, richText, plainText);
         SetInfo($"hero_punch_{heroId}", riderPunch, richText, plainText);
         SetInfo($"hero_kick_{heroId}", riderKick, richText, plainText);
+
+        SetInfo($"skill_info_hero_{heroId}", riderSkillShop, richText, plainText);
+        SetInfo($"hero_story_{heroId}", riderStoryShop, richText, plainText);
+        SetInfo($"hero_weight_{heroId}", riderWeightShop, richText, plainText);
+        SetInfo($"hero_height_{heroId}", riderHeightShop, richText, plainText);
+        SetInfo($"hero_punch_{heroId}", riderPunchShop, richText, plainText);
+        SetInfo($"hero_kick_{heroId}", riderKickShop, richText, plainText);
+
     }
     public void UpdateObjectInfo(int objectId)
     {
@@ -173,10 +224,17 @@ public class ApplyText : MonoBehaviour, ILocalizeObject
         }
     }
 
-    public void ApplyText1(ref Dictionary<string, string> localizedRichText, ref Dictionary<string, string> localizedTexts)
+    public void ApplyTxt(ref Dictionary<string, string> localizedRichText, ref Dictionary<string, string> localizedTexts)
     {
-        var textLocalizer = new TextLocalizer(localizedRichText, localizedTexts);
+        textLocalizer = new TextLocalizer(localizedRichText, localizedTexts);
+        SetCommonTexts(textLocalizer);
+        SetRiderTexts(textLocalizer);
+        SetShopTexts(textLocalizer);
+        SetLibraryTexts(textLocalizer);
+    }
 
+    private void SetCommonTexts(TextLocalizer textLocalizer)
+    {
         textLocalizer.SetLocalizedText("loading", loading);
         textLocalizer.SetLocalizedText("button_start", button_start);
         textLocalizer.SetLocalizedText("title_stage", title_stage);
@@ -184,31 +242,63 @@ public class ApplyText : MonoBehaviour, ILocalizeObject
         textLocalizer.SetLocalizedText("warning_not_unlocked", warning_not_unlocked);
         textLocalizer.SetLocalizedText("warning_coming_soon", warning_coming_soon);
         textLocalizer.SetLocalizedText("guide_game_rule", guide_game_rule);
+        textLocalizer.SetLocalizedText("title_notification", title_notification);
+        textLocalizer.SetLocalizedText("popup_detail_quit", popup_detail_quit);
+        textLocalizer.SetLocalizedText("popup_detail_language_change", popup_detail_language_change);
+        textLocalizer.SetLocalizedText("button_yes", button_yes);
+        textLocalizer.SetLocalizedText("button_no", button_no);
+        textLocalizer.SetLocalizedText("button_view", button_view);
+        textLocalizer.SetLocalizedText("button_ok", button_ok);
+        textLocalizer.SetLocalizedText("button_replay", button_replay);
+        textLocalizer.SetLocalizedText("button_skill", button_skill);
+    }
+
+    private void SetRiderTexts(TextLocalizer textLocalizer)
+    {
         textLocalizer.SetLocalizedText("title_rider_information", title_rider_information);
         textLocalizer.SetLocalizedText("hp_hero_1001", hp_hero_1001);
         textLocalizer.SetLocalizedText("hp_hero_1002", hp_hero_1002);
         textLocalizer.SetLocalizedText("skill_info_hero_1001", skill_info_hero_stage);
         textLocalizer.SetLocalizedText("skill_info_hero_1002", skill_info_hero_onstage);
-        textLocalizer.SetLocalizedText("button_skill", button_skill);
-        textLocalizer.SetLocalizedText("button_replay", button_replay);
+    }
+
+    private void SetShopTexts(TextLocalizer textLocalizer)
+    {
+        textLocalizer.SetLocalizedText("shop_title", shop_title);
+        textLocalizer.SetLocalizedText("shop_daily_pack_title", shop_daily_pack_title);
+        textLocalizer.SetLocalizedText("shop_daily_pack_tag_free", shop_daily_pack_tag_free);
+        textLocalizer.SetLocalizedText("button_exchange", button_exchange);
+        textLocalizer.SetLocalizedText("shop_help_money_1_title", shop_help_money_1_title);
+        textLocalizer.SetLocalizedText("shop_help_money_1_content", shop_help_money_1_content);
+        textLocalizer.SetLocalizedText("shop_help_hot_deal_title", shop_help_hot_deal_title);
+        textLocalizer.SetLocalizedText("shop_help_hot_deal_content", shop_help_hot_deal_content);
+        textLocalizer.SetLocalizedText("shop_help_rider_shop_title", shop_help_rider_shop_title);
+        textLocalizer.SetLocalizedText("shop_help_rider_shop_content", shop_help_rider_shop_content);
+        textLocalizer.SetLocalizedText("button_shop_hot_deal", button_shop_hot_deal);
+        textLocalizer.SetLocalizedText("button_shop_rider", button_shop_rider);
+        //textLocalizer.SetLocalizedText("shop_claimed", shop_claimed);
+        //textLocalizer.SetLocalizedText("shop_receive_package", shop_receive_package);
+        //textLocalizer.SetLocalizedText("shop_owned_rider", shop_owned_rider);
+        textLocalizer.SetLocalizedText("shop_noti_buy_rider", shop_noti_buy_rider);
+        textLocalizer.SetLocalizedText("shop_congratulation_title", shop_congratulation);
+        textLocalizer.SetLocalizedText("shop_congratulation_rider_get", shop_congratulation_rider_get);
+        textLocalizer.SetLocalizedText("shop_sort_default", shop_sort_default);
+        textLocalizer.SetLocalizedText("shop_sort_day", shop_sort_day);
+        textLocalizer.SetLocalizedText("shop_sort_price", shop_sort_price);
+    }
+
+    private void SetLibraryTexts(TextLocalizer textLocalizer)
+    {
         textLocalizer.SetLocalizedText("title_setting", title_setting);
         textLocalizer.SetLocalizedText("setting_sound", setting_sound);
         textLocalizer.SetLocalizedText("setting_language", setting_language);
         textLocalizer.SetLocalizedText("setting_privacy_policy", setting_privacy_policy);
         textLocalizer.SetLocalizedText("setting_credit", setting_credit);
-        textLocalizer.SetLocalizedText("title_notification", title_notification);
         textLocalizer.SetLocalizedText("setting_term_of_condition", setting_term_of_condition);
-        textLocalizer.SetLocalizedText("popup_detail_quit", popup_detail_quit);
-        textLocalizer.SetLocalizedText("button_yes", button_yes);
-        textLocalizer.SetLocalizedText("button_no", button_no);
         textLocalizer.SetLocalizedText("setting_language_1", setting_language_1);
         textLocalizer.SetLocalizedText("setting_language_2", setting_language_2);
         textLocalizer.SetLocalizedText("setting_sound_on", setting_sound_on);
         textLocalizer.SetLocalizedText("setting_sound_off", setting_sound_off);
-        textLocalizer.SetLocalizedText("button_view", button_view);
-        textLocalizer.SetLocalizedText("button_ok", button_ok);
-        textLocalizer.SetLocalizedText("title_notification", title_notification);
-        textLocalizer.SetLocalizedText("popup_detail_language_change", popup_detail_language_change);
     }
 
     public void ApplyFont(ref Dictionary<string, TMP_FontAsset> localizedFonts)
@@ -222,7 +312,31 @@ public class ApplyText : MonoBehaviour, ILocalizeObject
             setting_sound, setting_sound_on, setting_sound_off, setting_language, setting_language_1,
             setting_language_2, setting_privacy_policy, setting_term_of_condition, setting_credit
            , popup_detail_quit, popup_detail_language_change, popup_detail_credit,
-         
+
+        // Object
+        objectName, objectStory, objectBattle, libraryObjectStory, libraryObjectBattleInfor,
+
+        // Rider
+        riderNameLib, riderStory, riderWeight, riderHeight, riderPunch, riderKick,
+
+        // Library
+        libraryFeatureName, libraryButtonTutorial, libraryRiderSectionTitle, libraryObjectSectionTitle,
+        libraryRiderTitle, libraryObjectTitle, libraryRiderAmount, libraryObjectAmount, libraryRiderStory,
+        libraryRiderBattleInfor, libraryRiderForm, libraryRiderWeight, libraryRiderHeight,
+        libraryRiderPunchPower, libraryRiderKickPower,
+
+        // Tutorial
+        tutorial_how_to_win, tutorial_how_to_win_explain, tutorial_how_to_move, tutorial_how_to_move_explain,
+        tutorial_use_skill, tutorial_use_skill_explain, tutorial_replay, tutorial_replay_explain,
+
+        // Shop
+        shop_title, shop_daily_pack_title, shop_daily_pack_tag_free,
+        shop_help_money_1_title, shop_help_money_1_content, shop_help_hot_deal_title, shop_help_hot_deal_content,
+        shop_help_rider_shop_title, shop_help_rider_shop_content, button_shop_hot_deal, button_shop_rider,
+        // shop_owned_rider, // Nếu có active lại thì thêm vào đây
+        shop_noti_buy_rider, shop_congratulation, shop_congratulation_rider_get,
+        shop_sort_default, shop_sort_day, shop_sort_price
+
         };
 
         foreach (var text in allTexts)
@@ -233,6 +347,7 @@ public class ApplyText : MonoBehaviour, ILocalizeObject
         fontLocalizer.SetLocalizedFont("button_no", button_no);
         fontLocalizer.SetLocalizedFont("button_yes", button_yes);
         fontLocalizer.SetLocalizedFont("button_skill", button_skill);
+        fontLocalizer.SetLocalizedFont("button_skill", button_exchange);
         fontLocalizer.SetLocalizedFont("title_notification", title_notification);
     }
 }

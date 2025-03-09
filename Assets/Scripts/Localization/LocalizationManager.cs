@@ -74,7 +74,7 @@ public class LocalizationManager : MonoBehaviour
     {
         if (applyTextScript != null)
         {
-            applyTextScript.ApplyText1(ref  richText, ref this.localizedTexts);
+            applyTextScript.ApplyTxt(ref  richText, ref this.localizedTexts);
             applyTextScript.ApplyFont(ref localizedFonts);
         }
     }

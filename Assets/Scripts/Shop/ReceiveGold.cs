@@ -11,8 +11,14 @@ public class ReceiveGold : MonoBehaviour
     [SerializeField] public Button exchangeBtn;
     [SerializeField] private int goldAmount;
     [SerializeField] private TextMeshProUGUI allGoldTxt;
+    private void OnEnable()
+    {
+        ApplyText.instance.textLocalizer.SetLocalizedText("shop_daily_pack_title",
+           nameGiftTxt);
+    }
     private void Start()
     {
+        
         exchangeBtn.onClick.AddListener(() => Exchange());
     }
     public void SetGold(int goldAmount)
@@ -22,7 +28,9 @@ public class ReceiveGold : MonoBehaviour
     }
     public void Exchange()
     {
-        nameGiftTxt.text = "You received";
+        ApplyText.instance.textLocalizer.SetLocalizedText("shop_receive_package",
+             nameGiftTxt);
+        //nameGiftTxt.text = "You received";
         GoldManager.instance.AddGold(goldAmount);
         exchangeBtn.gameObject.SetActive(false);
     }

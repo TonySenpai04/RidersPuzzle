@@ -9,6 +9,7 @@ public class DailyGift : MonoBehaviour
     [SerializeField] private string saveFilePath;
     [SerializeField] private int goldAmount = 5;
     [SerializeField] private Button giftButton;
+    [SerializeField] private Button exChangeBtn;
     [SerializeField] private ReceiveGold receiveGold;
 
     private void Start()
@@ -30,15 +31,26 @@ public class DailyGift : MonoBehaviour
 
         if (giftData.lastClaimDate == serverDate)
         {
-            giftButton.GetComponentInChildren<TextMeshProUGUI>().text = "Claimed";
+            ApplyText.instance.textLocalizer.SetLocalizedText("shop_claimed",
+                giftButton.GetComponentInChildren<TextMeshProUGUI>());
+           // giftButton.GetComponentInChildren<TextMeshProUGUI>().text = "Claimed";
         }
         else
         {
-            giftButton.GetComponentInChildren<TextMeshProUGUI>().text = "FREE";
+            ApplyText.instance.textLocalizer.SetLocalizedText("shop_daily_pack_tag_free",
+               giftButton.GetComponentInChildren<TextMeshProUGUI>());
+            //giftButton.GetComponentInChildren<TextMeshProUGUI>().text = "FREE";
+            giftButton.onClick.AddListener(() => ShowExchangeBtn());
             giftButton.onClick.AddListener(() => SoundManager.instance.PlaySFX("Click Sound"));
-            giftButton.onClick.AddListener(ClaimGift);
+            exChangeBtn.onClick.AddListener(ClaimGift);
         }
     }
+    public void ShowExchangeBtn()
+    {
+
+        exChangeBtn.gameObject.SetActive(!exChangeBtn.gameObject.activeSelf);
+    }
+   
 
     public void ClaimGift()
     {
@@ -56,11 +68,14 @@ public class DailyGift : MonoBehaviour
 
         receiveGold.gameObject.SetActive(true);
         receiveGold.SetGold(this.goldAmount);
-       
+        exChangeBtn.gameObject.SetActive(false);
+
     }
     public void ReceiveGift()
     {
-        giftButton.GetComponentInChildren<TextMeshProUGUI>().text = "Claimed";
+        ApplyText.instance.textLocalizer.SetLocalizedText("shop_claimed",
+              giftButton.GetComponentInChildren<TextMeshProUGUI>());
+      //  giftButton.GetComponentInChildren<TextMeshProUGUI>().text = "Claimed";
         giftButton.onClick.RemoveAllListeners();
         giftButton.onClick.AddListener(() => SoundManager.instance.PlaySFX("Click Sound"));
 

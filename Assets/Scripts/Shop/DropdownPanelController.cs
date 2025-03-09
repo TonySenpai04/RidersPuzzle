@@ -29,6 +29,7 @@ public class DropdownPanelController : MonoBehaviour
         {
             btn.onClick.AddListener(() => ToggleImageSize(btn));
         }
+        ToggleImageSize(buttons[0]);
     }
 
     private void ToggleImageSize(Button clickedButton)
