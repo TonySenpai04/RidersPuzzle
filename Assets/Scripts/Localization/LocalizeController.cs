@@ -136,7 +136,3 @@ public class LocalizeController : MonoBehaviour
         Vietnamese = 5
     }
 }
-public class LanguageData
-{
-    public int languageCode;
-}

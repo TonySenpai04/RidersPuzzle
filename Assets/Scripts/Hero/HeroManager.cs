@@ -17,16 +17,7 @@ public struct DataHero
     public string skillDescription;
     public string story;
 }
-[Serializable]
-public class UnlockHeroData
-{
-    public List<int> seenHeroIds;
 
-    public UnlockHeroData(List<int> ids)
-    {
-        seenHeroIds = ids;
-    }
-}
 public class HeroManager : MonoBehaviour
 {
      public List<DataHero> heroDatas;

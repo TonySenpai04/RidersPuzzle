@@ -3,11 +3,6 @@ using System.Collections;
 using System.Collections.Generic;
 using System.IO;
 using UnityEngine;
-[Serializable]
-public class GoldData
-{
-    public int amount;
-}
 public class GoldManager : MonoBehaviour
 {
     public string goldPath=>Path.Combine(Application.persistentDataPath, "GoldData.json");

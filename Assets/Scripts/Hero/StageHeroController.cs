@@ -159,8 +159,4 @@ public class StageHeroController : MonoBehaviour
         }
     }
 }
-[System.Serializable]
-public class SelectedHeroData
-{
-    public int SelectedHeroID;
-}
+

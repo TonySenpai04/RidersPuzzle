@@ -3,16 +3,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using UnityEngine;
-[System.Serializable]
-public class SeenObjectsData
-{
-    public List<int> seenObjectIds;
 
-    public SeenObjectsData(List<int> ids)
-    {
-        seenObjectIds = ids;
-    }
-}
 
 public class HiddenObjectManager : MonoBehaviour
 {

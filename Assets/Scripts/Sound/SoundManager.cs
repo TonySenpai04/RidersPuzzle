@@ -15,11 +15,7 @@ public class HeroSound
     public int id;
     public List<AudioClip> clip;
 }
-[System.Serializable]
-public class SoundData
-{
-    public bool isMute;
-}
+
 public class SoundManager : MonoBehaviour
 {
     private string soundDataPath => Path.Combine(Application.persistentDataPath , "SoundData.json");

@@ -119,8 +119,4 @@ public class FirstPlayManager : MonoBehaviour
         }
     }
 }
-[System.Serializable]
-public class FirstPlayData
-{
-    public bool isFirst;
-}
+

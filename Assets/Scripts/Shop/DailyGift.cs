@@ -96,9 +96,5 @@ public class DailyGift : MonoBehaviour
         File.WriteAllText(saveFilePath, json);
     }
 
-    [System.Serializable]
-    private class DailyGiftData
-    {
-        public string lastClaimDate = "";
-    }
+   
 }

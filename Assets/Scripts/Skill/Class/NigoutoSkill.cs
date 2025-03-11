@@ -24,6 +24,7 @@ internal class NigoutoSkill : BaseSkill
 
             Vector2Int[] positions = new Vector2Int[]
             {
+                new Vector2Int(currentRow, currentCol),
             new Vector2Int(currentRow + 1, currentCol),
             new Vector2Int(currentRow - 1, currentCol),
             new Vector2Int(currentRow, currentCol - 1),
