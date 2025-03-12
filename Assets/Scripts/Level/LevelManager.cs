@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEditor;
 using UnityEngine;
 
@@ -57,8 +58,8 @@ public class LevelManager : MonoBehaviour
     }
     void Start()
     {
-        LoadLevelData();
-        LoadLevel();
+        //LoadLevelData();
+       // LoadLevel();
     }
     public int  GetTotalLevel()
     {
@@ -79,19 +80,21 @@ public class LevelManager : MonoBehaviour
     {
         levelDataController.LoadLevelData(levels);
         levelDataController.LoadLevelData(levelsClone);
-        List<LevelProgressData> allProgress = SaveGameManager.instance.LoadAllProgress();
-        foreach (var progress in allProgress)
+        FirebaseAuthSimpleManager.Instance.LoadPlayerData((loadedData) =>
         {
-            int lv = progress.levelIndex;
-            if (lv >= 0 && lv < levels.Count)
+            List<LevelProgressData> allProgress = loadedData.levelData;
+            foreach (var progress in allProgress)
             {
-                Level tempLevel = levels[lv];
-                tempLevel.isUnlock = progress.isUnlocked;
-                tempLevel.isComplete = progress.isComplete;
-                levels[lv] = tempLevel;
+                int lv = progress.levelIndex;
+                if (lv >= 0 && lv < levels.Count)
+                {
+                    Level tempLevel = levels[lv];
+                    tempLevel.isUnlock = progress.isUnlocked;
+                    tempLevel.isComplete = progress.isComplete;
+                    levels[lv] = tempLevel;
+                }
             }
-        }
-        int highestCompleteLevel = -1; 
+             int highestCompleteLevel = -1; 
         for (int i = 0; i < levels.Count; i++)
         {
             if (levels[i].isUnlock && levels[i].isComplete)
@@ -108,6 +111,9 @@ public class LevelManager : MonoBehaviour
             levels[highestCompleteLevel + 1] = tempLevel;
         }
 
+        });
+        
+       
     }
 
     public  LevelDataInfo GetCurrentLevelData()
@@ -360,6 +366,9 @@ public class LevelManager : MonoBehaviour
 
         Debug.Log("All levels have been reset.");
     }
-
+    public int GetAllLevelComplete()
+    {
+        return levels.Where(h => h.isComplete).ToList().Count;
+    }
 }
 

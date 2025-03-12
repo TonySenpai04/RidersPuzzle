@@ -8,7 +8,7 @@ public class SliderController : MonoBehaviour
 
     public bool isRunning = true;
     public Slider slider;
-    public float speed = 0.5f;
+    public float speed = 0.1f;
     float time = 0f;
     public GameObject btnStart;
     public GameObject panelTransition;

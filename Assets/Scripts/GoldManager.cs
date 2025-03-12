@@ -8,10 +8,10 @@ public class GoldManager : MonoBehaviour
     public string goldPath=>Path.Combine(Application.persistentDataPath, "GoldData.json");
     public int currentGold;
     public static GoldManager instance;
-    private void Start()
+    private void Awake()
     {
         instance = this;
-        LoadData();
+        LoadLocal();
     }
     public void SaveGold()
     {
@@ -20,12 +20,21 @@ public class GoldManager : MonoBehaviour
         File.WriteAllText(goldPath, json);
 
     }
-    public void LoadData()
+    public void LoadCloudData()
     {
-        if(File.Exists(goldPath))
+        FirebaseAuthSimpleManager.Instance.LoadPlayerData((loadedData) =>
         {
-            string json=File.ReadAllText(goldPath);
-            var gold=JsonUtility.FromJson<GoldData>(json);
+            currentGold = loadedData.gold;
+        });
+
+
+    }
+    public void LoadLocal()
+    {
+        if (File.Exists(goldPath))
+        {
+            string json = File.ReadAllText(goldPath);
+            var gold = JsonUtility.FromJson<GoldData>(json);
             this.currentGold = gold.amount;
         }
     }

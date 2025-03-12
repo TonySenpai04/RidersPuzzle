@@ -2,6 +2,7 @@
   "project_info": {
     "project_number": "153226551240",
     "project_id": "riders-puzzle",
+    "firebase_url":"https://riders-puzzle-default-rtdb.firebaseio.com",
     "storage_bucket": "riders-puzzle.firebasestorage.app"
   },
   "client": [

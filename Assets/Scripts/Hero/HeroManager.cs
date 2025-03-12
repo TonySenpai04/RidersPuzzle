@@ -40,6 +40,21 @@ public class HeroManager : MonoBehaviour
     {
         return heroDatas.Where(h=>h.isUnlock).ToList();
     }
+    public UnlockHeroData GetUnlockHeroID()
+    {
+        List<int> ids = heroDatas.Where(h => h.isUnlock).Select(h => h.id).ToList();
+        return new UnlockHeroData(ids);
+    }
+    public void LoadCloudUnlockHero()
+    {
+        FirebaseAuthSimpleManager.Instance.LoadPlayerData((loadedData) =>
+        {
+            foreach (int id in loadedData.unlockHeroData.seenHeroIds)
+            {
+                UnlockHero(id);
+            }
+        });
+    }
     public void UnlockHero(int id)
     {
         int index = heroDatas.FindIndex(h => h.id == id);

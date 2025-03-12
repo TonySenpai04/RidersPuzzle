@@ -1,191 +1,134 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-using Firebase;
-using Firebase.Auth;
-using Firebase.Database;
+﻿//using System.Collections;
+//using UnityEngine;
+//using Firebase;
+//using Firebase.Auth;
+//using Firebase.Database;
+//using Firebase.Extensions;
+//[System.Serializable]
+//public class PlayerData
+//{
+//    public string playerId;
+//    public string playerName;
+//    public int level;
+//    public int gold;
 
-[System.Serializable]
-public class GameData
-{
-    public int gold;
-    public int level;
-    public int gpgs;
+//    // Constructor có tham số
+//    public PlayerData(string id, string name, int level, int gold)
+//    {
+//        this.playerId = id;
+//        this.playerName = name;
+//        this.level = level;
+//        this.gold = gold;
+//    }
 
-    public GameData(int gold, int level, int gpgs)
-    {
-        this.gold = gold;
-        this.level = level;
-        this.gpgs = gpgs;
-    }
-}
+//    // Constructor mặc định (bắt buộc nếu dùng Firebase)
+//    public PlayerData() { }
+//}
 
-public class FirebaseManager : MonoBehaviour
-{
-    public static FirebaseManager Instance;
 
-    private FirebaseAuth auth;
-    private DatabaseReference dbReference;
-    private FirebaseUser user;
+//public class FirebaseManager : MonoBehaviour
+//{
+//    private DatabaseReference dbRef;
+//    private FirebaseAuth auth;
+//    private FirebaseUser user;
 
-    public bool isFirebaseReady = false;
+//    private void Start()
+//    {
+//        InitializeFirebase();
+//    }
 
-    private void Awake()
-    {
-        if (Instance == null)
-        {
-            Instance = this;
-            DontDestroyOnLoad(gameObject);
-            InitializeFirebase();
-        }
-        else
-        {
-            Destroy(gameObject);
-        }
-    }
+//    private void InitializeFirebase()
+//    {
+//        FirebaseApp.CheckAndFixDependenciesAsync().ContinueWithOnMainThread(task =>
+//        {
+//            if (task.Result == DependencyStatus.Available)
+//            {
+//                FirebaseApp app = FirebaseApp.DefaultInstance;
 
-    private void Start()
-    {
-        // Delay nhẹ để tránh xung đột khi Play Mode khởi động
-        StartCoroutine(DelayedStart());
-    }
+//                // ✅ THÊM DÒNG NÀY để tránh lỗi DatabaseURL
+//                app.Options.DatabaseUrl = new System.Uri("https://riders-puzzle-default-rtdb.asia-southeast1.firebasedatabase.app/"); // <== THAY ĐÚNG URL CỦA BẠN Ở ĐÂY
 
-    IEnumerator DelayedStart()
-    {
-        yield return new WaitForSeconds(1f); // Delay nhẹ tránh treo
-        StartCoroutine(WaitForFirebaseReadyAndStart());
-    }
+//                auth = FirebaseAuth.DefaultInstance;
+//                dbRef = FirebaseDatabase.DefaultInstance.RootReference;
 
-    IEnumerator WaitForFirebaseReadyAndStart()
-    {
-        float timeout = 10f;
-        float elapsed = 0f;
+//                Debug.Log("✅ Firebase initialized.");
+//            }
+//            else
+//            {
+//                Debug.LogError("❌ Firebase initialization failed: " + task.Result);
+//            }
+//        });
+//    }
 
-        while (!isFirebaseReady && elapsed < timeout)
-        {
-            elapsed += Time.deltaTime;
-            yield return null;
-        }
+//    // Hàm lưu dữ liệu
+//    public void SaveGameData(GameData data)
+//    {
+//        if (FirebaseAuth.DefaultInstance.CurrentUser == null)
+//        {
+//            Debug.LogWarning("⚠️ No user is logged in.");
+//            return;
+//        }
 
-        if (!isFirebaseReady)
-        {
-            Debug.LogWarning("⏳ Firebase chưa sẵn sàng sau thời gian chờ.");
-            yield break;
-        }
+//        string userId = FirebaseAuth.DefaultInstance.CurrentUser.UserId;
+//        string json = JsonUtility.ToJson(data);
 
-        Debug.Log("✅ Firebase đã sẵn sàng → Bắt đầu xử lý dữ liệu");
+//        dbRef.Child("users").Child(userId).Child("gameData").SetRawJsonValueAsync(json).ContinueWithOnMainThread(task =>
+//        {
+//            if (task.IsCompleted)
+//                Debug.Log("✅ Game data saved!");
+//            else
+//                Debug.LogError("❌ Save failed: " + task.Exception);
+//        });
+//    }
 
-        // Dữ liệu mẫu để test
-        GameData sampleData = new GameData(200, 5, 1);
+//    // Hàm tải dữ liệu
+//    public void LoadGameData(System.Action<GameData> onLoaded)
+//    {
+//        if (FirebaseAuth.DefaultInstance.CurrentUser == null)
+//        {
+//            Debug.LogWarning("⚠️ No user is logged in.");
+//            onLoaded?.Invoke(null);
+//            return;
+//        }
 
-        // Lưu
-        SaveData(sampleData);
+//        string userId = FirebaseAuth.DefaultInstance.CurrentUser.UserId;
 
-        // Load lại
-        LoadData(OnDataLoaded);
-    }
+//        dbRef.Child("users").Child(userId).Child("gameData").GetValueAsync().ContinueWithOnMainThread(task =>
+//        {
+//            if (task.IsFaulted || task.IsCanceled)
+//            {
+//                Debug.LogError("❌ Load failed: " + task.Exception);
+//                onLoaded?.Invoke(null);
+//            }
+//            else if (task.Result.Exists)
+//            {
+//                string json = task.Result.GetRawJsonValue();
+//                GameData data = JsonUtility.FromJson<GameData>(json);
+//                Debug.Log("✅ Game data loaded!");
+//                onLoaded?.Invoke(data);
+//            }
+//            else
+//            {
+//                Debug.LogWarning("⚠️ No data found for this user.");
+//                onLoaded?.Invoke(null);
+//            }
+//        });
+//    }
 
-    void OnDataLoaded(GameData data)
-    {
-        if (data != null)
-        {
-            Debug.Log($"📥 Dữ liệu đã load: Gold={data.gold}, Level={data.level}, GPGS={data.gpgs}");
-        }
-        else
-        {
-            Debug.LogWarning("❌ Không có dữ liệu hoặc load thất bại.");
-        }
-    }
+//    // Test function
+//    public void Test()
+//    {
+//        GameData newData = new GameData(500, 10, 1);
+//        SaveGameData(newData);
 
-    void InitializeFirebase()
-    {
-        FirebaseApp.CheckAndFixDependenciesAsync().ContinueWith(task =>
-        {
-            var status = task.Result;
-            if (status == DependencyStatus.Available)
-            {
-                auth = FirebaseAuth.DefaultInstance;
-                SignInAnonymously();
-            }
-            else
-            {
-                Debug.LogError("❌ Firebase dependency error: " + status);
-                isFirebaseReady = true; // tránh treo nếu lỗi dependency
-            }
-        });
-    }
-
-    void SignInAnonymously()
-    {
-        auth.SignInAnonymouslyAsync().ContinueWith(task =>
-        {
-            if (task.IsCompleted)
-            {
-                if (task.Exception == null)
-                {
-                    user = auth.CurrentUser;
-                    dbReference = FirebaseDatabase.DefaultInstance.RootReference;
-                    Debug.Log("🔐 Đăng nhập ẩn danh thành công - UserID: " + user.UserId);
-                }
-                else
-                {
-                    Debug.LogError("❌ Đăng nhập ẩn danh thất bại: " + task.Exception);
-                }
-
-                // Dù thành công hay lỗi cũng không nên treo app
-                isFirebaseReady = true;
-            }
-        });
-    }
-
-    public void SaveData(GameData data)
-    {
-        if (!isFirebaseReady || user == null)
-        {
-            Debug.LogWarning("⚠️ Firebase chưa sẵn sàng hoặc chưa có user - không thể lưu.");
-            return;
-        }
-
-        string userId = user.UserId;
-        string jsonData = JsonUtility.ToJson(data);
-
-        dbReference.Child("users").Child(userId).SetRawJsonValueAsync(jsonData).ContinueWith(task =>
-        {
-            if (task.IsCompleted && task.Exception == null)
-            {
-                Debug.Log("✅ Dữ liệu đã lưu thành công.");
-            }
-            else
-            {
-                Debug.LogError("❌ Lỗi khi lưu dữ liệu: " + task.Exception);
-            }
-        });
-    }
-
-    public void LoadData(System.Action<GameData> onDataLoaded)
-    {
-        if (!isFirebaseReady || user == null)
-        {
-            Debug.LogWarning("⚠️ Firebase chưa sẵn sàng hoặc chưa có user - không thể load.");
-            return;
-        }
-
-        string userId = user.UserId;
-
-        dbReference.Child("users").Child(userId).GetValueAsync().ContinueWith(task =>
-        {
-            if (task.IsCompleted && task.Exception == null && task.Result.Exists)
-            {
-                string json = task.Result.GetRawJsonValue();
-                GameData data = JsonUtility.FromJson<GameData>(json);
-                Debug.Log("📥 Dữ liệu đã load thành công từ Firebase.");
-                onDataLoaded?.Invoke(data);
-            }
-            else
-            {
-                Debug.LogWarning("❌ Load dữ liệu thất bại hoặc không tồn tại.");
-                onDataLoaded?.Invoke(null);
-            }
-        });
-    }
-}
+//        LoadGameData((loadedData) =>
+//        {
+//            if (loadedData != null)
+//            {
+//                Debug.Log("Gold: " + loadedData.gold);
+//                Debug.Log("Total Level: " + loadedData.totalLevel);
+//                Debug.Log("GPGS: " + loadedData.gpgs);
+//            }
+//        });
+//    }
+//}

@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -22,14 +23,15 @@ public class ButtonStageController : MonoBehaviour
     [SerializeField] private TutorialController tutorial;
     [SerializeField] private ObjectLibraryController objectLibraryController;
 
-    void Start()
+    private async void Start()
     {
+        await Task.Delay(2500);
         notiObject.gameObject.SetActive(false);
         CreateButtons();
         stageZone.SetActive(false);
 
     }
-
+    
     private void CreateButtons()
     {
         totalLevels = levelManager.GetTotalLevel();
