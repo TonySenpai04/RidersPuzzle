@@ -22,7 +22,7 @@ public class GoldManager : MonoBehaviour
     }
     public void LoadCloudData()
     {
-        FirebaseAuthSimpleManager.Instance.LoadPlayerData((loadedData) =>
+        FirebaseDataManager.Instance.LoadPlayerData((loadedData) =>
         {
             currentGold = loadedData.gold;
         });

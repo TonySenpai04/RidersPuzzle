@@ -47,7 +47,7 @@ public class HeroManager : MonoBehaviour
     }
     public void LoadCloudUnlockHero()
     {
-        FirebaseAuthSimpleManager.Instance.LoadPlayerData((loadedData) =>
+        FirebaseDataManager.Instance.LoadPlayerData((loadedData) =>
         {
             foreach (int id in loadedData.unlockHeroData.seenHeroIds)
             {

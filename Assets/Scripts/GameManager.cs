@@ -143,7 +143,7 @@ public class GameManager : MonoBehaviour
             hasPlayedWinSound = true;
         }
 
-        SaveGameManager.instance.SaveLevelProgress(LevelManager.instance.GetCurrentLevelData().level, true, true);
+       // SaveGameManager.instance.SaveLevelProgress(LevelManager.instance.GetCurrentLevelData().level, true, true);
         panelWin.SetActive(true);
         LevelManager.instance.UnlockNextLevel();
         LevelManager.instance.ClearObject();

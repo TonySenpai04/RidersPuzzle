@@ -9,6 +9,7 @@ using System.Threading.Tasks;
 [System.Serializable]
 public class PlayerData
 {
+    public string name;
     public int totalLevel;
     public int gold;
     public List<LevelProgressData> levelData;
@@ -16,8 +17,9 @@ public class PlayerData
 
     public PlayerData() { }
 
-    public PlayerData( int level, int gold, List<LevelProgressData> data, UnlockHeroData unlockHeroData)
+    public PlayerData(string name, int level, int gold, List<LevelProgressData> data, UnlockHeroData unlockHeroData)
     {
+        this.name = name;
         this.totalLevel = level;
         this.gold = gold;
         this.levelData = data;
@@ -26,9 +28,9 @@ public class PlayerData
 }
 
 
-public class FirebaseAuthSimpleManager : MonoBehaviour
+public class FirebaseDataManager : MonoBehaviour
 {
-    public static FirebaseAuthSimpleManager Instance;
+    public static FirebaseDataManager Instance;
 
     private FirebaseAuth auth;
     private DatabaseReference dbRef;
@@ -145,7 +147,7 @@ public class FirebaseAuthSimpleManager : MonoBehaviour
         if (currentUser == null)
         {
             Debug.Log("⚠ Chưa đăng nhập!");
-            PlayerData newData = new PlayerData(SaveGameManager.instance.LoadAllProgress().Count,
+            PlayerData newData = new PlayerData("Tony",SaveGameManager.instance.LoadAllProgress().Count,
                 GoldManager.instance.GetGold(), SaveGameManager.instance.LoadAllProgress(),HeroManager.instance.GetUnlockHeroID());
             onDataLoaded?.Invoke(newData);
             return;
@@ -169,10 +171,10 @@ public class FirebaseAuthSimpleManager : MonoBehaviour
     {
         return currentUser;
     }
-    public void Example(int level, int gold, List<LevelProgressData> data,UnlockHeroData unlockHeroData)
+    public void Example(string name,int level, int gold, List<LevelProgressData> data,UnlockHeroData unlockHeroData)
     {
         // Tạo dữ liệu và lưu
-        PlayerData newData = new PlayerData(level, gold, data,unlockHeroData);
+        PlayerData newData = new PlayerData(name,level, gold, data,unlockHeroData);
         SavePlayerData(newData);
 
         // Tải dữ liệu

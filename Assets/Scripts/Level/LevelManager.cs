@@ -80,7 +80,7 @@ public class LevelManager : MonoBehaviour
     {
         levelDataController.LoadLevelData(levels);
         levelDataController.LoadLevelData(levelsClone);
-        FirebaseAuthSimpleManager.Instance.LoadPlayerData((loadedData) =>
+        FirebaseDataManager.Instance.LoadPlayerData((loadedData) =>
         {
             List<LevelProgressData> allProgress = loadedData.levelData;
             foreach (var progress in allProgress)
@@ -168,7 +168,7 @@ public class LevelManager : MonoBehaviour
             nextLevel.isUnlock = true; 
             levels[nextLevelIndex] = nextLevel;
             SaveGameManager.instance.SaveLevelProgress(lv, tempLevel.isUnlock, tempLevel.isComplete);
-            SaveGameManager.instance.SaveLevelProgress(nextLevelIndex, nextLevel.isUnlock, nextLevel.isComplete);
+          //  SaveGameManager.instance.SaveLevelProgress(nextLevelIndex, nextLevel.isUnlock, nextLevel.isComplete);
         }
       
     }
