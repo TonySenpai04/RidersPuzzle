@@ -52,7 +52,7 @@ public class FirebaseDataManager : MonoBehaviour
                 Debug.Log(dbRef);
 
                 // Auto test login (bạn có thể xóa dòng này nếu muốn test thủ công)
-                Login("Admin1@gmail.com", "Admin1");
+              // Login("Admin1@gmail.com", "Admin1");
                
             }
             else
@@ -63,30 +63,84 @@ public class FirebaseDataManager : MonoBehaviour
     }
 
     // 🔐 Đăng ký tài khoản
-    public void Register(string email, string password)
+    public void Register(string email, string password, System.Action<bool, string> onResult = null)
     {
         auth.CreateUserWithEmailAndPasswordAsync(email, password).ContinueWithOnMainThread(task =>
         {
             if (task.IsFaulted || task.IsCanceled)
             {
-                Debug.LogError("❌ Register failed: " + task.Exception);
+                Debug.Log("❌ Register failed: " + task.Exception);
+
+                string errorMessage = "Đăng ký thất bại. Vui lòng kiểm tra thông tin.";
+
+                if (task.Exception != null && task.Exception.InnerExceptions.Count > 0)
+                {
+                    var firebaseEx = task.Exception.InnerExceptions[0] as FirebaseException;
+                    if (firebaseEx != null)
+                    {
+                        switch ((AuthError)firebaseEx.ErrorCode)
+                        {
+                            case AuthError.EmailAlreadyInUse:
+                                errorMessage = "Email đã được sử dụng.";
+                                break;
+                            case AuthError.InvalidEmail:
+                                errorMessage = "Email không hợp lệ.";
+                                break;
+                            case AuthError.WeakPassword:
+                                errorMessage = "Mật khẩu quá yếu. (ít nhất 6 ký tự)";
+                                break;
+                            default:
+                                errorMessage = "Đăng ký thất bại: " + firebaseEx.Message;
+                                break;
+                        }
+                    }
+                }
+
+                onResult?.Invoke(false, errorMessage);
                 return;
             }
 
             currentUser = task.Result.User;
             Debug.Log("✅ Registered: " + currentUser.Email);
+            onResult?.Invoke(true, null);
         });
     }
 
 
+
     // 🔐 Đăng nhập tài khoản
-    public void Login(string email, string password)
+    public void Login(string email, string password, System.Action<bool, string> onResult = null)
     {
         auth.SignInWithEmailAndPasswordAsync(email, password).ContinueWithOnMainThread(task =>
         {
             if (task.IsFaulted || task.IsCanceled)
             {
                 Debug.Log("❌ Login failed: " + task.Exception);
+                string errorMessage = "Đăng nhập thất bại. Vui lòng kiểm tra tài khoản hoặc mật khẩu.";
+                if (task.Exception != null && task.Exception.InnerExceptions.Count > 0)
+                {
+                    var firebaseEx = task.Exception.InnerExceptions[0] as FirebaseException;
+                    if (firebaseEx != null)
+                    {
+                        switch ((AuthError)firebaseEx.ErrorCode)
+                        {
+                            case AuthError.InvalidEmail:
+                                errorMessage = "Email không hợp lệ.";
+                                break;
+                            case AuthError.WrongPassword:
+                                errorMessage = "Sai mật khẩu.";
+                                break;
+                            case AuthError.UserNotFound:
+                                errorMessage = "Tài khoản không tồn tại.";
+                                break;
+                            default:
+                                errorMessage = "Đăng nhập thất bại: " + firebaseEx.Message;
+                                break;
+                        }
+                    }
+                }
+
+                onResult?.Invoke(false, errorMessage);
                 LoadPlayerData((data) =>
                 {
                     if (data != null)
@@ -119,9 +173,12 @@ public class FirebaseDataManager : MonoBehaviour
                 }
                 else
                 {
+                    Example("Tony2", LevelManager.instance.GetAllLevelComplete(), GoldManager.instance.GetGold(),
+           SaveGameManager.instance.LoadAllProgress(), HeroManager.instance.GetUnlockHeroID());
                     Debug.Log("📂 Chưa có dữ liệu. Tạo mới nếu cần.");
                 }
             });
+            onResult?.Invoke(true, null);
 
         });
     }

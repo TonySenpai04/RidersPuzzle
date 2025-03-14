@@ -51,6 +51,7 @@ public class ButtonStageController : MonoBehaviour
     }
     private void OnEnable()
     {
+
         if (!GameManager.instance.isMainActive)
         {
             SoundManager.instance.PlayMusic("Home Screen");

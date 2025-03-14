@@ -59,7 +59,40 @@ public class LevelManager : MonoBehaviour
     void Start()
     {
         //LoadLevelData();
-       // LoadLevel();
+        // LoadLevel();
+        levelDataController.LoadLevelData(levels);
+        levelDataController.LoadLevelData(levelsClone);
+     
+            List<LevelProgressData> allProgress = SaveGameManager.instance.LoadAllProgress();
+            foreach (var progress in allProgress)
+            {
+                int lv = progress.levelIndex;
+                if (lv >= 0 && lv < levels.Count)
+                {
+                    Level tempLevel = levels[lv];
+                    tempLevel.isUnlock = progress.isUnlocked;
+                    tempLevel.isComplete = progress.isComplete;
+                    levels[lv] = tempLevel;
+                }
+            }
+            int highestCompleteLevel = -1;
+            for (int i = 0; i < levels.Count; i++)
+            {
+                if (levels[i].isUnlock && levels[i].isComplete)
+                {
+                    highestCompleteLevel = i;
+                }
+            }
+
+
+            if (highestCompleteLevel + 1 < levels.Count)
+            {
+                Level tempLevel = levels[highestCompleteLevel + 1];
+                tempLevel.isUnlock = true;
+                levels[highestCompleteLevel + 1] = tempLevel;
+            }
+
+       
     }
     public int  GetTotalLevel()
     {
@@ -78,6 +111,8 @@ public class LevelManager : MonoBehaviour
     }
     public void LoadLevelData()
     {
+        levels.Clear();
+        levelsClone.Clear();
         levelDataController.LoadLevelData(levels);
         levelDataController.LoadLevelData(levelsClone);
         FirebaseDataManager.Instance.LoadPlayerData((loadedData) =>
