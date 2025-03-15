@@ -35,6 +35,7 @@ public class FirebaseDataManager : MonoBehaviour
     private FirebaseAuth auth;
     private DatabaseReference dbRef;
     private FirebaseUser currentUser;
+    public string username;
 
     private void Awake()
     {
@@ -63,7 +64,7 @@ public class FirebaseDataManager : MonoBehaviour
     }
 
     // 🔐 Đăng ký tài khoản
-    public void Register(string email, string password, System.Action<bool, string> onResult = null)
+    public void Register(string email, string password, string username, System.Action<bool, string> onResult = null)
     {
         auth.CreateUserWithEmailAndPasswordAsync(email, password).ContinueWithOnMainThread(task =>
         {
@@ -101,6 +102,7 @@ public class FirebaseDataManager : MonoBehaviour
             }
 
             currentUser = task.Result.User;
+            this.username= username;
             Debug.Log("✅ Registered: " + currentUser.Email);
             onResult?.Invoke(true, null);
         });
@@ -145,6 +147,7 @@ public class FirebaseDataManager : MonoBehaviour
                 {
                     if (data != null)
                     {
+                        this.username = data.name;
                         LevelManager.instance.LoadLevelData();
                         GoldManager.instance.LoadCloudData();
                         HeroManager.instance.LoadCloudUnlockHero();
@@ -169,11 +172,11 @@ public class FirebaseDataManager : MonoBehaviour
                     LevelManager.instance.LoadLevelData();
                     GoldManager.instance.LoadCloudData();
                     HeroManager.instance.LoadCloudUnlockHero();
-                    Debug.Log("🎮 Dữ liệu người chơi: " + data.gold + " - Level: " + data.totalLevel);
+                    Debug.Log("🎮 Dữ liệu người chơi: " + data.gold + " - Level: " + data.totalLevel+"-Name" +data.name);
                 }
                 else
                 {
-                    Example("Tony2", LevelManager.instance.GetAllLevelComplete(), GoldManager.instance.GetGold(),
+                    Example(LevelManager.instance.GetAllLevelComplete(), GoldManager.instance.GetGold(),
            SaveGameManager.instance.LoadAllProgress(), HeroManager.instance.GetUnlockHeroID());
                     Debug.Log("📂 Chưa có dữ liệu. Tạo mới nếu cần.");
                 }
@@ -204,7 +207,7 @@ public class FirebaseDataManager : MonoBehaviour
         if (currentUser == null)
         {
             Debug.Log("⚠ Chưa đăng nhập!");
-            PlayerData newData = new PlayerData("Tony",SaveGameManager.instance.LoadAllProgress().Count,
+            PlayerData newData = new PlayerData(username,SaveGameManager.instance.LoadAllProgress().Count,
                 GoldManager.instance.GetGold(), SaveGameManager.instance.LoadAllProgress(),HeroManager.instance.GetUnlockHeroID());
             onDataLoaded?.Invoke(newData);
             return;
@@ -228,10 +231,10 @@ public class FirebaseDataManager : MonoBehaviour
     {
         return currentUser;
     }
-    public void Example(string name,int level, int gold, List<LevelProgressData> data,UnlockHeroData unlockHeroData)
+    public void Example(int level, int gold, List<LevelProgressData> data,UnlockHeroData unlockHeroData)
     {
         // Tạo dữ liệu và lưu
-        PlayerData newData = new PlayerData(name,level, gold, data,unlockHeroData);
+        PlayerData newData = new PlayerData(username,level, gold, data,unlockHeroData);
         SavePlayerData(newData);
 
         // Tải dữ liệu

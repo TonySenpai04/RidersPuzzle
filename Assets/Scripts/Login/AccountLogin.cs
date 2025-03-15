@@ -10,13 +10,15 @@ using UnityEngine.UI;
 
 public class AccountLogin : MonoBehaviour
 {
-    public InputField userNameLogin;
+    public InputField emailLogin;
     public InputField passwordLogin;
-    public InputField userNameRegister;
+    public InputField emailRegister;
     public InputField passwordRegister;
+    public InputField userName;
     public TextMeshProUGUI errorTextLogin;
     public TextMeshProUGUI errorTextRegister;
     public GameObject login, regester,panelLogin;
+    public TextMeshProUGUI nameTxt;
     private string path => Path.Combine(Application.persistentDataPath, "LoginData.json");
     private async void Start()
     {
@@ -25,7 +27,7 @@ public class AccountLogin : MonoBehaviour
     }
     public void SaveLoginState()
     {
-        LoginData data = new LoginData { userName=userNameLogin.text,password=passwordLogin.text };
+        LoginData data = new LoginData { email= emailLogin.text,password=passwordLogin.text, userName = FirebaseDataManager.Instance.username };
         string json = JsonUtility.ToJson(data);
         File.WriteAllText(path, json);
     }
@@ -36,17 +38,24 @@ public class AccountLogin : MonoBehaviour
         {
             string json = File.ReadAllText(path);
             LoginData data = JsonUtility.FromJson<LoginData>(json);
-            this.userNameLogin.text = data.userName;
+            if (data.email == "" || data.password == "")
+                return;
+            this.emailLogin.text = data.email;
             this.passwordLogin.text = data.password;
+            FirebaseDataManager.Instance.username = data.userName;
             Login();
 
+        }
+        else
+        {
+            userName.text = "";
         }
  
     }
     public void Login()
     {
         errorTextLogin.text = ""; 
-        FirebaseDataManager.Instance.Login(userNameLogin.text, passwordLogin.text, OnLoginResult);
+        FirebaseDataManager.Instance.Login(emailLogin.text, passwordLogin.text, OnLoginResult);
         SaveLoginState();
         panelLogin.gameObject.SetActive(false);
 
@@ -60,13 +69,14 @@ public class AccountLogin : MonoBehaviour
         }
         else
         {
+            nameTxt.text = "Hello " + FirebaseDataManager.Instance.username;
             errorTextRegister.text = "✅ Đăng nhập thành công!";
         }
     }
     public void Register()
     {
         errorTextRegister.text = "";
-        FirebaseDataManager.Instance.Register(userNameRegister.text, passwordRegister.text, OnRegisterResult);
+        FirebaseDataManager.Instance.Register(emailRegister.text, passwordRegister.text, userName.text,OnRegisterResult);
     }
 
     private void OnRegisterResult(bool success, string message)
@@ -79,15 +89,17 @@ public class AccountLogin : MonoBehaviour
         {
             errorTextRegister.text = "✅ Đăng ký thành công!";
             login.gameObject.SetActive(true);
-            userNameLogin.text = userNameRegister.text;
+            emailLogin.text = emailRegister.text;
             passwordLogin.text = passwordRegister.text;
+            SaveLoginState();
             regester.gameObject.SetActive(false);
         }
     }
 }
 [Serializable]
 public class LoginData {
-    public string userName;
+    public string email;
     public string password;
+    public string userName;
 }
 
