@@ -1,4 +1,7 @@
-﻿using System;
+﻿using Firebase.Auth;
+using Firebase.Database;
+using Firebase.Extensions;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.IO;
@@ -15,10 +18,18 @@ public class AccountLogin : MonoBehaviour
     public InputField emailRegister;
     public InputField passwordRegister;
     public InputField userName;
+    public InputField emailInput;
     public TextMeshProUGUI errorTextLogin;
     public TextMeshProUGUI errorTextRegister;
-    public GameObject login, regester,panelLogin;
-    public TextMeshProUGUI nameTxt;
+    public GameObject login, regester, panelLogin,renameObj;
+    public Button loginBtn, registerBtn, accountBtn, loginBtnAcess;
+    public Sprite loginActive, loginUnactive;
+    public Image loginImage, icon;
+    public TextMeshProUGUI forgotPasswordMessageText;
+    public InputField emailInAccount;
+    public InputField passwordInAccount;
+    public InputField rename;
+    public TextMeshProUGUI nameText;
     private string path => Path.Combine(Application.persistentDataPath, "LoginData.json");
     private async void Start()
     {
@@ -27,11 +38,23 @@ public class AccountLogin : MonoBehaviour
     }
     public void SaveLoginState()
     {
-        LoginData data = new LoginData { email= emailLogin.text,password=passwordLogin.text, userName = FirebaseDataManager.Instance.username };
+        LoginData data = new LoginData { email = emailLogin.text, password = passwordLogin.text };
         string json = JsonUtility.ToJson(data);
         File.WriteAllText(path, json);
     }
-
+    private void FixedUpdate()
+    {
+        if (emailLogin.text == "" || passwordLogin.text == "")
+        {
+            loginBtnAcess.interactable = false;
+            loginImage.sprite = loginUnactive;
+        }
+        else
+        {
+            loginBtnAcess.interactable = true;
+            loginImage.sprite = loginActive;
+        }
+    }
     public void LoadLoginState()
     {
         if (File.Exists(path))
@@ -42,22 +65,45 @@ public class AccountLogin : MonoBehaviour
                 return;
             this.emailLogin.text = data.email;
             this.passwordLogin.text = data.password;
-            FirebaseDataManager.Instance.username = data.userName;
+            emailInAccount.text = data.email;
+            passwordInAccount.text = data.password;
+
             Login();
 
         }
         else
         {
             userName.text = "";
+            loginBtn.gameObject.SetActive(true);
+            registerBtn.gameObject.SetActive(true);
+            icon.gameObject.SetActive(true);
+            accountBtn.gameObject.SetActive(false);
         }
- 
+
     }
+    public void Logout()
+    {
+        Firebase.Auth.FirebaseAuth.DefaultInstance.SignOut();
+        Debug.Log("🚪 Đã đăng xuất");
+
+        string path = Path.Combine(Application.persistentDataPath, "LoginData.json");
+        if (File.Exists(path))
+        {
+            File.Delete(path);
+        }
+        login.SetActive(true);
+        regester.SetActive(false);
+        loginBtn.gameObject.SetActive(true);
+        registerBtn.gameObject.SetActive(true);
+        icon.gameObject.SetActive(true);
+        accountBtn.gameObject.SetActive(false);
+    }
+
+
     public void Login()
     {
-        errorTextLogin.text = ""; 
+        errorTextLogin.text = "";
         FirebaseDataManager.Instance.Login(emailLogin.text, passwordLogin.text, OnLoginResult);
-        SaveLoginState();
-        panelLogin.gameObject.SetActive(false);
 
     }
 
@@ -69,14 +115,31 @@ public class AccountLogin : MonoBehaviour
         }
         else
         {
-            nameTxt.text = "Hello " + FirebaseDataManager.Instance.username;
+            FirebaseUser currentUser = FirebaseDataManager.Instance.GetCurrentUser();
+            string uid = currentUser.UserId;
+            FirebaseDatabase.DefaultInstance.GetReference("users").Child(uid).Child("playerData")
+                .GetValueAsync().ContinueWithOnMainThread(task =>
+                {
+                    if (task.IsCompleted && task.Result.Exists)
+                    {
+                        PlayerData data = JsonUtility.FromJson<PlayerData>(task.Result.GetRawJsonValue());
+                        nameText.text = data.name;
+                    }
+                });
+
+            SaveLoginState();
+            login.gameObject.SetActive(false);
+            loginBtn.gameObject.SetActive(false);
+            registerBtn.gameObject.SetActive(false);
+            icon.gameObject.SetActive(false);
+            accountBtn.gameObject.SetActive(true);
             errorTextRegister.text = "✅ Đăng nhập thành công!";
         }
     }
     public void Register()
     {
         errorTextRegister.text = "";
-        FirebaseDataManager.Instance.Register(emailRegister.text, passwordRegister.text, userName.text,OnRegisterResult);
+        FirebaseDataManager.Instance.Register(emailRegister.text, passwordRegister.text, userName.text, OnRegisterResult);
     }
 
     private void OnRegisterResult(bool success, string message)
@@ -95,11 +158,30 @@ public class AccountLogin : MonoBehaviour
             regester.gameObject.SetActive(false);
         }
     }
+    public void OnClickForgotPassword()
+    {
+        FirebaseDataManager.Instance.ForgotPassword(emailInput.text, (success, message) =>
+        {
+            forgotPasswordMessageText.text = message;
+        });
+    }
+    public void Rename()
+    {
+        if (rename.text == "" || rename.text.Length >= 14)
+            return;
+        FirebaseDataManager.Instance.username = rename.text;
+        FirebaseDataManager.Instance.SaveData(
+                LevelManager.instance.GetAllLevelComplete(), GoldManager.instance.GetGold(),
+                      SaveGameManager.instance.LoadAllProgress(), HeroManager.instance.GetUnlockHeroID());
+        nameText.text = rename.text;
+        renameObj.SetActive(false);
+
+    }
 }
 [Serializable]
-public class LoginData {
+public class LoginData
+{
     public string email;
     public string password;
-    public string userName;
 }
 

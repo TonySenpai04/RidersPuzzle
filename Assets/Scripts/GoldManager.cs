@@ -18,6 +18,9 @@ public class GoldManager : MonoBehaviour
         var data = new GoldData { amount = currentGold };
         string json=JsonUtility.ToJson(data);
         File.WriteAllText(goldPath, json);
+        FirebaseDataManager.Instance.SaveData(
+               LevelManager.instance.GetAllLevelComplete(),currentGold,
+                     SaveGameManager.instance.LoadAllProgress(), HeroManager.instance.GetUnlockHeroID());
 
     }
     public void LoadCloudData()

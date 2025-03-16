@@ -14,16 +14,18 @@ public class PlayerData
     public int gold;
     public List<LevelProgressData> levelData;
     public UnlockHeroData unlockHeroData;
+    public int avatarIndex;
 
     public PlayerData() { }
 
-    public PlayerData(string name, int level, int gold, List<LevelProgressData> data, UnlockHeroData unlockHeroData)
+    public PlayerData(string name, int level, int gold, List<LevelProgressData> data, UnlockHeroData unlockHeroData, int avatarIndex)
     {
         this.name = name;
         this.totalLevel = level;
         this.gold = gold;
         this.levelData = data;
         this.unlockHeroData = unlockHeroData;
+        this.avatarIndex = avatarIndex;
     }
 }
 
@@ -36,6 +38,7 @@ public class FirebaseDataManager : MonoBehaviour
     private DatabaseReference dbRef;
     private FirebaseUser currentUser;
     public string username;
+
 
     private void Awake()
     {
@@ -118,7 +121,7 @@ public class FirebaseDataManager : MonoBehaviour
             if (task.IsFaulted || task.IsCanceled)
             {
                 Debug.Log("❌ Login failed: " + task.Exception);
-                string errorMessage = "Đăng nhập thất bại. Vui lòng kiểm tra tài khoản hoặc mật khẩu.";
+                string errorMessage = "Wrong username or password";
                 if (task.Exception != null && task.Exception.InnerExceptions.Count > 0)
                 {
                     var firebaseEx = task.Exception.InnerExceptions[0] as FirebaseException;
@@ -127,16 +130,16 @@ public class FirebaseDataManager : MonoBehaviour
                         switch ((AuthError)firebaseEx.ErrorCode)
                         {
                             case AuthError.InvalidEmail:
-                                errorMessage = "Email không hợp lệ.";
+                                errorMessage = "Wrong username or password";
                                 break;
                             case AuthError.WrongPassword:
-                                errorMessage = "Sai mật khẩu.";
+                                errorMessage = "Wrong username or password";
                                 break;
                             case AuthError.UserNotFound:
-                                errorMessage = "Tài khoản không tồn tại.";
+                                errorMessage = "Wrong username or password";
                                 break;
                             default:
-                                errorMessage = "Đăng nhập thất bại: " + firebaseEx.Message;
+                                errorMessage = "Wrong username or password";
                                 break;
                         }
                     }
@@ -151,6 +154,7 @@ public class FirebaseDataManager : MonoBehaviour
                         LevelManager.instance.LoadLevelData();
                         GoldManager.instance.LoadCloudData();
                         HeroManager.instance.LoadCloudUnlockHero();
+                        AvatarManager.instance.SelectAvatar(data.avatarIndex);
                         Debug.Log("🎮 Dữ liệu người chơi: " + data.gold + " - Level: " + data.totalLevel);
                     }
                     else
@@ -162,6 +166,7 @@ public class FirebaseDataManager : MonoBehaviour
             }
 
             currentUser = task.Result.User;
+
             Debug.Log("✅ Logged in: " + currentUser.Email + " | UID: " + currentUser.UserId);
 
             // Optional: Load dữ liệu sau login
@@ -172,12 +177,15 @@ public class FirebaseDataManager : MonoBehaviour
                     LevelManager.instance.LoadLevelData();
                     GoldManager.instance.LoadCloudData();
                     HeroManager.instance.LoadCloudUnlockHero();
+                    this.username = data.name;
+                    AvatarManager.instance.selectedAvatarIndex=data.avatarIndex;
+                    AvatarManager.instance.SelectAvatar(data.avatarIndex);
                     Debug.Log("🎮 Dữ liệu người chơi: " + data.gold + " - Level: " + data.totalLevel+"-Name" +data.name);
                 }
                 else
                 {
-                    Example(LevelManager.instance.GetAllLevelComplete(), GoldManager.instance.GetGold(),
-           SaveGameManager.instance.LoadAllProgress(), HeroManager.instance.GetUnlockHeroID());
+                    SaveData(LevelManager.instance.GetAllLevelComplete(), GoldManager.instance.GetGold(),
+                      SaveGameManager.instance.LoadAllProgress(), HeroManager.instance.GetUnlockHeroID());
                     Debug.Log("📂 Chưa có dữ liệu. Tạo mới nếu cần.");
                 }
             });
@@ -208,7 +216,7 @@ public class FirebaseDataManager : MonoBehaviour
         {
             Debug.Log("⚠ Chưa đăng nhập!");
             PlayerData newData = new PlayerData(username,SaveGameManager.instance.LoadAllProgress().Count,
-                GoldManager.instance.GetGold(), SaveGameManager.instance.LoadAllProgress(),HeroManager.instance.GetUnlockHeroID());
+                GoldManager.instance.GetGold(), SaveGameManager.instance.LoadAllProgress(),HeroManager.instance.GetUnlockHeroID(),0);
             onDataLoaded?.Invoke(newData);
             return;
         }
@@ -226,15 +234,38 @@ public class FirebaseDataManager : MonoBehaviour
             }
         });
     }
-
+    
     public FirebaseUser GetCurrentUser()
     {
         return currentUser;
     }
-    public void Example(int level, int gold, List<LevelProgressData> data,UnlockHeroData unlockHeroData)
+    public void ForgotPassword(string email, System.Action<bool, string> onResult = null)
+    {
+        if (string.IsNullOrEmpty(email))
+        {
+            onResult?.Invoke(false, "Username is invalid");
+            return;
+        }
+
+        FirebaseAuth.DefaultInstance.SendPasswordResetEmailAsync(email).ContinueWithOnMainThread(task =>
+        {
+            if (task.IsFaulted || task.IsCanceled)
+            {
+                Debug.LogError("❌ Gửi email khôi phục thất bại: " + task.Exception);
+                onResult?.Invoke(false, "Username is invalid");
+            }
+            else
+            {
+                Debug.Log("✅ Đã gửi email khôi phục thành công.");
+                onResult?.Invoke(true, "New password is sent.");
+            }
+        });
+    }
+
+    public void SaveData(int level, int gold, List<LevelProgressData> data,UnlockHeroData unlockHeroData)
     {
         // Tạo dữ liệu và lưu
-        PlayerData newData = new PlayerData(username,level, gold, data,unlockHeroData);
+        PlayerData newData = new PlayerData(username,level, gold, data,unlockHeroData, AvatarManager.instance.selectedAvatarIndex);
         SavePlayerData(newData);
 
         // Tải dữ liệu

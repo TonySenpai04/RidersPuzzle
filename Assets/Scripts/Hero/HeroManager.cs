@@ -25,7 +25,7 @@ public class HeroManager : MonoBehaviour
      void Awake()
      {
         instance = this;
-        LoadUnlockHero();
+       LoadUnlockHero();
      }
     public DataHero? GetHero(int id)
     {

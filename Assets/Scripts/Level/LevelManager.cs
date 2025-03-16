@@ -354,7 +354,9 @@ public class LevelManager : MonoBehaviour
         {
             Level tempLevel = levels[i];
             tempLevel.isUnlock = true;
+            tempLevel.isComplete = true;
             levels[i] = tempLevel;
+            SaveGameManager.instance.SaveLevelProgress(i, tempLevel.isUnlock, tempLevel.isComplete);
         }
     }
 

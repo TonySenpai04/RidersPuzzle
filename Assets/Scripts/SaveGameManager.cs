@@ -42,7 +42,7 @@ public class SaveGameManager : MonoBehaviour
         {
             allProgress.Add(progressData);
         }
-        FirebaseDataManager.Instance.Example(LevelManager.instance.GetAllLevelComplete(), GoldManager.instance.GetGold(),
+        FirebaseDataManager.Instance.SaveData(LevelManager.instance.GetAllLevelComplete(), GoldManager.instance.GetGold(),
            allProgress, HeroManager.instance.GetUnlockHeroID());
         // Lưu lại toàn bộ dữ liệu vào file
         string jsonData = JsonUtility.ToJson(new SerializableList<LevelProgressData>(allProgress), true);
