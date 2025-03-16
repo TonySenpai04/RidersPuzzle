@@ -40,6 +40,10 @@ public class GoldManager : MonoBehaviour
             var gold = JsonUtility.FromJson<GoldData>(json);
             this.currentGold = gold.amount;
         }
+        else
+        {
+            this.currentGold = 0;
+        }
     }
     public void AddGold(int amount)
     {

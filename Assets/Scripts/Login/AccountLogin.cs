@@ -9,6 +9,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using TMPro;
 using UnityEngine;
+using UnityEngine.Playables;
 using UnityEngine.UI;
 
 public class AccountLogin : MonoBehaviour
@@ -21,7 +22,7 @@ public class AccountLogin : MonoBehaviour
     public InputField emailInput;
     public TextMeshProUGUI errorTextLogin;
     public TextMeshProUGUI errorTextRegister;
-    public GameObject login, regester, panelLogin,renameObj;
+    public GameObject login, regester, panelLogin,renameObj,account,accountNotLog,selectzone,playzone,main;
     public Button loginBtn, registerBtn, accountBtn, loginBtnAcess;
     public Sprite loginActive, loginUnactive;
     public Image loginImage, icon;
@@ -30,6 +31,7 @@ public class AccountLogin : MonoBehaviour
     public InputField passwordInAccount;
     public InputField rename;
     public TextMeshProUGUI nameText;
+    
     private string path => Path.Combine(Application.persistentDataPath, "LoginData.json");
     private async void Start()
     {
@@ -91,12 +93,20 @@ public class AccountLogin : MonoBehaviour
         {
             File.Delete(path);
         }
+        main.SetActive(true);
+        LevelManager.instance.LoadLocal();
+        GoldManager.instance.LoadLocal();
+        HeroManager.instance.LoadUnlockHero();
         login.SetActive(true);
         regester.SetActive(false);
         loginBtn.gameObject.SetActive(true);
         registerBtn.gameObject.SetActive(true);
         icon.gameObject.SetActive(true);
         accountBtn.gameObject.SetActive(false);
+        passwordLogin.text = "";
+        emailLogin.text = "";
+        selectzone.SetActive(false);
+        playzone.SetActive(false);
     }
 
 
@@ -106,7 +116,15 @@ public class AccountLogin : MonoBehaviour
         FirebaseDataManager.Instance.Login(emailLogin.text, passwordLogin.text, OnLoginResult);
 
     }
+    public void ShowAccount()
+    {
+        if (emailLogin.text == "" || passwordLogin.text == "") {
+            accountNotLog.gameObject.SetActive(true);
+            return;
+        }
+        account.gameObject.SetActive(true);
 
+    }
     private void OnLoginResult(bool success, string errorMessage)
     {
         if (!success)
@@ -124,6 +142,8 @@ public class AccountLogin : MonoBehaviour
                     {
                         PlayerData data = JsonUtility.FromJson<PlayerData>(task.Result.GetRawJsonValue());
                         nameText.text = data.name;
+                        emailInAccount.text = emailLogin.text;
+                        passwordInAccount.text = passwordLogin.text;
                     }
                 });
 
