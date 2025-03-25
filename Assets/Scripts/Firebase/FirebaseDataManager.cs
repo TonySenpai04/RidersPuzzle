@@ -146,22 +146,22 @@ public class FirebaseDataManager : MonoBehaviour
                 }
 
                 onResult?.Invoke(false, errorMessage);
-                LoadPlayerData((data) =>
-                {
-                    if (data != null)
-                    {
-                        this.username = data.name;
-                        LevelManager.instance.LoadLevelData();
-                        GoldManager.instance.LoadCloudData();
-                        HeroManager.instance.LoadCloudUnlockHero();
-                        AvatarManager.instance.SelectAvatar(data.avatarIndex);
-                        Debug.Log("🎮 Dữ liệu người chơi: " + data.gold + " - Level: " + data.totalLevel);
-                    }
-                    else
-                    {
-                        Debug.Log("📂 Chưa có dữ liệu. Tạo mới nếu cần.");
-                    }
-                });
+                //LoadPlayerData((data) =>
+                //{
+                //    if (data != null)
+                //    {
+                //        this.username = data.name;
+                //        LevelManager.instance.LoadLevelData();
+                //        GoldManager.instance.LoadCloudData();
+                //        HeroManager.instance.LoadCloudUnlockHero();
+                //        AvatarManager.instance.SelectAvatar(data.avatarIndex);
+                //        Debug.Log("🎮 Dữ liệu người chơi: " + data.gold + " - Level: " + data.totalLevel);
+                //    }
+                //    else
+                //    {
+                //        Debug.Log("📂 Chưa có dữ liệu. Tạo mới nếu cần.");
+                //    }
+                //});
                 return;
             }
 

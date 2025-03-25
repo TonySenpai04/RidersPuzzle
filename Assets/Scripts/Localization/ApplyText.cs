@@ -381,7 +381,7 @@ public class ApplyText : MonoBehaviour, ILocalizeObject
         fontLocalizer.SetLocalizedFont("button_skill", button_skill);
         fontLocalizer.SetLocalizedFont("button_skill", button_exchange);
         fontLocalizer.SetLocalizedFont("title_notification", title_notification);
-        fontLocalizer.SetLocalizedFont("button_new_player", button_new_player);
+      //  fontLocalizer.SetLocalizedFont("button_new_player", button_new_player);
         fontLocalizer.SetLocalizedFont("login_popup_email", login_popup_email);
         fontLocalizer.SetLocalizedFont("login_popup_password", login_popup_password);
 

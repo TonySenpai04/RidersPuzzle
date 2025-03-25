@@ -24257,6 +24257,7 @@ MonoBehaviour:
   id: 
   titleTxt: {fileID: 1604394766}
   descriptionTxt: {fileID: 1432656182}
+  content: {fileID: 474990753}
 --- !u!224 &721862945
 RectTransform:
   m_ObjectHideFlags: 0
@@ -57800,7 +57801,7 @@ Animator:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1735798666}
-  m_Enabled: 1
+  m_Enabled: 0
   m_Avatar: {fileID: 0}
   m_Controller: {fileID: 9100000, guid: aadb02fcc705a8e48956040d5f8ed514, type: 2}
   m_CullingMode: 0
