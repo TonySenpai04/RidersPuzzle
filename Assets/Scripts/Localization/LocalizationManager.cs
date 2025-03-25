@@ -12,12 +12,14 @@ public class LocalizationManager : MonoBehaviour
     [SerializeField] private TextAsset riderAsset;
     [SerializeField] private TextAsset objectAsset;
     [SerializeField] private TextAsset commonAsset;
+    [SerializeField] private TextAsset storyAsset;
     [SerializeField] private ApplyText applyTextScript;
     private Dictionary<string, string> richText;
     private int currentLanguage;
     private IReadDataLocalize readCSVLocalizeRider;
     private IReadDataLocalize readCSVLocalizeObject;
     private IReadDataLocalize readCSVLocalizeCommon;
+    private IReadDataLocalize readCSVLocalizeStory;
     void Awake()
     {
         instance = this;
@@ -34,6 +36,7 @@ public class LocalizationManager : MonoBehaviour
         readCSVLocalizeRider = new ReadCSVLocalizeRider();
         readCSVLocalizeObject = new ReadCSVLocalizeObject();
         readCSVLocalizeCommon = new ReadCSVLocalizeCommon();
+        readCSVLocalizeStory = new ReadCSVLocalizeStory();
     }
 
     public void LoadData()
@@ -54,6 +57,7 @@ public class LocalizationManager : MonoBehaviour
         readCSVLocalizeRider.LoadLocalization(currentLanguage,localizedTexts, localizedFonts,riderAsset,richText);
        readCSVLocalizeObject.LoadLocalization(currentLanguage, localizedTexts, localizedFonts, objectAsset, richText);
         readCSVLocalizeCommon.LoadLocalization(currentLanguage, localizedTexts, localizedFonts, commonAsset, richText);
+        readCSVLocalizeStory.LoadLocalization(currentLanguage, localizedTexts, localizedFonts, storyAsset, richText);
         //foreach (var text in localizedTexts)
         //{
         //    Debug.Log(text.Key + "-" + text.Value);

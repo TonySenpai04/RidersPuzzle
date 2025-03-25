@@ -153,6 +153,8 @@ public class AccountLogin : MonoBehaviour
             registerBtn.gameObject.SetActive(false);
             icon.gameObject.SetActive(false);
             accountBtn.gameObject.SetActive(true);
+            int a = LevelManager.instance.GetAllLevelComplete();
+            StoryManager.instance.count = a / 50;
             errorTextRegister.text = "✅ Đăng nhập thành công!";
         }
     }

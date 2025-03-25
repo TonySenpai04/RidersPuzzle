@@ -164,6 +164,7 @@ public class LevelManager : MonoBehaviour
     public void LoadLevel()
     {
         ResetObjectData();
+      
      //   currentLevelIndex = levelIndex;
         int lv = currentLevelIndex - 1;
 
@@ -177,6 +178,8 @@ public class LevelManager : MonoBehaviour
         if (lv >= 0 && lv <= levels.Count)
         {
             Level level = levels[lv];
+            level.key = 0;
+            levels[lv]=level;
             gridController.ClearCollider();
             LoadObject(level);
 
@@ -208,10 +211,11 @@ public class LevelManager : MonoBehaviour
             Level nextLevel = levels[nextLevelIndex];
             nextLevel.isUnlock = true; 
             levels[nextLevelIndex] = nextLevel;
-            SaveGameManager.instance.SaveLevelProgress(lv, tempLevel.isUnlock, tempLevel.isComplete);
+            
           //  SaveGameManager.instance.SaveLevelProgress(nextLevelIndex, nextLevel.isUnlock, nextLevel.isComplete);
         }
-      
+        SaveGameManager.instance.SaveLevelProgress(lv, tempLevel.isUnlock, tempLevel.isComplete);
+
     }
 
     public bool IsLevelUnlocked(int levelIndex)

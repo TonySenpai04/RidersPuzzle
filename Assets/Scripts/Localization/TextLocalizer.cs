@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using TMPro;
+using UnityEngine.UI;
 
 public class TextLocalizer:ITextLocalizer
 {
@@ -21,6 +22,19 @@ public class TextLocalizer:ITextLocalizer
     }
 
     public void SetLocalizedText(string key, TMP_Text[] texts)
+    {
+        foreach (var t in texts)
+            SetLocalizedText(key, t);
+    }
+    public void SetLocalizedText(string key, Text text)
+    {
+        if (_richText.ContainsKey(key) && _plainText.ContainsKey(key))
+            text.text = _plainText[key];
+        else
+            text.text = "Thông tin không khả dụng.";
+    }
+
+    public void SetLocalizedText(string key, Text[] texts)
     {
         foreach (var t in texts)
             SetLocalizedText(key, t);

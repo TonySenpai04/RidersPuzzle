@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class ApplyText : MonoBehaviour, ILocalizeObject
 {
@@ -52,14 +53,17 @@ public class ApplyText : MonoBehaviour, ILocalizeObject
     [SerializeField] private TMP_Text riderPunch;
     [SerializeField] private TMP_Text riderKick;
     [Header("Lib")]
-    [SerializeField] private TMP_Text libraryFeatureName;
+    [SerializeField] private TMP_Text libraryFeatureName; 
+    [SerializeField] private TMP_Text libraryButtonStory;
     [SerializeField] private TMP_Text libraryButtonTutorial;
     [SerializeField] private TMP_Text libraryRiderSectionTitle;
     [SerializeField] private TMP_Text libraryObjectSectionTitle;
+    [SerializeField] private TMP_Text libraryStorySectionTitle;
     [SerializeField] private TMP_Text libraryRiderTitle;
     [SerializeField] private TMP_Text libraryObjectTitle;
     [SerializeField] private TMP_Text libraryRiderAmount;
     [SerializeField] private TMP_Text libraryObjectAmount;
+    [SerializeField] private TMP_Text libraryStoryAmount;
     [SerializeField] private TMP_Text libraryRiderStory;
     [SerializeField] private TMP_Text libraryRiderBattleInfor;
     [SerializeField] private TMP_Text libraryRiderForm;
@@ -112,6 +116,17 @@ public class ApplyText : MonoBehaviour, ILocalizeObject
     [SerializeField] private TMP_Text riderHeightShop;
     [SerializeField] private TMP_Text riderPunchShop;
     [SerializeField] private TMP_Text riderKickShop;
+    [Header("Login")]
+    [SerializeField] private TMP_Text button_return_player;
+    [SerializeField] private TMP_Text[] button_new_player;
+    [SerializeField] private TMP_Text login_popup_title;
+    [SerializeField] private TMP_Text[] login_popup_email;
+    [SerializeField] private TMP_Text[] login_popup_password;
+    [SerializeField] private Text login_popup_email_guide_1;
+    [Header("Story")]
+    [SerializeField] private TMP_Text titleStory;
+    [SerializeField] private TMP_Text contentStory;
+
     public static ApplyText instance;
     public  TextLocalizer textLocalizer;
     private void Awake() => instance = this;
@@ -154,7 +169,7 @@ public class ApplyText : MonoBehaviour, ILocalizeObject
         SetInfo("library_rider_height", libraryRiderHeight, richText, plainText);
         SetInfo("library_rider_punch_power", libraryRiderPunchPower, richText, plainText);
         SetInfo("library_rider_kick_power", libraryRiderKickPower, richText, plainText);
-
+        SetInfo("library_object_amount", libraryStoryAmount, richText, plainText);
         SetInfo("library_rider_story", libraryObjectStory, richText, plainText);
         SetInfo("library_rider_battle infor", libraryRiderBattleInforShop, richText, plainText);
         SetInfo("library_rider_form", libraryRiderFormShop, richText, plainText);
@@ -162,6 +177,8 @@ public class ApplyText : MonoBehaviour, ILocalizeObject
         SetInfo("library_rider_height", libraryRiderHeightShop, richText, plainText);
         SetInfo("library_rider_punch_power", libraryRiderPunchPowerShop, richText, plainText);
         SetInfo("library_rider_kick_power", libraryRiderKickPowerShop, richText, plainText);
+        SetInfo("library_rider_story", libraryButtonStory, richText, plainText);
+        SetInfo("library_rider_story", libraryStorySectionTitle, richText, plainText);
 
 
     }
@@ -223,6 +240,13 @@ public class ApplyText : MonoBehaviour, ILocalizeObject
             this.title_stage.SetText( localizedTexts["title_stage"] + " " + level);
         }
     }
+    public void UpdateStoryInfo(string storyId)
+    {
+        var richText = LocalizationManager.instance.GetLocalizedRichText();
+        var plainText = LocalizationManager.instance.GetLocalizedTexts();
+        SetInfo($"story_title_{storyId}", titleStory, richText, plainText);
+        SetInfo($"story_detail_{storyId}", contentStory, richText, plainText);
+    }
 
     public void ApplyTxt(ref Dictionary<string, string> localizedRichText, ref Dictionary<string, string> localizedTexts)
     {
@@ -230,7 +254,7 @@ public class ApplyText : MonoBehaviour, ILocalizeObject
         SetCommonTexts(textLocalizer);
         SetRiderTexts(textLocalizer);
         SetShopTexts(textLocalizer);
-        SetLibraryTexts(textLocalizer);
+        SetSettingTexts(textLocalizer);
     }
 
     private void SetCommonTexts(TextLocalizer textLocalizer)
@@ -251,6 +275,13 @@ public class ApplyText : MonoBehaviour, ILocalizeObject
         textLocalizer.SetLocalizedText("button_ok", button_ok);
         textLocalizer.SetLocalizedText("button_replay", button_replay);
         textLocalizer.SetLocalizedText("button_skill", button_skill);
+        textLocalizer.SetLocalizedText("button_return_player", button_return_player);
+
+        textLocalizer.SetLocalizedText("button_new_player", button_new_player);
+        textLocalizer.SetLocalizedText("login_popup_title", login_popup_title);
+        textLocalizer.SetLocalizedText("login_popup_email", login_popup_email);
+        textLocalizer.SetLocalizedText("login_popup_password", login_popup_password);
+        textLocalizer.SetLocalizedText("login_popup_email_guide_1", login_popup_email_guide_1);
     }
 
     private void SetRiderTexts(TextLocalizer textLocalizer)
@@ -287,7 +318,7 @@ public class ApplyText : MonoBehaviour, ILocalizeObject
         textLocalizer.SetLocalizedText("shop_sort_price", shop_sort_price);
     }
 
-    private void SetLibraryTexts(TextLocalizer textLocalizer)
+    private void SetSettingTexts(TextLocalizer textLocalizer)
     {
         textLocalizer.SetLocalizedText("title_setting", title_setting);
         textLocalizer.SetLocalizedText("setting_sound", setting_sound);
@@ -312,6 +343,7 @@ public class ApplyText : MonoBehaviour, ILocalizeObject
             setting_sound, setting_sound_on, setting_sound_off, setting_language, setting_language_1,
             setting_language_2, setting_privacy_policy, setting_term_of_condition, setting_credit
            , popup_detail_quit, popup_detail_language_change, popup_detail_credit,
+            login_popup_title,button_return_player,titleStory,contentStory,
 
         // Object
         objectName, objectStory, objectBattle, libraryObjectStory, libraryObjectBattleInfor,
@@ -349,5 +381,9 @@ public class ApplyText : MonoBehaviour, ILocalizeObject
         fontLocalizer.SetLocalizedFont("button_skill", button_skill);
         fontLocalizer.SetLocalizedFont("button_skill", button_exchange);
         fontLocalizer.SetLocalizedFont("title_notification", title_notification);
+        fontLocalizer.SetLocalizedFont("button_new_player", button_new_player);
+        fontLocalizer.SetLocalizedFont("login_popup_email", login_popup_email);
+        fontLocalizer.SetLocalizedFont("login_popup_password", login_popup_password);
+
     }
 }
