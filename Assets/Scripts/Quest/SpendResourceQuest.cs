@@ -5,7 +5,7 @@ public class SpendResourceQuest : QuestBase
     public string requiredMode;
     private int currentAmount;
 
-    public SpendResourceQuest(string id, string desc, string reward, int amount, string type, string mode)
+    public SpendResourceQuest(string id, string desc, int reward, int amount, string type, string mode)
     {
         questId = id;
         description = desc;
@@ -15,7 +15,7 @@ public class SpendResourceQuest : QuestBase
         requiredMode = mode;
     }
 
-    public void UpdateProgress(int amount)
+    public override void UpdateProgress(int amount)
     {
         currentAmount = amount;
     }

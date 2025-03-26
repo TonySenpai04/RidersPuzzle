@@ -1,9 +1,10 @@
+
 public class WinStageQuest : QuestBase
 {
     public int requiredWins;
-    private int currentWins;
+    public int currentWins;
 
-    public WinStageQuest(string id, string desc, string reward, int wins)
+    public WinStageQuest(string id, string desc, int reward, int wins)
     {
         questId = id;
         description = desc;
@@ -11,9 +12,11 @@ public class WinStageQuest : QuestBase
         requiredWins = wins;
     }
 
-    public void UpdateProgress(int wins)
+    public override void UpdateProgress(int wins)
     {
-        currentWins = wins;
+        currentWins += wins;
+        
+        SaveQuest();
     }
 
     public override bool CheckCompletion()

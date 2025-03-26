@@ -4,7 +4,7 @@ public class UseRiderSkillQuest : QuestBase
     public string requiredMode;
     private int currentUsage;
 
-    public UseRiderSkillQuest(string id, string desc, string reward, int usage, string mode)
+    public UseRiderSkillQuest(string id, string desc, int reward, int usage, string mode)
     {
         questId = id;
         description = desc;
@@ -13,7 +13,7 @@ public class UseRiderSkillQuest : QuestBase
         requiredMode = mode;
     }
 
-    public void UpdateProgress(int usage)
+    public override void UpdateProgress(int usage)
     {
         currentUsage = usage;
     }

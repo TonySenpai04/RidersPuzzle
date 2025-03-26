@@ -4,7 +4,7 @@ public class ReachStageQuest : QuestBase
     public string requiredMode;
     private bool reached = false;
 
-    public ReachStageQuest(string id, string desc, string reward, int stage, string mode)
+    public ReachStageQuest(string id, string desc, int reward, int stage, string mode)
     {
         questId = id;
         description = desc;
@@ -13,7 +13,7 @@ public class ReachStageQuest : QuestBase
         requiredMode = mode;
     }
 
-    public void MarkReached()
+    public  void MarkReached()
     {
         reached = true;
     }
@@ -21,5 +21,10 @@ public class ReachStageQuest : QuestBase
     public override bool CheckCompletion()
     {
         return reached;
+    }
+
+    public override void UpdateProgress(int update)
+    {
+        throw new System.NotImplementedException();
     }
 }

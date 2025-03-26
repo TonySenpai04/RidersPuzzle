@@ -5,7 +5,7 @@ public class PlayStageQuest : QuestBase
     public string requiredMode;
     private int currentPlays;
 
-    public PlayStageQuest(string id, string desc, string reward, int plays, string rider, string mode)
+    public PlayStageQuest(string id, string desc, int reward, int plays, string rider, string mode)
     {
         questId = id;
         description = desc;
@@ -15,9 +15,9 @@ public class PlayStageQuest : QuestBase
         requiredMode = mode;
     }
 
-    public void UpdateProgress(int plays)
+    public override void UpdateProgress(int plays)
     {
-        currentPlays = plays;
+        currentPlays += plays;
     }
 
     public override bool CheckCompletion()

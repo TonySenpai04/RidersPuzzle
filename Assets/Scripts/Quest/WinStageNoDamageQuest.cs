@@ -5,7 +5,7 @@ public class WinStageNoDamageQuest : QuestBase
     public string requiredMode;
     private int currentWins;
 
-    public WinStageNoDamageQuest(string id, string desc, string reward, int wins, string rider, string mode)
+    public WinStageNoDamageQuest(string id, string desc, int reward, int wins, string rider, string mode)
     {
         questId = id;
         description = desc;
@@ -15,7 +15,7 @@ public class WinStageNoDamageQuest : QuestBase
         requiredMode = mode;
     }
 
-    public void UpdateProgress(int wins)
+    public override void UpdateProgress(int wins)
     {
         currentWins = wins;
     }

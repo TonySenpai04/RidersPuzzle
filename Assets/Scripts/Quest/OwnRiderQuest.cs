@@ -3,7 +3,7 @@ public class OwnRiderQuest : QuestBase
     public int requiredRiderCount;
     private int currentCount;
 
-    public OwnRiderQuest(string id, string desc, string reward, int count)
+    public OwnRiderQuest(string id, string desc, int reward, int count)
     {
         questId = id;
         description = desc;
@@ -11,9 +11,9 @@ public class OwnRiderQuest : QuestBase
         requiredRiderCount = count;
     }
 
-    public void UpdateProgress(int count)
+    public override void UpdateProgress(int count)
     {
-        currentCount = count;
+        currentCount += count;
     }
 
     public override bool CheckCompletion()

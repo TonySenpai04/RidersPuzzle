@@ -5,7 +5,7 @@ public class TriggerEntityQuest : QuestBase
     public string requiredMode;
     private int currentTriggers;
 
-    public TriggerEntityQuest(string id, string desc, string reward, string objId, int triggers, string mode)
+    public TriggerEntityQuest(string id, string desc, int reward, string objId, int triggers, string mode)
     {
         questId = id;
         description = desc;
@@ -15,7 +15,7 @@ public class TriggerEntityQuest : QuestBase
         requiredMode = mode;
     }
 
-    public void UpdateProgress(int triggers)
+    public override void UpdateProgress(int triggers)
     {
         currentTriggers = triggers;
     }

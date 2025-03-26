@@ -4,7 +4,7 @@ public class BuyItemQuest : QuestBase
     public string resourceUsed;
     private int currentCount;
 
-    public BuyItemQuest(string id, string desc, string reward, int count, string resource)
+    public BuyItemQuest(string id, string desc, int reward, int count, string resource)
     {
         questId = id;
         description = desc;
@@ -13,7 +13,7 @@ public class BuyItemQuest : QuestBase
         resourceUsed = resource;
     }
 
-    public void UpdateProgress(int count)
+    public override void UpdateProgress(int count)
     {
         currentCount = count;
     }
