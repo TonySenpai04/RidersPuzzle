@@ -262,20 +262,46 @@ public class FirebaseDataManager : MonoBehaviour
         });
     }
 
-    public void SaveData(int level, int gold, List<LevelProgressData> data,UnlockHeroData unlockHeroData)
+    public void SaveData(int level, int gold, List<LevelProgressData> newData, UnlockHeroData unlockHeroData)
     {
-        // Tạo dữ liệu và lưu
-        PlayerData newData = new PlayerData(username,level, gold, data,unlockHeroData, AvatarManager.instance.selectedAvatarIndex);
-        SavePlayerData(newData);
-
-        // Tải dữ liệu
+        // Tải dữ liệu hiện tại để không mất dữ liệu cũ
         LoadPlayerData((loadedData) =>
         {
             if (loadedData != null)
             {
-                Debug.Log("Gold: " + loadedData.gold + " | Level: " + loadedData.totalLevel);
+                List<LevelProgressData> updatedLevelData = loadedData.levelData ?? new List<LevelProgressData>();
+
+                // Cập nhật hoặc thêm mới từng level trong danh sách
+                foreach (var newLevel in newData)
+                {
+                    bool exists = false;
+                    for (int i = 0; i < updatedLevelData.Count; i++)
+                    {
+                        if (updatedLevelData[i].levelIndex == newLevel.levelIndex)
+                        {
+                            updatedLevelData[i] = newLevel; // Ghi đè dữ liệu mới vào level cũ
+                            exists = true;
+                            break;
+                        }
+                    }
+                    if (!exists)
+                    {
+                        updatedLevelData.Add(newLevel); // Thêm level mới nếu chưa tồn tại
+                    }
+                }
+
+                // Tạo dữ liệu mới để lưu
+                PlayerData newPlayerData = new PlayerData(username, level, gold, updatedLevelData, unlockHeroData, AvatarManager.instance.selectedAvatarIndex);
+                SavePlayerData(newPlayerData);
+            }
+            else
+            {
+                // Nếu không có dữ liệu cũ, tạo dữ liệu mới
+                PlayerData newPlayerData = new PlayerData(username, level, gold, newData, unlockHeroData, AvatarManager.instance.selectedAvatarIndex);
+                SavePlayerData(newPlayerData);
             }
         });
     }
+
 
 }

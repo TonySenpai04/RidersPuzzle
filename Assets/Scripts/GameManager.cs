@@ -141,11 +141,11 @@ public class GameManager : MonoBehaviour
         {
             SoundManager.instance.PlaySFX("Stage Clear");
             QuestManager.instance.UpdateQuest("003", 1);
+            LevelManager.instance.UnlockNextLevel();
             hasPlayedWinSound = true;
         }
         // SaveGameManager.instance.SaveLevelProgress(LevelManager.instance.GetCurrentLevelData().level, true, true);
         panelWin.SetActive(true);
-        LevelManager.instance.UnlockNextLevel();
         LevelManager.instance.ClearObject();
         Destroy(objectWin, 0.5f);
         objectWin = null;
