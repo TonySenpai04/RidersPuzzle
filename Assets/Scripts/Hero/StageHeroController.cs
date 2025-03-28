@@ -18,9 +18,14 @@ public class StageHeroController : MonoBehaviour
     [SerializeField] private GameObject playZone;
     [SerializeField] private SkillManager skillManager;
     [SerializeField] private HeroManager heroManager;
-    [SerializeField] private int currentId;
+    [SerializeField] public int currentId;
     [SerializeField] private PlayerController playerController;
     [SerializeField] private List<ButtonHero> heroButtons = new List<ButtonHero>();
+    public static StageHeroController instance;
+    private void Awake()
+    {
+        instance = this;
+    }
     void Start()
     {
         LoadHeroData();

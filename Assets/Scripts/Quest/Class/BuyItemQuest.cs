@@ -2,13 +2,13 @@ public class BuyItemQuest : QuestBase
 {
     public int requiredItemCount;
     public string resourceUsed;
-    private int currentCount;
+    public int currentCount;
 
     public BuyItemQuest(string id, string desc, int reward, int count, string resource)
     {
         questId = id;
         description = desc;
-        rewardId = reward;
+        base.reward = reward;
         requiredItemCount = count;
         resourceUsed = resource;
     }
@@ -16,6 +16,7 @@ public class BuyItemQuest : QuestBase
     public override void UpdateProgress(int count)
     {
         currentCount = count;
+        SaveQuest();
     }
 
     public override bool CheckCompletion()

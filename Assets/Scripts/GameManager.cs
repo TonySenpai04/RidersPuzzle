@@ -140,7 +140,15 @@ public class GameManager : MonoBehaviour
         if (!hasPlayedWinSound)
         {
             SoundManager.instance.PlaySFX("Stage Clear");
-            QuestManager.instance.UpdateQuest("003", 1);
+           
+            foreach (var quest in QuestManager.instance.GetQuestsByType<WinStageNoDamageQuest>())
+            {
+                QuestManager.instance.UpdateQuest(quest.questId, 1,0);
+            }
+            foreach (var quest in QuestManager.instance.GetQuestsByType<WinStageQuest>())
+            {
+                QuestManager.instance.UpdateQuest(quest.questId, 1, 0);
+            }
             LevelManager.instance.UnlockNextLevel();
             hasPlayedWinSound = true;
         }

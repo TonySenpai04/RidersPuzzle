@@ -56,6 +56,7 @@ public class SkillPVEController
     {
         if (GameManager.instance.isEnd) return;
         GetSkillPVEById(currentIDHero)?.ActivateSkill();
+
     }
 
     public void IncreaseSkillUsesForCurrentHero(int amount)

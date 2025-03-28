@@ -2,13 +2,13 @@ public class ReachStageQuest : QuestBase
 {
     public int requiredStage;
     public string requiredMode;
-    private bool reached = false;
+    public bool reached = false;
 
     public ReachStageQuest(string id, string desc, int reward, int stage, string mode)
     {
         questId = id;
         description = desc;
-        rewardId = reward;
+        base.reward = reward;
         requiredStage = stage;
         requiredMode = mode;
     }

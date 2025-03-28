@@ -3,13 +3,13 @@ public class SpendResourceQuest : QuestBase
     public int requiredAmount;
     public string resourceType;
     public string requiredMode;
-    private int currentAmount;
+    public int currentAmount;
 
     public SpendResourceQuest(string id, string desc, int reward, int amount, string type, string mode)
     {
         questId = id;
         description = desc;
-        rewardId = reward;
+        base.reward = reward;
         requiredAmount = amount;
         resourceType = type;
         requiredMode = mode;
@@ -18,6 +18,7 @@ public class SpendResourceQuest : QuestBase
     public override void UpdateProgress(int amount)
     {
         currentAmount = amount;
+        SaveQuest();
     }
 
     public override bool CheckCompletion()

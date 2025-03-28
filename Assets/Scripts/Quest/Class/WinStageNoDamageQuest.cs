@@ -3,13 +3,13 @@ public class WinStageNoDamageQuest : QuestBase
     public int requiredWins;
     public string requiredRider;
     public string requiredMode;
-    private int currentWins;
+    public int currentWins;
 
     public WinStageNoDamageQuest(string id, string desc, int reward, int wins, string rider, string mode)
     {
         questId = id;
         description = desc;
-        rewardId = reward;
+        base.reward = reward;
         requiredWins = wins;
         requiredRider = rider;
         requiredMode = mode;
@@ -17,7 +17,11 @@ public class WinStageNoDamageQuest : QuestBase
 
     public override void UpdateProgress(int wins)
     {
-        currentWins = wins;
+        if (PlayerController.instance.hitPoint.GetCurrentHealth() == PlayerController.instance.hitPoint.GetMaxHealth())
+        {
+            currentWins += wins;
+            SaveQuest();
+        }
     }
 
     public override bool CheckCompletion()

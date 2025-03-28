@@ -11712,6 +11712,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 47f48fadb21fbc4418759e9e9e019ece, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  currentQuestList: 0
 --- !u!1 &324133680
 GameObject:
   m_ObjectHideFlags: 0

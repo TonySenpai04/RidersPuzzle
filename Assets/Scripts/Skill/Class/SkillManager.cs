@@ -57,8 +57,13 @@ public class SkillManager : MonoBehaviour
 
     public void ActiveSkillPVE()
     {
+        if (skillPVEController.GetCurrentSkill().GetNumberOfSkill() <= 0)
+            return;
         skillPVEController.ActiveSkillPVE();
-        Debug.Log(GetCurrentSkill().GetNumberOfSkill());
+        foreach (var quest in QuestManager.instance.GetQuestsByType<UseRiderSkillQuest>())
+        {
+            QuestManager.instance.UpdateQuest(quest.questId, 1, 0);
+        }
     }
     public void IncreaseSkillUsesForCurrentHero(int amount)
     {

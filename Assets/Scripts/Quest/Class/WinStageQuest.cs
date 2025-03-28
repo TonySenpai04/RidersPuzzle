@@ -8,7 +8,7 @@ public class WinStageQuest : QuestBase
     {
         questId = id;
         description = desc;
-        rewardId = reward;
+        base.reward = reward;
         requiredWins = wins;
     }
 

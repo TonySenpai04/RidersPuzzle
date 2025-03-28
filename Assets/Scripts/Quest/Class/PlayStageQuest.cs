@@ -3,13 +3,13 @@ public class PlayStageQuest : QuestBase
     public int requiredPlays;
     public string requiredRider;
     public string requiredMode;
-    private int currentPlays;
+    public int currentPlays;
 
     public PlayStageQuest(string id, string desc, int reward, int plays, string rider, string mode)
     {
         questId = id;
         description = desc;
-        rewardId = reward;
+        base.reward = reward;
         requiredPlays = plays;
         requiredRider = rider;
         requiredMode = mode;
@@ -18,6 +18,15 @@ public class PlayStageQuest : QuestBase
     public override void UpdateProgress(int plays)
     {
         currentPlays += plays;
+        SaveQuest();
+    }
+    public override void UpdateProgress(int count,int riderId)
+    {
+        if (riderId.ToString() == requiredRider)
+        {
+            currentPlays += count;
+            SaveQuest();
+        }
     }
 
     public override bool CheckCompletion()

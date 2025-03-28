@@ -5,14 +5,14 @@ public class LoginQuest : QuestBase
 {
     public int requiredDays;
     public int requiredConsecutiveDays;
-    private int currentDays;
-    private int currentConsecutiveDays;
+    public int currentDays;
+    public int currentConsecutiveDays;
 
     public LoginQuest(string id, string desc, int reward, int days, int consecutiveDays)
     {
         questId = id;
         description = desc;
-        rewardId = reward;
+        base.reward = reward;
         requiredDays = days;
         requiredConsecutiveDays = consecutiveDays;
     }
@@ -31,7 +31,7 @@ public class LoginQuest : QuestBase
 
     public override void UpdateProgress(int days)
     {
-        currentDays = days;
+       
     }
     public override void SaveQuest()
     {
