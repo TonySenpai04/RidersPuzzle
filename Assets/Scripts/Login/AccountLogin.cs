@@ -122,7 +122,21 @@ public class AccountLogin : MonoBehaviour
             accountNotLog.gameObject.SetActive(true);
             return;
         }
+
         account.gameObject.SetActive(true);
+        FirebaseUser currentUser = FirebaseDataManager.Instance.GetCurrentUser();
+        string uid = currentUser.UserId;
+        FirebaseDatabase.DefaultInstance.GetReference("users").Child(uid).Child("playerData")
+            .GetValueAsync().ContinueWithOnMainThread(task =>
+            {
+                if (task.IsCompleted && task.Result.Exists)
+                {
+                    PlayerData data = JsonUtility.FromJson<PlayerData>(task.Result.GetRawJsonValue());
+                    nameText.text = data.name;
+                    emailInAccount.text = emailLogin.text;
+                    passwordInAccount.text = passwordLogin.text;
+                }
+            });
 
     }
     private void OnLoginResult(bool success, string errorMessage)
@@ -153,7 +167,9 @@ public class AccountLogin : MonoBehaviour
             registerBtn.gameObject.SetActive(false);
             icon.gameObject.SetActive(false);
             accountBtn.gameObject.SetActive(true);
-            int a = LevelManager.instance.GetAllLevelComplete();
+            emailInAccount.text = emailLogin.text;
+            passwordInAccount.text = passwordLogin.text;
+           int a = LevelManager.instance.GetAllLevelComplete();
             StoryManager.instance.count = a / 50;
             errorTextRegister.text = "✅ Đăng nhập thành công!";
         }

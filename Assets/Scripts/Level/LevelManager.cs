@@ -123,6 +123,7 @@ public class LevelManager : MonoBehaviour
         levelDataController.LoadLevelData(levelsClone);
         FirebaseDataManager.Instance.LoadPlayerData((loadedData) =>
         {
+            HashSet<int> loadedLevelIndexes = new HashSet<int>();
             List<LevelProgressData> allProgress = loadedData.levelData;
             foreach (var progress in allProgress)
             {
@@ -133,9 +134,20 @@ public class LevelManager : MonoBehaviour
                     tempLevel.isUnlock = progress.isUnlocked;
                     tempLevel.isComplete = progress.isComplete;
                     levels[lv] = tempLevel;
+                    loadedLevelIndexes.Add(lv);
                 }
             }
-             int highestCompleteLevel = -1; 
+            for (int i = 0; i < levels.Count; i++)
+            {
+                if (!loadedLevelIndexes.Contains(i))
+                {
+                    Level tempLevel = levels[i];
+                    tempLevel.isUnlock = false;
+                    tempLevel.isComplete = false;
+                    levels[i] = tempLevel;
+                }
+            }
+            int highestCompleteLevel = -1; 
         for (int i = 0; i < levels.Count; i++)
         {
             if (levels[i].isUnlock && levels[i].isComplete)
