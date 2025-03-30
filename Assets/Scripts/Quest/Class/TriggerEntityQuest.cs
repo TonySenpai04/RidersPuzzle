@@ -1,3 +1,5 @@
+using System;
+
 public class TriggerEntityQuest : QuestBase
 {
     public int objectId;
@@ -32,5 +34,9 @@ public class TriggerEntityQuest : QuestBase
     public override void UpdateProgress(int progress)
     {
         
+    }
+    public override Tuple<int, int> GetProgress()
+    {
+        return Tuple.Create(currentTriggers, requiredTriggerCount);
     }
 }

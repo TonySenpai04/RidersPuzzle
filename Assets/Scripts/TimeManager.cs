@@ -8,6 +8,7 @@ public class TimeManager : MonoBehaviour
     private string timeAPI = "https://timeapi.io/api/Time/current/zone?timeZone=Asia/Ho_Chi_Minh";
     public static TimeManager Instance;
     public string ServerDate { get; private set; }
+    public DateTime ServerDateTime { get; private set; } // Lưu thời gian đầy đủ
     public bool IsTimeFetched { get; private set; } = false; // Đánh dấu đã lấy xong thời gian
 
     private void Awake()
@@ -15,7 +16,6 @@ public class TimeManager : MonoBehaviour
         if (Instance == null)
         {
             Instance = this;
-            DontDestroyOnLoad(gameObject);
             StartCoroutine(GetServerTime()); // Lấy thời gian ngay khi game khởi động
         }
         else
@@ -26,25 +26,46 @@ public class TimeManager : MonoBehaviour
 
     private IEnumerator GetServerTime()
     {
-        using (UnityWebRequest request = UnityWebRequest.Get(timeAPI))
-        {
-            request.certificateHandler = new BypassCertificate();
-            yield return request.SendWebRequest();
+        int maxRetries = 3; // Số lần thử lại tối đa
+        int retryCount = 0;
+        float retryDelay = 1f; // Thời gian chờ giữa mỗi lần thử 
 
-            if (request.result == UnityWebRequest.Result.Success)
+        while (retryCount < maxRetries)
+        {
+            using (UnityWebRequest request = UnityWebRequest.Get(timeAPI))
             {
-                string jsonResult = request.downloadHandler.text;
-                ServerTimeData timeData = JsonUtility.FromJson<ServerTimeData>(jsonResult);
-                ServerDate = DateTime.Parse(timeData.dateTime).ToString("yyyy-MM-dd");
-                IsTimeFetched = true;
-                Debug.Log("Thời gian server: " + ServerDate);
-            }
-            else
-            {
-                Debug.Log("Lỗi lấy thời gian từ server!");
+                request.certificateHandler = new BypassCertificate();
+                yield return request.SendWebRequest();
+
+                if (request.result == UnityWebRequest.Result.Success)
+                {
+                    string jsonResult = request.downloadHandler.text;
+                    ServerTimeData timeData = JsonUtility.FromJson<ServerTimeData>(jsonResult);
+                    ServerDateTime = DateTime.Parse(timeData.dateTime);
+                    ServerDate = DateTime.Parse(timeData.dateTime).ToString("yyyy-MM-dd");
+                    IsTimeFetched = true;
+                    Debug.Log("Thời gian server: " + ServerDate);
+                    yield break; // Thoát coroutine nếu thành công
+                }
+                else
+                {
+                    retryCount++;
+                    Debug.LogWarning($"Lỗi lấy thời gian từ server! Thử lại ({retryCount}/{maxRetries})...");
+                    yield return new WaitForSeconds(retryDelay); // Đợi rồi thử lại
+                }
             }
         }
+
+        Debug.LogError("Không thể lấy thời gian từ server sau nhiều lần thử!");
     }
+    public TimeSpan GetTimeUntilMidnight()
+    {
+        if (!IsTimeFetched) return TimeSpan.Zero;
+        DateTime now  = DateTime.Now; 
+        DateTime nextMidnight = now.Date.AddDays(1); // 12h đêm hôm sau
+        return nextMidnight - now;
+    }
+
 
     [Serializable]
     private class ServerTimeData

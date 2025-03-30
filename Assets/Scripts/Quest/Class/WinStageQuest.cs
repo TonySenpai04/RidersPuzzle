@@ -1,4 +1,6 @@
 
+using System;
+
 public class WinStageQuest : QuestBase
 {
     public int requiredWins;
@@ -22,5 +24,9 @@ public class WinStageQuest : QuestBase
     public override bool CheckCompletion()
     {
         return currentWins >= requiredWins;
+    }
+    public override Tuple<int, int> GetProgress()
+    {
+        return Tuple.Create(currentWins, requiredWins);
     }
 }

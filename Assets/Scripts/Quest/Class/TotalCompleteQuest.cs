@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -26,5 +27,9 @@ public class TotalCompleteQuest : QuestBase
     public override bool CheckCompletion()
     {
         return currentComplete >= requiredComplete;
+    }
+    public override Tuple<int, int> GetProgress()
+    {
+        return Tuple.Create(currentComplete, requiredComplete);
     }
 }

@@ -1,3 +1,5 @@
+using System;
+
 public class UseRiderSkillQuest : QuestBase
 {
     public int requiredSkillUsage;
@@ -22,5 +24,9 @@ public class UseRiderSkillQuest : QuestBase
     public override bool CheckCompletion()
     {
         return currentUsage >= requiredSkillUsage;
+    }
+    public override Tuple<int, int> GetProgress()
+    {
+        return Tuple.Create(currentUsage, requiredSkillUsage);
     }
 }

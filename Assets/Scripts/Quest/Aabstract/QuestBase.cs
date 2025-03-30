@@ -1,4 +1,5 @@
-﻿using System.IO;
+﻿using System;
+using System.IO;
 using UnityEngine;
 
 public abstract class QuestBase
@@ -36,5 +37,9 @@ public abstract class QuestBase
             File.Delete(path);
             Debug.Log($"Quest {questId} deleted.");
         }
+    }
+    public virtual Tuple<int,int> GetProgress()
+    {
+        return Tuple.Create(0,0);
     }
 }

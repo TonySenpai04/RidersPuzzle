@@ -1,3 +1,5 @@
+using System;
+
 public class PlayStageQuest : QuestBase
 {
     public int requiredPlays;
@@ -32,5 +34,9 @@ public class PlayStageQuest : QuestBase
     public override bool CheckCompletion()
     {
         return currentPlays >= requiredPlays;
+    }
+    public override Tuple<int, int> GetProgress()
+    {
+        return Tuple.Create(currentPlays, requiredPlays);
     }
 }

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using NUnit.Framework.Interfaces;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Data;
@@ -13,11 +14,13 @@ public class QuestManager : MonoBehaviour
     private Dictionary<int, Action> questLists = new Dictionary<int, Action>();
     public static QuestManager instance;
     public int currentQuestList;
-    private string lastAssignedDateKey = "LastQuestDate";
+    public int stampCount;
     private void Awake()
     {
         instance = this;
         InitializeQuestLists();
+
+
     }
     private void InitializeQuestLists()
     {
@@ -30,7 +33,7 @@ public class QuestManager : MonoBehaviour
     void Start()
     {
         StartCoroutine(WaitForServerTime());
-       // LoadQuests();
+        // LoadQuests();
     }
     public void QuestList1()
     {
@@ -100,6 +103,8 @@ public class QuestManager : MonoBehaviour
         currentQuestList = UnityEngine.Random.Range(1, questLists.Count + 1);
         questData.lastAssignedDate = today;
         questData.currentQuestList = currentQuestList;
+        questData.hasReceivedStampToday = false;
+
 
         SaveQuestData(questData);
 
@@ -140,13 +145,12 @@ public class QuestManager : MonoBehaviour
     private void FixedUpdate()
     {
         int currentComplete = activeQuests.Where(h => h.CheckCompletion()).Count() ;
-        Debug.Log(currentComplete);
         UpdateQuest("013", currentComplete, 0);
     }
 
     public void UpdateQuest(string id, int progress,int progress2)
     {
-
+        QuestData questData = LoadQuestData();
         foreach (var quest in activeQuests)
         {
             if (quest.questId == id)
@@ -155,8 +159,15 @@ public class QuestManager : MonoBehaviour
                 quest.UpdateProgress(progress, progress2); 
                 if (quest.CheckCompletion())
                 {
-                    RewardQuest(id);
+                  //  RewardQuest(id);
                     Debug.Log($"Quest {quest.questId} completed!");
+                    if (!questData.hasReceivedStampToday)
+                    {
+                        questData.stampCount += 1;
+                        questData.hasReceivedStampToday = true;
+                        SaveQuestData(questData);
+                        Debug.Log("Nhận 1 stamp cho ngày hôm nay!");
+                    }
                 }
                 return;
             }
@@ -166,15 +177,19 @@ public class QuestManager : MonoBehaviour
     }
     public void RewardQuest(string id)
     {
-        foreach (var quest in activeQuests)
-        {
-            if (quest.questId == id && !quest.isReward && quest.CheckCompletion())
-            {
-                GoldManager.instance.AddGold(quest.reward);
-                quest.isReward = true;
-                return;
-            }
-        }
+        //foreach (var quest in activeQuests)
+        //{
+        //    if (quest.questId == id && !quest.isReward && quest.CheckCompletion())
+        //    {
+        //        GoldManager.instance.AddGold(quest.reward);
+        //        quest.isReward = true;
+        //        return;
+        //    }
+        //}
+    }
+    public QuestBase GetQuestById(string id)
+    {
+        return activeQuests.FirstOrDefault(h=>h.questId == id);
     }
     public static void SaveQuestData(QuestData data)
     {
@@ -182,7 +197,7 @@ public class QuestManager : MonoBehaviour
         File.WriteAllText(path, json);
     }
 
-    public static QuestData LoadQuestData()
+    public  QuestData LoadQuestData()
     {
         if (File.Exists(path))
         {
@@ -198,5 +213,7 @@ public class QuestData
 {
     public int currentQuestList;
     public string lastAssignedDate;
- 
+    public int stampCount;
+    public bool hasReceivedStampToday;
+
 }
