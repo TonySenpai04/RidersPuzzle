@@ -22886,10 +22886,46 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
+      - m_Target: {fileID: 830203653}
+        m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
+        m_MethodName: SetActive
+        m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 1
+        m_CallState: 2
       - m_Target: {fileID: 830203657}
         m_TargetAssemblyTypeName: ShopController, Assembly-CSharp
         m_MethodName: ToHeroShop
         m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 1630870846}
+        m_TargetAssemblyTypeName: BackgroundManager, Assembly-CSharp
+        m_MethodName: SetDefaultBg
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 1
+        m_CallState: 2
+      - m_Target: {fileID: 557611952}
+        m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
+        m_MethodName: SetActive
+        m_Mode: 6
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
@@ -43007,11 +43043,9 @@ MonoBehaviour:
   images:
   - {fileID: 1072365384}
   - {fileID: 955139687}
-  - {fileID: 0}
   circles:
   - {fileID: 97530293}
   - {fileID: 353235991}
-  - {fileID: 0}
   circleEmpty: {fileID: 21300000, guid: 8a6d445c2bf77554eb2d7c0c3e593c92, type: 3}
   circleFilled: {fileID: 21300000, guid: c2a30679bcb37dd4098d40c1670db074, type: 3}
   currentIndex: 0
@@ -47783,7 +47817,7 @@ MonoBehaviour:
           m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: 
-          m_BoolArgument: 1
+          m_BoolArgument: 0
         m_CallState: 2
 --- !u!114 &1339924500
 MonoBehaviour:
@@ -69427,7 +69461,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1939979601}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1143238396}
+        m_TargetAssemblyTypeName: NotiManager, Assembly-CSharp
+        m_MethodName: ShowNotification
+        m_Mode: 5
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: Cooming Soon
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1939979601
 MonoBehaviour:
   m_ObjectHideFlags: 0

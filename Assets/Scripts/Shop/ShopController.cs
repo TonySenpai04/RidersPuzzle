@@ -48,8 +48,8 @@ public class ShopController : MonoBehaviour
     public void ToHeroShop()
     {
         isHeroShop=true;
-        NotiManager.instance.ShowNotification("Cooming soon");
-      // SetSelectedButton(heroBtn);
+        //NotiManager.instance.ShowNotification("Cooming soon");
+       SetSelectedButton(heroBtn);
         isHeroShop = false;
 
     }
