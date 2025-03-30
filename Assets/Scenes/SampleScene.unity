@@ -7946,6 +7946,8 @@ MonoBehaviour:
   - {fileID: 1560583581}
   stampImage: {fileID: 21300000, guid: 49734d70e7556654eb3f25c04fa05b94, type: 3}
   timerText: {fileID: 1882398623}
+  rewardObj: {fileID: 1462544424}
+  rewardTxt: {fileID: 1638439097}
 --- !u!114 &197940831
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -12684,7 +12686,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Daily gift
+  m_text: You received
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 7317eec8898dcfa4789df435953d577f, type: 2}
   m_sharedMaterial: {fileID: -6687790196517014331, guid: 7317eec8898dcfa4789df435953d577f, type: 2}
@@ -68356,7 +68358,7 @@ MonoBehaviour:
     story: A man who often jokes around, but still has a strong fighting spirit and
       is willing to sacrifice for justice.
   - id: 1003
-    price: 27999
+    price: 28888
     name: Skulz
     hp: 8
     icon: {fileID: 21300000, guid: 1da4970e07482834db5dc34c080253db, type: 3}

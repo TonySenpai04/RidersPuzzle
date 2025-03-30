@@ -19,7 +19,8 @@ public class QuestUIController : MonoBehaviour
     [SerializeField] private List<Image> completedImages;
     [SerializeField] private Sprite stampImage;
     [SerializeField] private TextMeshProUGUI timerText;
-
+    [SerializeField] private GameObject rewardObj;
+    [SerializeField] private TextMeshProUGUI rewardTxt;
     void Start()
      {
         Init();
@@ -98,6 +99,7 @@ public class QuestUIController : MonoBehaviour
     }
     public void CompleteQuestReward()
     {
+        int reward = 0;
         List<QuestUI> completedQuests = new List<QuestUI>(); // Danh sách tạm để lưu các quest hoàn thành
 
         foreach (QuestUI quest in quests)
@@ -106,12 +108,14 @@ public class QuestUIController : MonoBehaviour
             if (questBase.CheckCompletion())
             {
                 GoldManager.instance.AddGold(questBase.reward);
+                reward += questBase.reward;
                 questBase.isReward = true;
                 questBase.SaveQuest();
                 completedQuests.Add(quest); // Đánh dấu để xóa sau
             }
         }
-
+        rewardObj.SetActive(true);
+        rewardTxt.text= reward.ToString();
         // Xóa các quest đã hoàn thành khỏi danh sách và UI
         foreach (QuestUI quest in completedQuests)
         {
