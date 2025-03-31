@@ -5,10 +5,14 @@ using UnityEngine;
 public abstract class QuestBase
 {
     public string questId;
-    public string description;
+    [NonSerialized] public string description;
     public int reward;
     public bool isReward;
-    public abstract void UpdateProgress(int progress);
+
+    public virtual void UpdateProgress(int progress)
+    {
+
+    }
     public virtual void UpdateProgress(int progress1, int progress2)
     {
 
@@ -26,6 +30,7 @@ public abstract class QuestBase
         if (File.Exists(path))
         {
             string json = File.ReadAllText(path);
+            
             JsonUtility.FromJsonOverwrite(json, this);
         }
     }
@@ -42,4 +47,5 @@ public abstract class QuestBase
     {
         return Tuple.Create(0,0);
     }
+    public void OnBeforeSerialize() { }
 }

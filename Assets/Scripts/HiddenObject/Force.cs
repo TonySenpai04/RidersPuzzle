@@ -12,8 +12,9 @@ public class Force : HiddenObject
             return;
         }
         PlaySFX();
-        PlayerController.instance.movementController.MoveForward(2);
+        
         PlayerController.instance.movementController.numberOfMoves.ReduceeMove(4);
+        PlayerController.instance.movementController.MoveForward(2);
         DestroyObject();
     }
 }

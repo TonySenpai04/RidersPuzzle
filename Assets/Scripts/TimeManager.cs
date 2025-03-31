@@ -61,9 +61,15 @@ public class TimeManager : MonoBehaviour
     public TimeSpan GetTimeUntilMidnight()
     {
         if (!IsTimeFetched) return TimeSpan.Zero;
-        DateTime now  = DateTime.Now; 
-        DateTime nextMidnight = now.Date.AddDays(1); // 12h đêm hôm sau
-        return nextMidnight - now;
+        DateTime now = DateTime.Now;
+        DateTime nextNoon = now.Date.AddHours(12); 
+
+        if (now >= nextNoon)
+        {
+            nextNoon = now.Date.AddDays(1).AddHours(12); 
+        }
+
+        return nextNoon - now;
     }
 
 

@@ -17,11 +17,7 @@ public class PlayStageQuest : QuestBase
         requiredMode = mode;
     }
 
-    public override void UpdateProgress(int plays)
-    {
-        currentPlays += plays;
-        SaveQuest();
-    }
+
     public override void UpdateProgress(int count,int riderId)
     {
         if (riderId.ToString() == requiredRider)

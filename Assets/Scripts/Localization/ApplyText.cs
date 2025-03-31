@@ -34,6 +34,7 @@ public class ApplyText : MonoBehaviour, ILocalizeObject
     [SerializeField] private TMP_Text[] title_notification;
     [SerializeField] private TMP_Text popup_detail_quit;
     [SerializeField] private TMP_Text popup_detail_language_change;
+    [SerializeField] private TMP_Text popup_detail_language_change_stage;
     [SerializeField] private TMP_Text popup_detail_credit;
     [SerializeField] private TMP_Text[] button_yes;
     [SerializeField] private TMP_Text[] button_no;
@@ -269,6 +270,7 @@ public class ApplyText : MonoBehaviour, ILocalizeObject
         textLocalizer.SetLocalizedText("title_notification", title_notification);
         textLocalizer.SetLocalizedText("popup_detail_quit", popup_detail_quit);
         textLocalizer.SetLocalizedText("popup_detail_language_change", popup_detail_language_change);
+        textLocalizer.SetLocalizedText("popup_detail_language_change", popup_detail_language_change_stage);
         textLocalizer.SetLocalizedText("button_yes", button_yes);
         textLocalizer.SetLocalizedText("button_no", button_no);
         textLocalizer.SetLocalizedText("button_view", button_view);
@@ -342,7 +344,7 @@ public class ApplyText : MonoBehaviour, ILocalizeObject
             skill_info_hero_onstage, skill_info_hero_lib, button_replay, title_setting,
             setting_sound, setting_sound_on, setting_sound_off, setting_language, setting_language_1,
             setting_language_2, setting_privacy_policy, setting_term_of_condition, setting_credit
-           , popup_detail_quit, popup_detail_language_change, popup_detail_credit,
+           , popup_detail_quit, popup_detail_language_change, popup_detail_credit,popup_detail_language_change_stage,
             login_popup_title,button_return_player,titleStory,contentStory,
 
         // Object

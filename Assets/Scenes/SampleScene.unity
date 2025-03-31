@@ -7939,15 +7939,17 @@ MonoBehaviour:
   stampCount: 0
   completedImages:
   - {fileID: 2010155524}
-  - {fileID: 2116035535}
   - {fileID: 129081063}
-  - {fileID: 1968333420}
-  - {fileID: 310603590}
   - {fileID: 1560583581}
+  - {fileID: 1968333420}
+  - {fileID: 2116035535}
+  - {fileID: 310603590}
   stampImage: {fileID: 21300000, guid: 49734d70e7556654eb3f25c04fa05b94, type: 3}
   timerText: {fileID: 1882398623}
   rewardObj: {fileID: 1462544424}
   rewardTxt: {fileID: 1638439097}
+  unselectSprite: {fileID: 21300000, guid: d6c37431dfc5a6b4594a79f6bd4eb7f9, type: 3}
+  selectSprite: {fileID: 21300000, guid: d134a71c5afc0344fa98320ac46743a6, type: 3}
 --- !u!114 &197940831
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -38245,7 +38247,7 @@ MonoBehaviour:
   - {fileID: 1101982533551577117, guid: 634ee2aa41c383c40a4f25d2ad130695, type: 3}
   - {fileID: 7218747492197014958, guid: 51c6ef5ff8542404eb3c1b855d293473, type: 3}
   - {fileID: -1211898106481113863, guid: 8dc6b4dff80d5cd43b74a0d95673d415, type: 3}
-  - {fileID: 3723956077048871618, guid: eb5aaf285dcf93742b032445a4dc06f2, type: 3}
+  - {fileID: 1552014637289203985, guid: 125ee23ab63969749953f8b0e36bbe8f, type: 3}
   - {fileID: -4611138964240901131, guid: 09c4b125a6c4e2143b21a0fadd1f72c3, type: 3}
   - {fileID: 7644660544443407208, guid: 8428340b0af678d4981b666c6fac49ab, type: 3}
   - {fileID: 9173045081875084332, guid: dc2e1ca7e569ffe42b854e497fa22a15, type: 3}
@@ -38257,7 +38259,7 @@ MonoBehaviour:
   - {fileID: 8101898487227231425, guid: bcb9eb28a0cf5f1448e306c3c5a72687, type: 3}
   - {fileID: 483692375014082932, guid: 17d6467f88dc24d46a909834e04a97d5, type: 3}
   - {fileID: 5545686664795374432, guid: 375ae245ddd5a6a468c7ae77c3d2ba38, type: 3}
-  - {fileID: -8508295066770132916, guid: 125ee23ab63969749953f8b0e36bbe8f, type: 3}
+  - {fileID: -2742037922042190524, guid: eb5aaf285dcf93742b032445a4dc06f2, type: 3}
   - {fileID: 1417353063487614309, guid: 307fbe9652dc20e4ca72e68a3bf2bb11, type: 3}
   - {fileID: -6684742591381293817, guid: 139f116b0ce12a1459d6b9e489cdc151, type: 3}
   - {fileID: -552130359063316847, guid: 68b0b763ef5b585458031231d1eb6a5a, type: 3}
@@ -54582,17 +54584,21 @@ MonoBehaviour:
   - {fileID: 2146023779}
   - {fileID: 589115172}
   - {fileID: 770830522}
+  - {fileID: 1969289696}
   popup_detail_quit: {fileID: 1540867179}
   popup_detail_language_change: {fileID: 1785771996}
+  popup_detail_language_change_stage: {fileID: 350130831}
   popup_detail_credit: {fileID: 406958810}
   button_yes:
   - {fileID: 1602022190}
   - {fileID: 1779120542}
   - {fileID: 338509965}
+  - {fileID: 936216742}
   button_no:
   - {fileID: 653249979}
   - {fileID: 297331729}
   - {fileID: 1282043682}
+  - {fileID: 1624427818}
   button_ok:
   - {fileID: 893680220}
   - {fileID: 1245808886}
@@ -54712,6 +54718,7 @@ MonoBehaviour:
   objectAsset: {fileID: 4900000, guid: 1977ba8c84b738b4fa8f025b91d8157d, type: 3}
   commonAsset: {fileID: 4900000, guid: 45b9b709a23cb8e4597442e2b1c9dd22, type: 3}
   storyAsset: {fileID: 4900000, guid: 5be47c239a3971e4eac5e36f9dffd6af, type: 3}
+  questAsset: {fileID: 4900000, guid: 6c954dba309831748b838e6ae8f83b2c, type: 3}
   applyTextScript: {fileID: 1519185842}
 --- !u!1 &1524311781
 GameObject:
@@ -57484,7 +57491,7 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 1, y: 1}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 0, y: 2232.94}
+  m_SizeDelta: {x: 0, y: 2608.28}
   m_Pivot: {x: 0, y: 1}
 --- !u!114 &1592084329
 MonoBehaviour:

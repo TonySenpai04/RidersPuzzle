@@ -52,6 +52,11 @@ public class GameManager : MonoBehaviour
         ApplyText.instance.UpdateTitleStage(level.level);
         backgroundController.UpdateRandomArt();
         PlayerController.instance.LoadLevel();
+
+         foreach (var quest in QuestManager.instance.GetQuestsByType<PlayStageQuest>())
+        {
+            QuestManager.instance.UpdateQuest(quest.questId, 1, StageHeroController.instance.currentId);
+        }
     }
     public void LoadLangue()
     {

@@ -21,6 +21,8 @@ public class QuestUIController : MonoBehaviour
     [SerializeField] private TextMeshProUGUI timerText;
     [SerializeField] private GameObject rewardObj;
     [SerializeField] private TextMeshProUGUI rewardTxt;
+    [SerializeField] private Sprite unselectSprite;
+    [SerializeField] private Sprite selectSprite;
     void Start()
      {
         Init();
@@ -89,6 +91,17 @@ public class QuestUIController : MonoBehaviour
         }
         if (currentCompleteQuest == 0)
         {
+            CompleteAll.GetComponent<Image>().sprite= unselectSprite;
+            CompleteAll.interactable = false;
+        }
+        else
+        {
+            CompleteAll.GetComponent<Image>().sprite = selectSprite;
+            CompleteAll.interactable = true;
+            CompleteAll.gameObject.SetActive(true);
+        }
+        if (quests.Count <= 0)
+        {
             CompleteAll.gameObject.SetActive(false);
         }
         else
@@ -116,6 +129,8 @@ public class QuestUIController : MonoBehaviour
         }
         rewardObj.SetActive(true);
         rewardTxt.text= reward.ToString();
+        StartCoroutine(ShowRewardTemporarily());
+
         // Xóa các quest đã hoàn thành khỏi danh sách và UI
         foreach (QuestUI quest in completedQuests)
         {
@@ -124,6 +139,24 @@ public class QuestUIController : MonoBehaviour
         }
 
         currentCompleteQuest = 0; // Reset lại số quest hoàn thành
+    }
+    private void OnEnable()
+    {
+        if (stampCount >= 7)
+        {
+            int reward = 888;
+            rewardObj.SetActive(true);
+            rewardTxt.text = reward.ToString();
+            GoldManager.instance.AddGold(reward);
+            StartCoroutine(ShowRewardTemporarily());
+            stampCount /= 7;
+        }
+    }
+    private IEnumerator ShowRewardTemporarily()
+    {
+        rewardObj.SetActive(true);
+        yield return new WaitForSeconds(1f);
+        rewardObj.SetActive(false);
     }
 
 }

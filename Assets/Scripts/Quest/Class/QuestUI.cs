@@ -15,7 +15,10 @@ public class QuestUI : MonoBehaviour
     [SerializeField] private Slider scrollBar;
 
     public string QuestID { get => questID; set => questID = value; }
-
+    private void Start()
+    {
+        scrollBar.interactable = false;
+    }
     public void SetQuestData(string questID, string des, string reward, Tuple<int, int> progress)
     {
         this.QuestID = questID;
@@ -35,6 +38,7 @@ public class QuestUI : MonoBehaviour
     private void FixedUpdate()
     {
         QuestBase quest= QuestManager.instance.GetQuestById(QuestID);
+        this.des.text = quest.description;
         Tuple<int, int> progress = quest.GetProgress();
         this.progress.text = progress.Item1 + "/" + progress.Item2;
         if (progress.Item2 > 0)

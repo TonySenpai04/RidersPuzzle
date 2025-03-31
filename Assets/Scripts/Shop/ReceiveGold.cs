@@ -32,10 +32,21 @@ public class ReceiveGold : MonoBehaviour
              nameGiftTxt);
         //nameGiftTxt.text = "You received";
         GoldManager.instance.AddGold(goldAmount);
+        foreach (var quest in QuestManager.instance.GetQuestsByType<DailyGiftQuest>())
+        {
+            QuestManager.instance.UpdateQuest(quest.questId, 1, 0);
+        }
+        StartCoroutine(ShowRewardTemporarily());
         exchangeBtn.gameObject.SetActive(false);
     }
     private void FixedUpdate()
     {
         allGoldTxt.text = GoldManager.instance.GetGold().ToString();
+    }
+    private IEnumerator ShowRewardTemporarily()
+    {
+        this.gameObject.SetActive(true);
+        yield return new WaitForSeconds(1f);
+        this.gameObject.SetActive(false);
     }
 }

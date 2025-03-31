@@ -16,6 +16,12 @@ public class ReceiveHero : MonoBehaviour
         receivedIdHero = receivedHero.Value.id;
         heroImage.sprite = receivedHero.Value.heroImage;
         heroName.text = (receivedHero.Value.id+ " "+receivedHero.Value.name).ToUpper();
-
+        StartCoroutine( ShowRewardTemporarily());
+    }
+    private IEnumerator ShowRewardTemporarily()
+    {
+        // rewardObj.SetActive(true);
+        yield return new WaitForSeconds(1f);
+        this.gameObject.SetActive(false);
     }
 }

@@ -13,6 +13,7 @@ public class LocalizationManager : MonoBehaviour
     [SerializeField] private TextAsset objectAsset;
     [SerializeField] private TextAsset commonAsset;
     [SerializeField] private TextAsset storyAsset;
+    [SerializeField] private TextAsset questAsset;
     [SerializeField] private ApplyText applyTextScript;
     private Dictionary<string, string> richText;
     private int currentLanguage;
@@ -20,6 +21,7 @@ public class LocalizationManager : MonoBehaviour
     private IReadDataLocalize readCSVLocalizeObject;
     private IReadDataLocalize readCSVLocalizeCommon;
     private IReadDataLocalize readCSVLocalizeStory;
+    private IReadDataLocalize readCSVLocalizeQuest;
     void Awake()
     {
         instance = this;
@@ -37,6 +39,7 @@ public class LocalizationManager : MonoBehaviour
         readCSVLocalizeObject = new ReadCSVLocalizeObject();
         readCSVLocalizeCommon = new ReadCSVLocalizeCommon();
         readCSVLocalizeStory = new ReadCSVLocalizeStory();
+        readCSVLocalizeQuest= new ReadCSVLocalizeQuest(); 
     }
 
     public void LoadData()
@@ -58,6 +61,7 @@ public class LocalizationManager : MonoBehaviour
        readCSVLocalizeObject.LoadLocalization(currentLanguage, localizedTexts, localizedFonts, objectAsset, richText);
         readCSVLocalizeCommon.LoadLocalization(currentLanguage, localizedTexts, localizedFonts, commonAsset, richText);
         readCSVLocalizeStory.LoadLocalization(currentLanguage, localizedTexts, localizedFonts, storyAsset, richText);
+        readCSVLocalizeQuest.LoadLocalization(currentLanguage, localizedTexts, localizedFonts, questAsset, richText);
         //foreach (var text in localizedTexts)
         //{
         //    Debug.Log(text.Key + "-" + text.Value);
@@ -121,6 +125,15 @@ public class LocalizationManager : MonoBehaviour
         SaveLanguage();
         // LoadLanguage((Language)(languageCode));
     }
+    public string GetLocalizedText(string key, params object[] args)
+    {
+        if (localizedTexts.TryGetValue(key, out string localizedString))
+        {
+            return string.Format(localizedString, args); // Thay thế {0}, {1} bằng giá trị thực tế
+        }
+        return key; // Nếu không tìm thấy key, trả về key (để dễ debug)
+    }
+
     public enum Language
     {
         English = 3,

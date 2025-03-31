@@ -57,7 +57,7 @@ public class LanguageSetting : MonoBehaviour
     {
         LocalizationManager.instance.ChangeLanguage(temp);
         LocalizationManager.instance.LoadLanague();
-
+        QuestManager.instance.ReloadQuestDes();
     }
   
 }

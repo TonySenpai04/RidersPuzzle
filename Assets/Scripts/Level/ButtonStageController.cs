@@ -113,10 +113,7 @@ public class ButtonStageController : MonoBehaviour
         {
             HiddenObjectManager.instance.SetSeenObjectById(levelData.objectPrefab.GetComponent<HiddenObject>().id);
         }
-        foreach (var quest in QuestManager.instance.GetQuestsByType<PlayStageQuest>())
-        {
-            QuestManager.instance.UpdateQuest(quest.questId, 1, StageHeroController.instance.currentId);
-        }
+       
         info.gameObject.SetActive(false);
         tutorial.close.onClick.RemoveAllListeners();
         tutorial.GetComponent<Image>().enabled = false;
