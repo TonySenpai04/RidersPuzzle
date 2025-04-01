@@ -22,7 +22,7 @@ public class LibraryController : MonoBehaviour
         heroTxt.text = HeroManager.instance.HeroOwnedQuantity()+"/11";
         objectTxt.text = HiddenObjectManager.instance.GetSeenObject().Count
             + "/" + HiddenObjectManager.instance.ObjectQuantity();
-         int unlockCount = LevelManager.instance.GetAllLevelComplete() / 50;
+         int unlockCount = LevelManager.instance.GetAllLevelComplete() / 30;
         storyTxt.text = unlockCount.ToString()+"/"+StoryManager.instance.stories.Count.ToString();
     }
     private void OnEnable()
@@ -38,7 +38,7 @@ public class LibraryController : MonoBehaviour
         heroTxt.text = HeroManager.instance.HeroOwnedQuantity() + "/11" ;
         objectTxt.text = HiddenObjectManager.instance.GetSeenObject().Count
             + "/" + HiddenObjectManager.instance.ObjectQuantity();
-        int unlockCount = LevelManager.instance.GetAllLevelComplete() / 50;
+        int unlockCount = LevelManager.instance.GetAllLevelComplete() / 30;
         storyTxt.text = unlockCount.ToString() + "/" + StoryManager.instance.stories.Count.ToString();
     }
 }

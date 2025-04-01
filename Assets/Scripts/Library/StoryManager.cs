@@ -20,7 +20,7 @@ public class StoryManager : MonoBehaviour
     void Start()
     {
         instance = this;
-       count = LevelManager.instance.GetAllLevelComplete()/50;
+       count = LevelManager.instance.GetAllLevelComplete()/30;
     }
     public Story GetByStoryId(string id)
     {
@@ -40,7 +40,7 @@ public class StoryManager : MonoBehaviour
             Debug.Log(LevelManager.instance.GetAllLevelComplete());
         }
         int levelWinCount = LevelManager.instance.GetAllLevelComplete();
-        int storyToUnlock = levelWinCount / 50;
+        int storyToUnlock = levelWinCount / 30;
         if(count < storyToUnlock)
         {
             NotiManager.instance.ShowNotiRedDot("library");

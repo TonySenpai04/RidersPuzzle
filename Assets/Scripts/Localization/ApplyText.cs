@@ -124,9 +124,21 @@ public class ApplyText : MonoBehaviour, ILocalizeObject
     [SerializeField] private TMP_Text[] login_popup_email;
     [SerializeField] private TMP_Text[] login_popup_password;
     [SerializeField] private Text login_popup_email_guide_1;
+    [SerializeField] private TMP_Text login_popup_display_name, login_popup_forget_password,
+        button_login, login_popup_wrong_password
+        , button_register, login_popup_register_success, login_popup_my_account, register_new_account, forget_password_title,
+        forget_password_content, button_reset;
+    [SerializeField] private Text login_popup_password_guide_1, login_popup_email_guide_2, login_popup_password_guide_2,
+        login_popup_display_name_guide, login_popup_email_guide_3;
     [Header("Story")]
     [SerializeField] private TMP_Text titleStory;
     [SerializeField] private TMP_Text contentStory;
+    [Header("Quest")]
+    [SerializeField] private TMP_Text quest_daily_quest_title, button_complete_all,
+         button_achievement, quest_reset_time, quest_daily_quest_all_completed,
+        quest_help_daily_quest_title, quest_help_daily_quest_content, quest_help_achivement_title, quest_help_achivement_content
+        ;
+   
 
     public static ApplyText instance;
     public  TextLocalizer textLocalizer;
@@ -284,6 +296,37 @@ public class ApplyText : MonoBehaviour, ILocalizeObject
         textLocalizer.SetLocalizedText("login_popup_email", login_popup_email);
         textLocalizer.SetLocalizedText("login_popup_password", login_popup_password);
         textLocalizer.SetLocalizedText("login_popup_email_guide_1", login_popup_email_guide_1);
+
+        textLocalizer.SetLocalizedText("login_popup_display_name", login_popup_display_name);
+        textLocalizer.SetLocalizedText("login_popup_password_guide_1", login_popup_password_guide_1);
+
+        textLocalizer.SetLocalizedText("login_popup_forget_password", login_popup_forget_password);
+        textLocalizer.SetLocalizedText("login_popup_email_guide_1", login_popup_email_guide_1);
+        textLocalizer.SetLocalizedText("button_login", button_login);
+        textLocalizer.SetLocalizedText("login_popup_email_guide_1", login_popup_email_guide_3);
+       // textLocalizer.SetLocalizedText("login_popup_wrong_password", login_popup_wrong_password);
+        textLocalizer.SetLocalizedText("login_popup_email_guide_2", login_popup_email_guide_2);
+        textLocalizer.SetLocalizedText("login_popup_password_guide_2", login_popup_password_guide_2);
+        textLocalizer.SetLocalizedText("login_popup_display_name_guide", login_popup_display_name_guide);
+        textLocalizer.SetLocalizedText("button_register", button_register);
+       // textLocalizer.SetLocalizedText("login_popup_register_success", login_popup_register_success);
+        textLocalizer.SetLocalizedText("login_popup_my_account", login_popup_my_account);
+        textLocalizer.SetLocalizedText("register_new_account", register_new_account);
+        textLocalizer.SetLocalizedText("forget_password_title", forget_password_title);
+        textLocalizer.SetLocalizedText("forget_password_content", forget_password_content);
+        textLocalizer.SetLocalizedText("button_reset", button_reset);
+        textLocalizer.SetLocalizedText("quest_daily_quest_title", quest_daily_quest_title);
+        textLocalizer.SetLocalizedText("button_complete_all", button_complete_all);
+       // textLocalizer.SetLocalizedText("button_daily_quest", button_daily_quest);
+        textLocalizer.SetLocalizedText("button_achievement", button_achievement);
+        textLocalizer.SetLocalizedText("quest_reset_time", quest_reset_time);
+        //textLocalizer.SetLocalizedText("quest_tag_completed", quest_tag_completed);
+        textLocalizer.SetLocalizedText("quest_daily_quest_all_completed", quest_daily_quest_all_completed);
+        textLocalizer.SetLocalizedText("quest_help_daily_quest_title", quest_help_daily_quest_title);
+        textLocalizer.SetLocalizedText("quest_help_daily_quest_content", quest_help_daily_quest_content);
+        textLocalizer.SetLocalizedText("quest_help_achivement_title", quest_help_achivement_title);
+        textLocalizer.SetLocalizedText("quest_help_achivement_content", quest_help_achivement_content);
+
     }
 
     private void SetRiderTexts(TextLocalizer textLocalizer)
@@ -346,6 +389,13 @@ public class ApplyText : MonoBehaviour, ILocalizeObject
             setting_language_2, setting_privacy_policy, setting_term_of_condition, setting_credit
            , popup_detail_quit, popup_detail_language_change, popup_detail_credit,popup_detail_language_change_stage,
             login_popup_title,button_return_player,titleStory,contentStory,
+            quest_daily_quest_title, button_complete_all,
+         button_achievement, quest_reset_time, quest_daily_quest_all_completed,
+        quest_help_daily_quest_title, quest_help_daily_quest_content, quest_help_achivement_title, quest_help_achivement_content
+        ,login_popup_display_name, login_popup_forget_password,
+        button_login, login_popup_wrong_password
+        , button_register, login_popup_register_success, login_popup_my_account, register_new_account, forget_password_title,
+        forget_password_content, button_reset,
 
         // Object
         objectName, objectStory, objectBattle, libraryObjectStory, libraryObjectBattleInfor,

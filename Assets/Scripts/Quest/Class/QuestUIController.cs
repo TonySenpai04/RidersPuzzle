@@ -34,7 +34,8 @@ public class QuestUIController : MonoBehaviour
     {
         
             TimeSpan timeLeft = TimeManager.Instance.GetTimeUntilMidnight();
-            timerText.text = $"Daily quest reset in: {timeLeft.Hours:D2}:{timeLeft.Minutes:D2}:{timeLeft.Seconds:D2}";
+        string localize = LocalizationManager.instance.GetLocalizedText("quest_reset_time");
+            timerText.text = $"{localize} {timeLeft.Hours:D2}:{timeLeft.Minutes:D2}:{timeLeft.Seconds:D2}";
        
     }
     private void Update()
@@ -43,6 +44,8 @@ public class QuestUIController : MonoBehaviour
     }
     private void UpdateStampUI()
     {
+        QuestData questData = QuestManager.instance.LoadQuestData();
+        stampCount = questData.stampCount;
         for (int i = 0; i < completedImages.Count; i++)
         {
             if (i < stampCount)
@@ -108,7 +111,9 @@ public class QuestUIController : MonoBehaviour
         {
             CompleteAll.gameObject.SetActive(true);
         }
+
         UpdateStampUI();
+
     }
     public void CompleteQuestReward()
     {

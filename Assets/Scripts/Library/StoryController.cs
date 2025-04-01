@@ -38,7 +38,7 @@ public class StoryController : MonoBehaviour
             storyLibaries.Add(objectLib);
 
         }
-        int unlockCount = LevelManager.instance.GetAllLevelComplete() / 50;
+        int unlockCount = LevelManager.instance.GetAllLevelComplete() / 30;
         objectSeenTxt.text = unlockCount.ToString();
         UpdateSeenStory();
     }
@@ -49,7 +49,7 @@ public class StoryController : MonoBehaviour
     void UnlockStoriesByLevel()
     {
         int seen = LevelManager.instance.GetAllLevelComplete();
-        int unlockCount = seen / 50;
+        int unlockCount = seen / 30;
         objectSeenTxt.text = unlockCount.ToString();
         for (int i = 0; i <StoryManager.instance.stories.Count; i++)
         {

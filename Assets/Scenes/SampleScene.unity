@@ -9007,7 +9007,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &217652766
 RectTransform:
   m_ObjectHideFlags: 0
@@ -13224,7 +13224,7 @@ MonoBehaviour:
   levels: []
   levelsClone: []
   currentLevelIndex: 1
-  data: {fileID: 4900000, guid: 00c0a6e6709c1e4459d894a530160a4a, type: 3}
+  data: {fileID: 4900000, guid: f6487afd355581b4e82fb2e1b2d9b012, type: 3}
   hiddenObjectManager: {fileID: 1076175228}
 --- !u!4 &325954454
 Transform:
@@ -25997,10 +25997,10 @@ RectTransform:
   m_Children: []
   m_Father: {fileID: 574155501}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: -2725.2505}
-  m_SizeDelta: {x: 0, y: 5450.6}
+  m_AnchorMin: {x: 0.5, y: 1}
+  m_AnchorMax: {x: 0.5, y: 1}
+  m_AnchoredPosition: {x: 0, y: -3581.266}
+  m_SizeDelta: {x: 1080, y: 7162.53}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &699068826
 MonoBehaviour:
@@ -33391,7 +33391,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1321991228}
+      - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: GoogleLogin, Assembly-CSharp
         m_MethodName: SignIn
         m_Mode: 1
@@ -37685,7 +37685,6 @@ Transform:
   - {fileID: 786270578}
   - {fileID: 1193736341}
   - {fileID: 323031828}
-  - {fileID: 1321991227}
   - {fileID: 1316386015}
   - {fileID: 1860357872}
   m_Father: {fileID: 0}
@@ -47345,50 +47344,6 @@ MonoBehaviour:
   objectParent: {fileID: 1320715658}
   objectLibraries: []
   objectSeenTxt: {fileID: 932796351}
---- !u!1 &1321991226
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1321991227}
-  - component: {fileID: 1321991228}
-  m_Layer: 0
-  m_Name: LoginManager
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 0
---- !u!4 &1321991227
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1321991226}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 1054705959}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1321991228
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1321991226}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 48255d427687a234a82412d71fa41e0f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &1326881671
 GameObject:
   m_ObjectHideFlags: 0
@@ -54685,8 +54640,33 @@ MonoBehaviour:
   - {fileID: 899317182}
   - {fileID: 1600202387}
   login_popup_email_guide_1: {fileID: 485049199}
+  login_popup_display_name: {fileID: 1219676554}
+  login_popup_forget_password: {fileID: 900427068}
+  button_login: {fileID: 872618707}
+  login_popup_wrong_password: {fileID: 716411569}
+  button_register: {fileID: 330918104}
+  login_popup_register_success: {fileID: 943426148}
+  login_popup_my_account: {fileID: 671354427}
+  register_new_account: {fileID: 278036621}
+  forget_password_title: {fileID: 1728391801}
+  forget_password_content: {fileID: 1550271055}
+  button_reset: {fileID: 168264530}
+  login_popup_password_guide_1: {fileID: 1709535224}
+  login_popup_email_guide_2: {fileID: 113066682}
+  login_popup_password_guide_2: {fileID: 74419772}
+  login_popup_display_name_guide: {fileID: 1261749508}
+  login_popup_email_guide_3: {fileID: 1226253855}
   titleStory: {fileID: 1604394766}
   contentStory: {fileID: 1432656182}
+  quest_daily_quest_title: {fileID: 1575417204}
+  button_complete_all: {fileID: 1854688603}
+  button_achievement: {fileID: 747972234}
+  quest_reset_time: {fileID: 1882398623}
+  quest_daily_quest_all_completed: {fileID: 2144063720}
+  quest_help_daily_quest_title: {fileID: 276720941}
+  quest_help_daily_quest_content: {fileID: 1062412084}
+  quest_help_achivement_title: {fileID: 307728818}
+  quest_help_achivement_content: {fileID: 370042733}
 --- !u!4 &1519185843
 Transform:
   m_ObjectHideFlags: 0
@@ -54716,8 +54696,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   riderAsset: {fileID: 4900000, guid: a15edacb2ca267749bb2bfc048808b83, type: 3}
   objectAsset: {fileID: 4900000, guid: 1977ba8c84b738b4fa8f025b91d8157d, type: 3}
-  commonAsset: {fileID: 4900000, guid: 45b9b709a23cb8e4597442e2b1c9dd22, type: 3}
-  storyAsset: {fileID: 4900000, guid: 5be47c239a3971e4eac5e36f9dffd6af, type: 3}
+  commonAsset: {fileID: 4900000, guid: 689969be032fc414d9ac1382e2644c32, type: 3}
+  storyAsset: {fileID: 4900000, guid: 7cf60b12f8555b74d915ea23bab654cd, type: 3}
   questAsset: {fileID: 4900000, guid: 6c954dba309831748b838e6ae8f83b2c, type: 3}
   applyTextScript: {fileID: 1519185842}
 --- !u!1 &1524311781
@@ -57143,8 +57123,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 80
-  m_fontSizeBase: 80
+  m_fontSize: 60
+  m_fontSizeBase: 60
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
@@ -67284,12 +67264,12 @@ MonoBehaviour:
     title: 
     content: 
     isSeen: 0
-    sprite: {fileID: 0}
+    sprite: {fileID: 21300000, guid: 83ced09c17bb45a498a5a39fe6367972, type: 3}
   - id: 0004
     title: 
     content: 
     isSeen: 0
-    sprite: {fileID: 0}
+    sprite: {fileID: 21300000, guid: 6d1b31ae1dc4521419484e7b23f28a6c, type: 3}
   - id: 0005
     title: 
     content: 

@@ -107,7 +107,7 @@ public class FirebaseDataManager : MonoBehaviour
             currentUser = task.Result.User;
             this.username= username;
             Debug.Log("✅ Registered: " + currentUser.Email);
-            onResult?.Invoke(true, null);
+            onResult?.Invoke(true, LocalizationManager.instance.GetLocalizedText("login_popup_register_success"));
         });
     }
 
@@ -130,16 +130,16 @@ public class FirebaseDataManager : MonoBehaviour
                         switch ((AuthError)firebaseEx.ErrorCode)
                         {
                             case AuthError.InvalidEmail:
-                                errorMessage = "Wrong username or password";
+                                errorMessage = LocalizationManager.instance.GetLocalizedText("login_popup_wrong_password");
                                 break;
                             case AuthError.WrongPassword:
-                                errorMessage = "Wrong username or password";
+                                errorMessage = LocalizationManager.instance.GetLocalizedText("login_popup_wrong_password"); ;
                                 break;
                             case AuthError.UserNotFound:
-                                errorMessage = "Wrong username or password";
+                                errorMessage = LocalizationManager.instance.GetLocalizedText("login_popup_wrong_password"); ;
                                 break;
                             default:
-                                errorMessage = "Wrong username or password";
+                                errorMessage = LocalizationManager.instance.GetLocalizedText("login_popup_wrong_password"); ;
                                 break;
                         }
                     }
