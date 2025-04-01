@@ -18,6 +18,15 @@ public class PushNotificationManager : MonoBehaviour
 
     void OnMessageReceived(object sender, Firebase.Messaging.MessageReceivedEventArgs e)
     {
-        Debug.Log("Thông báo nhận được: " + e.Message.Notification.Body);
+        if (e.Message.Data.ContainsKey("url"))
+        {
+            string url = e.Message.Data["url"];
+            Debug.Log("Mở đường link: " + url);
+            Application.OpenURL(url); // Mở trình duyệt với URL nhận được
+        }
+        else
+        {
+            Debug.Log("Thông báo nhận được: " + e.Message.Notification.Body);
+        }
     }
 }

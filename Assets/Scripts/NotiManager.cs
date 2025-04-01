@@ -135,5 +135,12 @@ public class NotiManager : MonoBehaviour
         string json = JsonUtility.ToJson(redNotiData, true);
         File.WriteAllText(notiPath, json);
     }
+    public void CoomingSoon()
+    {
+        StopAllCoroutines();
+        notiObject.gameObject.SetActive(true);
+        notiTxt.text = LocalizationManager.instance.GetLocalizedText("warning_coming_soon");
+        StartCoroutine(HideNotificationAfterDelay(1f));
+    }
 }
 

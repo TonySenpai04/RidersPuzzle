@@ -36,10 +36,24 @@ public class ApplyText : MonoBehaviour, ILocalizeObject
     [SerializeField] private TMP_Text popup_detail_language_change;
     [SerializeField] private TMP_Text popup_detail_language_change_stage;
     [SerializeField] private TMP_Text popup_detail_credit;
+    [SerializeField] private TMP_Text login_popup_my_account_game;
     [SerializeField] private TMP_Text[] button_yes;
     [SerializeField] private TMP_Text[] button_no;
     [SerializeField] private TMP_Text[] button_ok;
     [SerializeField] private TMP_Text skill_info_hero_lib;
+      [SerializeField] private TMP_Text title_setting_stage;
+    [SerializeField] private TMP_Text setting_sound_stage, setting_sound_on_stage,
+ setting_sound_off_stage,
+setting_language_stage,
+ setting_language_1_stage,
+ setting_language_2_stage,
+ setting_privacy_policy_stage,
+setting_term_of_condition_stage,
+ setting_credit_stage
+, login_popup_my_account_stage, title_rider_information_stage;
+
+
+
     [Header("Object")]
     [SerializeField] private TMP_Text objectName;
     [SerializeField] private TMP_Text objectStory;
@@ -127,9 +141,9 @@ public class ApplyText : MonoBehaviour, ILocalizeObject
     [SerializeField] private TMP_Text login_popup_display_name, login_popup_forget_password,
         button_login, login_popup_wrong_password
         , button_register, login_popup_register_success, login_popup_my_account, register_new_account, forget_password_title,
-        forget_password_content, button_reset;
+        forget_password_content, button_reset,  button_logout,my_account;
     [SerializeField] private Text login_popup_password_guide_1, login_popup_email_guide_2, login_popup_password_guide_2,
-        login_popup_display_name_guide, login_popup_email_guide_3;
+        login_popup_display_name_guide, login_popup_email_guide_3 ;
     [Header("Story")]
     [SerializeField] private TMP_Text titleStory;
     [SerializeField] private TMP_Text contentStory;
@@ -296,13 +310,12 @@ public class ApplyText : MonoBehaviour, ILocalizeObject
         textLocalizer.SetLocalizedText("login_popup_email", login_popup_email);
         textLocalizer.SetLocalizedText("login_popup_password", login_popup_password);
         textLocalizer.SetLocalizedText("login_popup_email_guide_1", login_popup_email_guide_1);
-
         textLocalizer.SetLocalizedText("login_popup_display_name", login_popup_display_name);
         textLocalizer.SetLocalizedText("login_popup_password_guide_1", login_popup_password_guide_1);
-
         textLocalizer.SetLocalizedText("login_popup_forget_password", login_popup_forget_password);
         textLocalizer.SetLocalizedText("login_popup_email_guide_1", login_popup_email_guide_1);
         textLocalizer.SetLocalizedText("button_login", button_login);
+        textLocalizer.SetLocalizedText("button_logout", button_logout);
         textLocalizer.SetLocalizedText("login_popup_email_guide_1", login_popup_email_guide_3);
        // textLocalizer.SetLocalizedText("login_popup_wrong_password", login_popup_wrong_password);
         textLocalizer.SetLocalizedText("login_popup_email_guide_2", login_popup_email_guide_2);
@@ -310,7 +323,7 @@ public class ApplyText : MonoBehaviour, ILocalizeObject
         textLocalizer.SetLocalizedText("login_popup_display_name_guide", login_popup_display_name_guide);
         textLocalizer.SetLocalizedText("button_register", button_register);
        // textLocalizer.SetLocalizedText("login_popup_register_success", login_popup_register_success);
-        textLocalizer.SetLocalizedText("login_popup_my_account", login_popup_my_account);
+        textLocalizer.SetLocalizedText("button_my_account", login_popup_my_account);
         textLocalizer.SetLocalizedText("register_new_account", register_new_account);
         textLocalizer.SetLocalizedText("forget_password_title", forget_password_title);
         textLocalizer.SetLocalizedText("forget_password_content", forget_password_content);
@@ -332,6 +345,7 @@ public class ApplyText : MonoBehaviour, ILocalizeObject
     private void SetRiderTexts(TextLocalizer textLocalizer)
     {
         textLocalizer.SetLocalizedText("title_rider_information", title_rider_information);
+        textLocalizer.SetLocalizedText("title_rider_information", title_rider_information_stage);
         textLocalizer.SetLocalizedText("hp_hero_1001", hp_hero_1001);
         textLocalizer.SetLocalizedText("hp_hero_1002", hp_hero_1002);
         textLocalizer.SetLocalizedText("skill_info_hero_1001", skill_info_hero_stage);
@@ -375,6 +389,22 @@ public class ApplyText : MonoBehaviour, ILocalizeObject
         textLocalizer.SetLocalizedText("setting_language_2", setting_language_2);
         textLocalizer.SetLocalizedText("setting_sound_on", setting_sound_on);
         textLocalizer.SetLocalizedText("setting_sound_off", setting_sound_off);
+
+        textLocalizer.SetLocalizedText("title_setting", title_setting_stage);
+        textLocalizer.SetLocalizedText("setting_sound", setting_sound_stage);
+        textLocalizer.SetLocalizedText("setting_language", setting_language_stage);
+        textLocalizer.SetLocalizedText("setting_privacy_policy", setting_privacy_policy_stage);
+        textLocalizer.SetLocalizedText("setting_credit", setting_credit_stage);
+        textLocalizer.SetLocalizedText("setting_term_of_condition", setting_term_of_condition_stage);
+        textLocalizer.SetLocalizedText("setting_language_1", setting_language_1_stage);
+        textLocalizer.SetLocalizedText("setting_language_2", setting_language_2_stage);
+        textLocalizer.SetLocalizedText("setting_sound_on", setting_sound_on_stage);
+        textLocalizer.SetLocalizedText("setting_sound_off", setting_sound_off_stage);
+
+        textLocalizer.SetLocalizedText("login_popup_my_account", login_popup_my_account_game);
+        textLocalizer.SetLocalizedText("login_popup_my_account", login_popup_my_account_stage);
+        textLocalizer.SetLocalizedText("login_popup_my_account", my_account);
+
     }
 
     public void ApplyFont(ref Dictionary<string, TMP_FontAsset> localizedFonts)
@@ -383,7 +413,7 @@ public class ApplyText : MonoBehaviour, ILocalizeObject
         TMP_Text[] allTexts =
         {
             loading, button_start, title_stage, title_choose_a_stage, warning_not_unlocked, warning_coming_soon,
-            guide_game_rule, title_rider_information, hp_hero_1001, hp_hero_1002, skill_info_hero_stage,
+            guide_game_rule, title_rider_information, hp_hero_1001, hp_hero_1002, skill_info_hero_stage,title_rider_information_stage,
             skill_info_hero_onstage, skill_info_hero_lib, button_replay, title_setting,
             setting_sound, setting_sound_on, setting_sound_off, setting_language, setting_language_1,
             setting_language_2, setting_privacy_policy, setting_term_of_condition, setting_credit
@@ -395,7 +425,15 @@ public class ApplyText : MonoBehaviour, ILocalizeObject
         ,login_popup_display_name, login_popup_forget_password,
         button_login, login_popup_wrong_password
         , button_register, login_popup_register_success, login_popup_my_account, register_new_account, forget_password_title,
-        forget_password_content, button_reset,
+        forget_password_content, button_reset,setting_sound_stage, setting_sound_on_stage,
+ setting_sound_off_stage,
+setting_language_stage,
+ setting_language_1_stage,
+ setting_language_2_stage,
+ setting_privacy_policy_stage,
+setting_term_of_condition_stage,
+ setting_credit_stage,button_logout
+, login_popup_my_account_stage,title_setting_stage,login_popup_my_account_game,my_account,
 
         // Object
         objectName, objectStory, objectBattle, libraryObjectStory, libraryObjectBattleInfor,

@@ -2108,9 +2108,9 @@ RectTransform:
   m_Children: []
   m_Father: {fileID: 536475597}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 1, y: 1}
-  m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -468.45, y: -532}
+  m_AnchorMin: {x: 0.5, y: 0}
+  m_AnchorMax: {x: 0.5, y: 0}
+  m_AnchoredPosition: {x: 60, y: 150}
   m_SizeDelta: {x: 120, y: 120}
   m_Pivot: {x: 1, y: 1}
 --- !u!114 &59386869
@@ -9007,7 +9007,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &217652766
 RectTransform:
   m_ObjectHideFlags: 0
@@ -13224,7 +13224,7 @@ MonoBehaviour:
   levels: []
   levelsClone: []
   currentLevelIndex: 1
-  data: {fileID: 4900000, guid: f6487afd355581b4e82fb2e1b2d9b012, type: 3}
+  data: {fileID: 4900000, guid: 6f59378aacc30c749a9bfa07999f1368, type: 3}
   hiddenObjectManager: {fileID: 1076175228}
 --- !u!4 &325954454
 Transform:
@@ -20580,8 +20580,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0.5}
   m_AnchorMax: {x: 1, y: 0.5}
-  m_AnchoredPosition: {x: 0.73999023, y: -273}
-  m_SizeDelta: {x: -131.44, y: 666.91}
+  m_AnchoredPosition: {x: 0.73999023, y: -185.32}
+  m_SizeDelta: {x: -131.44, y: 842.27}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &536475598
 MonoBehaviour:
@@ -49007,8 +49007,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0.5}
   m_AnchorMax: {x: 1, y: 0.5}
-  m_AnchoredPosition: {x: 8, y: -321}
-  m_SizeDelta: {x: -65.25997, y: 609.99}
+  m_AnchoredPosition: {x: 8, y: -249.59}
+  m_SizeDelta: {x: -65.26, y: 752.8}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1384051237
 MonoBehaviour:
@@ -52743,7 +52743,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0.5}
   m_AnchorMax: {x: 0, y: 0.5}
-  m_AnchoredPosition: {x: 25, y: 146}
+  m_AnchoredPosition: {x: 25, y: 220}
   m_SizeDelta: {x: 50, y: 50}
   m_Pivot: {x: 0, y: 0.5}
 --- !u!114 &1479189585
@@ -52910,7 +52910,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0.5}
   m_AnchorMax: {x: 0, y: 0.5}
-  m_AnchoredPosition: {x: 25, y: 157}
+  m_AnchoredPosition: {x: 25, y: 267}
   m_SizeDelta: {x: 50, y: 50}
   m_Pivot: {x: 0, y: 0.5}
 --- !u!114 &1486020293
@@ -54544,6 +54544,7 @@ MonoBehaviour:
   popup_detail_language_change: {fileID: 1785771996}
   popup_detail_language_change_stage: {fileID: 350130831}
   popup_detail_credit: {fileID: 406958810}
+  login_popup_my_account_game: {fileID: 1551938768}
   button_yes:
   - {fileID: 1602022190}
   - {fileID: 1779120542}
@@ -54558,6 +54559,18 @@ MonoBehaviour:
   - {fileID: 893680220}
   - {fileID: 1245808886}
   skill_info_hero_lib: {fileID: 311323704}
+  title_setting_stage: {fileID: 1816596771}
+  setting_sound_stage: {fileID: 1561758887}
+  setting_sound_on_stage: {fileID: 221296947}
+  setting_sound_off_stage: {fileID: 444314539}
+  setting_language_stage: {fileID: 1179971951}
+  setting_language_1_stage: {fileID: 1368890415}
+  setting_language_2_stage: {fileID: 1462566773}
+  setting_privacy_policy_stage: {fileID: 959161942}
+  setting_term_of_condition_stage: {fileID: 1309941687}
+  setting_credit_stage: {fileID: 893526742}
+  login_popup_my_account_stage: {fileID: 324133682}
+  title_rider_information_stage: {fileID: 1300138021}
   objectName: {fileID: 77643885}
   objectStory: {fileID: 1894846919}
   objectBattle: {fileID: 717930432}
@@ -54636,9 +54649,11 @@ MonoBehaviour:
   login_popup_email:
   - {fileID: 1662619698}
   - {fileID: 805372368}
+  - {fileID: 551759336}
   login_popup_password:
   - {fileID: 899317182}
   - {fileID: 1600202387}
+  - {fileID: 721222755}
   login_popup_email_guide_1: {fileID: 485049199}
   login_popup_display_name: {fileID: 1219676554}
   login_popup_forget_password: {fileID: 900427068}
@@ -54651,6 +54666,8 @@ MonoBehaviour:
   forget_password_title: {fileID: 1728391801}
   forget_password_content: {fileID: 1550271055}
   button_reset: {fileID: 168264530}
+  button_logout: {fileID: 1419654295}
+  my_account: {fileID: 1188661659}
   login_popup_password_guide_1: {fileID: 1709535224}
   login_popup_email_guide_2: {fileID: 113066682}
   login_popup_password_guide_2: {fileID: 74419772}
@@ -54694,9 +54711,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6ff3e288d79d4f84e93124c12281f950, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  riderAsset: {fileID: 4900000, guid: a15edacb2ca267749bb2bfc048808b83, type: 3}
+  riderAsset: {fileID: 4900000, guid: 7da7aabd5435d294daf95181318136a9, type: 3}
   objectAsset: {fileID: 4900000, guid: 1977ba8c84b738b4fa8f025b91d8157d, type: 3}
-  commonAsset: {fileID: 4900000, guid: 689969be032fc414d9ac1382e2644c32, type: 3}
+  commonAsset: {fileID: 4900000, guid: e5fdc205ed2f9fa4b885834e101cdb04, type: 3}
   storyAsset: {fileID: 4900000, guid: 7cf60b12f8555b74d915ea23bab654cd, type: 3}
   questAsset: {fileID: 4900000, guid: 6c954dba309831748b838e6ae8f83b2c, type: 3}
   applyTextScript: {fileID: 1519185842}
@@ -58317,7 +58334,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0.5}
   m_AnchorMax: {x: 0, y: 0.5}
-  m_AnchoredPosition: {x: 25, y: 64}
+  m_AnchoredPosition: {x: 25, y: 138.00003}
   m_SizeDelta: {x: 50, y: 50}
   m_Pivot: {x: 0, y: 0.5}
 --- !u!114 &1610300753
@@ -68403,7 +68420,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0.5}
   m_AnchorMax: {x: 0, y: 0.5}
-  m_AnchoredPosition: {x: 25, y: 83}
+  m_AnchoredPosition: {x: 25, y: 193}
   m_SizeDelta: {x: 50, y: 50}
   m_Pivot: {x: 0, y: 0.5}
 --- !u!114 &1906142029
@@ -69453,8 +69470,8 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 1143238396}
         m_TargetAssemblyTypeName: NotiManager, Assembly-CSharp
-        m_MethodName: ShowNotification
-        m_Mode: 5
+        m_MethodName: CoomingSoon
+        m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine

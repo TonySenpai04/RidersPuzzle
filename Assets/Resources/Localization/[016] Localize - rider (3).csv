@@ -1,4 +1,4 @@
-Is_duplicated,key,Origin,English (en),Font,Vietnamese (vi),Font
+duplicated,key,Origin,English (en),Font,Vietnamese (vi),Font
 FALSE,hero_name_1001,ITSUI,ITSUI,Roboto-Regular SDF,ITSUI,Roboto-Regular SDF
 FALSE,hp_hero_1001,5,5,Roboto-Regular SDF,5,Roboto-Regular SDF
 FALSE,hero_story_1001,"Itsui always says, ""Let's start drawing miracles!"", but he's better at destroying things than anyone.","Itsui always says, ""Let's start drawing miracles!"", but he's better at destroying things than anyone.",Roboto-Regular SDF,"Itsui lúc nào cũng nói: ""Bắt đầu vẽ lên những kỳ tích nào!"", nhưng cậu ấy giỏi phá hoại hơn bất kỳ ai.",Roboto-Regular SDF
@@ -18,7 +18,7 @@ FALSE,hero_kick_1002,5.5 t,5.5 t,Roboto-Regular SDF,5.5 tấn,Roboto-Regular SDF
 FALSE,hero_name_1003,SKULZ,SKULZ,Roboto-Regular SDF,SKULZ,Roboto-Regular SDF
 FALSE,hp_hero_1003,8,8,Roboto-Regular SDF,8,Roboto-Regular SDF
 FALSE,hero_story_1003,A hard-boiled detective who determines to pursue justice to the end.,A hard-boiled detective who determines to pursue justice to the end.,Roboto-Regular SDF,"Một thám tử cứng rắn và rất nghiêm khắc, quyết tâm theo đuổi công lý đến cùng. ",Roboto-Regular SDF
-FALSE,skill_info_hero_1003,Restores all HP to the character and increases 2 moves,Restores all HP to the character and increases 2 moves,Roboto-Regular SDF,Hồi phục lại tất cả HP cho nhân vật,Roboto-Regular SDF
+FALSE,skill_info_hero_1003,"At the time of using the skill, if the character's HP is less than the number of moves, it will recover the exact number of moves. If the character's HP is greater than the number of moves, it will increase the number of moves equal to the HP. It is only possible to recover HP equal to the character's HP limit.","At the time of using the skill, if the character's HP is less than the number of moves, it will recover the exact number of moves. If the character's HP is greater than the number of moves, it will increase the number of moves equal to the HP. It is only possible to recover HP equal to the character's HP limit.",Roboto-Regular SDF,"Tại thời điểm sử dụng kỹ năng, nếu nhân vật có HP nhỏ hơn số nước đi (move) thì hồi phục bằng đúng số move. Nếu nhân vật có HP lớn hơn số move thì tăng thêm move bằng với HP. Chỉ có thể hồi phục HP bằng với giới hạn HP của bản thân.",Roboto-Regular SDF
 FALSE,hero_weight_1003,92 kg,92 kg,Roboto-Regular SDF,92 kg,Roboto-Regular SDF
 FALSE,hero_height_1003,1.95 m,1.95 m,Roboto-Regular SDF,1.95 m,Roboto-Regular SDF
 FALSE,hero_punch_1003,2.5 t,2.5 t,Roboto-Regular SDF,2.5 tấn,Roboto-Regular SDF
