@@ -42,22 +42,27 @@ public class TimeManager : MonoBehaviour
                     string jsonResult = request.downloadHandler.text;
                     ServerTimeData timeData = JsonUtility.FromJson<ServerTimeData>(jsonResult);
                     ServerDateTime = DateTime.Parse(timeData.dateTime);
-                    ServerDate = DateTime.Parse(timeData.dateTime).ToString("yyyy-MM-dd");
+                    ServerDate = ServerDateTime.ToString("yyyy-MM-dd");
                     IsTimeFetched = true;
-                    Debug.Log("Thời gian server: " + ServerDate);
+                    Debug.Log("✅ Lấy thời gian từ server thành công: " + ServerDate);
                     yield break; // Thoát coroutine nếu thành công
                 }
                 else
                 {
                     retryCount++;
-                    Debug.LogWarning($"Lỗi lấy thời gian từ server! Thử lại ({retryCount}/{maxRetries})...");
-                    yield return new WaitForSeconds(retryDelay); // Đợi rồi thử lại
+                    Debug.LogWarning($"⚠️ Lỗi lấy thời gian từ server! Thử lại ({retryCount}/{maxRetries})...");
+                    yield return new WaitForSeconds(retryDelay);
                 }
             }
         }
 
-        Debug.LogError("Không thể lấy thời gian từ server sau nhiều lần thử!");
+        // Fallback: Lấy thời gian từ thiết bị
+        ServerDateTime = DateTime.UtcNow;
+        ServerDate = ServerDateTime.ToString("yyyy-MM-dd");
+        IsTimeFetched = true;
+        Debug.LogWarning("⛔ Không thể lấy thời gian từ server, dùng thời gian thiết bị: " + ServerDate);
     }
+
     public TimeSpan GetTimeUntilMidnight()
     {
         if (!IsTimeFetched) return TimeSpan.Zero;

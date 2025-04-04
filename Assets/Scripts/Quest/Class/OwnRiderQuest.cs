@@ -1,3 +1,5 @@
+using System;
+
 public class OwnRiderQuest : QuestBase
 {
     public int requiredRiderCount;
@@ -13,12 +15,16 @@ public class OwnRiderQuest : QuestBase
 
     public override void UpdateProgress(int count)
     {
-        currentCount += count;
+        currentCount = count;
         SaveQuest();
     }
 
     public override bool CheckCompletion()
     {
-        return currentCount >= requiredRiderCount;
+        return HeroManager.instance.GetUnlockHero().Count >= requiredRiderCount;
+    }
+    public override Tuple<int, int> GetProgress()
+    {
+        return Tuple.Create(HeroManager.instance.GetUnlockHero().Count, requiredRiderCount);
     }
 }

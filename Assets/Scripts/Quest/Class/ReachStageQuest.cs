@@ -1,8 +1,11 @@
+using System;
+
 public class ReachStageQuest : QuestBase
 {
     public int requiredStage;
     public string requiredMode;
-    public bool reached = false;
+    public int currentStage;
+
 
     public ReachStageQuest(string id, string desc, int reward, int stage, string mode)
     {
@@ -13,18 +16,18 @@ public class ReachStageQuest : QuestBase
         requiredMode = mode;
     }
 
-    public  void MarkReached()
-    {
-        reached = true;
-    }
 
     public override bool CheckCompletion()
     {
-        return reached;
+        return LevelManager.instance.GetAllLevelComplete() >= requiredStage;
     }
 
     public override void UpdateProgress(int update)
     {
-        throw new System.NotImplementedException();
+        currentStage = update;
+    }
+    public override Tuple<int, int> GetProgress()
+    {
+        return Tuple.Create(currentStage, requiredStage);
     }
 }

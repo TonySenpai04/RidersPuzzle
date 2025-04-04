@@ -29,7 +29,19 @@ public class QuestUIController : MonoBehaviour
         CompleteAll.onClick.AddListener(() => CompleteQuestReward());
         QuestData questData = QuestManager.instance.LoadQuestData();
         stampCount=questData.stampCount;
-     }
+        if (stampCount >= 7)
+        {
+            int reward = 888;
+            rewardObj.SetActive(true);
+            rewardTxt.text = reward.ToString();
+            GoldManager.instance.AddGold(reward);
+            StartCoroutine(ShowRewardTemporarily());
+            questData.stampCount = 0;
+            QuestManager.instance.SaveQuestData(questData);
+
+        }
+
+    }
     private void UpdateTimer()
     {
         
@@ -154,7 +166,10 @@ public class QuestUIController : MonoBehaviour
             rewardTxt.text = reward.ToString();
             GoldManager.instance.AddGold(reward);
             StartCoroutine(ShowRewardTemporarily());
-            stampCount /= 7;
+            QuestData questData = QuestManager.instance.LoadQuestData();
+            questData.stampCount =0 ;
+            QuestManager.instance.SaveQuestData(questData);
+
         }
     }
     private IEnumerator ShowRewardTemporarily()

@@ -1,37 +1,48 @@
-﻿using System.IO;
+﻿using System;
+using System.IO;
 using UnityEngine;
 
-public class LoginQuest : QuestBase
+internal class LoginNormalQuest : QuestBase
 {
     public int requiredDays;
-    public int requiredConsecutiveDays;
     public int currentDays;
-    public int currentConsecutiveDays;
+    public string lastLoginDate;
 
-    public LoginQuest(string id, string desc, int reward, int days, int consecutiveDays)
+    public LoginNormalQuest(string id, string desc, int reward, int days)
     {
         questId = id;
         description = desc;
         base.reward = reward;
         requiredDays = days;
-        requiredConsecutiveDays = consecutiveDays;
+        lastLoginDate = "";
     }
+    public void OnPlayerLogin()
+    {
+        string today = DateTime.UtcNow.Date.ToString("yyyy-MM-dd");
 
+        if (lastLoginDate != today)
+        {
+            currentDays++;
+            lastLoginDate = today;
+            SaveQuest();
+        }
+        else
+        {
+            Debug.Log($"[LoginNormalQuest] Đã cộng điểm hôm nay rồi ({today}), không cộng lại.");
+        }
+    }
     public override void UpdateProgress(int days, int consecutiveDays)
     {
-        currentDays += days;
-        currentConsecutiveDays += consecutiveDays;
-        SaveQuest();
     }
 
     public override bool CheckCompletion()
     {
-        return currentDays >= requiredDays && currentConsecutiveDays >= requiredConsecutiveDays;
+        return currentDays >= requiredDays ;
     }
 
     public override void UpdateProgress(int days)
     {
-       
+        // currentDays += days;
     }
     public override void SaveQuest()
     {
@@ -39,7 +50,10 @@ public class LoginQuest : QuestBase
         string json = JsonUtility.ToJson(this, true);
         File.WriteAllText(path, json);
     }
-
+    public override Tuple<int, int> GetProgress()
+    {
+        return Tuple.Create(currentDays, requiredDays);
+    }
     // ✅ Override lại để load cả `progress` và `consecutiveProgress`
     public override void LoadQuest()
     {

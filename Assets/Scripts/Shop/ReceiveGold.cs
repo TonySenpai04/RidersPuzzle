@@ -36,6 +36,10 @@ public class ReceiveGold : MonoBehaviour
         {
             QuestManager.instance.UpdateQuest(quest.questId, 1, 0);
         }
+        foreach (var quest in AchievementManager.instance.GetQuestsByType<DailyGiftQuest>())
+        {
+            AchievementManager.instance.UpdateQuest(quest.questId, 1, 0);
+        }
         StartCoroutine(ShowRewardTemporarily());
         exchangeBtn.gameObject.SetActive(false);
     }

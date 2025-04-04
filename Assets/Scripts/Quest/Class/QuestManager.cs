@@ -329,7 +329,7 @@ public class QuestManager : MonoBehaviour
     {
         return activeQuests.FirstOrDefault(h=>h.questId == id);
     }
-    public static void SaveQuestData(QuestData data)
+    public  void SaveQuestData(QuestData data)
     {
         string json = JsonUtility.ToJson(data);
         File.WriteAllText(path, json);

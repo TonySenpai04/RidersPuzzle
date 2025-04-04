@@ -154,6 +154,10 @@ public class GameManager : MonoBehaviour
             {
                 QuestManager.instance.UpdateQuest(quest.questId, 1, 0);
             }
+            foreach (var quest in AchievementManager.instance.GetQuestsByType<WinStageQuest>())
+            {
+                AchievementManager.instance.UpdateQuest(quest.questId, 1, 0);
+            }
             LevelManager.instance.UnlockNextLevel();
             hasPlayedWinSound = true;
         }
