@@ -169,9 +169,9 @@ public class AccountLogin : MonoBehaviour
             accountBtn.gameObject.SetActive(true);
             emailInAccount.text = emailLogin.text;
             passwordInAccount.text = passwordLogin.text;
-           int a = LevelManager.instance.GetAllLevelComplete();
-            StoryManager.instance.count = a / 30;
-            errorTextRegister.text = "✅ Đăng nhập thành công!";
+            StoryManager.instance.UpdateStoryQuantity();
+            StoryManager.instance.isLoaded=true;
+           errorTextRegister.text = "✅ Đăng nhập thành công!";
         }
     }
     public void Register()

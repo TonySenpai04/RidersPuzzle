@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.IO;
 using UnityEngine;
 
 [Serializable]
@@ -17,10 +18,22 @@ public class StoryManager : MonoBehaviour
     public  List<Story> stories;
     public static StoryManager instance;
     public int count;
+    public bool isLoaded;
+    private string path => Path.Combine(Application.persistentDataPath, "LoginData.json");
     void Start()
     {
         instance = this;
-       count = LevelManager.instance.GetAllLevelComplete()/30;
+        UpdateStoryQuantity();
+        if (!File.Exists(path))
+        {
+            isLoaded=true;
+
+        }
+    }
+
+    public void UpdateStoryQuantity()
+    {
+        count = LevelManager.instance.GetAllLevelComplete() / 30;
     }
     public Story GetByStoryId(string id)
     {
@@ -35,17 +48,31 @@ public class StoryManager : MonoBehaviour
     }
     public void FixedUpdate()
     {
-        if(Input.GetKey(KeyCode.L))
+        if (isLoaded)
         {
-            Debug.Log(LevelManager.instance.GetAllLevelComplete());
+            int levelWinCount = LevelManager.instance.GetAllLevelComplete();
+            int storyToUnlock = levelWinCount / 30;
+            UnlockStories(storyToUnlock);
+            if (count < storyToUnlock)
+            {
+                NotiManager.instance.ShowNotiRedDot("library");
+                NotiManager.instance.ShowNotiRedDot("storylib");
+                count = storyToUnlock;
+            }
         }
-        int levelWinCount = LevelManager.instance.GetAllLevelComplete();
-        int storyToUnlock = levelWinCount / 30;
-        if(count < storyToUnlock)
+    }
+    private void UnlockStories(int unlockCount)
+    {
+        for (int i = 0; i < stories.Count; i++)
         {
-            NotiManager.instance.ShowNotiRedDot("library");
-            NotiManager.instance.ShowNotiRedDot("storylib");
-            count = storyToUnlock;
+            if (i < unlockCount)
+            {
+                stories[i].isSeen = true;
+            }
+            else
+            {
+                stories[i].isSeen = false;
+            }
         }
     }
 

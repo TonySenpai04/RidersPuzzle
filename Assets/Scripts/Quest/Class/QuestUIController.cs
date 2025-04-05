@@ -27,10 +27,16 @@ public class QuestUIController : MonoBehaviour
      {
         Init();
         CompleteAll.onClick.AddListener(() => CompleteQuestReward());
+        GetQuest7Day();
+
+    }
+    public void GetQuest7Day()
+    {
         QuestData questData = QuestManager.instance.LoadQuestData();
-        stampCount=questData.stampCount;
+        stampCount = questData.stampCount;
         if (stampCount >= 7)
         {
+
             int reward = 888;
             rewardObj.SetActive(true);
             rewardTxt.text = reward.ToString();
@@ -40,7 +46,6 @@ public class QuestUIController : MonoBehaviour
             QuestManager.instance.SaveQuestData(questData);
 
         }
-
     }
     private void UpdateTimer()
     {
@@ -53,6 +58,7 @@ public class QuestUIController : MonoBehaviour
     private void Update()
     {
         UpdateTimer();
+        GetQuest7Day();
     }
     private void UpdateStampUI()
     {
@@ -156,21 +162,6 @@ public class QuestUIController : MonoBehaviour
         }
 
         currentCompleteQuest = 0; // Reset lại số quest hoàn thành
-    }
-    private void OnEnable()
-    {
-        if (stampCount >= 7)
-        {
-            int reward = 888;
-            rewardObj.SetActive(true);
-            rewardTxt.text = reward.ToString();
-            GoldManager.instance.AddGold(reward);
-            StartCoroutine(ShowRewardTemporarily());
-            QuestData questData = QuestManager.instance.LoadQuestData();
-            questData.stampCount =0 ;
-            QuestManager.instance.SaveQuestData(questData);
-
-        }
     }
     private IEnumerator ShowRewardTemporarily()
     {

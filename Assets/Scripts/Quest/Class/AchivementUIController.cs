@@ -21,6 +21,7 @@ public class AchivementUIController : MonoBehaviour
     [SerializeField] private TextMeshProUGUI rewardTxt;
     [SerializeField] private Sprite unselectSprite;
     [SerializeField] private Sprite selectSprite;
+    [SerializeField] private TextMeshProUGUI totalCompletedTxt;
     void Start()
     {
         Init();
@@ -45,6 +46,7 @@ public class AchivementUIController : MonoBehaviour
     }
     private void FixedUpdate()
     {
+        totalCompletedTxt.text= "Total completed achievement: "+AchievementManager.instance.GetTotalComplete();
         int currentComplete = AchievementManager.instance.activeQuests.Where(h => h.isReward).Count();
         if (currentComplete >= AchievementManager.instance.activeQuests.Count)
         {

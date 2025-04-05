@@ -148,9 +148,10 @@ setting_term_of_condition_stage,
     [SerializeField] private TMP_Text titleStory;
     [SerializeField] private TMP_Text contentStory;
     [Header("Quest")]
-    [SerializeField] private TMP_Text quest_daily_quest_title, button_complete_all,
+    [SerializeField] private TMP_Text quest_daily_quest_title, button_complete_all, button_complete_all_2,
          button_achievement, quest_reset_time, quest_daily_quest_all_completed,
-        quest_help_daily_quest_title, quest_help_daily_quest_content, quest_help_achivement_title, quest_help_achivement_content
+        quest_help_daily_quest_title, quest_help_daily_quest_content, quest_help_achivement_title, quest_help_achivement_content,
+        quest_achievement_title
         ;
    
 
@@ -339,6 +340,8 @@ setting_term_of_condition_stage,
         textLocalizer.SetLocalizedText("quest_help_daily_quest_content", quest_help_daily_quest_content);
         textLocalizer.SetLocalizedText("quest_help_achivement_title", quest_help_achivement_title);
         textLocalizer.SetLocalizedText("quest_help_achivement_content", quest_help_achivement_content);
+        textLocalizer.SetLocalizedText("quest_achievement_title", quest_achievement_title);
+        textLocalizer.SetLocalizedText("button_complete_all", button_complete_all_2); 
 
     }
 
@@ -420,6 +423,7 @@ setting_term_of_condition_stage,
            , popup_detail_quit, popup_detail_language_change, popup_detail_credit,popup_detail_language_change_stage,
             login_popup_title,button_return_player,titleStory,contentStory,
             quest_daily_quest_title, button_complete_all,
+
          button_achievement, quest_reset_time, quest_daily_quest_all_completed,
         quest_help_daily_quest_title, quest_help_daily_quest_content, quest_help_achivement_title, quest_help_achivement_content
         ,login_popup_display_name, login_popup_forget_password,
@@ -433,7 +437,7 @@ setting_language_stage,
  setting_privacy_policy_stage,
 setting_term_of_condition_stage,
  setting_credit_stage,button_logout
-, login_popup_my_account_stage,title_setting_stage,login_popup_my_account_game,my_account,
+, login_popup_my_account_stage,title_setting_stage,login_popup_my_account_game,my_account,quest_achievement_title,
 
         // Object
         objectName, objectStory, objectBattle, libraryObjectStory, libraryObjectBattleInfor,

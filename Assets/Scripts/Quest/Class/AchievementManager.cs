@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class AchievementManager : MonoBehaviour
@@ -110,6 +111,25 @@ public class AchievementManager : MonoBehaviour
                 Debug.Log($"Quest {quest.questId} completed!");
             }
         }
+    }
+    public void ReloadQuestDes()
+    {
+        activeQuests.Clear();
+        LoadQuests();
+
+    }
+    public int GetTotalComplete()
+    {
+        int count = 0;
+        foreach (var quest in activeQuests)
+        {
+            if (quest.CheckCompletion())
+            {
+
+                count++;
+            }
+        }
+        return count;
     }
     public QuestBase GetQuestById(string id)
     {
