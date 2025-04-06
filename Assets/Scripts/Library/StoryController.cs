@@ -91,9 +91,8 @@ public class StoryController : MonoBehaviour
     }
     public void SetStoryView(string id)
     {
-
-        storyView.SetData(id);
         this.storyView.gameObject.SetActive(true);
+        storyView.SetData(id);
         objectParent.gameObject.SetActive(false);
         BackgroundManager.instance.SetObjectBg(3000);
        ApplyText.instance.UpdateStoryInfo(id);

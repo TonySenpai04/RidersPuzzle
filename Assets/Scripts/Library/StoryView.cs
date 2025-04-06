@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System.Collections;
+using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -33,6 +34,24 @@ public class StoryView : MonoBehaviour
         seenStories = StoryManager.instance.stories.FindAll(s => s.isSeen);
     }
 
+    private IEnumerator AdjustContentHeight()
+    {
+        // Chờ 1 frame để TextMeshPro cập nhật preferredHeight
+        yield return null;
+
+        float preferredHeight = descriptionTxt.preferredHeight;
+
+        float extraPadding = 200f; 
+
+        RectTransform contentRect = content.GetComponent<RectTransform>();
+        if (contentRect != null)
+        {
+            Vector2 sizeDelta = contentRect.sizeDelta;
+            sizeDelta.y = preferredHeight + extraPadding; 
+            contentRect.sizeDelta = sizeDelta;
+        }
+    }
+
     public void SetData(string id)
     {
         this.id = id;
@@ -49,6 +68,8 @@ public class StoryView : MonoBehaviour
         if (story != null)
         {
             ApplyText.instance.UpdateStoryInfo(id);
+            StartCoroutine(AdjustContentHeight());
+
         }
 
         currentIndex = seenStories.FindIndex(s => s.id == id);

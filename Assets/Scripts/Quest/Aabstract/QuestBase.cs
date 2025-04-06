@@ -8,6 +8,7 @@ public abstract class QuestBase
     [NonSerialized] public string description;
     public int reward;
     public bool isReward;
+    public string groupId;
 
     public virtual void UpdateProgress(int progress)
     {

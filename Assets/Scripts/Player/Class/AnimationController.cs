@@ -19,6 +19,11 @@ public class AnimationController : MonoBehaviour
         StopAllCoroutines();
         StartCoroutine(BounceEffect());
     }
+    void OnDisable() { StopAllCoroutines();}
+    public void StopCroutines()
+    {
+        StopAllCoroutines();
+    }
     IEnumerator BounceEffect()
     {
         while (true)

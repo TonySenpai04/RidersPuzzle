@@ -92,6 +92,10 @@ public class PlayerController : MonoBehaviour
             // SoundManager.instance.PlayMusic(currentHPState);
         }
     }
+    private void OnDisable()
+    {
+        StopAllCoroutines();
+    }
     private IEnumerator TransitionMusic(string newMusic)
     {
         while (SoundManager.instance.musicSource.volume > 0)

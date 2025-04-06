@@ -32,16 +32,22 @@ public class AchivementUIController : MonoBehaviour
 
     public void Init()
     {
-        for (int i = 0; i < AchievementManager.instance.activeQuests.Count; i++)
+        List<QuestBase> questsToShow = AchievementManager.instance.GetFirstUncompletedQuestEachGroup();
+        for (int i = 0; i < questsToShow.Count; i++)
         {
-            if (!AchievementManager.instance.activeQuests[i].isReward)
-            {
-                AchievementUI quest = Instantiate(questUI, content);
-                quest.SetQuestData(AchievementManager.instance.activeQuests[i].questId,
-                    AchievementManager.instance.activeQuests[i].description, AchievementManager.instance.activeQuests[i].reward.ToString(),
-                    AchievementManager.instance.activeQuests[i].GetProgress());
-                quests.Add(quest);
-            }
+            AchievementUI quest = Instantiate(questUI, content);
+            quest.SetQuestData(questsToShow[i].questId,
+                   questsToShow[i].description, questsToShow[i].reward.ToString(),
+                 questsToShow[i].GetProgress());
+            quests.Add(quest);
+            //if (!AchievementManager.instance.activeQuests[i].isReward)
+            //{
+            //    AchievementUI quest = Instantiate(questUI, content);
+            //    quest.SetQuestData(AchievementManager.instance.activeQuests[i].questId,
+            //        AchievementManager.instance.activeQuests[i].description, AchievementManager.instance.activeQuests[i].reward.ToString(),
+            //        AchievementManager.instance.activeQuests[i].GetProgress());
+            //    quests.Add(quest);
+            //}
         }
     }
     private void FixedUpdate()
@@ -112,7 +118,12 @@ public class AchivementUIController : MonoBehaviour
             quests.Remove(quest);
             Destroy(quest.gameObject); // Xóa UI của quest
         }
-
+        foreach (var q in quests)
+        {
+            Destroy(q.gameObject);
+        }
+        quests.Clear();
+        Init();
         currentCompleteQuest = 0; // Reset lại số quest hoàn thành
     }
  

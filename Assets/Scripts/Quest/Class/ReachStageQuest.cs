@@ -28,6 +28,6 @@ public class ReachStageQuest : QuestBase
     }
     public override Tuple<int, int> GetProgress()
     {
-        return Tuple.Create(currentStage, requiredStage);
+        return Tuple.Create(LevelManager.instance.GetAllLevelComplete(), requiredStage);
     }
 }

@@ -21,79 +21,102 @@ public class AchievementManager : MonoBehaviour
     {
         activeQuests.Add(new LoginNormalQuest("0001",
                   LocalizationManager.instance.GetLocalizedText("quest_001_1",7),
-                  288, 7));
+                  288, 7)
+        { groupId = "LoginNormal" });
         activeQuests.Add(new LoginNormalQuest("0002",
                  LocalizationManager.instance.GetLocalizedText("quest_001_1", 14),
-                 288, 14));
+                 288, 14)
+        { groupId = "LoginNormal" });
         activeQuests.Add(new LoginNormalQuest("0003",
             LocalizationManager.instance.GetLocalizedText("quest_001_1", 21),
-            288, 21));
+            288, 21)
+        { groupId = "LoginNormal" });
         activeQuests.Add(new LoginNormalQuest("0004",
                  LocalizationManager.instance.GetLocalizedText("quest_001_1", 28),
-                 288, 28));
+                 288, 28)
+        { groupId = "LoginNormal" });
         activeQuests.Add(new LoginNormalQuest("0005",
                  LocalizationManager.instance.GetLocalizedText("quest_001_1", 35),
-                 288, 35));
+                 288, 35)
+        { groupId = "LoginNormal" });
 
         activeQuests.Add(new LoginStreakQuest("0006",
                 LocalizationManager.instance.GetLocalizedText("quest_001_2", 7),
-                688, 7));
+                688, 7)
+        { groupId = "LoginStreakQuest" });
         activeQuests.Add(new LoginStreakQuest("0007",
                  LocalizationManager.instance.GetLocalizedText("quest_001_2", 14),
-                 688, 14));
+                 688, 14)
+        { groupId = "LoginStreakQuest" });
         activeQuests.Add(new LoginStreakQuest("0008",
                LocalizationManager.instance.GetLocalizedText("quest_001_2", 21),
-               688, 21));
+               688, 21)
+        { groupId = "LoginStreakQuest" });
         activeQuests.Add(new LoginStreakQuest("0009",
                  LocalizationManager.instance.GetLocalizedText("quest_001_2", 28),
-                 688, 28));
+                 688, 28)
+        { groupId = "LoginStreakQuest" });
         activeQuests.Add(new LoginStreakQuest("0010",
                  LocalizationManager.instance.GetLocalizedText("quest_001_2", 35),
-                 688, 35));
+                 688, 35)
+        { groupId = "LoginStreakQuest" });
 
         activeQuests.Add(new WinStageQuest("0011",
            LocalizationManager.instance.GetLocalizedText("quest_003_1", 99),
-           199, 99));
+           199, 99)
+        { groupId = "WinStageQuest" });
         activeQuests.Add(new WinStageQuest("0012",
           LocalizationManager.instance.GetLocalizedText("quest_003_1", 199),
-          199, 199));
+          199, 199)
+        { groupId = "WinStageQuest" });
         activeQuests.Add(new WinStageQuest("0013",
           LocalizationManager.instance.GetLocalizedText("quest_003_1", 299),
-          199, 299));
+          199, 299)
+        { groupId = "WinStageQuest" });
         activeQuests.Add(new WinStageQuest("0014",
           LocalizationManager.instance.GetLocalizedText("quest_003_1",399),
-          199, 399));
+          199, 399)
+        { groupId = "WinStageQuest" });
         activeQuests.Add(new WinStageQuest("0015",
           LocalizationManager.instance.GetLocalizedText("quest_003_1", 499),
-          199, 499));
+          199, 499)
+        { groupId = "WinStageQuest" });
 
         activeQuests.Add(new ReachStageQuest("0016",
          LocalizationManager.instance.GetLocalizedText("quest_005_1", 50),
-         100, 50,""));
+         100, 50,"")
+        { groupId = "ReachStageQuest" });
         activeQuests.Add(new ReachStageQuest("0017",
         LocalizationManager.instance.GetLocalizedText("quest_005_1", 100),
-        100, 100, ""));
+        100, 100, "")
+        { groupId = "ReachStageQuest" });
 
 
         activeQuests.Add(new OwnRiderQuest("0018",
         LocalizationManager.instance.GetLocalizedText("quest_006_1", 3),
-        499, 3));
+        499, 3)
+        { groupId = "OwnRiderQuest" });
 
         activeQuests.Add(new DailyGiftQuest("0019",
          LocalizationManager.instance.GetLocalizedText("quest_012_1", 3),
-         99, 3));
+         99, 3)
+        { groupId = "DailyGiftQuest" });
         activeQuests.Add(new DailyGiftQuest("0020",
          LocalizationManager.instance.GetLocalizedText("quest_012_1", 13),
-         99, 13));
+         99, 13)
+        { groupId = "DailyGiftQuest" });
         activeQuests.Add(new DailyGiftQuest("0021",
          LocalizationManager.instance.GetLocalizedText("quest_012_1", 23),
-         99, 23));
+         99, 23)
+        { groupId = "DailyGiftQuest" });
         activeQuests.Add(new DailyGiftQuest("0022",
          LocalizationManager.instance.GetLocalizedText("quest_012_1", 33),
-         99, 33));
+         99, 33)
+        { groupId = "DailyGiftQuest" });
         activeQuests.Add(new DailyGiftQuest("0023",
        LocalizationManager.instance.GetLocalizedText("quest_012_1", 43),
-       99, 43));
+       99, 43)
+        { groupId = "DailyGiftQuest" });
         foreach (var quest in activeQuests)
         {
             quest.LoadQuest();
@@ -130,6 +153,14 @@ public class AchievementManager : MonoBehaviour
             }
         }
         return count;
+    }
+    public List<QuestBase> GetFirstUncompletedQuestEachGroup()
+    {
+        return activeQuests
+            .Where(q => !q.isReward) // Chưa nhận thưởng
+            .GroupBy(q => q.groupId) // Gom nhóm theo groupId
+            .Select(g => g.OrderBy(q => q.questId).First()) // Lấy nhiệm vụ nhỏ nhất trong mỗi nhóm
+            .ToList();
     }
     public QuestBase GetQuestById(string id)
     {

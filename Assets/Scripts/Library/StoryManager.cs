@@ -53,12 +53,7 @@ public class StoryManager : MonoBehaviour
             int levelWinCount = LevelManager.instance.GetAllLevelComplete();
             int storyToUnlock = levelWinCount / 30;
             UnlockStories(storyToUnlock);
-            if (count < storyToUnlock)
-            {
-                NotiManager.instance.ShowNotiRedDot("library");
-                NotiManager.instance.ShowNotiRedDot("storylib");
-                count = storyToUnlock;
-            }
+
         }
     }
     private void UnlockStories(int unlockCount)

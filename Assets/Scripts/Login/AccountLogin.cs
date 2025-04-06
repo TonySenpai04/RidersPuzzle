@@ -93,6 +93,7 @@ public class AccountLogin : MonoBehaviour
         {
             File.Delete(path);
         }
+        SoundManager.instance.PlayMusic("Start Screen");
         main.SetActive(true);
         LevelManager.instance.LoadLocal();
         GoldManager.instance.LoadLocal();
