@@ -33,6 +33,7 @@ public class QuestUIController : MonoBehaviour
     public void GetQuest7Day()
     {
         QuestData questData = QuestManager.instance.LoadQuestData();
+
         stampCount = questData.stampCount;
         if (stampCount >= 7)
         {
@@ -130,7 +131,7 @@ public class QuestUIController : MonoBehaviour
             CompleteAll.gameObject.SetActive(true);
         }
 
-        UpdateStampUI();
+  
 
     }
     public void CompleteQuestReward()
@@ -169,5 +170,8 @@ public class QuestUIController : MonoBehaviour
         yield return new WaitForSeconds(1f);
         rewardObj.SetActive(false);
     }
-
+    private void OnEnable()
+    {
+        UpdateStampUI();
+    }
 }

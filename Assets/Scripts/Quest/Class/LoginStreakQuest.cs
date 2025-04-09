@@ -82,24 +82,11 @@ public class LoginStreakQuest : QuestBase
     {
        // currentDays += days;
     }
-    public override void SaveQuest()
-    {
-        string path = Application.persistentDataPath + $"/quest_{questId}.json";
-        string json = JsonUtility.ToJson(this, true);
-        File.WriteAllText(path, json);
-    }
+
     public override Tuple<int, int> GetProgress()
     {
         return Tuple.Create(currentConsecutiveDays, requiredConsecutiveDays);
     }
     // ✅ Override lại để load cả `progress` và `consecutiveProgress`
-    public override void LoadQuest()
-    {
-        string path = Application.persistentDataPath + $"/quest_{questId}.json";
-        if (File.Exists(path))
-        {
-            string json = File.ReadAllText(path);
-            JsonUtility.FromJsonOverwrite(json, this);
-        }
-    }
+
 }

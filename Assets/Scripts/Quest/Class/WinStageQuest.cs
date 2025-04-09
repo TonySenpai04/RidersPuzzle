@@ -1,5 +1,8 @@
-
+﻿
+using Firebase.Database;
+using Firebase.Extensions;
 using System;
+using UnityEngine;
 
 public class WinStageQuest : QuestBase
 {
@@ -29,4 +32,6 @@ public class WinStageQuest : QuestBase
     {
         return Tuple.Create(currentWins, requiredWins);
     }
+  
+
 }

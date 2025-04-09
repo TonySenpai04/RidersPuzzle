@@ -31,73 +31,86 @@ public class AccountLogin : MonoBehaviour
     public InputField passwordInAccount;
     public InputField rename;
     public TextMeshProUGUI nameText;
-    
+    public Image loadingSpning;
+
     private string path => Path.Combine(Application.persistentDataPath, "LoginData.json");
     private async void Start()
     {
         await Task.Delay(2000);
         LoadLoginState();
     }
-    public void SaveLoginState()
-    {
-        LoginData data = new LoginData { email = emailLogin.text, password = passwordLogin.text };
-        string json = JsonUtility.ToJson(data);
-        File.WriteAllText(path, json);
-    }
+
     private void FixedUpdate()
     {
-        if (emailLogin.text == "" || passwordLogin.text == "")
-        {
-            loginBtnAcess.interactable = false;
-            loginImage.sprite = loginUnactive;
-        }
-        else
-        {
-            loginBtnAcess.interactable = true;
-            loginImage.sprite = loginActive;
-        }
+        UpdateLoginButtonUI();
     }
+
+    private void UpdateLoginButtonUI()
+    {
+        bool inputEmpty = string.IsNullOrEmpty(emailLogin.text) || string.IsNullOrEmpty(passwordLogin.text);
+        loginBtnAcess.interactable = !inputEmpty;
+        loginImage.sprite = inputEmpty ? loginUnactive : loginActive;
+    }
+
+    public void SaveLoginState()
+    {
+        LoginData data = new LoginData
+        {
+            email = emailLogin.text,
+            password = passwordLogin.text
+        };
+        File.WriteAllText(path, JsonUtility.ToJson(data));
+    }
+
     public void LoadLoginState()
     {
-        if (File.Exists(path))
+        if (!File.Exists(path))
         {
-            string json = File.ReadAllText(path);
-            LoginData data = JsonUtility.FromJson<LoginData>(json);
-            if (data.email == "" || data.password == "")
-                return;
-            this.emailLogin.text = data.email;
-            this.passwordLogin.text = data.password;
-            emailInAccount.text = data.email;
-            passwordInAccount.text = data.password;
-
-            Login();
-
-        }
-        else
-        {
-            userName.text = "";
-            loginBtn.gameObject.SetActive(true);
-            registerBtn.gameObject.SetActive(true);
-            icon.gameObject.SetActive(true);
-            accountBtn.gameObject.SetActive(false);
+            ShowLoginUI();
+            return;
         }
 
+        LoginData data = JsonUtility.FromJson<LoginData>(File.ReadAllText(path));
+        if (string.IsNullOrEmpty(data.email) || string.IsNullOrEmpty(data.password))
+        {
+            return;
+        }
+
+        emailLogin.text = data.email;
+        passwordLogin.text = data.password;
+        emailInAccount.text = data.email;
+        passwordInAccount.text = data.password;
+
+        Login();
     }
+
+    private void ShowLoginUI()
+    {
+        userName.text = "";
+        loginBtn.gameObject.SetActive(true);
+        registerBtn.gameObject.SetActive(true);
+        icon.gameObject.SetActive(true);
+        accountBtn.gameObject.SetActive(false);
+    }
+
     public void Logout()
     {
-        Firebase.Auth.FirebaseAuth.DefaultInstance.SignOut();
+        FirebaseAuth.DefaultInstance.SignOut();
         Debug.Log("🚪 Đã đăng xuất");
 
-        string path = Path.Combine(Application.persistentDataPath, "LoginData.json");
-        if (File.Exists(path))
-        {
-            File.Delete(path);
-        }
+        if (File.Exists(path)) File.Delete(path);
+
+        ResetToLoginUI();
+    }
+
+    private void ResetToLoginUI()
+    {
         SoundManager.instance.PlayMusic("Start Screen");
         main.SetActive(true);
         LevelManager.instance.LoadLocal();
         GoldManager.instance.LoadLocal();
         HeroManager.instance.LoadUnlockHero();
+
         login.SetActive(true);
         regester.SetActive(false);
         loginBtn.gameObject.SetActive(true);
@@ -110,23 +123,44 @@ public class AccountLogin : MonoBehaviour
         playzone.SetActive(false);
     }
 
-
     public void Login()
     {
         errorTextLogin.text = "";
-        FirebaseDataManager.Instance.Login(emailLogin.text, passwordLogin.text, OnLoginResult);
+        loadingSpning.gameObject.SetActive(true);
 
+        FirebaseDataManager.Instance.Login(emailLogin.text, passwordLogin.text, OnLoginResult);
     }
-    public void ShowAccount()
+
+    private void OnLoginResult(bool success, string errorMessage)
     {
-        if (emailLogin.text == "" || passwordLogin.text == "") {
-            accountNotLog.gameObject.SetActive(true);
+        if (!success)
+        {
+            errorTextLogin.text = errorMessage;
+            loadingSpning.gameObject.SetActive(false);
             return;
         }
 
-        account.gameObject.SetActive(true);
+        HandleSuccessfulLogin();
+    }
+
+    private void HandleSuccessfulLogin()
+    {
+        LoadUserDataFromFirebase();
+
+        QuestManager.instance.SyncLocalQuestsToFirebaseIfNotExist();
+        QuestManager.instance.LoadQuests();
+        AchievementManager.instance.SyncLocalQuestsToFirebaseIfNotExist();
+        AchievementManager.instance.LoadQuestData();
+
+        SaveLoginState();
+        UpdateUIAfterLogin();
+    }
+
+    private void LoadUserDataFromFirebase()
+    {
         FirebaseUser currentUser = FirebaseDataManager.Instance.GetCurrentUser();
         string uid = currentUser.UserId;
+
         FirebaseDatabase.DefaultInstance.GetReference("users").Child(uid).Child("playerData")
             .GetValueAsync().ContinueWithOnMainThread(task =>
             {
@@ -138,46 +172,27 @@ public class AccountLogin : MonoBehaviour
                     passwordInAccount.text = passwordLogin.text;
                 }
             });
-
     }
-    private void OnLoginResult(bool success, string errorMessage)
+
+    private void UpdateUIAfterLogin()
     {
-        if (!success)
-        {
-            errorTextLogin.text = errorMessage;
-        }
-        else
-        {
-            FirebaseUser currentUser = FirebaseDataManager.Instance.GetCurrentUser();
-            string uid = currentUser.UserId;
-            FirebaseDatabase.DefaultInstance.GetReference("users").Child(uid).Child("playerData")
-                .GetValueAsync().ContinueWithOnMainThread(task =>
-                {
-                    if (task.IsCompleted && task.Result.Exists)
-                    {
-                        PlayerData data = JsonUtility.FromJson<PlayerData>(task.Result.GetRawJsonValue());
-                        nameText.text = data.name;
-                        emailInAccount.text = emailLogin.text;
-                        passwordInAccount.text = passwordLogin.text;
-                    }
-                });
+        login.gameObject.SetActive(false);
+        loginBtn.gameObject.SetActive(false);
+        registerBtn.gameObject.SetActive(false);
+        icon.gameObject.SetActive(false);
+        accountBtn.gameObject.SetActive(true);
+        emailInAccount.text = emailLogin.text;
+        passwordInAccount.text = passwordLogin.text;
 
-            SaveLoginState();
-            login.gameObject.SetActive(false);
-            loginBtn.gameObject.SetActive(false);
-            registerBtn.gameObject.SetActive(false);
-            icon.gameObject.SetActive(false);
-            accountBtn.gameObject.SetActive(true);
-            emailInAccount.text = emailLogin.text;
-            passwordInAccount.text = passwordLogin.text;
-            StoryManager.instance.UpdateStoryQuantity();
-            StoryManager.instance.isLoaded=true;
-           errorTextRegister.text = "✅ Đăng nhập thành công!";
-        }
+        StoryManager.instance.UpdateStoryQuantity();
+        StoryManager.instance.isLoaded = true;
+        loadingSpning.gameObject.SetActive(false);
     }
+
     public void Register()
     {
         errorTextRegister.text = "";
+        loadingSpning.gameObject.SetActive(true);
         FirebaseDataManager.Instance.Register(emailRegister.text, passwordRegister.text, userName.text, OnRegisterResult);
     }
 
@@ -186,17 +201,20 @@ public class AccountLogin : MonoBehaviour
         if (!success)
         {
             errorTextRegister.text = message;
+            loadingSpning.gameObject.SetActive(false);
+            return;
         }
-        else
-        {
-            errorTextRegister.text = "✅ Đăng ký thành công!";
-            login.gameObject.SetActive(true);
-            emailLogin.text = emailRegister.text;
-            passwordLogin.text = passwordRegister.text;
-            SaveLoginState();
-            regester.gameObject.SetActive(false);
-        }
+
+        errorTextRegister.text = "✅ Đăng ký thành công!";
+        emailLogin.text = emailRegister.text;
+        passwordLogin.text = passwordRegister.text;
+        loadingSpning.gameObject.SetActive(false);
+        SaveLoginState();
+        regester.gameObject.SetActive(false);
+        login.gameObject.SetActive(true);
+
     }
+
     public void OnClickForgotPassword()
     {
         FirebaseDataManager.Instance.ForgotPassword(emailInput.text, (success, message) =>
@@ -204,17 +222,33 @@ public class AccountLogin : MonoBehaviour
             forgotPasswordMessageText.text = message;
         });
     }
+
     public void Rename()
     {
-        if (rename.text == "" || rename.text.Length >= 14)
+        if (string.IsNullOrEmpty(rename.text) || rename.text.Length >= 14)
             return;
+
         FirebaseDataManager.Instance.username = rename.text;
         FirebaseDataManager.Instance.SaveData(
-                LevelManager.instance.GetAllLevelComplete(), GoldManager.instance.GetGold(),
-                      SaveGameManager.instance.LoadAllProgress(), HeroManager.instance.GetUnlockHeroID());
+            LevelManager.instance.GetAllLevelComplete(),
+            GoldManager.instance.GetGold(),
+            SaveGameManager.instance.LoadAllProgress(),
+            HeroManager.instance.GetUnlockHeroID());
+
         nameText.text = rename.text;
         renameObj.SetActive(false);
+    }
 
+    public void ShowAccount()
+    {
+        if (string.IsNullOrEmpty(emailLogin.text) || string.IsNullOrEmpty(passwordLogin.text))
+        {
+            accountNotLog.gameObject.SetActive(true);
+            return;
+        }
+
+        account.gameObject.SetActive(true);
+        LoadUserDataFromFirebase();
     }
 }
 [Serializable]

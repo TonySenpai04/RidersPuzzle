@@ -135,6 +135,13 @@ public class AchievementManager : MonoBehaviour
             }
         }
     }
+    public void LoadQuestData()
+    {
+        foreach (var quest in activeQuests)
+        {
+            quest.LoadQuest();
+        }
+    }
     public void ReloadQuestDes()
     {
         activeQuests.Clear();
@@ -224,5 +231,11 @@ public class AchievementManager : MonoBehaviour
 
         return filteredQuests;
     }
-
+    public void SyncLocalQuestsToFirebaseIfNotExist()
+    {
+        foreach (var quest in activeQuests)
+        {
+            quest.SyncLocalQuestsToFirebaseIfNotExist();
+        }
+    }
 }

@@ -14,7 +14,6 @@ public class WinStageNoDamageQuest : QuestBase
         base.reward = reward;
         requiredWins = wins;
         requiredRider = rider;
-        requiredMode = mode;
     }
 
     public override void UpdateProgress(int wins)
