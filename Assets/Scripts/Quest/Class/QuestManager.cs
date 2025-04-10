@@ -7,6 +7,7 @@ using System.Collections.Generic;
 using System.Data;
 using System.IO;
 using System.Linq;
+using System.Threading.Tasks;
 using UnityEngine;
 
 public class QuestManager : MonoBehaviour
@@ -36,8 +37,12 @@ public class QuestManager : MonoBehaviour
 
     void Start()
     {
-        StartCoroutine(WaitForServerTime());
+       
         // LoadQuests();
+    }
+    public void CoroutineAssignDailyQuestList()
+    {
+        StartCoroutine(WaitForServerTime());
     }
     public void ReloadQuestDes()
     {
@@ -226,12 +231,10 @@ public class QuestManager : MonoBehaviour
     
     }
 
-    private void AssignDailyQuestList()
+    private async void AssignDailyQuestList()
     {
-        QuestData questData = LoadQuestData(); // Tải dữ liệu từ JSON
-       
+        QuestData questData = await LoadQuestData(); 
         string today = TimeManager.Instance.ServerDate;
-
         if (questData.lastAssignedDate == today)
         {
             currentQuestList = questData.currentQuestList;
@@ -245,7 +248,6 @@ public class QuestManager : MonoBehaviour
         questData.lastAssignedDate = today;
         questData.currentQuestList = currentQuestList;
         questData.hasReceivedStampToday = false;
-
 
         SaveQuestData(questData);
 
@@ -285,22 +287,22 @@ public class QuestManager : MonoBehaviour
 
     private void FixedUpdate()
     {
-        int currentComplete = activeQuests.Where(h => h.CheckCompletion()).Count() ;
-        UpdateQuest("013", currentComplete, 0);
+        //int currentComplete = activeQuests.Where(h => h.CheckCompletion()).Count() ;
+        //UpdateQuest("013", currentComplete, 0);
     }
 
-    public void UpdateQuest(string id, int progress,int progress2)
+    public  async void UpdateQuest(string id, int progress,int progress2)
     {
-        QuestData questData = LoadQuestData();
+        QuestData questData = await LoadQuestData();
         foreach (var quest in activeQuests)
         {
             if (quest.questId == id)
             {
                 quest.UpdateProgress(progress);
-                quest.UpdateProgress(progress, progress2); 
+                quest.UpdateProgress(progress, progress2);
+                GetQuestById("013").UpdateProgress(activeQuests.Where(h => h.CheckCompletion()).Count());
                 if (quest.CheckCompletion())
                 {
-                  //  RewardQuest(id);
                     Debug.Log($"Quest {quest.questId} completed!");
                     if (!questData.hasReceivedStampToday)
                     {
@@ -327,36 +329,40 @@ public class QuestManager : MonoBehaviour
         SaveQuestDataToFirebase(data);
     }
 
-    public  QuestData LoadQuestData()
+    public async Task<QuestData> LoadQuestData()
     {
+        QuestData localData = new QuestData();
+
         if (File.Exists(path))
         {
             string json = File.ReadAllText(path);
-            QuestData data = JsonUtility.FromJson<QuestData>(json);
-            LoadQuestDataFromFirebase((firebaseData) =>
-            {
-                if (firebaseData != null)
-                {
-                    data = firebaseData;
-                    stampCount = data.stampCount;
-                }
-                else
-                {
-                    Debug.Log("⚠️ Firebase không có dữ liệu QuestData. Dùng dữ liệu local.");
-
-                }
-            });
-            return data;
+            localData = JsonUtility.FromJson<QuestData>(json);
         }
-       
-        return new QuestData(); // Trả về dữ liệu mặc định nếu chưa có file
+
+        var firebaseData = await LoadQuestDataFromFirebaseAsync(); // cần viết lại hàm này trả về Task<QuestData>
+
+        if (firebaseData != null)
+        {
+            localData = firebaseData;
+            stampCount = localData.stampCount;
+            Debug.Log("Count:" + localData.stampCount);
+            Debug.Log("⚠️ Firebase có dữ liệu QuestData");
+        }
+        else
+        {
+            Debug.Log("⚠️ Firebase không có dữ liệu QuestData. Dùng dữ liệu local.");
+        }
+
+        return localData;
     }
+
     public void  SyncLocalQuestsToFirebaseIfNotExist()
     {
        foreach(var quest in activeQuests)
        {
             quest.SyncLocalQuestsToFirebaseIfNotExist();
        }
+        CoroutineAssignDailyQuestList();
     }
     public  void SaveQuestDataToFirebase(QuestData data)
     {
@@ -382,43 +388,46 @@ public class QuestManager : MonoBehaviour
             });
     }
 
-    public  void LoadQuestDataFromFirebase(Action<QuestData> onLoaded)
+    public async Task<QuestData> LoadQuestDataFromFirebaseAsync()
     {
         if (FirebaseDataManager.Instance.GetCurrentUser() == null)
         {
             Debug.LogWarning("❌ Chưa đăng nhập - không thể load QuestData từ Firebase.");
-            onLoaded?.Invoke(null);
-            return;
+            return null;
         }
 
         string userId = FirebaseDataManager.Instance.GetCurrentUser().UserId;
         string key = "questData";
 
-        FirebaseDatabase.DefaultInstance.RootReference
+        DataSnapshot snapshot = await FirebaseDatabase.DefaultInstance.RootReference
             .Child("users")
             .Child(userId)
             .Child(key)
-            .GetValueAsync()
-            .ContinueWithOnMainThread(task =>
+            .GetValueAsync();
+
+        if (snapshot.Exists)
+        {
+            string json = snapshot.GetRawJsonValue();
+            Debug.Log("✅ Load QuestData từ Firebase:\n" + json);
+
+            QuestData data = JsonUtility.FromJson<QuestData>(json);
+            SaveQuestData(data); // Save xuống local nếu muốn
+            return data;
+        }
+        else
+        {
+            Debug.Log("☁️ Firebase chưa có -> Load local & đồng bộ lên Firebase.");
+            QuestData localData = new QuestData();
+
+            if (File.Exists(path))
             {
-                if (task.IsCompleted && task.Result.Exists)
-                {
-                    string json = task.Result.GetRawJsonValue();
-                    QuestData data = JsonUtility.FromJson<QuestData>(json);
-                    SaveQuestData(data);
-                    Debug.Log("✅ Load QuestData từ Firebase.");
-                    onLoaded?.Invoke(data);
-                }
-                else
-                {
-                    // Nếu Firebase chưa có, load từ local và đẩy lên Firebase
-                    QuestData localData = LoadQuestData();
-                    SaveQuestDataToFirebase(localData);
-                    onLoaded?.Invoke(localData);
-                    Debug.Log("☁️ Firebase chưa có -> Load local & đồng bộ lên Firebase.");
-   
-                }
-            });
+                string json = File.ReadAllText(path);
+                localData = JsonUtility.FromJson<QuestData>(json);
+            }
+
+            SaveQuestDataToFirebase(localData); // cũng nên chuyển sang async luôn
+            return localData;
+        }
     }
 
 }

@@ -30,9 +30,9 @@ public class QuestUIController : MonoBehaviour
         GetQuest7Day();
 
     }
-    public void GetQuest7Day()
+    public async void GetQuest7Day()
     {
-        QuestData questData = QuestManager.instance.LoadQuestData();
+        QuestData questData = await QuestManager.instance.LoadQuestData();
 
         stampCount = questData.stampCount;
         if (stampCount >= 7)
@@ -45,6 +45,7 @@ public class QuestUIController : MonoBehaviour
             StartCoroutine(ShowRewardTemporarily());
             questData.stampCount = 0;
             QuestManager.instance.SaveQuestData(questData);
+            UpdateStampUI();
 
         }
     }
@@ -59,11 +60,11 @@ public class QuestUIController : MonoBehaviour
     private void Update()
     {
         UpdateTimer();
-        GetQuest7Day();
+        
     }
-    private void UpdateStampUI()
+    private async void UpdateStampUI()
     {
-        QuestData questData = QuestManager.instance.LoadQuestData();
+        QuestData questData = await QuestManager.instance.LoadQuestData();
         stampCount = questData.stampCount;
         for (int i = 0; i < completedImages.Count; i++)
         {
@@ -161,7 +162,7 @@ public class QuestUIController : MonoBehaviour
             quests.Remove(quest);
             Destroy(quest.gameObject); // Xóa UI của quest
         }
-
+        GetQuest7Day();
         currentCompleteQuest = 0; // Reset lại số quest hoàn thành
     }
     private IEnumerator ShowRewardTemporarily()
@@ -172,6 +173,7 @@ public class QuestUIController : MonoBehaviour
     }
     private void OnEnable()
     {
+        GetQuest7Day();
         UpdateStampUI();
     }
 }

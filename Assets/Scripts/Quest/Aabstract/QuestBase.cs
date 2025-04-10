@@ -54,6 +54,29 @@ public abstract class QuestBase
             File.Delete(path);
             Debug.Log($"Quest {questId} deleted.");
         }
+        if (FirebaseDataManager.Instance.GetCurrentUser() != null)
+        {
+            string userId = FirebaseDataManager.Instance.GetCurrentUser().UserId;
+            string questKey = $"quest_{questId}";
+
+            FirebaseDatabase.DefaultInstance.RootReference
+                .Child("users")
+                .Child(userId)
+                .Child("quests")
+                .Child(questKey)
+                .RemoveValueAsync()
+                .ContinueWithOnMainThread(task =>
+                {
+                    if (task.IsCompleted)
+                        Debug.Log($"🗑️ Đã xoá quest {questId} khỏi Firebase.");
+                    else
+                        Debug.LogError($"❌ Lỗi khi xoá quest {questId} khỏi Firebase: {task.Exception}");
+                });
+        }
+        else
+        {
+            Debug.Log("⚠️ Chưa đăng nhập – không thể xoá quest khỏi Firebase.");
+        }
     }
     public virtual Tuple<int,int> GetProgress()
     {
