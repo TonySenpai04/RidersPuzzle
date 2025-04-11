@@ -27,7 +27,6 @@ internal class ReadCSVLocalizeQuest : ReadCSVLocalizeBase
                 var richTxt = values[5];
 
                 localizedTexts[key] = currentLanguage == 5 ? viText : enText;
-                Debug.Log(key+"-"+ enText);
                 localizedFonts[key] = Resources.Load<TMP_FontAsset>($"Fonts/{fontName}");
                 richText.Add(key, richTxt);
             }

@@ -24,6 +24,7 @@ internal class LoginNormalQuest : QuestBase
         {
             currentDays++;
             lastLoginDate = today;
+            Debug.Log("lastLoginDate:"+lastLoginDate);
             SaveQuest();
         }
         else

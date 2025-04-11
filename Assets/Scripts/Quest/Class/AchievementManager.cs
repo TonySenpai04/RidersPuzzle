@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 using Unity.VisualScripting;
 using UnityEngine;
 
@@ -14,7 +15,7 @@ public class AchievementManager : MonoBehaviour
     }
     void Start()
     {
-        LoadQuests();
+       
     }
 
     void LoadQuests()
@@ -120,9 +121,8 @@ public class AchievementManager : MonoBehaviour
         foreach (var quest in activeQuests)
         {
             quest.LoadQuest();
-            Debug.Log(quest.questId + "-" + quest.description);
         }
-        OnPlayerLogin();
+      //  OnPlayerLogin();
 
     }
     private void FixedUpdate()
@@ -231,11 +231,14 @@ public class AchievementManager : MonoBehaviour
 
         return filteredQuests;
     }
-    public void SyncLocalQuestsToFirebaseIfNotExist()
+    public async void SyncLocalQuestsToFirebaseIfNotExist()
     {
         foreach (var quest in activeQuests)
         {
             quest.SyncLocalQuestsToFirebaseIfNotExist();
         }
+         LoadQuests();
+        await Task.Delay(2500);
+        OnPlayerLogin();
     }
 }

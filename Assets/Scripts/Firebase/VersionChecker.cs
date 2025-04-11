@@ -6,10 +6,13 @@ using Firebase.RemoteConfig;
 
 public class VersionChecker : MonoBehaviour
 {
-    public string currentVersion = "1.0.0";
+    public string currentVersion ;
+    public GameObject popup;
 
     void Start()
     {
+        currentVersion = Application.version;
+        Debug.Log("📦 Current version from build: " + currentVersion);
         FirebaseApp.CheckAndFixDependenciesAsync().ContinueWithOnMainThread(task =>
         {
             if (task.Result == DependencyStatus.Available)
@@ -43,11 +46,13 @@ public class VersionChecker : MonoBehaviour
 
                     if (!string.IsNullOrEmpty(latestVersion) && latestVersion != currentVersion)
                     {
+                        popup.SetActive(true);
                         Debug.Log("⚠️ Cần cập nhật phiên bản!");
                         // TODO: Gọi popup bắt cập nhật
                     }
                     else
                     {
+                        popup.SetActive(false);
                         Debug.Log("⚠️ Không cần cập nhật phiên bản!");
                     }
                 });

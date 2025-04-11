@@ -19,7 +19,7 @@ public class LoginStreakQuest : QuestBase
     public void OnPlayerLogin()
     {
         string today = DateTime.UtcNow.Date.ToString("yyyy-MM-dd");
-
+        Debug.Log("lastLoginDate:" + lastLoginDate);
         if (!string.IsNullOrEmpty(lastLoginDate))
         {
             DateTime lastLogin = DateTime.Parse(lastLoginDate);

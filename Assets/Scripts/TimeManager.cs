@@ -28,7 +28,7 @@ public class TimeManager : MonoBehaviour
     {
         int maxRetries = 3; // Số lần thử lại tối đa
         int retryCount = 0;
-        float retryDelay = 1f; // Thời gian chờ giữa mỗi lần thử 
+        float retryDelay = 0.2f; // Thời gian chờ giữa mỗi lần thử 
 
         while (retryCount < maxRetries)
         {

@@ -238,6 +238,7 @@ public class QuestManager : MonoBehaviour
         if (questData.lastAssignedDate == today)
         {
             currentQuestList = questData.currentQuestList;
+            stampCount = questData.stampCount;
             questLists[currentQuestList]?.Invoke();
             LoadQuests();
             Debug.Log($"Loaded previous quest list {currentQuestList} for today.");
@@ -267,7 +268,7 @@ public class QuestManager : MonoBehaviour
         foreach (var quest in activeQuests)
         {
             quest.LoadQuest();
-            Debug.Log(quest.questId + "-" + quest.description);
+
         }
     }
     public List<QuestBase> GetQuestsByType<T>() where T : QuestBase
@@ -332,6 +333,7 @@ public class QuestManager : MonoBehaviour
     public async Task<QuestData> LoadQuestData()
     {
         QuestData localData = new QuestData();
+        Debug.Log("localData:" + localData.stampCount);
 
         if (File.Exists(path))
         {
@@ -340,7 +342,6 @@ public class QuestManager : MonoBehaviour
         }
 
         var firebaseData = await LoadQuestDataFromFirebaseAsync(); // cần viết lại hàm này trả về Task<QuestData>
-
         if (firebaseData != null)
         {
             localData = firebaseData;
@@ -411,7 +412,7 @@ public class QuestManager : MonoBehaviour
             Debug.Log("✅ Load QuestData từ Firebase:\n" + json);
 
             QuestData data = JsonUtility.FromJson<QuestData>(json);
-            SaveQuestData(data); // Save xuống local nếu muốn
+            SaveQuestData(data); 
             return data;
         }
         else
@@ -439,5 +440,9 @@ public class QuestData
     public string lastAssignedDate;
     public int stampCount;
     public bool hasReceivedStampToday;
+    public QuestData()
+    {
+
+    }
 
 }

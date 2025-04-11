@@ -23,15 +23,65 @@ public class ButtonStageController : MonoBehaviour
     [SerializeField] private TutorialController tutorial;
     [SerializeField] private ObjectLibraryController objectLibraryController;
 
+    [SerializeField] private int levelsPerPage = 150;
+    [SerializeField] private int currentPage = 0;
+    [SerializeField] private int totalPages = 0;
+    [SerializeField] private Button nextPageButton;
+    [SerializeField] private Button prevPageButton;
+
+
     private async void Start()
     {
         await Task.Delay(2500);
         notiObject.gameObject.SetActive(false);
+        totalLevels = levelManager.GetTotalLevel();
+        totalPages = Mathf.CeilToInt((float)totalLevels / levelsPerPage);
+
+        nextPageButton.onClick.AddListener(NextPage);
+        prevPageButton.onClick.AddListener(PreviousPage);
+
+
         CreateButtons();
         stageZone.SetActive(false);
 
     }
-    
+    private void UpdateVisibleButtons()
+    {
+        for (int i = 0; i < buttons.Count; i++)
+        {
+            int start = currentPage * levelsPerPage;
+            int end = Mathf.Min(start + levelsPerPage, totalLevels);
+
+            buttons[i].gameObject.SetActive(i >= start && i < end);
+        }
+
+        UpdateNavigationButtons();
+    }
+
+    private void NextPage()
+    {
+        if (currentPage < totalPages - 1)
+        {
+            currentPage++;
+            UpdateVisibleButtons();
+        }
+    }
+
+    private void PreviousPage()
+    {
+        if (currentPage > 0)
+        {
+            currentPage--;
+            UpdateVisibleButtons();
+        }
+    }
+
+    private void UpdateNavigationButtons()
+    {
+        nextPageButton.gameObject.SetActive(currentPage < totalPages - 1);
+        prevPageButton.gameObject.SetActive(currentPage > 0);
+    }
+
     private void CreateButtons()
     {
         totalLevels = levelManager.GetTotalLevel();
@@ -43,6 +93,7 @@ public class ButtonStageController : MonoBehaviour
             button.Initialize(i + 1, LoadLevel, isUnlocked,this);
             buttons.Add(button);
         }
+        UpdateVisibleButtons();
     }
     private void FixedUpdate()
     {
