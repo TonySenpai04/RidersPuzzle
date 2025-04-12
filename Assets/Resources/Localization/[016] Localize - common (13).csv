@@ -4,7 +4,7 @@ FALSE,button_start,START YOUR JOURNEY,START YOUR JOURNEY,RobotoSemi-Bold SDF,B�
 FALSE,title_choose_a_stage,Choose a stage,Choose a stage,RobotoSemi-Bold SDF,Chọn màn chơi,RobotoSemi-Bold SDF,
 FALSE,warning_not_unlocked,Not unlocked,Not unlocked,Roboto-Regular SDF,Chưa mở,Roboto-Regular SDF,
 FALSE,warning_coming_soon,Coming soon,Coming soon,Roboto-Regular SDF,Sắp ra mắt,Roboto-Regular SDF,
-FALSE,title_stage,Stage,Stage,RobotoSemi-Bold SDF,Màn chơi,RobotoSemi-Bold SDF,
+FALSE,title_stage,STAGE,STAGE,IBM Plex Mono SDF,MÀN,IBM Plex Mono SDF,
 FALSE,guide_game_rule,Reach the girl to win!,Reach the girl to win!,RobotoSemi-Bold SDF,Giải cứu Tsumu-chan để thắng!,RobotoSemi-Bold SDF,
 FALSE,title_rider_information,RIDER INFORMATION,RIDER INFORMATION,RobotoSemi-Bold SDF,THÔNG TIN RIDER,RobotoSemi-Bold SDF,
 FALSE,button_skill,SKILL,SKILL,RobotoSemi-Bold SDF,KỸ NĂNG,RobotoSemi-Bold SDF,
@@ -89,7 +89,7 @@ FALSE,button_my_account,MY ACCOUNT,MY ACCOUNT,RobotoSemi-Bold SDF,TÀI KHOẢN C
 FALSE,register_new_account,Register new account,Register new account,RobotoSemi-Bold SDF,Tạo tài khoản mới,RobotoSemi-Bold SDF,
 FALSE,forget_password_title,Reset password,Reset password,RobotoSemi-Bold SDF,Đặt lại mật khẩu,RobotoSemi-Bold SDF,
 FALSE,forget_password_content,The new password will be sent to your registed email.,The new password will be sent to your registed email.,Roboto-Regular SDF,Mật khẩu mới sẽ được gửi tới email bạn đã đăng ký.,Roboto-Regular SDF,
-FALSE,button_logout,LOGOUT,LOGOUT,Roboto-Regular SDF,ĐĂNG XUẤT,Roboto-Regular SDF,
+FALSE,button_logout,LOG OUT,LOG OUT,RobotoSemi-Bold SDF,ĐĂNG XUẤT,RobotoSemi-Bold SDF,
 FALSE,button_reset,RESET,RESET,RobotoSemi-Bold SDF,Đặt lại ,RobotoSemi-Bold SDF,
 FALSE,library_rider_story,STORY,STORY,RobotoSemi-Bold SDF,CHUYỆN KỂ,RobotoSemi-Bold SDF,
 FALSE,library_story_unlock_condition,Unlock after completing each 30 stage,Unlock after completing each 30 stage,Roboto-Regular SDF,Mở khóa mỗi khi hoàn thành 30 màn ,Roboto-Regular SDF,
@@ -106,3 +106,16 @@ FALSE,quest_help_daily_quest_title,DAILY QUEST,DAILY QUEST,RobotoSemi-Bold SDF,N
 FALSE,quest_help_daily_quest_content,Complete quests to earn a stamp daily. Collect 7 stamps to receive a big reward.,Complete quests to earn a stamp daily. Collect 7 stamps to receive a big reward.,Roboto-Regular SDF,Hoàn thành nhiệm vụ để nhận con dấu mỗi ngày. Thu thập đủ 7 con dấu để nhận phần thưởng lớn.,Roboto-Regular SDF,
 FALSE,quest_help_achivement_title,ACHIEVEMENT,ACHIEVEMENT,RobotoSemi-Bold SDF,THÀNH TỰU,RobotoSemi-Bold SDF,
 FALSE,quest_help_achivement_content,Complete achievements to get rewards.,Complete achievements to get rewards.,Roboto-Regular SDF,Hoàn thành các thành tựu để nhận phần thưởng.,Roboto-Regular SDF,
+FALSE,shop_help_quest_stamp_title,QUEST STAMP,QUEST STAMP,RobotoSemi-Bold SDF,DẤU ẤN NHIỆM VỤ,RobotoSemi-Bold SDF,
+FALSE,shop_help_quest_stamp_content,You an earn 1 stamp for each day when completing at least a quest.,You an earn 1 stamp for each day when completing at least a quest.,Roboto-Regular SDF,Bạn có thể nhận được 1 dấu ấn mỗi ngày khi hoàn thành ít nhất 1 nhiệm vụ.,Roboto-Regular SDF,
+FALSE,new_title,NEWS,NEWS,RobotoSemi-Bold SDF,TIN TỨC,RobotoSemi-Bold SDF,
+FALSE,patch_note_infor,"- Increase limit stage from 150 to 180
+- Add new chapter of story: Chapter 6
+- Add new achievements
+- Add detail for quest feature help","- Increase limit stage from 150 to 180
+- Add new chapter of story: Chapter 6
+- Add new achievements
+- Add detail for quest feature help",Roboto-Regular SDF,"- Tăng giới hạn giai đoạn từ 150 lên 180 
+- Thêm chương mới của câu chuyện: Chương 6 
+- Thêm thành tích mới 
+- Thêm chi tiết cho trợ giúp tính năng nhiệm vụ",Roboto-Regular SDF,

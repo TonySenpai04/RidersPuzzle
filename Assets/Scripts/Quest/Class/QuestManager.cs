@@ -412,7 +412,7 @@ public class QuestManager : MonoBehaviour
             Debug.Log("✅ Load QuestData từ Firebase:\n" + json);
 
             QuestData data = JsonUtility.FromJson<QuestData>(json);
-            SaveQuestData(data); 
+          //  SaveQuestData(data); 
             return data;
         }
         else

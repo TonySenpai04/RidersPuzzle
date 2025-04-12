@@ -148,13 +148,15 @@ setting_term_of_condition_stage,
     [SerializeField] private TMP_Text titleStory;
     [SerializeField] private TMP_Text contentStory;
     [Header("Quest")]
-    [SerializeField] private TMP_Text quest_daily_quest_title, button_complete_all, button_complete_all_2,
+    [SerializeField] private TMP_Text quest_daily_quest_title;
+    [SerializeField] private TMP_Text button_complete_all, button_complete_all_2,
          button_achievement, quest_reset_time, quest_daily_quest_all_completed,
         quest_help_daily_quest_title, quest_help_daily_quest_content, quest_help_achivement_title, quest_help_achivement_content,
-        quest_achievement_title
+        quest_achievement_title, shop_help_quest_stamp_title, shop_help_quest_stamp_content
         ;
-   
-
+    [Header("New")]
+    [SerializeField] private TMP_Text new_title;
+     [SerializeField] private TMP_Text patch_note_infor;
     public static ApplyText instance;
     public  TextLocalizer textLocalizer;
     private void Awake() => instance = this;
@@ -341,7 +343,11 @@ setting_term_of_condition_stage,
         textLocalizer.SetLocalizedText("quest_help_achivement_title", quest_help_achivement_title);
         textLocalizer.SetLocalizedText("quest_help_achivement_content", quest_help_achivement_content);
         textLocalizer.SetLocalizedText("quest_achievement_title", quest_achievement_title);
-        textLocalizer.SetLocalizedText("button_complete_all", button_complete_all_2); 
+        textLocalizer.SetLocalizedText("button_complete_all", button_complete_all_2);
+        textLocalizer.SetLocalizedText("shop_help_quest_stamp_content", shop_help_quest_stamp_content);
+        textLocalizer.SetLocalizedText("shop_help_quest_stamp_title", shop_help_quest_stamp_title);
+        textLocalizer.SetLocalizedText("new_title", new_title);
+        textLocalizer.SetLocalizedText("patch_note_infor", patch_note_infor);
 
     }
 
@@ -438,7 +444,7 @@ setting_language_stage,
 setting_term_of_condition_stage,
  setting_credit_stage,button_logout
 , login_popup_my_account_stage,title_setting_stage,login_popup_my_account_game,my_account,quest_achievement_title,
-
+ shop_help_quest_stamp_title, shop_help_quest_stamp_content,new_title,patch_note_infor,
         // Object
         objectName, objectStory, objectBattle, libraryObjectStory, libraryObjectBattleInfor,
 

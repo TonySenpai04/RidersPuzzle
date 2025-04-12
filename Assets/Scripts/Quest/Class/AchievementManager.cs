@@ -118,6 +118,39 @@ public class AchievementManager : MonoBehaviour
        LocalizationManager.instance.GetLocalizedText("quest_012_1", 43),
        99, 43)
         { groupId = "DailyGiftQuest" });
+
+        activeQuests.Add(new OwnRiderQuest("0024",
+       LocalizationManager.instance.GetLocalizedText("quest_006_1", 4),
+       499, 4)
+        { groupId = "OwnRiderQuest" });
+        activeQuests.Add(new ReachStageQuest("0025",
+        LocalizationManager.instance.GetLocalizedText("quest_005_1", 150),
+        100, 150, "")
+        { groupId = "ReachStageQuest" });
+
+        activeQuests.Add(new CollectGoldQuest("0026",
+      LocalizationManager.instance.GetLocalizedText("quest_006_1", 1000),
+      200, 1000)
+        { groupId = "CollectGoldQuest" });
+        activeQuests.Add(new CollectGoldQuest("0027",
+     LocalizationManager.instance.GetLocalizedText("quest_006_1", 2000),
+     200, 2000)
+        { groupId = "CollectGoldQuest" });
+
+        activeQuests.Add(new CollectGoldQuest("0028",
+     LocalizationManager.instance.GetLocalizedText("quest_006_1", 5000),
+     200, 5000)
+        { groupId = "CollectGoldQuest" });
+        activeQuests.Add(new CollectGoldQuest("0029",
+  LocalizationManager.instance.GetLocalizedText("quest_006_1", 8000),
+  200, 8000)
+        { groupId = "CollectGoldQuest" });
+
+        activeQuests.Add(new CollectGoldQuest("0030",
+      LocalizationManager.instance.GetLocalizedText("quest_006_1", 15000),
+      200, 15000)
+        { groupId = "CollectGoldQuest" });
+
         foreach (var quest in activeQuests)
         {
             quest.LoadQuest();
