@@ -1,4 +1,4 @@
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
@@ -17,7 +17,7 @@ public class SliderController : MonoBehaviour
 
     void Start()
     {
-        slider.gameObject.SetActive(true);
+      //  slider.gameObject.SetActive(true);
         btnStart.SetActive(false);
        
         isRunning = true;
@@ -25,28 +25,40 @@ public class SliderController : MonoBehaviour
    
     void Update()
     {
-        if (isRunning)
+        if (isRunning && slider.gameObject.activeSelf)
         {
             UpdateSliderValue();
             CheckSliderCompletion();
         }
     }
+    public void ShowSlider()
+    {
+        slider.gameObject.SetActive(true);
+    }
 
+    // Hàm này sẽ được gọi từ VersionChecker để ẩn thanh slider
+    public void HideSlider()
+    {
+        slider.gameObject.SetActive(false);
+    }
     void UpdateSliderValue()
     {
+        // Nếu chưa lấy xong thời gian => cho chạy tối đa tới 99%
+        float maxValue = TimeManager.Instance != null && !TimeManager.Instance.IsTimeFetched ? 0.75f : 1f;
+
         time += Time.deltaTime * speed;
+        time = Mathf.Min(time, maxValue); // không vượt quá maxValue
         slider.value = time;
     }
 
 
 
+
     void CheckSliderCompletion()
     {
-        if (time >= 1)
+        if (time >= 1f && TimeManager.Instance != null && TimeManager.Instance.IsTimeFetched)
         {
             CompleteSlider();
-
-
         }
     }
 

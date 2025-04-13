@@ -63,6 +63,7 @@ public class ButtonStageController : MonoBehaviour
         if (currentPage < totalPages - 1)
         {
             currentPage++;
+            buttonParent.GetComponent<RectTransform>().transform.position = new Vector2(0, -9065.08f);
             UpdateVisibleButtons();
         }
     }
@@ -72,6 +73,7 @@ public class ButtonStageController : MonoBehaviour
         if (currentPage > 0)
         {
             currentPage--;
+            buttonParent.GetComponent<RectTransform>().transform.position = new Vector2(0, -9065.08f);
             UpdateVisibleButtons();
         }
     }

@@ -32,7 +32,7 @@ public class AccountLogin : MonoBehaviour
     public InputField rename;
     public TextMeshProUGUI nameText;
     public Image loadingSpning;
-
+    public bool isLogin;
     private string path => Path.Combine(Application.persistentDataPath, "LoginData.json");
     private async void Start()
     {
@@ -67,6 +67,10 @@ public class AccountLogin : MonoBehaviour
         if (!File.Exists(path))
         {
             ShowLoginUI();
+            QuestManager.instance.SyncLocalQuestsToFirebaseIfNotExist();
+            QuestManager.instance.LoadQuests();
+            AchievementManager.instance.SyncLocalQuestsToFirebaseIfNotExist();
+            AchievementManager.instance.LoadQuestData();
             return;
         }
 

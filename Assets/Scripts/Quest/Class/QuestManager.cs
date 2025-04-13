@@ -333,7 +333,6 @@ public class QuestManager : MonoBehaviour
     public async Task<QuestData> LoadQuestData()
     {
         QuestData localData = new QuestData();
-        Debug.Log("localData:" + localData.stampCount);
 
         if (File.Exists(path))
         {
@@ -346,7 +345,6 @@ public class QuestManager : MonoBehaviour
         {
             localData = firebaseData;
             stampCount = localData.stampCount;
-            Debug.Log("Count:" + localData.stampCount);
             Debug.Log("⚠️ Firebase có dữ liệu QuestData");
         }
         else
@@ -410,9 +408,9 @@ public class QuestManager : MonoBehaviour
         {
             string json = snapshot.GetRawJsonValue();
             Debug.Log("✅ Load QuestData từ Firebase:\n" + json);
-
             QuestData data = JsonUtility.FromJson<QuestData>(json);
-          //  SaveQuestData(data); 
+            Debug.Log("Count:" + data.stampCount);
+            //  SaveQuestData(data); 
             return data;
         }
         else
