@@ -22,6 +22,8 @@ public class AchivementUIController : MonoBehaviour
     [SerializeField] private Sprite unselectSprite;
     [SerializeField] private Sprite selectSprite;
     [SerializeField] private TextMeshProUGUI totalCompletedTxt;
+    List<QuestBase> questsToShow;
+
     void Start()
     {
         Init();
@@ -29,10 +31,22 @@ public class AchivementUIController : MonoBehaviour
     }
 
 
-
+    private void OnEnable()
+    {
+        if (quests.Count > 0)
+        {
+            foreach (var q in quests)
+            {
+                Destroy(q.gameObject);
+            }
+            quests.Clear();
+            Init();
+            currentCompleteQuest = 0;
+        }
+    }
     public void Init()
     {
-        List<QuestBase> questsToShow = AchievementManager.instance.GetFirstUncompletedQuestEachGroup();
+         questsToShow = AchievementManager.instance.GetFirstUncompletedQuestEachGroup();
         for (int i = 0; i < questsToShow.Count; i++)
         {
             AchievementUI quest = Instantiate(questUI, content);
@@ -53,7 +67,7 @@ public class AchivementUIController : MonoBehaviour
     private void FixedUpdate()
     {
         totalCompletedTxt.text= "Total completed achievement: "+AchievementManager.instance.GetTotalComplete();
-        int currentComplete = AchievementManager.instance.activeQuests.Where(h => h.isReward).Count();
+        int currentComplete = questsToShow.Where(h => h.isReward).Count();
         if (currentComplete >= AchievementManager.instance.activeQuests.Count)
         {
             completedTxt.gameObject.SetActive(true);
@@ -62,13 +76,8 @@ public class AchivementUIController : MonoBehaviour
         {
             completedTxt.gameObject.SetActive(false);
         }
-        foreach (var quest in quests)
-        {
-            if (AchievementManager.instance.GetQuestById(quest.QuestID).CheckCompletion())
-            {
-                currentCompleteQuest += 1;
-            }
-        }
+        currentCompleteQuest = questsToShow.Where(h => h.CheckCompletion()).Count();
+
         if (currentCompleteQuest == 0)
         {
             CompleteAll.GetComponent<Image>().sprite = unselectSprite;
@@ -126,7 +135,7 @@ public class AchivementUIController : MonoBehaviour
         Init();
         currentCompleteQuest = 0; // Reset lại số quest hoàn thành
     }
- 
+
     private IEnumerator ShowRewardTemporarily()
     {
         rewardObj.SetActive(true);

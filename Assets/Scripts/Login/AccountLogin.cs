@@ -103,7 +103,10 @@ public class AccountLogin : MonoBehaviour
         Debug.Log("🚪 Đã đăng xuất");
 
         if (File.Exists(path)) File.Delete(path);
-
+        QuestManager.instance.SyncLocalQuestsToFirebaseIfNotExist();
+        QuestManager.instance.LoadQuests();
+        AchievementManager.instance.SyncLocalQuestsToFirebaseIfNotExist();
+        AchievementManager.instance.LoadQuestData();
         ResetToLoginUI();
     }
 
@@ -114,7 +117,6 @@ public class AccountLogin : MonoBehaviour
         LevelManager.instance.LoadLocal();
         GoldManager.instance.LoadLocal();
         HeroManager.instance.LoadUnlockHero();
-
         login.SetActive(true);
         regester.SetActive(false);
         loginBtn.gameObject.SetActive(true);

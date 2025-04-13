@@ -20,6 +20,7 @@ public class AchievementManager : MonoBehaviour
 
     void LoadQuests()
     {
+        activeQuests.Clear();
         activeQuests.Add(new LoginNormalQuest("0001",
                   LocalizationManager.instance.GetLocalizedText("quest_001_1",7),
                   288, 7)
