@@ -157,6 +157,9 @@ setting_term_of_condition_stage,
     [Header("New")]
     [SerializeField] private TMP_Text new_title;
      [SerializeField] private TMP_Text patch_note_infor;
+    [Header("Update")]
+    [SerializeField] private TMP_Text button_update;
+    [SerializeField] private TMP_Text popup_update_title,popup_update_content;
     public static ApplyText instance;
     public  TextLocalizer textLocalizer;
     private void Awake() => instance = this;
@@ -349,6 +352,10 @@ setting_term_of_condition_stage,
         textLocalizer.SetLocalizedText("new_title", new_title);
         textLocalizer.SetLocalizedText("patch_note_infor", patch_note_infor);
 
+        textLocalizer.SetLocalizedText("popup_update_content", popup_update_content);
+        textLocalizer.SetLocalizedText("popup_update_title", popup_update_title);
+        textLocalizer.SetLocalizedText("button_update", button_update);
+
     }
 
     private void SetRiderTexts(TextLocalizer textLocalizer)
@@ -428,7 +435,7 @@ setting_term_of_condition_stage,
             setting_language_2, setting_privacy_policy, setting_term_of_condition, setting_credit
            , popup_detail_quit, popup_detail_language_change, popup_detail_credit,popup_detail_language_change_stage,
             login_popup_title,button_return_player,titleStory,contentStory,
-            quest_daily_quest_title, button_complete_all,
+            quest_daily_quest_title, button_complete_all,button_update,popup_update_title,popup_update_content,
 
          button_achievement, quest_reset_time, quest_daily_quest_all_completed,
         quest_help_daily_quest_title, quest_help_daily_quest_content, quest_help_achivement_title, quest_help_achivement_content

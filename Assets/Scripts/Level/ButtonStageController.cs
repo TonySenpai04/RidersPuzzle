@@ -64,8 +64,14 @@ public class ButtonStageController : MonoBehaviour
         {
             currentPage++;
             buttonParent.GetComponent<RectTransform>().transform.position = new Vector2(0, -9065.08f);
+            StartCoroutine(DelayedLayoutRebuild());
             UpdateVisibleButtons();
         }
+    }
+    private IEnumerator DelayedLayoutRebuild()
+    {
+        yield return null; // Chờ 1 frame để đảm bảo nút đã spawn
+        LayoutRebuilder.ForceRebuildLayoutImmediate(buttonParent.GetComponent<RectTransform>());
     }
 
     private void PreviousPage()
@@ -74,6 +80,7 @@ public class ButtonStageController : MonoBehaviour
         {
             currentPage--;
             buttonParent.GetComponent<RectTransform>().transform.position = new Vector2(0, -9065.08f);
+            StartCoroutine(DelayedLayoutRebuild());
             UpdateVisibleButtons();
         }
     }
@@ -95,8 +102,11 @@ public class ButtonStageController : MonoBehaviour
             button.Initialize(i + 1, LoadLevel, isUnlocked,this);
             buttons.Add(button);
         }
+        StartCoroutine(DelayedLayoutRebuild());
         UpdateVisibleButtons();
+        buttonParent.GetComponent<RectTransform>().transform.position = new Vector2(0, -9065.08f);
     }
+
     private void FixedUpdate()
     {
         UpdateButtons();
