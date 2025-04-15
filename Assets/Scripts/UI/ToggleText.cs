@@ -15,7 +15,7 @@ public class ToggleText : MonoBehaviour
         targetText.gameObject.SetActive(isTextVisible);
     }
 
-    void ToggleTextVisibility()
+   public void ToggleTextVisibility()
     {
         isTextVisible = !isTextVisible;
         targetText.gameObject.SetActive(isTextVisible);

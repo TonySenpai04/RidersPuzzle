@@ -130,28 +130,27 @@ public class AchievementManager : MonoBehaviour
         { groupId = "ReachStageQuest" });
 
         activeQuests.Add(new CollectGoldQuest("0026",
-      LocalizationManager.instance.GetLocalizedText("quest_006_1", 1000),
+      LocalizationManager.instance.GetLocalizedText("quest_009_1_2", 1000, "hapi"),
       200, 1000)
         { groupId = "CollectGoldQuest" });
         activeQuests.Add(new CollectGoldQuest("0027",
-     LocalizationManager.instance.GetLocalizedText("quest_006_1", 2000),
+     LocalizationManager.instance.GetLocalizedText("quest_009_1_2", 2000, "hapi"),
      200, 2000)
         { groupId = "CollectGoldQuest" });
 
         activeQuests.Add(new CollectGoldQuest("0028",
-     LocalizationManager.instance.GetLocalizedText("quest_006_1", 5000),
+     LocalizationManager.instance.GetLocalizedText("quest_009_1_2", 5000, "hapi"),
      200, 5000)
         { groupId = "CollectGoldQuest" });
         activeQuests.Add(new CollectGoldQuest("0029",
-  LocalizationManager.instance.GetLocalizedText("quest_006_1", 8000),
+  LocalizationManager.instance.GetLocalizedText("quest_009_1_2", 8000, "hapi"),
   200, 8000)
         { groupId = "CollectGoldQuest" });
 
         activeQuests.Add(new CollectGoldQuest("0030",
-      LocalizationManager.instance.GetLocalizedText("quest_006_1", 15000),
+      LocalizationManager.instance.GetLocalizedText("quest_009_1_2", 15000, "hapi"),
       200, 15000)
         { groupId = "CollectGoldQuest" });
-
         foreach (var quest in activeQuests)
         {
             quest.LoadQuest();

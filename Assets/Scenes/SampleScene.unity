@@ -40137,8 +40137,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0}
   m_AnchorMax: {x: 0.5, y: 0}
-  m_AnchoredPosition: {x: 0, y: 80}
-  m_SizeDelta: {x: 500, y: 114.160034}
+  m_AnchoredPosition: {x: 18.56, y: 80}
+  m_SizeDelta: {x: 802.41, y: 114.16}
   m_Pivot: {x: 0.5, y: 0}
 --- !u!114 &1042528399
 MonoBehaviour:
@@ -42610,6 +42610,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1132109304}
   - component: {fileID: 1132109305}
+  - component: {fileID: 1132109306}
   m_Layer: 5
   m_Name: Content
   m_TagString: Untagged
@@ -42660,6 +42661,20 @@ MonoBehaviour:
   m_Spacing: {x: 50, y: 50}
   m_Constraint: 0
   m_ConstraintCount: 2
+--- !u!114 &1132109306
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1132109303}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3245ec927659c4140ac4f8d17403cc18, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_HorizontalFit: 0
+  m_VerticalFit: 2
 --- !u!1 &1132723492
 GameObject:
   m_ObjectHideFlags: 0
@@ -46821,6 +46836,18 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
+      - m_Target: {fileID: 1805482858}
+        m_TargetAssemblyTypeName: ToggleText, Assembly-CSharp
+        m_MethodName: ToggleTextVisibility
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
       - m_Target: {fileID: 1400142459}
         m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
         m_MethodName: SetActive
@@ -58636,7 +58663,7 @@ MonoBehaviour:
   objectAsset: {fileID: 4900000, guid: 1977ba8c84b738b4fa8f025b91d8157d, type: 3}
   commonAsset: {fileID: 4900000, guid: 7e070a449fd419147bb709a10479ca1f, type: 3}
   storyAsset: {fileID: 4900000, guid: 350d3915b94a4454e9deddc9e2df16ba, type: 3}
-  questAsset: {fileID: 4900000, guid: 6c954dba309831748b838e6ae8f83b2c, type: 3}
+  questAsset: {fileID: 4900000, guid: 6fcfadc2eedd3314ebce4d11d3fef2b8, type: 3}
   applyTextScript: {fileID: 1519185842}
 --- !u!1 &1524311781
 GameObject:
@@ -61655,6 +61682,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1592084328}
   - component: {fileID: 1592084329}
+  - component: {fileID: 1592084330}
   m_Layer: 5
   m_Name: Content
   m_TagString: Untagged
@@ -61705,6 +61733,20 @@ MonoBehaviour:
   m_Spacing: {x: 50, y: 50}
   m_Constraint: 0
   m_ConstraintCount: 2
+--- !u!114 &1592084330
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1592084327}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3245ec927659c4140ac4f8d17403cc18, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_HorizontalFit: 0
+  m_VerticalFit: 2
 --- !u!1 &1599865373
 GameObject:
   m_ObjectHideFlags: 0

@@ -47,6 +47,10 @@ public class AchivementUIController : MonoBehaviour
     public void Init()
     {
          questsToShow = AchievementManager.instance.GetFirstUncompletedQuestEachGroup();
+        foreach (var q in questsToShow)
+        {
+            Debug.Log("Id:" + q.questId+"-des:"+q.description);
+        }
         for (int i = 0; i < questsToShow.Count; i++)
         {
             AchievementUI quest = Instantiate(questUI, content);
@@ -134,6 +138,7 @@ public class AchivementUIController : MonoBehaviour
         quests.Clear();
         Init();
         currentCompleteQuest = 0; // Reset lại số quest hoàn thành
+        content.GetComponent<RectTransform>().anchoredPosition = new Vector2(0, 0);
     }
 
     private IEnumerator ShowRewardTemporarily()

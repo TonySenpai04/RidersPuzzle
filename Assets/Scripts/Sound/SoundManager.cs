@@ -23,6 +23,7 @@ public class SoundManager : MonoBehaviour
     [SerializeField] private List<HeroSound> heroSounds;
     [SerializeField] public AudioSource musicSource;
     [SerializeField] public AudioSource sFXSource;
+    private bool isHeroSFXPlaying = false;
     public static SoundManager instance;
     private bool isMute;
     private void Awake()
@@ -77,7 +78,7 @@ public class SoundManager : MonoBehaviour
         {
             musicSource.clip = sound.clip;
             musicSource.loop = true;
-            musicSource.volume = 0.5f;
+            musicSource.volume = 0.3f;
             musicSource.Play();
         }
         else
@@ -110,15 +111,33 @@ public class SoundManager : MonoBehaviour
     }
     public void PlayHeroSFX(int id)
     {
+        if (isHeroSFXPlaying) return;
         HeroSound sound = GetHeroSound(id);
-        if (sound != null && sound.clip != null)
+        if (sound != null && sound.clip != null && sound.clip.Count > 0)
         {
-            sFXSource.PlayOneShot(sound.clip[UnityEngine.Random.Range(0,sound.clip.Count)]);
+            AudioClip selectedClip = sound.clip[UnityEngine.Random.Range(0, sound.clip.Count)];
+            sFXSource.PlayOneShot(selectedClip);
+           isHeroSFXPlaying = true;
+            // Gọi hàm chờ đến khi clip phát xong
+            instance.StartCoroutine(ResetHeroSFXFlag(selectedClip.length));
         }
         else
         {
-            Debug.LogWarning($"Âm thanh {name} không tìm thấy hoặc clip chưa được gán!");
+            Debug.LogWarning($"Âm thanh {id} không tìm thấy hoặc clip chưa được gán!");
         }
+        //if (sound != null && sound.clip != null)
+        //{
+        //    sFXSource.PlayOneShot(sound.clip[UnityEngine.Random.Range(0,sound.clip.Count)]);
+        //}
+        //else
+        //{
+        //    Debug.LogWarning($"Âm thanh {name} không tìm thấy hoặc clip chưa được gán!");
+        //}
+    }
+    private IEnumerator ResetHeroSFXFlag(float delay)
+    {
+        yield return new WaitForSeconds(delay);
+        isHeroSFXPlaying = false;
     }
 
     public void SetAudio(bool isOn)

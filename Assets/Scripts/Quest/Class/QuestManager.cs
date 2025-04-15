@@ -54,6 +54,7 @@ public class QuestManager : MonoBehaviour
     }
     public void QuestList1()
     {
+        activeQuests.Clear();
         activeQuests.Add(new PlayStageQuest("001",
             LocalizationManager.instance.GetLocalizedText("quest_002_1_2",2,"Itsui"),
             10, 2, "1001", ""));
@@ -96,6 +97,7 @@ public class QuestManager : MonoBehaviour
     }
     public void QuestList2()
     {
+        activeQuests.Clear();
         activeQuests.Add(new PlayStageQuest("001",
          LocalizationManager.instance.GetLocalizedText("quest_002_1_2", 2, "Itsui"),
         10, 2, "1001", ""));
@@ -138,6 +140,7 @@ public class QuestManager : MonoBehaviour
     }
     public void QuestList3()
     {
+        activeQuests.Clear();
         activeQuests.Add(new PlayStageQuest("001",
          LocalizationManager.instance.GetLocalizedText("quest_002_1_2", 2, "Itsui"),
         10, 2, "1001", ""));
@@ -180,6 +183,7 @@ public class QuestManager : MonoBehaviour
     }
     public void QuestList4()
     {
+        activeQuests.Clear();
         activeQuests.Add(new PlayStageQuest("001",
          LocalizationManager.instance.GetLocalizedText("quest_002_1_2", 2, "Itsui"),
         10, 2, "1001", ""));
