@@ -33,5 +33,10 @@ public abstract class BaseSkill : ISkill
     {
         this.skillAmount = amount;
     }
+
+    public virtual int GetSkillId()
+    {
+        return id;
+    }
 }
 

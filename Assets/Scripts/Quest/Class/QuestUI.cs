@@ -24,7 +24,14 @@ public class QuestUI : MonoBehaviour
         this.QuestID = questID;
         this.des.text = des;
         this.reward.text = reward;
-        this.progress.text = progress.Item1 + "/" + progress.Item2;
+        if (progress.Item2 < 1000)
+        {
+            this.progress.text = progress.Item1 + "/" + progress.Item2;
+        }
+        else
+        {
+            this.progress.text = progress.Item1 + "/\n" + progress.Item2;
+        }
         if (progress.Item2 > 0)
         {
             float fillAmount = Mathf.Clamp01((float)progress.Item1 / progress.Item2);
@@ -40,7 +47,14 @@ public class QuestUI : MonoBehaviour
         QuestBase quest= QuestManager.instance.GetQuestById(QuestID);
         this.des.text = quest.description;
         Tuple<int, int> progress = quest.GetProgress();
-        this.progress.text = progress.Item1 + "/" + progress.Item2;
+        if (progress.Item2 < 1000)
+        {
+            this.progress.text = progress.Item1 + "/" + progress.Item2;
+        }
+        else
+        {
+            this.progress.text = progress.Item1 + "/\n" + progress.Item2;
+        }
         if (progress.Item2 > 0)
         {
             float fillAmount = Mathf.Clamp01((float)progress.Item1 / progress.Item2);

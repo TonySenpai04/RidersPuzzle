@@ -8,4 +8,5 @@ public interface ISkill
     void SetNumberOfSkill(int amount);
     void IncreaseUses(int amount);
     int GetNumberOfSkill();
+    int GetSkillId();
 }

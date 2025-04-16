@@ -126,3 +126,8 @@ From now, you could find the version detail here
 FALSE,button_update,UPDATE,UPDATE,RobotoSemi-Bold SDF,CẬP NHẬT,RobotoSemi-Bold SDF,
 FALSE,popup_update_title,Update new version,Update new version,RobotoSemi-Bold SDF,Cập nhật phiên bản,RobotoSemi-Bold SDF,
 FALSE,popup_update_content,New version is available. Please update to access full feature!,New version is available. Please update to access full feature!,Roboto-Regular SDF,Phiên bản mới đã có. Hãy cập nhật để truy cập đầy đủ tính năng,Roboto-Regular SDF,
+FALSE,loading_screen_tip_1,You win a stage when reaching the girl without losing all HP of rider,You win a stage when reaching the girl without losing all HP of rider,Roboto-Regular SDF,Bạn sẽ thắng một màn chơi khi đi tới cô gái mà không mất toàn bộ HP.,Roboto-Regular SDF,
+FALSE,loading_screen_tip_2,"Hapi is an useful resource, let's earn as much as possible.","Hapi is an useful resource, let's earn as much as possible.",Roboto-Regular SDF,"Hapi là tài nguyên hữu dụng, hãy kiếm nhiều nhất có thể",Roboto-Regular SDF,
+FALSE,loading_screen_tip_3,Don't forget claim daily gift in Shop everyday!,Don't forget claim daily gift in Shop everyday!,Roboto-Regular SDF,Đừng quên nhận quà miễn phí trong Cửa hàng mỗi ngày!,Roboto-Regular SDF,
+FALSE,loading_screen_tip_4,Each Rider has a unique skill.,Each Rider has a unique skill.,Roboto-Regular SDF,Mỗi Rider đều có một kỹ năng riêng biệt.,Roboto-Regular SDF,
+FALSE,loading_screen_tip_5,Each chapter of story is unlocked after winning every 30 stages,Each chapter of story is unlocked after winning every 30 stages,Roboto-Regular SDF,Mỗi chương truyện được mở khoá khi thắng 30 màn chơi.,Roboto-Regular SDF,
