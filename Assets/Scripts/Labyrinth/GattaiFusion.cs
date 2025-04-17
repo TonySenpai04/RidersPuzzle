@@ -17,7 +17,7 @@ public class GattaiFusionUI : MonoBehaviour
     public List<SkillFushionButton> skills;
     private void Start()
     {
-        foreach (var heroData in HeroManager.instance.heroDatas)
+        foreach (var heroData in HeroManager.instance.GetUnlockHero())
         {
             HeroFusionButton button = Instantiate(heroButtonPrefab, heroButtonContainer);
             button.SetData(heroData.id, heroData.icon, OnClickHeroButton);
@@ -29,19 +29,29 @@ public class GattaiFusionUI : MonoBehaviour
     }
     public void OnClickHeroButton(int heroID)
     {
-        if (!selectedHeroes.Contains(heroID))
+        bool isSelected = selectedHeroes.Contains(heroID);
+
+        if (!isSelected)
         {
+
+            if (selectedHeroes.Count >= 5)
+            {
+                Debug.Log("Chỉ được chọn tối đa 5 Rider.");
+                return;
+            }
             selectedHeroes.Add(heroID);
         }
         else
         {
             selectedHeroes.Remove(heroID);
         }
+
         foreach (var btn in heros)
         {
-            bool isSelected = selectedHeroes.Contains(btn.GetID());
-            btn.SetHighlight(isSelected);
+            bool selected = selectedHeroes.Contains(btn.GetID());
+            btn.SetHighlight(selected);
         }
+
         if (selectedHeroes.Count >= 3)
         {
             ShowSkillSelection();
@@ -51,6 +61,7 @@ public class GattaiFusionUI : MonoBehaviour
             ClearSkillSelection();
         }
     }
+
 
     void ShowSkillSelection()
     {
