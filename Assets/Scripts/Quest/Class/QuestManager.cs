@@ -238,7 +238,7 @@ public class QuestManager : MonoBehaviour
     private async void AssignDailyQuestList()
     {
         QuestData questData = await LoadQuestData(); 
-        string today = TimeManager.Instance.ServerDate;
+        string today  = TimeManager.Instance.GetEffectiveDateForDailyQuest();
         if (questData.lastAssignedDate == today)
         {
             currentQuestList = questData.currentQuestList;

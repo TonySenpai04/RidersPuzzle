@@ -27,22 +27,63 @@ public class UpgradeManager : MonoBehaviour
 {
     public static UpgradeManager Instance;
 
-    // Dữ liệu nâng cấp: key là heroId
-    public Dictionary<int, List<HeroUpgradeData>> upgradeDataDict = new();
-
-    void Awake()
+    private void Awake()
     {
         Instance = this;
-      //  LoadUpgradeDataFromJson(); // Hoặc từ sheet Excel convert ra
     }
 
-    public HeroUpgradeData GetUpgradeData(int heroId, int level)
+    public bool TryUpgradeHero(int heroId)
     {
-        if (upgradeDataDict.TryGetValue(heroId, out var upgrades))
+        var heroData = HeroManager.instance.heroDatas;
+        int index = heroData.FindIndex(h => h.id == heroId);
+        if (index == -1)
         {
-            return upgrades.FirstOrDefault(u => u.level == level);
+            Debug.Log("Hero không tồn tại.");
+            return false;
         }
-        return null;
+
+        DataHero hero = heroData[index];
+        int currentLevel = hero.level;
+
+        var nextLevelData = ReadCSVDataHeroStat.instance.GetHeroLevelData(heroId, currentLevel + 1);
+        if (nextLevelData == null)
+        {
+            Debug.Log("Hero đã đạt cấp tối đa.");
+            return false;
+        }
+
+        foreach (var req in nextLevelData.upgradeRequirements)
+        {
+            if (!ResourceManager.Instance.HasEnough(req.resourceType, req.resourceId, req.amount))
+            {
+                Debug.Log("Không đủ tài nguyên.");
+                return false;
+            }
+        }
+
+        foreach (var req in nextLevelData.upgradeRequirements)
+        {
+            ResourceManager.Instance.ConsumeResource(req.resourceType, req.resourceId, req.amount);
+        }
+
+        float rand = UnityEngine.Random.Range(0f, 1f);
+        if (rand <= nextLevelData.upgradeRate)
+        {
+            hero.level = currentLevel + 1;
+            hero.hp = nextLevelData.hp;
+            heroData[index] = hero;
+
+            HeroManager.instance.SaveHeroesData();
+
+            Debug.Log($"✅ Thành công! Hero {heroId} đã lên cấp {hero.level}");
+            return true;
+        }
+        else
+        {
+            Debug.Log($"❌ Thất bại! Hero {heroId} không lên cấp.");
+            return false;
+        }
     }
+    
 }
 

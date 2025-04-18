@@ -76,6 +76,23 @@ public class TimeManager : MonoBehaviour
 
         return nextNoon - now;
     }
+    public string GetEffectiveDateForDailyQuest()
+    {
+        if (!IsTimeFetched)
+        {
+            Debug.LogWarning("⚠️ Server time chưa được lấy! Trả về ngày hiện tại của thiết bị.");
+            return DateTime.Now.ToString("yyyy-MM-dd");
+        }
+
+        DateTime effectiveDateTime = ServerDateTime;
+
+        if (effectiveDateTime.Hour < 12)
+        {
+            effectiveDateTime = effectiveDateTime.AddDays(-1); // Trước 12h trưa → tính là hôm trước
+        }
+
+        return effectiveDateTime.ToString("yyyy-MM-dd");
+    }
 
 
     [Serializable]

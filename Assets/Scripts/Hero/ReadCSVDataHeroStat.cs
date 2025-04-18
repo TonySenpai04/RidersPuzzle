@@ -15,7 +15,7 @@ public class RiderUpgradeLevel
     public int level;
     public int hp;
     public int masteryPoint;
-
+    public float upgradeRate;
     public List<UpgradeRequirement> upgradeRequirements = new List<UpgradeRequirement>();
 }
 
@@ -48,7 +48,7 @@ public class ReadCSVDataHeroStat : MonoBehaviour
             foreach (RiderUpgradeLevel level in rider.levels)
             {
                 // Debug Level, HP và Mastery trong một dòng
-                string levelInfo = $"Level: {level.level}, HP: {level.hp}, Mastery: {level.masteryPoint}";
+                string levelInfo = $"Level: {level.level}, HP: {level.hp}, Mastery: {level.masteryPoint},Upgrade Rate: {level.upgradeRate}";
 
                 // Kiểm tra các yêu cầu nâng cấp (upgrade requirements)
                 if (level.upgradeRequirements != null && level.upgradeRequirements.Any())
@@ -79,22 +79,27 @@ public class ReadCSVDataHeroStat : MonoBehaviour
 
         for (int i = 1; i < lines.Length; i++) // Bỏ dòng header
         {
-            var parts = lines[i].Trim().Split(',');
+            var line = lines[i].Trim();
+            if (string.IsNullOrWhiteSpace(line)) continue;
 
-            if (parts.Length < 14 || string.IsNullOrWhiteSpace(parts[0])) continue;
+            var parts = line.Split(',');
+
+            if (parts.Length < 15 || string.IsNullOrWhiteSpace(parts[0])) continue;
 
             int idRider = int.Parse(parts[0]);
             string name = parts[1];
             int level = int.Parse(parts[2]);
             int hp = int.Parse(parts[3]);
             int mastery = int.Parse(parts[4]);
+            float upgradeRate = float.Parse(parts[5]);
 
             var reqs = new List<UpgradeRequirement>();
             for (int j = 0; j < 3; j++)
             {
-                int type = int.Parse(parts[5 + j * 3]);
-                int id = int.Parse(parts[6 + j * 3]);
-                int amount = int.Parse(parts[7 + j * 3]);
+                int type = int.Parse(parts[6 + j * 3]);
+                int id = int.Parse(parts[7 + j * 3]);
+                int amount = int.Parse(parts[8 + j * 3]);
+
                 if (amount > 0)
                 {
                     reqs.Add(new UpgradeRequirement
@@ -104,9 +109,7 @@ public class ReadCSVDataHeroStat : MonoBehaviour
                         amount = amount
                     });
                 }
-               
             }
-            Debug.Log("reqs:" + reqs.Count);
 
             if (!riders.ContainsKey(idRider))
             {
@@ -123,11 +126,12 @@ public class ReadCSVDataHeroStat : MonoBehaviour
                 level = level,
                 hp = hp,
                 masteryPoint = mastery,
+                upgradeRate = upgradeRate,
                 upgradeRequirements = reqs
             });
         }
 
-        riderDatas.AddRange(riders.Values);  // Lưu tất cả RiderData vào riderDatas
+        riderDatas.AddRange(riders.Values);
     }
     public RiderUpgradeLevel GetHeroLevelData(int heroId, int level)
     {
