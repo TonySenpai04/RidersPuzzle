@@ -1,8 +1,11 @@
-﻿using System;
-using System.Collections;
+﻿using Firebase.Auth;
+using Firebase.Database;
+using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Threading.Tasks;
 using UnityEngine;
+
 [Serializable]
 public class ResourceData
 {
@@ -30,21 +33,23 @@ public class ResourceManager : MonoBehaviour
         Instance = this;
         resourceDict = new Dictionary<(int, int), int>
          {
-                { (0,    1),    10000000 },
-                { (0,    2),    10000000 },
-                { (2, 1001),    10000000 },
-                { (2, 1002),    10000000 },
-                { (2, 1003),    10000000 },
-                { (3, 1001),    10000000 },
-                { (3, 1002),    10000000 },
-                { (3, 1003),    10000000 }
+                { (0,    1),    0 },
+                { (0,    2),    0 },
+                { (2, 1001),    0 },
+                { (2, 1002),    0 },
+                { (2, 1003),    0 },
+                { (3, 1001),    0 },
+                { (3, 1002),    0 },
+                { (3, 1003),    0 }
         };
 
-
-       
-       // LoadResources(); // load từ file hoặc Firebase
+    
     }
-
+    private async void Start()
+    {
+        await Task.Delay(3500);
+        LoadResources();
+    }
     public int GetQuantity(int type, int id)
     {
         return resourceDict.TryGetValue((type, id), out int qty) ? qty : 0;
@@ -64,7 +69,15 @@ public class ResourceManager : MonoBehaviour
         resourceDict[key] += amount;
         SaveResources();
     }
+    public void SetResource(int type, int id, int amount)
+    {
+        var key = (type, id);
+        if (!resourceDict.ContainsKey(key))
+            resourceDict[key] = 0;
 
+        resourceDict[key] = amount;
+        SaveResources();
+    }
     public bool ConsumeResource(int type, int id, int amount)
     {
         if (!HasEnough(type, id, amount)) return false;
@@ -78,6 +91,7 @@ public class ResourceManager : MonoBehaviour
     {
         string json = JsonUtility.ToJson(new ResourceSaveWrapper(resourceDict));
         File.WriteAllText(Application.persistentDataPath + "/resources.json", json);
+        SaveResourcesToFirebase();
     }
 
     public void LoadResources()
@@ -88,7 +102,68 @@ public class ResourceManager : MonoBehaviour
             string json = File.ReadAllText(path);
             var wrapper = JsonUtility.FromJson<ResourceSaveWrapper>(json);
             resourceDict = wrapper.ToDictionary();
+
         }
+        LoadResourcesFromFirebase();
+        SetResource(0,1,  GoldManager.instance.GetGold());
+        Debug.Log("da load");
+
+    }
+    public void SaveResourcesToFirebase()
+    {
+        string json = JsonUtility.ToJson(new ResourceSaveWrapper(resourceDict));
+        if (FirebaseDataManager.Instance.GetCurrentUser() == null)
+        {
+            Debug.Log("❌ User not logged in, can't save to Firebase.");
+            return;
+        }
+        string userId = FirebaseDataManager.Instance.GetCurrentUser().UserId;
+
+        FirebaseDatabase.DefaultInstance
+            .GetReference("users")
+            .Child(userId)
+            .Child("resources")
+            .SetRawJsonValueAsync(json)
+            .ContinueWith(task =>
+            {
+                if (task.IsCompletedSuccessfully)
+                {
+                    Debug.Log("Resources saved to Firebase");
+                }
+                else
+                {
+                    Debug.LogError("Failed to save resources: " + task.Exception);
+                }
+            });
+    }
+    public void LoadResourcesFromFirebase()
+    {
+        if (FirebaseDataManager.Instance.GetCurrentUser() == null)
+        {
+            Debug.Log("❌ User not logged in, can't save to Firebase.");
+            return;
+        }
+        string userId = FirebaseDataManager.Instance.GetCurrentUser().UserId;
+
+
+        FirebaseDatabase.DefaultInstance
+            .GetReference("users")
+            .Child(userId)
+            .Child("resources")
+            .GetValueAsync().ContinueWith(task =>
+            {
+                if (task.IsCompletedSuccessfully && task.Result.Exists)
+                {
+                    string json = task.Result.GetRawJsonValue();
+                    var wrapper = JsonUtility.FromJson<ResourceSaveWrapper>(json);
+                    resourceDict = wrapper.ToDictionary();
+                    Debug.Log("Resources loaded from Firebase");
+                }
+                else
+                {
+                    Debug.LogWarning("No resource data found on Firebase or failed to load.");
+                }
+            });
     }
 }
 [Serializable]
@@ -113,5 +188,7 @@ public class ResourceSaveWrapper
         }
         return dict;
     }
+   
+
 }
 

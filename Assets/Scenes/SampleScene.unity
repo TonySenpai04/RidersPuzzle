@@ -3108,7 +3108,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   isRunning: 1
   slider: {fileID: 1042528399}
-  speed: 0.2
+  speed: 0.15
   btnStart: {fileID: 281498464}
   panelTransition: {fileID: 1714441172}
 --- !u!1 &73305337
@@ -19294,7 +19294,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &466635147
 Transform:
   m_ObjectHideFlags: 0
@@ -34298,7 +34298,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &873756089
 Transform:
   m_ObjectHideFlags: 0

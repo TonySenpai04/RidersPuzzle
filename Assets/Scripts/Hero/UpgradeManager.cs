@@ -31,7 +31,10 @@ public class UpgradeManager : MonoBehaviour
     {
         Instance = this;
     }
-
+    private void Start()
+    {
+        HeroManager.instance.LoadHeroesData();
+    }
     public bool TryUpgradeHero(int heroId)
     {
         var heroData = HeroManager.instance.heroDatas;

@@ -64,7 +64,7 @@ public class HeroManager : MonoBehaviour
      {
         instance = this;
        LoadUnlockHero();
-        LoadHeroesData();
+    
 
 
      }
