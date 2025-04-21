@@ -168,7 +168,7 @@ public class QuestUIController : MonoBehaviour
     private IEnumerator ShowRewardTemporarily()
     {
         rewardObj.SetActive(true);
-        yield return new WaitForSeconds(1f);
+        yield return new WaitForSeconds(3f);
         rewardObj.SetActive(false);
     }
     private void OnEnable()
