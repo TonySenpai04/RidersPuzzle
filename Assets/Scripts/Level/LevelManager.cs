@@ -429,5 +429,12 @@ public class LevelManager : MonoBehaviour
     {
         return levels.Where(h => h.isComplete).ToList().Count;
     }
+    public int RandomLevelIndex()
+    {
+        List<Level> levels = new List<Level>();
+        levels = this.levels.Where(h => !h.isActiveObject).ToList();
+        int random= UnityEngine.Random.Range(0, levels.Count);
+        return random;
+    } 
 }
 

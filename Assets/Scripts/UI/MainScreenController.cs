@@ -27,7 +27,7 @@ public class MainScreenController : MonoBehaviour
         LocalizationManager.instance.GetLocalizedText("loading_screen_tip_5")
         };
 
-        InvokeRepeating(nameof(ShowRandomTip), 0f, 3f);
+        InvokeRepeating(nameof(ShowRandomTip), 0f, 5f);
 
 
     }

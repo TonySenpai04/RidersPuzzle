@@ -14428,7 +14428,7 @@ MonoBehaviour:
   levels: []
   levelsClone: []
   currentLevelIndex: 1
-  data: {fileID: 4900000, guid: 190417647368e9845a29b3a8d2b112a9, type: 3}
+  data: {fileID: 4900000, guid: fbaf18ff72953a54ca47187258a0fd76, type: 3}
   hiddenObjectManager: {fileID: 1076175228}
 --- !u!4 &325954454
 Transform:
@@ -28001,11 +28001,11 @@ RectTransform:
   m_Children: []
   m_Father: {fileID: 574155501}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.5, y: 0}
-  m_AnchorMax: {x: 0.5, y: 0}
-  m_AnchoredPosition: {x: 0, y: 0}
+  m_AnchorMin: {x: 0.5, y: 1}
+  m_AnchorMax: {x: 0.5, y: 1}
+  m_AnchoredPosition: {x: 0, y: -0.00021362305}
   m_SizeDelta: {x: 1080, y: 0}
-  m_Pivot: {x: 0.5, y: 0}
+  m_Pivot: {x: 0.5, y: 1}
 --- !u!114 &699068826
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -59295,7 +59295,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   riderAsset: {fileID: 4900000, guid: afaad02e98f903c48995a602c15f44c7, type: 3}
   objectAsset: {fileID: 4900000, guid: 1977ba8c84b738b4fa8f025b91d8157d, type: 3}
-  commonAsset: {fileID: 4900000, guid: a1bf24c346e184f48aa00d52fce6280a, type: 3}
+  commonAsset: {fileID: 4900000, guid: 136cb0fee57476343851c8a2fe5f92ff, type: 3}
   storyAsset: {fileID: 4900000, guid: 185e552524660c94baf3a1081dc643f4, type: 3}
   questAsset: {fileID: 4900000, guid: 6fcfadc2eedd3314ebce4d11d3fef2b8, type: 3}
   applyTextScript: {fileID: 1519185842}
@@ -73617,6 +73617,7 @@ GameObject:
   - component: {fileID: 1890777220}
   - component: {fileID: 1890777219}
   - component: {fileID: 1890777218}
+  - component: {fileID: 1890777221}
   m_Layer: 5
   m_Name: Labyrinth
   m_TagString: Untagged
@@ -73664,6 +73665,8 @@ MonoBehaviour:
   heroButtonContainer: {fileID: 988155326}
   heros: []
   skills: []
+  totalHP: 0
+  totalId: 0
 --- !u!114 &1890777219
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -73702,6 +73705,35 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1890777216}
   m_CullTransparentMesh: 1
+--- !u!114 &1890777221
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1890777216}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a3ab0f79b8674414cbbd85c29a270b0f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  levelManager: {fileID: 325954453}
+  totalLevels: 0
+  playZone: {fileID: 252246640}
+  stageZone: {fileID: 554217425}
+  transitionLevel: {fileID: 1637595638}
+  gataiData:
+    id: 0
+    price: 0
+    name: 
+    hp: 0
+    icon: {fileID: 0}
+    isUnlock: 0
+    heroImage: {fileID: 0}
+    skillDescription: 
+    story: 
+    level: 0
+  levelIndex: 0
 --- !u!1 &1894623451
 GameObject:
   m_ObjectHideFlags: 0

@@ -109,20 +109,16 @@ FALSE,quest_help_achivement_content,Complete achievements to get rewards.,Comple
 FALSE,shop_help_quest_stamp_title,QUEST STAMP,QUEST STAMP,RobotoSemi-Bold SDF,DẤU ẤN NHIỆM VỤ,RobotoSemi-Bold SDF,
 FALSE,shop_help_quest_stamp_content,You an earn 1 stamp for each day when completing at least a quest.,You an earn 1 stamp for each day when completing at least a quest.,Roboto-Regular SDF,Bạn có thể nhận được 1 dấu ấn mỗi ngày khi hoàn thành ít nhất 1 nhiệm vụ.,Roboto-Regular SDF,
 FALSE,new_title,NEWS,NEWS,RobotoSemi-Bold SDF,TIN TỨC,RobotoSemi-Bold SDF,
-FALSE,patch_note_infor,"- Add feature: NEWS
-From now, you could find the version detail here
-- Increase limit stage from 150 to 180
-- Add new chapter of story: Chapter 6
-- Add new achievements
-- Add detail for quest feature help","- Add feature: NEWS
-From now, you could find the version detail here
-- Increase limit stage from 150 to 180
-- Add new chapter of story: Chapter 6
-- Add new achievements
-- Add detail for quest feature help",Roboto-Regular SDF,"- Tăng giới hạn giai đoạn từ 150 lên 180 
-- Thêm chương mới của câu chuyện: Chương 6 
-- Thêm thành tích mới 
-- Thêm chi tiết cho trợ giúp tính năng nhiệm vụ",Roboto-Regular SDF,
+FALSE,patch_note_infor,"- Add tips text at loading screen
+- Increase limit stage from 180 to 210
+- Add new chapter of story: Chapter 7: Meeting Akale
+- Optimize UI and fix some small bugs","- Add tips text at loading screen
+- Increase limit stage from 180 to 210
+- Add new chapter of story: Chapter 7: Meeting Akale
+- Optimize UI and fix some small bugs",Roboto-Regular SDF,"- Thêm gợi ý chơi ở màn hình chờ
+- Tăng giới hạn màn chơi từ 180 lên 210
+- Thêm chương mới của câu chuyện: Chương 7: Gặp gỡ Akale
+- Tối ưu một số UI và sửa lỗi nhỏ",Roboto-Regular SDF,
 FALSE,button_update,UPDATE,UPDATE,RobotoSemi-Bold SDF,CẬP NHẬT,RobotoSemi-Bold SDF,
 FALSE,popup_update_title,Update new version,Update new version,RobotoSemi-Bold SDF,Cập nhật phiên bản,RobotoSemi-Bold SDF,
 FALSE,popup_update_content,New version is available. Please update to access full feature!,New version is available. Please update to access full feature!,Roboto-Regular SDF,Phiên bản mới đã có. Hãy cập nhật để truy cập đầy đủ tính năng,Roboto-Regular SDF,

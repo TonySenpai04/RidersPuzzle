@@ -15,6 +15,8 @@ public class GattaiFusionUI : MonoBehaviour
     private List<ISkill> availableSkills = new List<ISkill>();
     public List<HeroFusionButton> heros;
     public List<SkillFushionButton> skills;
+    public int totalHP;
+    public int totalId;
     private void Start()
     {
         foreach (var heroData in HeroManager.instance.GetUnlockHero())
@@ -105,6 +107,7 @@ public class GattaiFusionUI : MonoBehaviour
         {
             // Chọn mới
             selectedSkillIndex = index;
+            ApplyText.instance.UpdateSkillInfoOnStage(availableSkills[index].GetSkillId());
             Debug.Log("Skill được chọn: " + availableSkills[index].GetSkillId());
         }
 
@@ -119,8 +122,6 @@ public class GattaiFusionUI : MonoBehaviour
     {
         if (selectedSkillIndex < 0) return;
 
-        int totalHP = 0;
-        int totalId = 0;
         foreach (var heroID in selectedHeroes)
         {
             totalHP += HeroManager.instance.GetHero(heroID).Value.hp;
@@ -130,7 +131,12 @@ public class GattaiFusionUI : MonoBehaviour
         ISkill selectedSkill = availableSkills[selectedSkillIndex];
         SkillManager.instance.AddSkillPVE(totalId, selectedSkill);
         SkillManager.instance.SetSkillId(totalId);
+        DataHero data=new DataHero();
+        data.hp = totalHP;
+        data.id = totalId;
 
+        LabyrinthController.instance.SetGataiData(data);
+        LabyrinthController.instance.Randomlevel();
         Debug.Log("Fusion thành công! HP: " + totalHP + " | Skill: " + selectedSkill.GetSkillId());
 
         // Reset lại
