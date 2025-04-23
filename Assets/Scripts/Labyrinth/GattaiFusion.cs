@@ -17,6 +17,7 @@ public class GattaiFusionUI : MonoBehaviour
     public List<SkillFushionButton> skills;
     public int totalHP;
     public int totalId;
+    public int masteryPoints=5;
     private void Start()
     {
         foreach (var heroData in HeroManager.instance.GetUnlockHero())
@@ -121,7 +122,7 @@ public class GattaiFusionUI : MonoBehaviour
     public void OnClickOKFusion()
     {
         if (selectedSkillIndex < 0) return;
-
+        if (masteryPoints < 1) return;
         foreach (var heroID in selectedHeroes)
         {
             totalHP += HeroManager.instance.GetHero(heroID).Value.hp;
@@ -137,6 +138,7 @@ public class GattaiFusionUI : MonoBehaviour
 
         LabyrinthController.instance.SetGataiData(data);
         LabyrinthController.instance.Randomlevel();
+        masteryPoints--;
         Debug.Log("Fusion thành công! HP: " + totalHP + " | Skill: " + selectedSkill.GetSkillId());
 
         // Reset lại

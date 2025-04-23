@@ -64,6 +64,14 @@ public class DailyGiftData
 {
     public string lastClaimDate = "";
 }
+[System.Serializable]
+public class MazeEffectData
+{
+    public string lastMazeEffectDate;
+    public int lastMazeEffectIndex;
+}
+
+
 public class SaveData : MonoBehaviour
 {
     

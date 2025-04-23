@@ -13,9 +13,12 @@ public class LabyrinthController : MonoBehaviour
     [SerializeField] private DataHero gataiData;
     [SerializeField] private int levelIndex;
     public static LabyrinthController instance;
+    [SerializeField] private List<MazeEffect> mazeEffects;
+
     private void Awake()
     {
         instance = this;
+      
     }
     public void SetGataiData(DataHero gataiData)
     {

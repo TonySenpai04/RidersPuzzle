@@ -34,16 +34,18 @@ public class SwipeDetector : ISwipeDetector
         }
     }
 
-    private void HandleSwipe()
-    {
+   private void HandleSwipe()
+{
+    float deltaX = endTouchPosition.x - startTouchPosition.x;
+    float deltaY = endTouchPosition.y - startTouchPosition.y;
 
-        float deltaX = endTouchPosition.x - startTouchPosition.x;
-        if (Mathf.Abs(deltaX) > swipeThreshold)
-        {
-            if (deltaX < 0)
-                OnSwipeRight?.Invoke(); 
-            else
-                OnSwipeLeft?.Invoke();
-        }
+    if (Mathf.Abs(deltaX) > swipeThreshold && Mathf.Abs(deltaX) > Mathf.Abs(deltaY))
+    {
+        if (deltaX < 0)
+            OnSwipeLeft?.Invoke();  // Vuốt trái
+        else
+            OnSwipeRight?.Invoke(); // Vuốt phải
     }
+}
+
 }
