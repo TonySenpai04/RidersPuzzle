@@ -42,6 +42,7 @@ public class ButtonStageController : MonoBehaviour
 
 
         CreateButtons();
+        ShowPageLevel();
         stageZone.SetActive(false);
 
     }
@@ -72,6 +73,14 @@ public class ButtonStageController : MonoBehaviour
     {
         yield return null; // Chờ 1 frame để đảm bảo nút đã spawn
         LayoutRebuilder.ForceRebuildLayoutImmediate(buttonParent.GetComponent<RectTransform>());
+    }
+    public void ShowPageLevel()
+    {
+        int completedLevel = levelManager.GetAllLevelComplete();
+        currentPage = Mathf.Clamp((completedLevel - 1) / levelsPerPage, 0, totalPages - 1);
+        buttonParent.GetComponent<RectTransform>().transform.position = new Vector2(0, -9065.08f);
+        StartCoroutine(DelayedLayoutRebuild());
+        UpdateVisibleButtons();
     }
 
     private void PreviousPage()

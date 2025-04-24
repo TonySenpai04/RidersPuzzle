@@ -151,6 +151,11 @@ public class AchievementManager : MonoBehaviour
       LocalizationManager.instance.GetLocalizedText("quest_009_1_2", 15000, "hapi"),
       200, 15000)
         { groupId = "CollectGoldQuest" });
+
+        activeQuests.Add(new ReachStageQuest("0031",
+        LocalizationManager.instance.GetLocalizedText("quest_005_1", 200),
+        100, 200, "")
+        { groupId = "ReachStageQuest" });
         foreach (var quest in activeQuests)
         {
             quest.LoadQuest();

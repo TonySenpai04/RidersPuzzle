@@ -61,6 +61,13 @@ public class QuestManager : MonoBehaviour
         activeQuests.Add(new PlayStageQuest("002",
             LocalizationManager.instance.GetLocalizedText("quest_002_1_2", 2,"Nigou"),
             10, 2, "1002", ""));
+        activeQuests.Add(new PlayStageQuest("0014",
+         LocalizationManager.instance.GetLocalizedText("quest_002_1_2", 2, "Skulz"),
+         50, 2, "1003", ""));
+
+        activeQuests.Add(new PlayStageQuest("0015",
+           LocalizationManager.instance.GetLocalizedText("quest_002_1_2", 2, "Akale"),
+           50, 2, "1004", ""));
 
         activeQuests.Add(new WinStageQuest("003",
             LocalizationManager.instance.GetLocalizedText("quest_003_1", 5),
@@ -83,9 +90,9 @@ public class QuestManager : MonoBehaviour
             5, 1));
 
         activeQuests.Add(new TotalCompleteQuest("013",
-            LocalizationManager.instance.GetLocalizedText("quest_013_1", 6),
-            35, 6));
-       
+            LocalizationManager.instance.GetLocalizedText("quest_013_1", 7),
+            85, 7));
+      
         //activeQuests.Add(new PlayStageQuest("001", "Play any level with rider Itsui 2 times", 10, 2, "1001", ""));
         //activeQuests.Add(new PlayStageQuest("002", "Play any level with rider Nigou 2 times", 10, 2, "1002", ""));
         //activeQuests.Add(new WinStageQuest("003", "Win any level 5 times", 10, 5));
@@ -105,7 +112,13 @@ public class QuestManager : MonoBehaviour
         activeQuests.Add(new PlayStageQuest("002",
             LocalizationManager.instance.GetLocalizedText("quest_002_1_2", 2, "Nigou"),
             10, 2, "1002", ""));
+        activeQuests.Add(new PlayStageQuest("0014",
+       LocalizationManager.instance.GetLocalizedText("quest_002_1_2", 2, "Skulz"),
+       50, 2, "1003", ""));
 
+        activeQuests.Add(new PlayStageQuest("0015",
+           LocalizationManager.instance.GetLocalizedText("quest_002_1_2", 2, "Akale"),
+           50, 2, "1004", ""));
         activeQuests.Add(new WinStageQuest("003",
             LocalizationManager.instance.GetLocalizedText("quest_003_1", 5),
             10, 5));
@@ -127,8 +140,9 @@ public class QuestManager : MonoBehaviour
             5, 1));
 
         activeQuests.Add(new TotalCompleteQuest("013",
-            LocalizationManager.instance.GetLocalizedText("quest_013_1", 6),
-            35, 6));
+             LocalizationManager.instance.GetLocalizedText("quest_013_1", 6),
+             85, 6));
+     
         //activeQuests.Add(new PlayStageQuest("001", "Play any level with rider Itsui 2 times", 10, 2, "1001", ""));
         //activeQuests.Add(new PlayStageQuest("002", "Play any level with rider Nigou 2 times", 10, 2, "1002", ""));
         //activeQuests.Add(new WinStageQuest("003", "Win any level 5 times", 10, 5));
@@ -148,6 +162,13 @@ public class QuestManager : MonoBehaviour
         activeQuests.Add(new PlayStageQuest("002",
             LocalizationManager.instance.GetLocalizedText("quest_002_1_2", 2, "Nigou"),
             10, 2, "1002", ""));
+        activeQuests.Add(new PlayStageQuest("0014",
+      LocalizationManager.instance.GetLocalizedText("quest_002_1_2", 2, "Skulz"),
+      50, 2, "1003", ""));
+
+        activeQuests.Add(new PlayStageQuest("0015",
+           LocalizationManager.instance.GetLocalizedText("quest_002_1_2", 2, "Akale"),
+           50, 2, "1004", ""));
 
         activeQuests.Add(new WinStageQuest("003",
             LocalizationManager.instance.GetLocalizedText("quest_003_1", 5),
@@ -171,7 +192,8 @@ public class QuestManager : MonoBehaviour
 
         activeQuests.Add(new TotalCompleteQuest("013",
             LocalizationManager.instance.GetLocalizedText("quest_013_1", 6),
-            35, 6));
+            85, 6));
+    
         //activeQuests.Add(new PlayStageQuest("001", "Play any level with rider Itsui 2 times", 10, 2, "1001", ""));
         //activeQuests.Add(new PlayStageQuest("002", "Play any level with rider Nigou 2 times", 10, 2, "1002", ""));
         //activeQuests.Add(new WinStageQuest("003", "Win any level 5 times", 10, 5));
@@ -191,7 +213,13 @@ public class QuestManager : MonoBehaviour
         activeQuests.Add(new PlayStageQuest("002",
             LocalizationManager.instance.GetLocalizedText("quest_002_1_2", 2, "Nigou"),
             10, 2, "1002", ""));
+        activeQuests.Add(new PlayStageQuest("0014",
+   LocalizationManager.instance.GetLocalizedText("quest_002_1_2", 2, "Skulz"),
+   50, 2, "1003", ""));
 
+        activeQuests.Add(new PlayStageQuest("0015",
+           LocalizationManager.instance.GetLocalizedText("quest_002_1_2", 2, "Akale"),
+           50, 2, "1004", ""));
         activeQuests.Add(new WinStageQuest("003",
             LocalizationManager.instance.GetLocalizedText("quest_003_1", 5),
             10, 5));
@@ -215,6 +243,10 @@ public class QuestManager : MonoBehaviour
         activeQuests.Add(new TotalCompleteQuest("013",
             LocalizationManager.instance.GetLocalizedText("quest_013_1", 6),
             35, 6));
+        activeQuests.Add(new TotalCompleteQuest("013",
+           LocalizationManager.instance.GetLocalizedText("quest_013_1", 6),
+           85, 6));
+ 
         //activeQuests.Add(new PlayStageQuest("001", "Play any level with rider Itsui 2 times", 10, 2, "1001", ""));
         //activeQuests.Add(new PlayStageQuest("002", "Play any level with rider Nigou 2 times", 10, 2, "1002", ""));
         //activeQuests.Add(new WinStageQuest("003", "Win any level 5 times", 10, 5));   
