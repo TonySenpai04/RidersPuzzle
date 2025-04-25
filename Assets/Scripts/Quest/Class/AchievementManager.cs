@@ -64,24 +64,24 @@ public class AchievementManager : MonoBehaviour
         { groupId = "LoginStreakQuest" });
 
         activeQuests.Add(new WinStageQuest("0011",
-           LocalizationManager.instance.GetLocalizedText("quest_003_1", 99),
-           199, 99)
+           LocalizationManager.instance.GetLocalizedText("quest_003_1", 50),
+           139, 50)
         { groupId = "WinStageQuest" });
         activeQuests.Add(new WinStageQuest("0012",
-          LocalizationManager.instance.GetLocalizedText("quest_003_1", 199),
-          199, 199)
+          LocalizationManager.instance.GetLocalizedText("quest_003_1", 100),
+          139, 100)
         { groupId = "WinStageQuest" });
         activeQuests.Add(new WinStageQuest("0013",
-          LocalizationManager.instance.GetLocalizedText("quest_003_1", 299),
-          199, 299)
+          LocalizationManager.instance.GetLocalizedText("quest_003_1", 150),
+          139, 150)
         { groupId = "WinStageQuest" });
         activeQuests.Add(new WinStageQuest("0014",
-          LocalizationManager.instance.GetLocalizedText("quest_003_1",399),
-          199, 399)
+          LocalizationManager.instance.GetLocalizedText("quest_003_1",200),
+          139, 200)
         { groupId = "WinStageQuest" });
         activeQuests.Add(new WinStageQuest("0015",
-          LocalizationManager.instance.GetLocalizedText("quest_003_1", 499),
-          199, 499)
+          LocalizationManager.instance.GetLocalizedText("quest_003_1", 250),
+          139, 250)
         { groupId = "WinStageQuest" });
 
         activeQuests.Add(new ReachStageQuest("0016",
@@ -156,6 +156,47 @@ public class AchievementManager : MonoBehaviour
         LocalizationManager.instance.GetLocalizedText("quest_005_1", 200),
         100, 200, "")
         { groupId = "ReachStageQuest" });
+
+        activeQuests.Add(new PlayStageQuest("0032",
+            LocalizationManager.instance.GetLocalizedText("quest_002_1", 99),
+            199, 99, "","")  
+        { groupId = "PlayStageQuest" });
+        activeQuests.Add(new PlayStageQuest("0033",
+          LocalizationManager.instance.GetLocalizedText("quest_002_1", 199),
+          199, 199, "", "")
+        { groupId = "PlayStageQuest" });
+        activeQuests.Add(new PlayStageQuest("0034",
+          LocalizationManager.instance.GetLocalizedText("quest_002_1", 299),
+          199, 299, "", "")
+        { groupId = "PlayStageQuest" });
+        activeQuests.Add(new PlayStageQuest("0035",
+          LocalizationManager.instance.GetLocalizedText("quest_002_1", 399),
+          199, 399, "", "")
+        { groupId = "PlayStageQuest" });
+        activeQuests.Add(new PlayStageQuest("0036",
+          LocalizationManager.instance.GetLocalizedText("quest_002_1", 499),
+          199, 499, "", "")
+        { groupId = "PlayStageQuest" });
+        activeQuests.Add(new WinStageQuest("0037",
+           LocalizationManager.instance.GetLocalizedText("quest_003_1", 300),
+           139, 300)
+        { groupId = "WinStageQuest" });
+        activeQuests.Add(new WinStageQuest("0037",
+          LocalizationManager.instance.GetLocalizedText("quest_003_1", 350),
+          139, 350)
+        { groupId = "WinStageQuest" });
+        activeQuests.Add(new WinStageQuest("0037",
+          LocalizationManager.instance.GetLocalizedText("quest_003_1", 400),
+          139, 400)
+        { groupId = "WinStageQuest" });
+        activeQuests.Add(new WinStageQuest("0037",
+          LocalizationManager.instance.GetLocalizedText("quest_003_1", 450),
+          139, 450)
+        { groupId = "WinStageQuest" });
+        activeQuests.Add(new WinStageQuest("0037",
+          LocalizationManager.instance.GetLocalizedText("quest_003_1", 500),
+          139, 500)
+        { groupId = "WinStageQuest" });
         foreach (var quest in activeQuests)
         {
             quest.LoadQuest();

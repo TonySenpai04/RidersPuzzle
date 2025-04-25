@@ -20,7 +20,7 @@ public class PlayStageQuest : QuestBase
 
     public override void UpdateProgress(int count,int riderId)
     {
-        if (riderId.ToString() == requiredRider)
+        if (riderId.ToString() == requiredRider || requiredRider=="")
         {
             currentPlays += count;
             SaveQuest();

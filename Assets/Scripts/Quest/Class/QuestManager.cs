@@ -61,11 +61,11 @@ public class QuestManager : MonoBehaviour
         activeQuests.Add(new PlayStageQuest("002",
             LocalizationManager.instance.GetLocalizedText("quest_002_1_2", 2,"Nigou"),
             10, 2, "1002", ""));
-        activeQuests.Add(new PlayStageQuest("0014",
+        activeQuests.Add(new PlayStageQuest("014",
          LocalizationManager.instance.GetLocalizedText("quest_002_1_2", 2, "Skulz"),
          50, 2, "1003", ""));
 
-        activeQuests.Add(new PlayStageQuest("0015",
+        activeQuests.Add(new PlayStageQuest("015",
            LocalizationManager.instance.GetLocalizedText("quest_002_1_2", 2, "Akale"),
            50, 2, "1004", ""));
 
@@ -112,11 +112,11 @@ public class QuestManager : MonoBehaviour
         activeQuests.Add(new PlayStageQuest("002",
             LocalizationManager.instance.GetLocalizedText("quest_002_1_2", 2, "Nigou"),
             10, 2, "1002", ""));
-        activeQuests.Add(new PlayStageQuest("0014",
+        activeQuests.Add(new PlayStageQuest("014",
        LocalizationManager.instance.GetLocalizedText("quest_002_1_2", 2, "Skulz"),
        50, 2, "1003", ""));
 
-        activeQuests.Add(new PlayStageQuest("0015",
+        activeQuests.Add(new PlayStageQuest("015",
            LocalizationManager.instance.GetLocalizedText("quest_002_1_2", 2, "Akale"),
            50, 2, "1004", ""));
         activeQuests.Add(new WinStageQuest("003",
@@ -162,11 +162,11 @@ public class QuestManager : MonoBehaviour
         activeQuests.Add(new PlayStageQuest("002",
             LocalizationManager.instance.GetLocalizedText("quest_002_1_2", 2, "Nigou"),
             10, 2, "1002", ""));
-        activeQuests.Add(new PlayStageQuest("0014",
+        activeQuests.Add(new PlayStageQuest("014",
       LocalizationManager.instance.GetLocalizedText("quest_002_1_2", 2, "Skulz"),
       50, 2, "1003", ""));
 
-        activeQuests.Add(new PlayStageQuest("0015",
+        activeQuests.Add(new PlayStageQuest("015",
            LocalizationManager.instance.GetLocalizedText("quest_002_1_2", 2, "Akale"),
            50, 2, "1004", ""));
 
@@ -213,11 +213,11 @@ public class QuestManager : MonoBehaviour
         activeQuests.Add(new PlayStageQuest("002",
             LocalizationManager.instance.GetLocalizedText("quest_002_1_2", 2, "Nigou"),
             10, 2, "1002", ""));
-        activeQuests.Add(new PlayStageQuest("0014",
+        activeQuests.Add(new PlayStageQuest("014",
    LocalizationManager.instance.GetLocalizedText("quest_002_1_2", 2, "Skulz"),
    50, 2, "1003", ""));
 
-        activeQuests.Add(new PlayStageQuest("0015",
+        activeQuests.Add(new PlayStageQuest("015",
            LocalizationManager.instance.GetLocalizedText("quest_002_1_2", 2, "Akale"),
            50, 2, "1004", ""));
         activeQuests.Add(new WinStageQuest("003",

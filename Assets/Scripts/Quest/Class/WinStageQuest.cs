@@ -6,7 +6,7 @@ using UnityEngine;
 
 public class WinStageQuest : QuestBase
 {
-    public int requiredWins;
+   [NonSerialized] public int requiredWins;
     public int currentWins;
 
     public WinStageQuest(string id, string desc, int reward, int wins)
