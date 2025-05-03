@@ -1,6 +1,9 @@
+using Firebase.Auth;
+using Firebase.Database;
 using System.Collections;
 using System.Collections.Generic;
 using System.IO;
+using System.Threading.Tasks;
 using TMPro;
 using UnityEngine;
 [System.Serializable]
@@ -35,6 +38,7 @@ public class NotiManager : MonoBehaviour
 
     private Dictionary<string, GameObject> redDotDict = new Dictionary<string, GameObject>();
     private RedNotiData redNotiData = new RedNotiData();
+    private const string LAST_LOGIN_DATE_KEY = "LastLoginDate";
 
     public string notiPath => Path.Combine(Application.persistentDataPath, "Noti.json");
     private void Awake()
@@ -46,7 +50,10 @@ public class NotiManager : MonoBehaviour
         }
         LoadLocal();
     }
-    
+    private  void Start()
+    {
+        StartCoroutine(WaitForServerTime());   
+    }
     public void ShowNotification(string message)
     {
         StopAllCoroutines();
@@ -142,5 +149,78 @@ public class NotiManager : MonoBehaviour
         notiTxt.text = LocalizationManager.instance.GetLocalizedText("warning_coming_soon");
         StartCoroutine(HideNotificationAfterDelay(1f));
     }
+    private IEnumerator WaitForServerTime()
+    {
+        while (!TimeManager.Instance.IsTimeFetched)
+        {
+            yield return null;
+        }
+
+        CheckDailyLogin();
+
+    }
+    public void ClearMultipleNotiRedDots(List<string> names)
+    {
+        foreach (var name in names)
+        {
+            if (redDotDict.ContainsKey(name))
+            {
+                redDotDict[name].SetActive(false);
+                UpdateRedDotStatus(name, false);
+            }
+        }
+        SaveRedDots();
+    }
+    public void ShowMultipleNotiRedDots(List<string> names)
+    {
+        foreach (var name in names)
+        {
+            if (redDotDict.ContainsKey(name))
+            {
+                redDotDict[name].SetActive(true);
+                UpdateRedDotStatus(name, true);
+            }
+        }
+        SaveRedDots();
+    }
+    private async void CheckDailyLogin()
+    {
+
+        string lastLogin = PlayerPrefs.GetString(LAST_LOGIN_DATE_KEY, "");
+        string today = TimeManager.Instance.ServerDate;
+        string userId = FirebaseDataManager.Instance.GetCurrentUser().UserId;
+        string key = "questData";
+        FirebaseUser currentUser = FirebaseDataManager.Instance.GetCurrentUser();
+        if (currentUser != null)
+        {
+            DataSnapshot snapshot =  await FirebaseDatabase.DefaultInstance.RootReference
+                .Child("users")
+                .Child(userId)
+                .Child(key)
+                .GetValueAsync();
+
+            if (snapshot.Exists)
+            {
+                string json = snapshot.GetRawJsonValue();
+                QuestData data = JsonUtility.FromJson<QuestData>(json);
+                lastLogin = data.lastAssignedDate;
+
+
+            }
+        }
+
+        Debug.Log(today == lastLogin);
+        if (lastLogin != today)
+        {
+            // New login day: show red dots for shop and daily quest
+            ShowMultipleNotiRedDots(new List<string> { "shop", "dailygift" });
+
+            // Update login date
+            PlayerPrefs.SetString(LAST_LOGIN_DATE_KEY, today);
+            PlayerPrefs.Save();
+        }
+    }
+
+
 }
 

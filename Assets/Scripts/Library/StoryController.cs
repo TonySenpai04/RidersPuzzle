@@ -33,7 +33,7 @@ public class StoryController : MonoBehaviour
             {
                 objectLib.GetComponent<Button>().onClick.AddListener(() => SoundManager.instance.PlaySFX("Click Sound"));
                 objectLib.GetComponent<Button>().onClick.AddListener(() =>
-                NotiManager.instance.ShowNotification("Unlock after completing each 50 stage"));
+                NotiManager.instance.ShowNotification(LocalizationManager.instance.GetLocalizedText("library_story_unlock_condition")));
             }
             storyLibaries.Add(objectLib);
 
@@ -85,7 +85,7 @@ public class StoryController : MonoBehaviour
                 obj.GetComponent<Button>().onClick.RemoveAllListeners();
                 obj.GetComponent<Button>().onClick.AddListener(() => SoundManager.instance.PlaySFX("Click Sound"));
                 obj.GetComponent<Button>().onClick.AddListener(() =>
-                NotiManager.instance.ShowNotification("Unlock after completing each 50 stage"));
+               NotiManager.instance.ShowNotification(LocalizationManager.instance.GetLocalizedText("library_story_unlock_condition")));
             }
         }
     }

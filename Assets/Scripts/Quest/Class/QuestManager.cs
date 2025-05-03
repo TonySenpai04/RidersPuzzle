@@ -19,6 +19,7 @@ public class QuestManager : MonoBehaviour
     public int currentQuestList;
     public int stampCount;
     private Dictionary<string, string> questDescriptions = new Dictionary<string, string>();
+    public bool isShowNoti=false;
 
     private void Awake()
     {
@@ -241,9 +242,6 @@ public class QuestManager : MonoBehaviour
             5, 1));
 
         activeQuests.Add(new TotalCompleteQuest("013",
-            LocalizationManager.instance.GetLocalizedText("quest_013_1", 6),
-            35, 6));
-        activeQuests.Add(new TotalCompleteQuest("013",
            LocalizationManager.instance.GetLocalizedText("quest_013_1", 6),
            85, 6));
  
@@ -271,11 +269,13 @@ public class QuestManager : MonoBehaviour
     {
         QuestData questData = await LoadQuestData(); 
         string today  = TimeManager.Instance.GetEffectiveDateForDailyQuest();
+        Debug.Log(today);
         if (questData.lastAssignedDate == today)
         {
             currentQuestList = questData.currentQuestList;
             stampCount = questData.stampCount;
             questLists[currentQuestList]?.Invoke();
+            isShowNoti = false;
             LoadQuests();
             Debug.Log($"Loaded previous quest list {currentQuestList} for today.");
             return;
@@ -345,6 +345,8 @@ public class QuestManager : MonoBehaviour
                     {
                         questData.stampCount += 1;
                         questData.hasReceivedStampToday = true;
+                        isShowNoti = true;
+                     
                         SaveQuestData(questData);
                         Debug.Log("Nhận 1 stamp cho ngày hôm nay!");
                     }

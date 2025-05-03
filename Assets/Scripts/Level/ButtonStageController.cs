@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using TMPro;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -29,7 +30,7 @@ public class ButtonStageController : MonoBehaviour
     [SerializeField] private Button nextPageButton;
     [SerializeField] private Button prevPageButton;
 
-
+ 
     private async void Start()
     {
         await Task.Delay(2500);
@@ -46,6 +47,7 @@ public class ButtonStageController : MonoBehaviour
         stageZone.SetActive(false);
 
     }
+    
     private void UpdateVisibleButtons()
     {
         for (int i = 0; i < buttons.Count; i++)
@@ -128,7 +130,11 @@ public class ButtonStageController : MonoBehaviour
         {
             SoundManager.instance.PlayMusic("Home Screen");
         }
-       
+        if (buttons.Count > 0)
+        {
+            ShowPageLevel();
+        }
+
     }
     public void UpdateButtons()
     {

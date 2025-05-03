@@ -42,6 +42,7 @@ public class AchivementUIController : MonoBehaviour
             quests.Clear();
             Init();
             currentCompleteQuest = 0;
+           
         }
     }
     public void Init()

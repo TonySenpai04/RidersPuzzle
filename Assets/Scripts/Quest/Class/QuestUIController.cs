@@ -175,5 +175,10 @@ public class QuestUIController : MonoBehaviour
     {
         GetQuest7Day();
         UpdateStampUI();
+        if (QuestManager.instance.isShowNoti)
+        {
+            NotiManager.instance.ShowNotification(LocalizationManager.instance.GetLocalizedText("quest_stamp_earn_tip"));
+            QuestManager.instance.isShowNoti = false;
+        }
     }
 }

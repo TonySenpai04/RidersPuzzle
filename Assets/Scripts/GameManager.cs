@@ -227,6 +227,9 @@ public class GameManager : MonoBehaviour
     #endregion
 
     public void DisableMain() => isMainActive = false;
+    public void QuitGame() { 
+        Application.Quit();
+     }
 
 
 }

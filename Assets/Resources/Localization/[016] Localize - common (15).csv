@@ -1,4 +1,32 @@
 duplicated,key,Origin,English (en),Font,Vietnamese (vi),Font,Rich text
+FALSE,patch_note_infor,"- Increase stage limit from 210 to 240
+- Add story chapter 8
+- Renew game icon and loading screen theme 4/30
+- Add daily quest using Rider Skulz; Akale; add achievement to pass stage, win stage
+- Improve UX: Notification red dot in News feature when first updating new version
+- Improve UX: Prioritize displaying page containing stage being played for easy searching
+- Improve UI: Align feature name text position
+- Improve UI: Align text displaying number of quest requests
+- Improve UI: Adjust new feature icon drawing
+- Fix bug: Displaying 3rd page of stage has blank space","- Increase stage limit from 210 to 240
+- Add story chapter 8
+- Renew game icon and loading screen theme 4/30
+- Add daily quest using Rider Skulz; Akale; add achievement to pass stage, win stage
+- Improve UX: Notification red dot in News feature when first updating new version
+- Improve UX: Prioritize displaying page containing stage being played for easy searching
+- Improve UI: Align feature name text position
+- Improve UI: Align text displaying number of quest requests
+- Improve UI: Adjust new feature icon drawing
+- Fix bug: Displaying 3rd page of stage has blank space",Roboto-Regular SDF,"- Tăng giới hạn màn chơi từ 210 lên 240
+- Thêm chương 8 của truyện
+- Đổi mới icon game và màn hình chờ nhân dịp lễ 30/4
+- Thêm nhiệm vụ hàng ngày sử dụng Rider Skulz; Akale; thêm thành tựu vượt, thắng màn chơi
+- Cải thiện UX: Thông báo chấm đỏ ở tính năng News khi lần đầu cập nhật bản mới
+- Cải thiện UX: Ưu tiên hiển thị trang chứa màn chơi đang chơi để dễ tìm kiếm
+- Cải thiện UI: Căn chỉnh vị trí chữ hiển thị tên tính năng
+- Cải thiện UI: Căn chỉnh số hiển thị số lượng yêu cầu nhiệm vụ
+- Cải thiện UI: Chỉnh nét vẽ icon tính năng mới
+- Fix bug: Hiển thị trang thứ 3 của màn chơi có khoảng trống",Roboto-Regular SDF,
 FALSE,loading,Loading...,Loading...,Roboto-Italic SDF,Đang tải game...,Roboto-Italic SDF,
 FALSE,button_start,START YOUR JOURNEY,START YOUR JOURNEY,RobotoSemi-Bold SDF,BẮT ĐẦU CHƠI,RobotoSemi-Bold SDF,
 FALSE,title_choose_a_stage,Choose a stage,Choose a stage,RobotoSemi-Bold SDF,Chọn màn chơi,RobotoSemi-Bold SDF,
@@ -109,16 +137,6 @@ FALSE,quest_help_achivement_content,Complete achievements to get rewards.,Comple
 FALSE,shop_help_quest_stamp_title,QUEST STAMP,QUEST STAMP,RobotoSemi-Bold SDF,DẤU ẤN NHIỆM VỤ,RobotoSemi-Bold SDF,
 FALSE,shop_help_quest_stamp_content,You an earn 1 stamp for each day when completing at least a quest.,You an earn 1 stamp for each day when completing at least a quest.,Roboto-Regular SDF,Bạn có thể nhận được 1 dấu ấn mỗi ngày khi hoàn thành ít nhất 1 nhiệm vụ.,Roboto-Regular SDF,
 FALSE,new_title,NEWS,NEWS,RobotoSemi-Bold SDF,TIN TỨC,RobotoSemi-Bold SDF,
-FALSE,patch_note_infor,"- Add tips text at loading screen
-- Increase limit stage from 180 to 210
-- Add new chapter of story: Chapter 7: Meeting Akale
-- Optimize UI and fix some small bugs","- Add tips text at loading screen
-- Increase limit stage from 180 to 210
-- Add new chapter of story: Chapter 7: Meeting Akale
-- Optimize UI and fix some small bugs",Roboto-Regular SDF,"- Thêm gợi ý chơi ở màn hình chờ
-- Tăng giới hạn màn chơi từ 180 lên 210
-- Thêm chương mới của câu chuyện: Chương 7: Gặp gỡ Akale
-- Tối ưu một số UI và sửa lỗi nhỏ",Roboto-Regular SDF,
 FALSE,button_update,UPDATE,UPDATE,RobotoSemi-Bold SDF,CẬP NHẬT,RobotoSemi-Bold SDF,
 FALSE,popup_update_title,Update new version,Update new version,RobotoSemi-Bold SDF,Cập nhật phiên bản,RobotoSemi-Bold SDF,
 FALSE,popup_update_content,New version is available. Please update to access full feature!,New version is available. Please update to access full feature!,Roboto-Regular SDF,Phiên bản mới đã có. Hãy cập nhật để truy cập đầy đủ tính năng,Roboto-Regular SDF,

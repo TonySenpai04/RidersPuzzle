@@ -22,4 +22,8 @@ public class OpenLinkButton : MonoBehaviour
     {
         Application.OpenURL(url);
     }
+    public void QuitGame()
+    {
+        Application.Quit();
+    }
 }

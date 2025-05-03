@@ -1,4 +1,6 @@
-﻿using System;
+﻿using Firebase.Auth;
+using Firebase.Database;
+using System;
 using System.IO;
 using UnityEngine;
 
@@ -16,10 +18,29 @@ internal class LoginNormalQuest : QuestBase
         requiredDays = days;
         lastLoginDate = "";
     }
-    public void OnPlayerLogin()
+    public async void OnPlayerLogin()
     {
-        string today = DateTime.UtcNow.Date.ToString("yyyy-MM-dd");
+        string today = TimeManager.Instance.ServerDate;
+        string userId = FirebaseDataManager.Instance.GetCurrentUser().UserId;
+        string key = "questData";
+        FirebaseUser currentUser = FirebaseDataManager.Instance.GetCurrentUser();
+        if (currentUser != null)
+        {
+            DataSnapshot snapshot = await FirebaseDatabase.DefaultInstance.RootReference
+                .Child("users")
+                .Child(userId)
+                .Child(key)
+                .GetValueAsync();
 
+            if (snapshot.Exists)
+            {
+                string json = snapshot.GetRawJsonValue();
+                QuestData data = JsonUtility.FromJson<QuestData>(json);
+                lastLoginDate = data.lastAssignedDate;
+
+
+            }
+        }
         if (lastLoginDate != today)
         {
             currentDays++;
