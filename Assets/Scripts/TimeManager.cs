@@ -57,7 +57,7 @@ public class TimeManager : MonoBehaviour
         }
 
         // Fallback: Lấy thời gian từ thiết bị
-        ServerDateTime = DateTime.UtcNow;
+        ServerDateTime = DateTime.UtcNow.AddHours(7);
         ServerDate = ServerDateTime.ToString("yyyy-MM-dd");
         IsTimeFetched = true;
         Debug.LogWarning("⛔ Không thể lấy thời gian từ server, dùng thời gian thiết bị: " + ServerDate);
@@ -78,13 +78,8 @@ public class TimeManager : MonoBehaviour
     }
     public string GetEffectiveDateForDailyQuest()
     {
-        if (!IsTimeFetched)
-        {
-            Debug.LogWarning("⚠️ Server time chưa được lấy! Trả về ngày hiện tại của thiết bị.");
-            return DateTime.Now.ToString("yyyy-MM-dd");
-        }
+        DateTime effectiveDateTime = IsTimeFetched ? ServerDateTime : DateTime.UtcNow.AddHours(7);
 
-        DateTime effectiveDateTime = ServerDateTime.AddHours(7);
         Debug.Log("Hour:" + effectiveDateTime.Hour+" -Minute:"+ effectiveDateTime.Minute);
 
         if (effectiveDateTime.Hour < 12)

@@ -270,6 +270,11 @@ public class QuestManager : MonoBehaviour
         QuestData questData = await LoadQuestData(); 
         string today  = TimeManager.Instance.GetEffectiveDateForDailyQuest();
         Debug.Log(today);
+        string todayGift = TimeManager.Instance.ServerDate;
+        if(questData.lastAssignedDate != todayGift)
+        {
+            NotiManager.instance.CheckDailyLogin();
+        }
         if (questData.lastAssignedDate == today)
         {
             currentQuestList = questData.currentQuestList;
@@ -285,7 +290,6 @@ public class QuestManager : MonoBehaviour
         questData.lastAssignedDate = today;
         questData.currentQuestList = currentQuestList;
         questData.hasReceivedStampToday = false;
-
         SaveQuestData(questData);
 
         activeQuests.Clear();

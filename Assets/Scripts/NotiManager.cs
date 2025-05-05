@@ -50,10 +50,7 @@ public class NotiManager : MonoBehaviour
         }
         LoadLocal();
     }
-    private  void Start()
-    {
-        StartCoroutine(WaitForServerTime());   
-    }
+   
     public void ShowNotification(string message)
     {
         StopAllCoroutines();
@@ -183,42 +180,10 @@ public class NotiManager : MonoBehaviour
         }
         SaveRedDots();
     }
-    private async void CheckDailyLogin()
+    public  void CheckDailyLogin()
     {
 
-        string lastLogin = PlayerPrefs.GetString(LAST_LOGIN_DATE_KEY, "");
-        string today = TimeManager.Instance.ServerDate;
-        string userId = FirebaseDataManager.Instance.GetCurrentUser().UserId;
-        string key = "questData";
-        FirebaseUser currentUser = FirebaseDataManager.Instance.GetCurrentUser();
-        if (currentUser != null)
-        {
-            DataSnapshot snapshot =  await FirebaseDatabase.DefaultInstance.RootReference
-                .Child("users")
-                .Child(userId)
-                .Child(key)
-                .GetValueAsync();
-
-            if (snapshot.Exists)
-            {
-                string json = snapshot.GetRawJsonValue();
-                QuestData data = JsonUtility.FromJson<QuestData>(json);
-                lastLogin = data.lastAssignedDate;
-
-
-            }
-        }
-
-        Debug.Log(today == lastLogin);
-        if (lastLogin != today)
-        {
-            // New login day: show red dots for shop and daily quest
-            ShowMultipleNotiRedDots(new List<string> { "shop", "dailygift" });
-
-            // Update login date
-            PlayerPrefs.SetString(LAST_LOGIN_DATE_KEY, today);
-            PlayerPrefs.Save();
-        }
+        ShowMultipleNotiRedDots(new List<string> { "shop", "dailygift" });
     }
 
 
