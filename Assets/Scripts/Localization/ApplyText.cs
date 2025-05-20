@@ -31,11 +31,14 @@ public class ApplyText : MonoBehaviour, ILocalizeObject
     [SerializeField] private TMP_Text[] button_view;
     [SerializeField] private TMP_Text setting_term_of_condition;
     [SerializeField] private TMP_Text setting_credit;
+    [SerializeField] private TMP_Text setting_credit_popup1;
+    [SerializeField] private TMP_Text setting_credit_popup2;
     [SerializeField] private TMP_Text[] title_notification;
     [SerializeField] private TMP_Text popup_detail_quit;
     [SerializeField] private TMP_Text popup_detail_language_change;
     [SerializeField] private TMP_Text popup_detail_language_change_stage;
     [SerializeField] private TMP_Text popup_detail_credit;
+    [SerializeField] private TMP_Text popup_detail_credit2;
     [SerializeField] private TMP_Text login_popup_my_account_game;
     [SerializeField] private TMP_Text[] button_yes;
     [SerializeField] private TMP_Text[] button_no;
@@ -141,9 +144,9 @@ setting_term_of_condition_stage,
     [SerializeField] private TMP_Text login_popup_display_name, login_popup_forget_password,
         button_login, login_popup_wrong_password
         , button_register, login_popup_register_success, login_popup_my_account, register_new_account, forget_password_title,
-        forget_password_content, button_reset,  button_logout,my_account;
+        forget_password_content, button_reset,  button_logout,my_account, logout_btn1, logout_btn2;
     [SerializeField] private Text login_popup_password_guide_1, login_popup_email_guide_2, login_popup_password_guide_2,
-        login_popup_display_name_guide, login_popup_email_guide_3 ;
+        login_popup_display_name_guide, login_popup_email_guide_3;
     [Header("Story")]
     [SerializeField] private TMP_Text titleStory;
     [SerializeField] private TMP_Text contentStory;
@@ -310,7 +313,8 @@ setting_term_of_condition_stage,
         textLocalizer.SetLocalizedText("button_replay", button_replay);
         textLocalizer.SetLocalizedText("button_skill", button_skill);
         textLocalizer.SetLocalizedText("button_return_player", button_return_player);
-
+        textLocalizer.SetLocalizedText("popup_detail_credit", popup_detail_credit);
+        textLocalizer.SetLocalizedText("popup_detail_credit", popup_detail_credit2);
         textLocalizer.SetLocalizedText("button_new_player", button_new_player);
         textLocalizer.SetLocalizedText("login_popup_title", login_popup_title);
         textLocalizer.SetLocalizedText("login_popup_email", login_popup_email);
@@ -322,6 +326,8 @@ setting_term_of_condition_stage,
         textLocalizer.SetLocalizedText("login_popup_email_guide_1", login_popup_email_guide_1);
         textLocalizer.SetLocalizedText("button_login", button_login);
         textLocalizer.SetLocalizedText("button_logout", button_logout);
+        textLocalizer.SetLocalizedText("button_logout", logout_btn1);
+        textLocalizer.SetLocalizedText("button_logout", logout_btn2);
         textLocalizer.SetLocalizedText("login_popup_email_guide_1", login_popup_email_guide_3);
        // textLocalizer.SetLocalizedText("login_popup_wrong_password", login_popup_wrong_password);
         textLocalizer.SetLocalizedText("login_popup_email_guide_2", login_popup_email_guide_2);
@@ -400,6 +406,8 @@ setting_term_of_condition_stage,
         textLocalizer.SetLocalizedText("setting_language", setting_language);
         textLocalizer.SetLocalizedText("setting_privacy_policy", setting_privacy_policy);
         textLocalizer.SetLocalizedText("setting_credit", setting_credit);
+        textLocalizer.SetLocalizedText("setting_credit", setting_credit_popup1);
+        textLocalizer.SetLocalizedText("setting_credit", setting_credit_popup2);
         textLocalizer.SetLocalizedText("setting_term_of_condition", setting_term_of_condition);
         textLocalizer.SetLocalizedText("setting_language_1", setting_language_1);
         textLocalizer.SetLocalizedText("setting_language_2", setting_language_2);
@@ -435,7 +443,7 @@ setting_term_of_condition_stage,
             setting_language_2, setting_privacy_policy, setting_term_of_condition, setting_credit
            , popup_detail_quit, popup_detail_language_change, popup_detail_credit,popup_detail_language_change_stage,
             login_popup_title,button_return_player,titleStory,contentStory,
-            quest_daily_quest_title, button_complete_all,button_update,popup_update_title,popup_update_content,
+            quest_daily_quest_title, button_complete_all,button_update,popup_update_title,popup_update_content,popup_detail_credit2,
 
          button_achievement, quest_reset_time, quest_daily_quest_all_completed,
         quest_help_daily_quest_title, quest_help_daily_quest_content, quest_help_achivement_title, quest_help_achivement_content
@@ -449,7 +457,7 @@ setting_language_stage,
  setting_language_2_stage,
  setting_privacy_policy_stage,
 setting_term_of_condition_stage,
- setting_credit_stage,button_logout
+ setting_credit_stage,button_logout,logout_btn1,logout_btn2
 , login_popup_my_account_stage,title_setting_stage,login_popup_my_account_game,my_account,quest_achievement_title,
  shop_help_quest_stamp_title, shop_help_quest_stamp_content,new_title,patch_note_infor,
         // Object

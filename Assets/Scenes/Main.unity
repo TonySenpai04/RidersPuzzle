@@ -14536,7 +14536,7 @@ MonoBehaviour:
   levels: []
   levelsClone: []
   currentLevelIndex: 1
-  data: {fileID: 4900000, guid: 62cd25c4388a1864a9f6d163ba95030e, type: 3}
+  data: {fileID: 4900000, guid: cd80cade6fa61884a925838a7ab903c7, type: 3}
   hiddenObjectManager: {fileID: 1076175228}
 --- !u!4 &325954454
 Transform:
@@ -25203,10 +25203,10 @@ RectTransform:
   m_Children: []
   m_Father: {fileID: 1655659015}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.5, y: 1}
-  m_AnchorMax: {x: 0.5, y: 1}
+  m_AnchorMin: {x: 0, y: 1}
+  m_AnchorMax: {x: 1, y: 1}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 257.26, y: 147.34}
+  m_SizeDelta: {x: 0, y: 147.34}
   m_Pivot: {x: 0.5, y: 1}
 --- !u!114 &611278937
 MonoBehaviour:
@@ -34164,10 +34164,10 @@ RectTransform:
   m_Children: []
   m_Father: {fileID: 1023459681}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.5, y: 1}
-  m_AnchorMax: {x: 0.5, y: 1}
+  m_AnchorMin: {x: 0, y: 1}
+  m_AnchorMax: {x: 1, y: 1}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 257.26, y: 147.34}
+  m_SizeDelta: {x: 0, y: 147.34}
   m_Pivot: {x: 0.5, y: 1}
 --- !u!114 &870303131
 MonoBehaviour:
@@ -52435,18 +52435,6 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-      - m_Target: {fileID: 1143238396}
-        m_TargetAssemblyTypeName: NotiManager, Assembly-CSharp
-        m_MethodName: ClearNotiRedDot
-        m_Mode: 5
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: shop
-          m_BoolArgument: 0
-        m_CallState: 2
 --- !u!114 &1339924500
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -55782,6 +55770,18 @@ MonoBehaviour:
           m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: dailygift
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 1143238396}
+        m_TargetAssemblyTypeName: NotiManager, Assembly-CSharp
+        m_MethodName: ClearNotiRedDot
+        m_Mode: 5
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: shop
           m_BoolArgument: 0
         m_CallState: 2
 --- !u!114 &1426799138
@@ -59601,6 +59601,8 @@ MonoBehaviour:
   - {fileID: 1437908053}
   setting_term_of_condition: {fileID: 473268491}
   setting_credit: {fileID: 1531124531}
+  setting_credit_popup1: {fileID: 611278937}
+  setting_credit_popup2: {fileID: 870303131}
   title_notification:
   - {fileID: 2146023779}
   - {fileID: 589115172}
@@ -59610,6 +59612,7 @@ MonoBehaviour:
   popup_detail_language_change: {fileID: 1785771996}
   popup_detail_language_change_stage: {fileID: 350130831}
   popup_detail_credit: {fileID: 406958810}
+  popup_detail_credit2: {fileID: 175776119}
   login_popup_my_account_game: {fileID: 1551938768}
   button_yes:
   - {fileID: 1602022190}
@@ -59734,6 +59737,8 @@ MonoBehaviour:
   button_reset: {fileID: 168264530}
   button_logout: {fileID: 1419654295}
   my_account: {fileID: 1188661659}
+  logout_btn1: {fileID: 44094833}
+  logout_btn2: {fileID: 258421869}
   login_popup_password_guide_1: {fileID: 1709535224}
   login_popup_email_guide_2: {fileID: 113066682}
   login_popup_password_guide_2: {fileID: 74419772}
@@ -59788,8 +59793,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   riderAsset: {fileID: 4900000, guid: afaad02e98f903c48995a602c15f44c7, type: 3}
   objectAsset: {fileID: 4900000, guid: 1977ba8c84b738b4fa8f025b91d8157d, type: 3}
-  commonAsset: {fileID: 4900000, guid: c73959ff804317749afcf55a81c2a62d, type: 3}
-  storyAsset: {fileID: 4900000, guid: df04c5091de972248b1e10f7ceda9a1b, type: 3}
+  commonAsset: {fileID: 4900000, guid: 4bb741cce2e6ec04291570ce25101c45, type: 3}
+  storyAsset: {fileID: 4900000, guid: 9e0c1ecc565ec9440b9f2c00af411308, type: 3}
   questAsset: {fileID: 4900000, guid: 6fcfadc2eedd3314ebce4d11d3fef2b8, type: 3}
   applyTextScript: {fileID: 1519185842}
 --- !u!1 &1524311781
@@ -73482,7 +73487,7 @@ MonoBehaviour:
     title: 
     content: 
     isSeen: 0
-    sprite: {fileID: 0}
+    sprite: {fileID: 21300000, guid: f3882973654ea95408353b17537c7c0f, type: 3}
   - id: 0010
     title: 
     content: 

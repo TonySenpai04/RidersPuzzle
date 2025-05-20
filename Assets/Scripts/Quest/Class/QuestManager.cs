@@ -275,6 +275,10 @@ public class QuestManager : MonoBehaviour
         {
             NotiManager.instance.CheckDailyLogin();
         }
+        else
+        {
+            NotiManager.instance.ClearMultipleNotiRedDots(new List<string> { "shop", "dailygift" });
+        }
         if (questData.lastAssignedDate == today)
         {
             currentQuestList = questData.currentQuestList;

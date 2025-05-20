@@ -1,32 +1,11 @@
 duplicated,key,Origin,English (en),Font,Vietnamese (vi),Font,Rich text
-FALSE,patch_note_infor,"- Increase stage limit from 210 to 240
-- Add story chapter 8
-- Renew game icon and loading screen theme 4/30
-- Add daily quest using Rider Skulz; Akale; add achievement to pass stage, win stage
-- Improve UX: Notification red dot in News feature when first updating new version
-- Improve UX: Prioritize displaying page containing stage being played for easy searching
-- Improve UI: Align feature name text position
-- Improve UI: Align text displaying number of quest requests
-- Improve UI: Adjust new feature icon drawing
-- Fix bug: Displaying 3rd page of stage has blank space","- Increase stage limit from 210 to 240
-- Add story chapter 8
-- Renew game icon and loading screen theme 4/30
-- Add daily quest using Rider Skulz; Akale; add achievement to pass stage, win stage
-- Improve UX: Notification red dot in News feature when first updating new version
-- Improve UX: Prioritize displaying page containing stage being played for easy searching
-- Improve UI: Align feature name text position
-- Improve UI: Align text displaying number of quest requests
-- Improve UI: Adjust new feature icon drawing
-- Fix bug: Displaying 3rd page of stage has blank space",Roboto-Regular SDF,"- Tăng giới hạn màn chơi từ 210 lên 240
-- Thêm chương 8 của truyện
-- Đổi mới icon game và màn hình chờ nhân dịp lễ 30/4
-- Thêm nhiệm vụ hàng ngày sử dụng Rider Skulz; Akale; thêm thành tựu vượt, thắng màn chơi
-- Cải thiện UX: Thông báo chấm đỏ ở tính năng News khi lần đầu cập nhật bản mới
-- Cải thiện UX: Ưu tiên hiển thị trang chứa màn chơi đang chơi để dễ tìm kiếm
-- Cải thiện UI: Căn chỉnh vị trí chữ hiển thị tên tính năng
-- Cải thiện UI: Căn chỉnh số hiển thị số lượng yêu cầu nhiệm vụ
-- Cải thiện UI: Chỉnh nét vẽ icon tính năng mới
-- Fix bug: Hiển thị trang thứ 3 của màn chơi có khoảng trống",Roboto-Regular SDF,
+FALSE,patch_note_infor,"- Added ""You can earn a stamp tomorrow"" notification after receiving a stamp during the day
+- Increased stage limit from 240 to 270
+- Added story chapter 9","- Added ""You can earn a stamp tomorrow"" notification after receiving a stamp during the day
+- Increased stage limit from 240 to 270
+- Added story chapter 9",Roboto-Regular SDF,"- Thêm thông báo ""You can earn a stamp tomorrow"" sau khi nhận stamp trong ngày
+- Tăng giới hạn stage từ 240 lên 270
+- Thêm story chapter 9",Roboto-Regular SDF,
 FALSE,loading,Loading...,Loading...,Roboto-Italic SDF,Đang tải game...,Roboto-Italic SDF,
 FALSE,button_start,START YOUR JOURNEY,START YOUR JOURNEY,RobotoSemi-Bold SDF,BẮT ĐẦU CHƠI,RobotoSemi-Bold SDF,
 FALSE,title_choose_a_stage,Choose a stage,Choose a stage,RobotoSemi-Bold SDF,Chọn màn chơi,RobotoSemi-Bold SDF,
@@ -145,3 +124,4 @@ FALSE,loading_screen_tip_2,"Hapi is an useful resource, let's earn as much as po
 FALSE,loading_screen_tip_3,Don't forget claim daily gift in Shop everyday!,Don't forget claim daily gift in Shop everyday!,Roboto-Regular SDF,Đừng quên nhận quà miễn phí trong Cửa hàng mỗi ngày!,Roboto-Regular SDF,
 FALSE,loading_screen_tip_4,Each Rider has a unique skill.,Each Rider has a unique skill.,Roboto-Regular SDF,Mỗi Rider đều có một kỹ năng riêng biệt.,Roboto-Regular SDF,
 FALSE,loading_screen_tip_5,Each chapter of story is unlocked after winning every 30 stages,Each chapter of story is unlocked after winning every 30 stages,Roboto-Regular SDF,Mỗi chương truyện được mở khoá khi thắng 30 màn chơi.,Roboto-Regular SDF,
+FALSE,quest_stamp_earn_tip,You can earn more stamp tomorrow,You can earn more stamp tomorrow,Roboto-Regular SDF,Bạn có thể nhận thêm dấu ấn vào ngày mai,Roboto-Regular SDF,

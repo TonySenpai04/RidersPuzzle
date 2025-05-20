@@ -4,6 +4,7 @@ using UnityEngine;
 using UnityEngine.Networking;
 using TMPro;
 using System.Collections.Generic;
+using System.IO;
 
 public class VersionChecker : MonoBehaviour
 {
@@ -14,6 +15,7 @@ public class VersionChecker : MonoBehaviour
 
     // Link tới file version.txt trên server (nhớ thay bằng link của bạn)
     public string versionCheckUrl = "https://drive.google.com/file/d/1w3FrRqeQqahO5H2lpWo_QCu7H4VR8K04/view?usp=sharing";
+    public string goldPath => Path.Combine(Application.persistentDataPath, "version.json");
 
     void Start()
     {
@@ -58,5 +60,16 @@ public class VersionChecker : MonoBehaviour
             }
         }
     }
+    public void SaveVersion()
+    {
+        var data = new VersionData { version = currentVersion };
+        string json = JsonUtility.ToJson(data);
+        File.WriteAllText(goldPath, json);
+       
+    }
 }
+public class VersionData {
+    public string version;
+}
+
 
