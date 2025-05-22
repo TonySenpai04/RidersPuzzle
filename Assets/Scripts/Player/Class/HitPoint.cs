@@ -9,6 +9,10 @@ public class HitPoint : IHitPoint, IImmortal
     public bool isImmortal;
     private int moveCount; 
     private int maxMoveCount = 3;
+    private bool invincibleOnTrigger = false; 
+    private int invincibleMoveCount = 0;
+    private int maxInvincibleMoveCount = 3;
+
     public HitPoint(float health)
     {
         this.health = health;
@@ -44,10 +48,24 @@ public class HitPoint : IHitPoint, IImmortal
             moveCount = 0;
             Debug.Log("Tao có khiêng");
         }
+
+    }
+    public void ActivateTriggerInvincibility()
+    {
+        if (invincibleOnTrigger)
+            return;
+        invincibleOnTrigger = true;
+        invincibleMoveCount = 0;
+        Debug.Log("Đang trong trạng thái miễn sát thương hoàn toàn.");
     }
 
     public void TakeDamage(int damage)
     {
+        if (invincibleOnTrigger)
+        {
+            Debug.Log("Miễn sát thương do trigger đặc biệt!");
+            return;
+        }
         currentHealth -= damage;
         if (currentHealth <= 1 && isImmortal)
         {
@@ -72,5 +90,15 @@ public class HitPoint : IHitPoint, IImmortal
                 Debug.Log("hết khiêng r.");
             }
         }
+        if (invincibleOnTrigger)
+        {
+            invincibleMoveCount++;
+            if (invincibleMoveCount >= maxInvincibleMoveCount)
+            {
+                invincibleOnTrigger = false;
+                Debug.Log("Hết miễn sát thương khi chạm vật thể.");
+            }
+        }
     }
+
 }

@@ -1,6 +1,6 @@
 ﻿public interface IImmortal
 {
     void ActivateImmortalEffect();  
-    void OnMove();               
-    //void RemoveImmortalEffect();
+    void OnMove();
+    void ActivateTriggerInvincibility();
 }

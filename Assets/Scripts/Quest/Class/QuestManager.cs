@@ -269,16 +269,18 @@ public class QuestManager : MonoBehaviour
     {
         QuestData questData = await LoadQuestData(); 
         string today  = TimeManager.Instance.GetEffectiveDateForDailyQuest();
-        Debug.Log(today);
-        string todayGift = TimeManager.Instance.ServerDate;
-        if(questData.lastAssignedDate != todayGift)
-        {
-            NotiManager.instance.CheckDailyLogin();
-        }
-        else
+        string serverDate = TimeManager.Instance.ServerDate;
+        DailyGiftData giftData = NotiManager.instance.LoadGiftData();
+
+        if (giftData.lastClaimDate == serverDate)
         {
             NotiManager.instance.ClearMultipleNotiRedDots(new List<string> { "shop", "dailygift" });
         }
+        else
+        {
+            NotiManager.instance.CheckDailyLogin();
+        }
+      
         if (questData.lastAssignedDate == today)
         {
             currentQuestList = questData.currentQuestList;

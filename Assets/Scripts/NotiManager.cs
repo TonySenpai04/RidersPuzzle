@@ -39,11 +39,13 @@ public class NotiManager : MonoBehaviour
     private Dictionary<string, GameObject> redDotDict = new Dictionary<string, GameObject>();
     private RedNotiData redNotiData = new RedNotiData();
     private const string LAST_LOGIN_DATE_KEY = "LastLoginDate";
+    [SerializeField] private string saveDailyGiftFilePath;
 
     public string notiPath => Path.Combine(Application.persistentDataPath, "Noti.json");
     private void Awake()
     {
         instance = this;
+        saveDailyGiftFilePath = Application.persistentDataPath + "/dailyGift.json";
         foreach (var dot in redDots)
         {
             redDotDict[dot.name] = dot.redDotObject;
@@ -185,7 +187,15 @@ public class NotiManager : MonoBehaviour
 
         ShowMultipleNotiRedDots(new List<string> { "shop", "dailygift" });
     }
-
+    public DailyGiftData LoadGiftData()
+    {
+        if (File.Exists(saveDailyGiftFilePath))
+        {
+            string json = File.ReadAllText(saveDailyGiftFilePath);
+            return JsonUtility.FromJson<DailyGiftData>(json);
+        }
+        return new DailyGiftData();
+    }
 
 }
 

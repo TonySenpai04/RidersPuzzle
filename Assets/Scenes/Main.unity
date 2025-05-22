@@ -42150,6 +42150,11 @@ MonoBehaviour:
   - {fileID: 1417353063487614309, guid: 307fbe9652dc20e4ca72e68a3bf2bb11, type: 3}
   - {fileID: -6684742591381293817, guid: 139f116b0ce12a1459d6b9e489cdc151, type: 3}
   - {fileID: -552130359063316847, guid: 68b0b763ef5b585458031231d1eb6a5a, type: 3}
+  - {fileID: 427918185889323560, guid: 1155d6b355d22a740b803bfdea390733, type: 3}
+  - {fileID: 1795108337610629352, guid: 8bbcfcd69a48fea4fa901c4c104a5feb, type: 3}
+  - {fileID: 876498515502618522, guid: b59327880ad3e354aa56d5573d2f50cf, type: 3}
+  - {fileID: 1803130152834693387, guid: 315a88d59a06ece45a0cf2b0234706da, type: 3}
+  - {fileID: 3563200906793574882, guid: 381c6ccbc1a3eab4c896aaa742457a3d, type: 3}
   powerUpObjects: []
   obstacleObjects: []
 --- !u!4 &1076175229
@@ -44288,6 +44293,7 @@ MonoBehaviour:
     redDotObject: {fileID: 1278402242}
   - name: dailygift
     redDotObject: {fileID: 458679941}
+  saveDailyGiftFilePath: 
 --- !u!4 &1143238397
 Transform:
   m_ObjectHideFlags: 0
@@ -59792,7 +59798,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   riderAsset: {fileID: 4900000, guid: afaad02e98f903c48995a602c15f44c7, type: 3}
-  objectAsset: {fileID: 4900000, guid: 1977ba8c84b738b4fa8f025b91d8157d, type: 3}
+  objectAsset: {fileID: 4900000, guid: 7f40a367a8118fb40b41ddd6694c7ecd, type: 3}
   commonAsset: {fileID: 4900000, guid: 4bb741cce2e6ec04291570ce25101c45, type: 3}
   storyAsset: {fileID: 4900000, guid: 9e0c1ecc565ec9440b9f2c00af411308, type: 3}
   questAsset: {fileID: 4900000, guid: 6fcfadc2eedd3314ebce4d11d3fef2b8, type: 3}

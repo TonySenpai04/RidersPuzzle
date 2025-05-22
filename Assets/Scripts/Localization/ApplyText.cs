@@ -259,6 +259,18 @@ setting_term_of_condition_stage,
         SetInfo($"object_name_{objectId}", objectName, richText, plainText);
         SetInfo($"object_story_{objectId}", objectStory, richText, plainText);
         SetInfo($"object_battle_info_{objectId}", objectBattle, richText, plainText);
+        if(objectId== 2032)
+        {
+            objectStory.text = LocalizationManager.instance.GetLocalizedText($"object_story_{objectId}", "Hepi");
+            objectBattle.text = LocalizationManager.instance.GetLocalizedText($"object_battle_info_{objectId}", "Hepi");
+        }
+        if (objectId == 2030)
+        {
+            objectStory.text = LocalizationManager.instance.GetLocalizedText($"object_story_{objectId}",
+                LocalizationManager.instance.GetLocalizedText($"object_name_{2001}"));
+            objectBattle.text = LocalizationManager.instance.GetLocalizedText($"object_battle_info_{objectId}",
+                LocalizationManager.instance.GetLocalizedText($"object_name_{2001}"));
+        }
 
     }
 
