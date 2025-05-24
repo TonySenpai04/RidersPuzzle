@@ -15,7 +15,9 @@ public class HellTicket : HiddenObject
 
         PlaySFX();
         List<Vector2Int> emptyPositions = new List<Vector2Int>();
-
+        var level = LevelManager.instance.GetCurrentLevelData();
+       int  endPosX = (int)level.endPos.x;
+       int  endPosY = (int)level.endPos.y;
         for (int row = 0; row < LevelManager.instance.GetGrid().rows; row++)
         {
             for (int col = 0; col < LevelManager.instance.GetGrid().cols; col++)
@@ -25,7 +27,9 @@ public class HellTicket : HiddenObject
                     PlayerController.instance.movementController.GetPos().Item2);
 
                 // Không tính ô hiện tại & chỉ chọn ô không có object
-                if ((row != currentPos.x || col != currentPos.y) && obj == null)
+                if ((row != currentPos.x || col != currentPos.y)
+                    && obj == null
+                    && (row != endPosX || col!= endPosY))
                 {
                     emptyPositions.Add(new Vector2Int(row, col));
                 }
