@@ -75,7 +75,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 2
-  m_Sprite: {fileID: 21300000, guid: 5f5cb0da7eaa17343be5fb159904f24a, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 7108fd0c67069ed45926c425c8521a90, type: 3}
   m_Color: {r: 0.98490566, g: 0.98490566, b: 0.98490566, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -123,5 +123,5 @@ MonoBehaviour:
   type: 0
   isDestroying: 0
   isPandora: 0
-  sprite: {fileID: 21300000, guid: 5f5cb0da7eaa17343be5fb159904f24a, type: 3}
+  sprite: {fileID: 21300000, guid: 7108fd0c67069ed45926c425c8521a90, type: 3}
   isSeen: 0
