@@ -24,6 +24,8 @@ public class BackgroundManager : MonoBehaviour
     [SerializeField] private Sprite objObstacleBg;
     [SerializeField] private Sprite pandoraboxBg;
     [SerializeField] private Sprite defaultBg;
+    [SerializeField] private Sprite upgradeBg;
+    [SerializeField] private Sprite enhanceBg;
     public static BackgroundManager instance;
     private void Awake()
     {
@@ -38,6 +40,14 @@ public class BackgroundManager : MonoBehaviour
         UpdateBackgroundArt();
         UpdateGridArt();
         gridController.GetSprite();
+    }
+    public void SetUpgradeBg()
+    {
+        libraryBg.sprite = upgradeBg;
+    }
+    public void SetEnhanceBg()
+    {
+        libraryBg.sprite = enhanceBg;
     }
     public void SetDefaultBg()
     {
@@ -109,4 +119,5 @@ public class BackgroundManager : MonoBehaviour
             Debug.LogWarning("Danh sách background arts rỗng!");
         }
     }
+
 }

@@ -24,7 +24,7 @@ public class ResourceData
 public class ResourceManager : MonoBehaviour
 {
     public static ResourceManager Instance;
-
+    public List<ResourceInfoData> resourceInfos;
     // Key = (type, id) -> quantity
     private Dictionary<(int, int), int> resourceDict ;
 
@@ -86,7 +86,11 @@ public class ResourceManager : MonoBehaviour
         SaveResources();
         return true;
     }
-
+    public Sprite GetIconForResource(int type, int id)
+    {
+        var info = resourceInfos.Find(r => r.resourceType == type && r.resourceId == id);
+        return info != null ? info.icon : null;
+    }
     public void SaveResources()
     {
         string json = JsonUtility.ToJson(new ResourceSaveWrapper(resourceDict));
@@ -190,5 +194,26 @@ public class ResourceSaveWrapper
     }
    
 
+
 }
 
+
+[System.Serializable]
+public class ResourceInfoData
+{
+    public int resourceType;
+    public int resourceId;
+    public string resourceName;
+    public Sprite icon;
+
+    public ResourceInfoData(int type, int id, string name, Sprite icon)
+    {
+        this.resourceType = type;
+        this.resourceId = id;
+        this.resourceName = name;
+        this.icon = icon;
+    }
+
+    // Optional: Key để tra nhanh
+    public (int, int) GetKey() => (resourceType, resourceId);
+}

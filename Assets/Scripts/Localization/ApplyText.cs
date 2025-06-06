@@ -165,6 +165,8 @@ setting_term_of_condition_stage,
     [SerializeField] private TMP_Text popup_update_title,popup_update_content;
     public static ApplyText instance;
     public  TextLocalizer textLocalizer;
+    [Header("Upgrade")]
+    [SerializeField] private TMP_Text heroSkill;
     private void Awake() => instance = this;
     private void Start()
     {
@@ -250,6 +252,13 @@ setting_term_of_condition_stage,
         SetInfo($"hero_height_{heroId}", riderHeightShop, richText, plainText);
         SetInfo($"hero_punch_{heroId}", riderPunchShop, richText, plainText);
         SetInfo($"hero_kick_{heroId}", riderKickShop, richText, plainText);
+
+    }
+    public void UpdateUpgrade(int heroId)
+    {
+        var richText = LocalizationManager.instance.GetLocalizedRichText();
+        var plainText = LocalizationManager.instance.GetLocalizedTexts();
+        SetInfo($"skill_info_hero_{heroId}", heroSkill, richText, plainText);
 
     }
     public void UpdateObjectInfo(int objectId)

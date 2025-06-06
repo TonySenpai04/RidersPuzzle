@@ -100,15 +100,15 @@ public class ReadCSVDataHeroStat : MonoBehaviour
                 int id = int.Parse(parts[7 + j * 3]);
                 int amount = int.Parse(parts[8 + j * 3]);
 
-                if (amount > 0)
-                {
+                //if (amount > 0)
+                //{
                     reqs.Add(new UpgradeRequirement
                     {
                         resourceType = type,
                         resourceId = id,
                         amount = amount
                     });
-                }
+               // }
             }
 
             if (!riders.ContainsKey(idRider))
