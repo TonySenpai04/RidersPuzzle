@@ -10,6 +10,7 @@ public class HeroCard : MonoBehaviour
     [SerializeField] private TextMeshProUGUI healthTxt;
 
     public UpgradeView upgradeView; // Gắn qua Inspector
+    public GameObject heroCardview;
 
     public void OnClickHeroCard()
     {
@@ -24,8 +25,10 @@ public class HeroCard : MonoBehaviour
 
         DataHero heroData = heroDatas[index];
         int nextLevel = heroData.level + 1;
+       
 
         var nextData = ReadCSVDataHeroStat.instance.GetHeroLevelData(heroID, nextLevel);
+        var currentData = ReadCSVDataHeroStat.instance.GetHeroLevelData(heroID, heroData.level);
         if (nextData == null)
         {
             Debug.Log("✅ Hero đã đạt cấp tối đa.");
@@ -33,7 +36,8 @@ public class HeroCard : MonoBehaviour
         }
 
         upgradeView.currentID = heroID;
-        upgradeView.SetUpgradeView(nextData);
+        upgradeView.SetUpgradeView(currentData, nextData);
+        heroCardview.SetActive(false);
     }
 
     public void SetHeroInfo(DataHero hero)
