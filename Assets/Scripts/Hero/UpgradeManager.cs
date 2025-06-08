@@ -74,9 +74,12 @@ public class UpgradeManager : MonoBehaviour
         {
             hero.level = currentLevel + 1;
             hero.hp = nextLevelData.hp;
+            hero.currentMP = nextLevelData.masteryPoint;
+            hero.mp = nextLevelData.masteryPoint;
             heroData[index] = hero;
 
             HeroManager.instance.SaveHeroesData();
+            HeroManager.instance.SaveHeroesDataToFirebase();
 
             Debug.Log($"✅ Thành công! Hero {heroId} đã lên cấp {hero.level}");
             return true;

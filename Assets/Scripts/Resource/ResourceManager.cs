@@ -38,9 +38,11 @@ public class ResourceManager : MonoBehaviour
                 { (2, 1001),    0 },
                 { (2, 1002),    0 },
                 { (2, 1003),    0 },
+                { (2, 1004),    0 },
                 { (3, 1001),    0 },
                 { (3, 1002),    0 },
-                { (3, 1003),    0 }
+                { (3, 1003),    0 },
+                { (3, 1004),    0 }
         };
 
     
@@ -67,6 +69,10 @@ public class ResourceManager : MonoBehaviour
             resourceDict[key] = 0;
 
         resourceDict[key] += amount;
+        if (key ==(0, 1))
+        {
+            GoldManager.instance.AddGold(amount);
+        }
         SaveResources();
     }
     public void SetResource(int type, int id, int amount)
@@ -76,6 +82,10 @@ public class ResourceManager : MonoBehaviour
             resourceDict[key] = 0;
 
         resourceDict[key] = amount;
+        if (key == (0, 1))
+        {
+            GoldManager.instance.ResetGold(amount);
+        }
         SaveResources();
     }
     public bool ConsumeResource(int type, int id, int amount)
@@ -83,6 +93,10 @@ public class ResourceManager : MonoBehaviour
         if (!HasEnough(type, id, amount)) return false;
 
         resourceDict[(type, id)] -= amount;
+        if ((type, id) == (0, 1))
+        {
+            GoldManager.instance.SpendGold(amount);
+        }
         SaveResources();
         return true;
     }

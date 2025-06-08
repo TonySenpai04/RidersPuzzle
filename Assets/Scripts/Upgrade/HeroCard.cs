@@ -2,16 +2,25 @@
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class HeroCard : MonoBehaviour
 {
     [SerializeField] private int heroID;
     [SerializeField] private TextMeshProUGUI levelTxt;
     [SerializeField] private TextMeshProUGUI healthTxt;
-
-    public UpgradeView upgradeView; // Gắn qua Inspector
+    [SerializeField] private Image heroImg;
+    public UpgradeView upgradeView; 
     public GameObject heroCardview;
-
+    public void SetData(int heroID,UpgradeView upgradeView,GameObject heroCardView,int level,int health,Sprite heroSprite)
+    {
+        this.heroID = heroID;
+        this.upgradeView = upgradeView;
+        this.heroCardview = heroCardView;
+        levelTxt.text = "LEVEL "+level.ToString();
+        healthTxt.text = health.ToString();
+        heroImg.sprite = heroSprite;
+    }
     public void OnClickHeroCard()
     {
         upgradeView.gameObject.SetActive(true);
@@ -32,7 +41,7 @@ public class HeroCard : MonoBehaviour
         if (nextData == null)
         {
             Debug.Log("✅ Hero đã đạt cấp tối đa.");
-            return;
+            
         }
 
         upgradeView.currentID = heroID;

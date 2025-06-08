@@ -44,7 +44,7 @@ public class FooterController : MonoBehaviour
                 buttonImage.sprite = button.unselected;
             }
         }
-        BackgroundManager.instance.SetDefaultBg();
+       // BackgroundManager.instance.SetDefaultBg();
     }
     public void SelectButton(string name)
     {
