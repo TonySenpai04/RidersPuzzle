@@ -49,7 +49,8 @@ public class GameManager : MonoBehaviour
         targetCol = (int)level.endPos.y;
 
         SetupWinCell();
-        ApplyText.instance.UpdateTitleStage(level.level);
+        // ApplyText.instance.UpdateTitleStage(level.level);
+        ApplyTextManager.instance.UpdateTitleStage(level.level);
         backgroundController.UpdateRandomArt();
         PlayerController.instance.LoadLevel();
 
@@ -65,7 +66,8 @@ public class GameManager : MonoBehaviour
     public void LoadLangue()
     {
         var level = LevelManager.instance.GetCurrentLevelData();
-        ApplyText.instance.UpdateTitleStage(level.level);
+        // ApplyText.instance.UpdateTitleStage(level.level);
+        ApplyTextManager.instance.UpdateTitleStage(level.level);
     }
    
     public void LoadNextLevel()

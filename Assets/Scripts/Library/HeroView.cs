@@ -58,7 +58,8 @@ public class HeroView : MonoBehaviour
         this.heroTxt.text = $"{id} {hero.Value.name}";
         
         this.hpTxt.text =  hero.Value.hp.ToString();
-        ApplyText.instance.UpdateSkillInfoLib(id);
+        // ApplyText.instance.UpdateSkillInfoLib(id);
+        ApplyTextManager.instance.UpdateSkillInfoLib(id);
         this.isUnlock=hero.Value.isUnlock;
         currentIndex = onwedHero.FindIndex(o => o.id == id);
         if (this.isUnlock)

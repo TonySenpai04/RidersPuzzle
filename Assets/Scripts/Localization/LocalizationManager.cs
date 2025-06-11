@@ -15,6 +15,7 @@ public class LocalizationManager : MonoBehaviour
     [SerializeField] private TextAsset storyAsset;
     [SerializeField] private TextAsset questAsset;
     [SerializeField] private ApplyText applyTextScript;
+    [SerializeField] private ApplyTextManager applyTextManager;
     private Dictionary<string, string> richText;
     private int currentLanguage;
     private IReadDataLocalize readCSVLocalizeRider;
@@ -75,16 +76,19 @@ public class LocalizationManager : MonoBehaviour
         richText.Clear();
         LoadLocalization();
         ApplyLocalizedTexts();
-        applyTextScript.LoadLangue();
+        // applyTextScript.LoadLangue();
+        applyTextManager.LoadLangue();
         GameManager.instance.LoadLangue();
     }
     void ApplyLocalizedTexts()
     {
-        if (applyTextScript != null)
-        {
-            applyTextScript.ApplyTxt(ref  richText, ref this.localizedTexts);
-            applyTextScript.ApplyFont(ref localizedFonts);
-        }
+        //if (applyTextScript != null)
+        //{
+        //    applyTextScript.ApplyTxt(ref  richText, ref this.localizedTexts);
+        //    applyTextScript.ApplyFont(ref localizedFonts);
+        //}
+        applyTextManager.ApplyTxt(ref richText, ref this.localizedTexts);
+        applyTextManager.ApplyFont(ref localizedFonts);
     }
 
     public string GetLocalizedText(string key)

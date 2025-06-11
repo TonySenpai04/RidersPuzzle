@@ -9,7 +9,7 @@ public class TimeManager : MonoBehaviour
     public static TimeManager Instance;
     public string ServerDate { get; private set; }
     public DateTime ServerDateTime { get; private set; } // Lưu thời gian đầy đủ
-    public bool IsTimeFetched { get; private set; } = false; // Đánh dấu đã lấy xong thời gian
+    public bool IsTimeFetched  = false; // Đánh dấu đã lấy xong thời gian
 
     private void Awake()
     {

@@ -21,12 +21,13 @@ public class LoginStreakQuest : QuestBase
     public async void OnPlayerLogin()
     {
         string today = TimeManager.Instance.ServerDate;
-        string userId = FirebaseDataManager.Instance.GetCurrentUser().UserId;
+       
         string key = "questData";
         FirebaseUser currentUser = FirebaseDataManager.Instance.GetCurrentUser();
         if (currentUser != null)
-        {
-            DataSnapshot snapshot = await FirebaseDatabase.DefaultInstance.RootReference
+            {
+                string userId = FirebaseDataManager.Instance.GetCurrentUser().UserId;
+                DataSnapshot snapshot = await FirebaseDatabase.DefaultInstance.RootReference
                 .Child("users")
                 .Child(userId)
                 .Child(key)

@@ -41,7 +41,7 @@ public class HeroShopItem : MonoBehaviour
             if (hero.Value.isUnlock)
             {
                 onwed.gameObject.SetActive(true);
-                ApplyText.instance.textLocalizer.SetLocalizedText("shop_owned_rider", onwed);
+                ApplyTextManager.instance.textLocalizer.SetLocalizedText("shop_owned_rider", onwed);
                 priceTxt.gameObject.SetActive(false);
 
             }
@@ -59,7 +59,7 @@ public class HeroShopItem : MonoBehaviour
     public void UpdateHero()
     {
 
-        ApplyText.instance.textLocalizer.SetLocalizedText("button_exchange", exchangeTxt);
+        ApplyTextManager.instance.textLocalizer.SetLocalizedText("button_exchange", exchangeTxt);
         var hero = HeroManager.instance.GetHero(HeroId);
         if (hero != null)
         {
@@ -67,7 +67,7 @@ public class HeroShopItem : MonoBehaviour
             if (hero.Value.isUnlock)
             {
                 onwed.gameObject.SetActive(true);
-                ApplyText.instance.textLocalizer.SetLocalizedText("shop_owned_rider", onwed);
+                ApplyTextManager.instance.textLocalizer.SetLocalizedText("shop_owned_rider", onwed);
                 priceTxt.gameObject.SetActive(false);
 
             }

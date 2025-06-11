@@ -289,10 +289,10 @@ public class AchievementManager : MonoBehaviour
             if (quest is LoginNormalQuest loginQuest)
             {
                 loginQuest.OnPlayerLogin();
-                if (loginQuest.CheckCompletion())
-                {
-                    Debug.Log($"✅ Login Quest {loginQuest.questId} hoàn thành!");
-                }
+                //if (loginQuest.CheckCompletion())
+                //{
+                //    Debug.Log($"✅ Login Quest {loginQuest.questId} hoàn thành!");
+                //}
             }
         }
     }

@@ -67,7 +67,8 @@ public class StoryView : MonoBehaviour
         Story story = StoryManager.instance.GetByStoryId(id);
         if (story != null)
         {
-            ApplyText.instance.UpdateStoryInfo(id);
+            // ApplyText.instance.UpdateStoryInfo(id);
+            ApplyTextManager.instance.UpdateStoryInfo(id);
             StartCoroutine(AdjustContentHeight());
 
         }

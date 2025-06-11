@@ -31,13 +31,13 @@ public class DailyGift : MonoBehaviour
 
         if (giftData.lastClaimDate == serverDate)
         {
-            ApplyText.instance.textLocalizer.SetLocalizedText("shop_claimed",
+            ApplyTextManager.instance.textLocalizer.SetLocalizedText("shop_claimed",
                 giftButton.GetComponentInChildren<TextMeshProUGUI>());
            // giftButton.GetComponentInChildren<TextMeshProUGUI>().text = "Claimed";
         }
         else
         {
-            ApplyText.instance.textLocalizer.SetLocalizedText("shop_daily_pack_tag_free",
+            ApplyTextManager.instance.textLocalizer.SetLocalizedText("shop_daily_pack_tag_free",
                giftButton.GetComponentInChildren<TextMeshProUGUI>());
             //giftButton.GetComponentInChildren<TextMeshProUGUI>().text = "FREE";
             giftButton.onClick.AddListener(() => ShowExchangeBtn());
@@ -73,7 +73,7 @@ public class DailyGift : MonoBehaviour
     }
     public void ReceiveGift()
     {
-        ApplyText.instance.textLocalizer.SetLocalizedText("shop_claimed",
+        ApplyTextManager.instance.textLocalizer.SetLocalizedText("shop_claimed",
               giftButton.GetComponentInChildren<TextMeshProUGUI>());
       //  giftButton.GetComponentInChildren<TextMeshProUGUI>().text = "Claimed";
         giftButton.onClick.RemoveAllListeners();

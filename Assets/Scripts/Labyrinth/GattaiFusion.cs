@@ -108,7 +108,8 @@ public class GattaiFusionUI : MonoBehaviour
         {
             // Chọn mới
             selectedSkillIndex = index;
-            ApplyText.instance.UpdateSkillInfoOnStage(availableSkills[index].GetSkillId());
+            ApplyTextManager.instance.UpdateSkillInfoOnStage(availableSkills[index].GetSkillId());
+          //  ApplyText.instance.UpdateSkillInfoOnStage(availableSkills[index].GetSkillId());
             Debug.Log("Skill được chọn: " + availableSkills[index].GetSkillId());
         }
 

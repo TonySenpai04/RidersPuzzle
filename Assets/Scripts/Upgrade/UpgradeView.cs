@@ -54,8 +54,8 @@ public class UpgradeView : MonoBehaviour
         var hero = HeroManager.instance.GetHero(this.currentID);
         this.heroImg.sprite = hero.Value.heroImage;
         this.heroNametxt.text = $"{hero.Value.name}";
-        ApplyText.instance.UpdateUpgrade(currentID);
-
+        //  ApplyText.instance.UpdateUpgrade(currentID);
+        ApplyTextManager.instance.UpdateUpgrade(currentID);
         if (upgradeData != null)
         {
             foreach (var req in upgradeData.upgradeRequirements)

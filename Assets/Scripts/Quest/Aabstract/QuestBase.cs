@@ -67,10 +67,10 @@ public abstract class QuestBase
                 .RemoveValueAsync()
                 .ContinueWithOnMainThread(task =>
                 {
-                    if (task.IsCompleted)
-                        Debug.Log($"🗑️ Đã xoá quest {questId} khỏi Firebase.");
-                    else
-                        Debug.LogError($"❌ Lỗi khi xoá quest {questId} khỏi Firebase: {task.Exception}");
+                    //if (task.IsCompleted)
+                    //    Debug.Log($"🗑️ Đã xoá quest {questId} khỏi Firebase.");
+                    //else
+                    //    Debug.LogError($"❌ Lỗi khi xoá quest {questId} khỏi Firebase: {task.Exception}");
                 });
         }
         else
@@ -102,10 +102,10 @@ public abstract class QuestBase
             .SetRawJsonValueAsync(json)
             .ContinueWithOnMainThread(task =>
             {
-                if (task.IsCompleted)
-                    Debug.Log($"✅ Đã lưu quest {questId} lên Firebase.");
-                else
-                    Debug.LogError($"❌ Lỗi khi lưu quest {questId}: {task.Exception}");
+                //if (task.IsCompleted)
+                //    Debug.Log($"✅ Đã lưu quest {questId} lên Firebase.");
+                //else
+                //    Debug.LogError($"❌ Lỗi khi lưu quest {questId}: {task.Exception}");
             });
     }
     public virtual void LoadQuestFromFirebase()
@@ -129,11 +129,11 @@ public abstract class QuestBase
                 {
                     string json = task.Result.GetRawJsonValue();
                     JsonUtility.FromJsonOverwrite(json, this);
-                    Debug.Log($"✅ Đã load quest {questId} từ Firebase vào instance hiện tại.");
+                  //  Debug.Log($"✅ Đã load quest {questId} từ Firebase vào instance hiện tại.");
                 }
                 else
                 {
-                    Debug.Log($"📂 Không có dữ liệu quest {questId} trên Firebase.");
+                   // Debug.Log($"📂 Không có dữ liệu quest {questId} trên Firebase.");
                 }
             });
     }

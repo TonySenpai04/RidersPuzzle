@@ -14217,7 +14217,7 @@ MonoBehaviour:
       m_Calls: []
   m_text: NO
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 50736f3ec3a63dd48b5b179bc4278cfb, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 7317eec8898dcfa4789df435953d577f, type: 2}
   m_sharedMaterial: {fileID: 328957574042116674, guid: 50736f3ec3a63dd48b5b179bc4278cfb, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
@@ -35645,7 +35645,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0.5}
   m_AnchorMax: {x: 1, y: 0.5}
-  m_AnchoredPosition: {x: -7.4298096, y: 68.18}
+  m_AnchoredPosition: {x: -7.4296875, y: 68.18}
   m_SizeDelta: {x: -276.8, y: 106.5}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &558138679
@@ -61274,6 +61274,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4b563f96ecc655646812d4fcb3aa218c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  IsTimeFetched: 0
 --- !u!1 &1194676167
 GameObject:
   m_ObjectHideFlags: 0
@@ -95347,6 +95348,7 @@ GameObject:
   - component: {fileID: 1519185843}
   - component: {fileID: 1519185842}
   - component: {fileID: 1519185845}
+  - component: {fileID: 1519185846}
   m_Layer: 0
   m_Name: LocalizeManager
   m_TagString: Untagged
@@ -95599,6 +95601,584 @@ MonoBehaviour:
   storyAsset: {fileID: 4900000, guid: 9e0c1ecc565ec9440b9f2c00af411308, type: 3}
   questAsset: {fileID: 4900000, guid: 6fcfadc2eedd3314ebce4d11d3fef2b8, type: 3}
   applyTextScript: {fileID: 1519185842}
+  applyTextManager: {fileID: 1519185846}
+--- !u!114 &1519185846
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1519185841}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ea7b424633d99244ea7b20c7ee2459b5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  commonTexts:
+  - key: loading
+    text: {fileID: 1751505225}
+  - key: button_start
+    text: {fileID: 1162493642}
+  - key: title_choose_a_stage
+    text: {fileID: 1952998197}
+  - key: warning_not_unlocked
+    text: {fileID: 1845269453}
+  - key: warning_coming_soon
+    text: {fileID: 1845269453}
+  - key: title_stage
+    text: {fileID: 1178841095}
+  - key: guide_game_rule
+    text: {fileID: 991602920}
+  - key: title_rider_information
+    text: {fileID: 1052777514}
+  - key: button_skill
+    text: {fileID: 2008426736}
+  - key: button_skill
+    text: {fileID: 1716528411}
+  - key: button_replay
+    text: {fileID: 1834365800}
+  - key: button_view
+    text: {fileID: 2047003060}
+  - key: button_view
+    text: {fileID: 619859051}
+  - key: button_view
+    text: {fileID: 1609337647}
+  - key: button_view
+    text: {fileID: 1326881673}
+  - key: button_view
+    text: {fileID: 1447646094}
+  - key: button_view
+    text: {fileID: 1617211510}
+  - key: button_view
+    text: {fileID: 1793376291}
+  - key: button_view
+    text: {fileID: 1326881673}
+  - key: button_view
+    text: {fileID: 1437908053}
+  - key: title_notification
+    text: {fileID: 2146023779}
+  - key: title_notification
+    text: {fileID: 589115172}
+  - key: title_notification
+    text: {fileID: 770830522}
+  - key: title_notification
+    text: {fileID: 1969289696}
+  - key: popup_detail_quit
+    text: {fileID: 1540867179}
+  - key: popup_detail_language_change
+    text: {fileID: 1785771996}
+  - key: popup_detail_language_change
+    text: {fileID: 350130831}
+  - key: popup_detail_credit
+    text: {fileID: 406958810}
+  - key: popup_detail_credit
+    text: {fileID: 175776119}
+  - key: button_yes
+    text: {fileID: 1602022190}
+  - key: button_yes
+    text: {fileID: 1779120542}
+  - key: button_yes
+    text: {fileID: 338509965}
+  - key: button_yes
+    text: {fileID: 936216742}
+  - key: button_no
+    text: {fileID: 653249979}
+  - key: button_no
+    text: {fileID: 297331729}
+  - key: button_no
+    text: {fileID: 1282043682}
+  - key: button_no
+    text: {fileID: 1624427818}
+  - key: button_ok
+    text: {fileID: 893680220}
+  - key: button_ok
+    text: {fileID: 1245808886}
+  - key: title_rider_information_stage
+    text: {fileID: 1300138021}
+  - key: objectName
+    text: {fileID: 77643885}
+  - key: objectStory
+    text: {fileID: 1894846919}
+  - key: objectBattle
+    text: {fileID: 717930432}
+  - key: library_rider_story
+    text: {fileID: 263808812}
+  - key: library_rider_battle infor
+    text: {fileID: 734580216}
+  - key: riderNameLib
+    text: {fileID: 1034766464}
+  - key: riderStory
+    text: {fileID: 906469393}
+  - key: riderWeight
+    text: {fileID: 494217652}
+  - key: riderHeight
+    text: {fileID: 739554874}
+  - key: riderPunch
+    text: {fileID: 746968770}
+  - key: riderKick
+    text: {fileID: 1285092446}
+  - key: library_feature_name
+    text: {fileID: 1983599132}
+  - key: library_rider_story
+    text: {fileID: 1232048066}
+  - key: library_button_tutorial
+    text: {fileID: 1857730459}
+  - key: library_rider_section_title
+    text: {fileID: 55464947}
+  - key: library_object_section_title
+    text: {fileID: 2022369562}
+  - key: library_rider_story
+    text: {fileID: 449492879}
+  - key: library_rider_section_title
+    text: {fileID: 557112851}
+  - key: library_object_section_title
+    text: {fileID: 1389397438}
+  - key: library_rider_amount
+    text: {fileID: 1256662003}
+  - key: library_object_amount
+    text: {fileID: 150770224}
+  - key: library_rider_amount
+    text: {fileID: 188044090}
+  - key: library_rider_story
+    text: {fileID: 170164427}
+  - key: library_rider_battle infor
+    text: {fileID: 1303902065}
+  - key: library_rider_form
+    text: {fileID: 169263425}
+  - key: library_rider_weight
+    text: {fileID: 1357842120}
+  - key: library_rider_height
+    text: {fileID: 532995934}
+  - key: library_rider_punch_power
+    text: {fileID: 656776342}
+  - key: library_rider_kick_power
+    text: {fileID: 1365002219}
+  - key: button_exchange
+    text: {fileID: 2033648950}
+  - key: button_exchange
+    text: {fileID: 2006396954}
+  - key: button_shop_hot_deal
+    text: {fileID: 576316765}
+  - key: button_shop_rider
+    text: {fileID: 333122601}
+  - key: library_rider_story
+    text: {fileID: 1760437715}
+  - key: library_rider_battle infor
+    text: {fileID: 336160181}
+  - key: library_rider_form
+    text: {fileID: 1681438487}
+  - key: library_rider_weight
+    text: {fileID: 715581764}
+  - key: library_rider_height
+    text: {fileID: 822707990}
+  - key: library_rider_punch_power
+    text: {fileID: 2004464478}
+  - key: library_rider_kick_power
+    text: {fileID: 1516579676}
+  - key: riderSkillShop
+    text: {fileID: 1524311783}
+  - key: riderNameLibShop
+    text: {fileID: 1568412373}
+  - key: riderStoryShop
+    text: {fileID: 2013842190}
+  - key: riderWeightShop
+    text: {fileID: 276781892}
+  - key: riderHeightShop
+    text: {fileID: 1111841791}
+  - key: riderPunchShop
+    text: {fileID: 1136414060}
+  - key: riderKickShop
+    text: {fileID: 380925875}
+  - key: button_return_player
+    text: {fileID: 2134160986}
+  - key: button_new_player
+    text: {fileID: 907204765}
+  - key: button_login
+    text: {fileID: 872618707}
+  - key: button_register
+    text: {fileID: 330918104}
+  - key: register_new_account
+    text: {fileID: 278036621}
+  - key: forget_password_title
+    text: {fileID: 1728391801}
+  - key: forget_password_content
+    text: {fileID: 1550271055}
+  - key: button_reset
+    text: {fileID: 168264530}
+  - key: button_logout
+    text: {fileID: 1419654295}
+  - key: button_logout
+    text: {fileID: 44094833}
+  - key: button_logout
+    text: {fileID: 258421869}
+  - key: button_complete_all
+    text: {fileID: 1854688603}
+  - key: button_complete_all
+    text: {fileID: 342008257}
+  - key: button_achievement
+    text: {fileID: 747972234}
+  - key: new_title
+    text: {fileID: 898012587}
+  - key: patch_note_infor
+    text: {fileID: 1721306799}
+  - key: button_update
+    text: {fileID: 1554609796}
+  - key: popup_update_title
+    text: {fileID: 1904497986}
+  - key: popup_update_content
+    text: {fileID: 219729366}
+  - key: heroSkill
+    text: {fileID: 1369553821}
+  shopTexts:
+  - key: shop_title
+    text: {fileID: 933763902}
+  - key: shop_daily_pack_title
+    text: {fileID: 137735488}
+  - key: shop_daily_pack_tag_free
+    text: {fileID: 1518625182}
+  - key: shop_help_money_1_title
+    text: {fileID: 1163401464}
+  - key: shop_help_money_1_content
+    text: {fileID: 208747521}
+  - key: shop_help_hot_deal_title
+    text: {fileID: 353649570}
+  - key: shop_help_hot_deal_content
+    text: {fileID: 767560713}
+  - key: shop_help_rider_shop_title
+    text: {fileID: 1279109668}
+  - key: shop_help_rider_shop_content
+    text: {fileID: 1759603123}
+  - key: shop_noti_buy_rider
+    text: {fileID: 523685146}
+  - key: shop_congratulation
+    text: {fileID: 776429009}
+  - key: shop_congratulation_rider_get
+    text: {fileID: 526078214}
+  - key: shop_sort_default
+    text: {fileID: 302439150}
+  - key: shop_sort_day
+    text: {fileID: 6543639}
+  - key: shop_sort_price
+    text: {fileID: 986742312}
+  - key: shop_help_quest_stamp_title
+    text: {fileID: 307728818}
+  - key: shop_help_quest_stamp_content
+    text: {fileID: 370042733}
+  riderTexts:
+  - key: hp_hero_1001
+    text: {fileID: 200392303}
+  - key: hp_hero_1002
+    text: {fileID: 200392303}
+  - key: skill_info_hero_stage
+    text: {fileID: 924966248}
+  - key: skill_info_hero_onstage
+    text: {fileID: 1335151489}
+  - key: skill_info_hero_lib
+    text: {fileID: 311323704}
+  loginTexts:
+  - key: login_popup_my_account
+    text: {fileID: 1551938768}
+  - key: login_popup_my_account
+    text: {fileID: 324133682}
+  - key: login_popup_my_account
+    text: {fileID: 1188661659}
+  - key: login_popup_title
+    text: {fileID: 834380176}
+  - key: login_popup_email
+    text: {fileID: 1662619698}
+  - key: login_popup_email
+    text: {fileID: 805372368}
+  - key: login_popup_email
+    text: {fileID: 551759336}
+  - key: login_popup_password
+    text: {fileID: 899317182}
+  - key: login_popup_password
+    text: {fileID: 1600202387}
+  - key: login_popup_password
+    text: {fileID: 721222755}
+  - key: login_popup_display_name
+    text: {fileID: 1219676554}
+  - key: login_popup_forget_password
+    text: {fileID: 900427068}
+  tutorialTexts:
+  - key: tutorial_how_to_win
+    text: {fileID: 214575292}
+  - key: tutorial_how_to_win_explain
+    text: {fileID: 258403387}
+  - key: tutorial_how_to_move
+    text: {fileID: 1176485747}
+  - key: tutorial_how_to_move_explain
+    text: {fileID: 990329408}
+  - key: tutorial_use_skill
+    text: {fileID: 347141291}
+  - key: tutorial_use_skill_explain
+    text: {fileID: 988431107}
+  - key: tutorial_replay
+    text: {fileID: 198036708}
+  - key: tutorial_replay_explain
+    text: {fileID: 1755067687}
+  questTexts:
+  - key: quest_daily_quest_title
+    text: {fileID: 1575417204}
+  - key: quest_reset_time
+    text: {fileID: 1882398623}
+  - key: quest_daily_quest_all_completed
+    text: {fileID: 2144063720}
+  - key: quest_help_daily_quest_title
+    text: {fileID: 276720941}
+  - key: quest_help_daily_quest_content
+    text: {fileID: 1062412084}
+  - key: quest_help_achivement_title
+    text: {fileID: 1306945500}
+  - key: quest_help_achivement_content
+    text: {fileID: 1663365495}
+  - key: quest_achievement_title
+    text: {fileID: 966803572}
+  settingTexts:
+  - key: setting_credit
+    text: {fileID: 1531124531}
+  - key: setting_credit
+    text: {fileID: 611278937}
+  - key: setting_credit
+    text: {fileID: 870303131}
+  - key: setting_credit
+    text: {fileID: 893526742}
+  - key: title_setting
+    text: {fileID: 476069395}
+  - key: title_setting
+    text: {fileID: 1816596771}
+  - key: setting_sound
+    text: {fileID: 380274929}
+  - key: setting_sound
+    text: {fileID: 1561758887}
+  - key: setting_language
+    text: {fileID: 172333264}
+  - key: setting_language
+    text: {fileID: 1179971951}
+  - key: setting_language_1
+    text: {fileID: 1319331969}
+  - key: setting_language_1
+    text: {fileID: 1368890415}
+  - key: setting_language_2
+    text: {fileID: 463861381}
+  - key: setting_language_2
+    text: {fileID: 1462566773}
+  - key: setting_sound_on
+    text: {fileID: 430676373}
+  - key: setting_sound_on
+    text: {fileID: 221296947}
+  - key: setting_sound_off
+    text: {fileID: 933505914}
+  - key: setting_sound_off
+    text: {fileID: 444314539}
+  - key: setting_privacy_policy
+    text: {fileID: 724047656}
+  - key: setting_privacy_policy
+    text: {fileID: 959161942}
+  - key: setting_term_of_condition
+    text: {fileID: 473268491}
+  - key: setting_term_of_condition
+    text: {fileID: 1309941687}
+  storyTexts:
+  - key: titleStory
+    text: {fileID: 1604394766}
+  - key: contentStory
+    text: {fileID: 1432656182}
+  fontTargets:
+  - {fileID: 1531124531}
+  - {fileID: 611278937}
+  - {fileID: 870303131}
+  - {fileID: 893526742}
+  - {fileID: 476069395}
+  - {fileID: 1816596771}
+  - {fileID: 380274929}
+  - {fileID: 1561758887}
+  - {fileID: 172333264}
+  - {fileID: 1179971951}
+  - {fileID: 1319331969}
+  - {fileID: 1368890415}
+  - {fileID: 463861381}
+  - {fileID: 1462566773}
+  - {fileID: 430676373}
+  - {fileID: 221296947}
+  - {fileID: 933505914}
+  - {fileID: 444314539}
+  - {fileID: 724047656}
+  - {fileID: 959161942}
+  - {fileID: 473268491}
+  - {fileID: 1309941687}
+  - {fileID: 1551938768}
+  - {fileID: 324133682}
+  - {fileID: 1188661659}
+  - {fileID: 1751505225}
+  - {fileID: 1162493642}
+  - {fileID: 1952998197}
+  - {fileID: 1845269453}
+  - {fileID: 1178841095}
+  - {fileID: 991602920}
+  - {fileID: 1052777514}
+  - {fileID: 200392303}
+  - {fileID: 924966248}
+  - {fileID: 1335151489}
+  - {fileID: 2008426736}
+  - {fileID: 1716528411}
+  - {fileID: 1834365800}
+  - {fileID: 2047003060}
+  - {fileID: 619859051}
+  - {fileID: 1609337647}
+  - {fileID: 1326881673}
+  - {fileID: 1447646094}
+  - {fileID: 1617211510}
+  - {fileID: 1793376291}
+  - {fileID: 1437908053}
+  - {fileID: 2146023779}
+  - {fileID: 589115172}
+  - {fileID: 770830522}
+  - {fileID: 1969289696}
+  - {fileID: 1540867179}
+  - {fileID: 1785771996}
+  - {fileID: 350130831}
+  - {fileID: 406958810}
+  - {fileID: 175776119}
+  - {fileID: 1602022190}
+  - {fileID: 1779120542}
+  - {fileID: 338509965}
+  - {fileID: 936216742}
+  - {fileID: 653249979}
+  - {fileID: 297331729}
+  - {fileID: 1282043682}
+  - {fileID: 1624427818}
+  - {fileID: 893680220}
+  - {fileID: 1245808886}
+  - {fileID: 311323704}
+  - {fileID: 1300138021}
+  - {fileID: 77643885}
+  - {fileID: 1894846919}
+  - {fileID: 717930432}
+  - {fileID: 263808812}
+  - {fileID: 734580216}
+  - {fileID: 1034766464}
+  - {fileID: 906469393}
+  - {fileID: 494217652}
+  - {fileID: 739554874}
+  - {fileID: 746968770}
+  - {fileID: 1285092446}
+  - {fileID: 1983599132}
+  - {fileID: 1232048066}
+  - {fileID: 1857730459}
+  - {fileID: 55464947}
+  - {fileID: 2022369562}
+  - {fileID: 449492879}
+  - {fileID: 557112851}
+  - {fileID: 1389397438}
+  - {fileID: 1256662003}
+  - {fileID: 150770224}
+  - {fileID: 188044090}
+  - {fileID: 170164427}
+  - {fileID: 1303902065}
+  - {fileID: 169263425}
+  - {fileID: 1357842120}
+  - {fileID: 532995934}
+  - {fileID: 656776342}
+  - {fileID: 1365002219}
+  - {fileID: 214575292}
+  - {fileID: 258403387}
+  - {fileID: 1176485747}
+  - {fileID: 990329408}
+  - {fileID: 347141291}
+  - {fileID: 988431107}
+  - {fileID: 198036708}
+  - {fileID: 1755067687}
+  - {fileID: 933763902}
+  - {fileID: 137735488}
+  - {fileID: 1518625182}
+  - {fileID: 2033648950}
+  - {fileID: 2006396954}
+  - {fileID: 1163401464}
+  - {fileID: 208747521}
+  - {fileID: 353649570}
+  - {fileID: 767560713}
+  - {fileID: 1279109668}
+  - {fileID: 1759603123}
+  - {fileID: 576316765}
+  - {fileID: 333122601}
+  - {fileID: 523685146}
+  - {fileID: 776429009}
+  - {fileID: 526078214}
+  - {fileID: 302439150}
+  - {fileID: 6543639}
+  - {fileID: 986742312}
+  - {fileID: 1760437715}
+  - {fileID: 336160181}
+  - {fileID: 1681438487}
+  - {fileID: 715581764}
+  - {fileID: 822707990}
+  - {fileID: 2004464478}
+  - {fileID: 1516579676}
+  - {fileID: 1524311783}
+  - {fileID: 1568412373}
+  - {fileID: 2013842190}
+  - {fileID: 276781892}
+  - {fileID: 1111841791}
+  - {fileID: 1136414060}
+  - {fileID: 380925875}
+  - {fileID: 2134160986}
+  - {fileID: 907204765}
+  - {fileID: 834380176}
+  - {fileID: 1662619698}
+  - {fileID: 805372368}
+  - {fileID: 551759336}
+  - {fileID: 899317182}
+  - {fileID: 1600202387}
+  - {fileID: 721222755}
+  - {fileID: 1219676554}
+  - {fileID: 900427068}
+  - {fileID: 872618707}
+  - {fileID: 716411569}
+  - {fileID: 330918104}
+  - {fileID: 943426148}
+  - {fileID: 671354427}
+  - {fileID: 278036621}
+  - {fileID: 1728391801}
+  - {fileID: 1550271055}
+  - {fileID: 168264530}
+  - {fileID: 1419654295}
+  - {fileID: 44094833}
+  - {fileID: 258421869}
+  - {fileID: 1604394766}
+  - {fileID: 1432656182}
+  - {fileID: 1575417204}
+  - {fileID: 1854688603}
+  - {fileID: 342008257}
+  - {fileID: 747972234}
+  - {fileID: 1882398623}
+  - {fileID: 2144063720}
+  - {fileID: 276720941}
+  - {fileID: 1062412084}
+  - {fileID: 1306945500}
+  - {fileID: 1663365495}
+  - {fileID: 966803572}
+  - {fileID: 307728818}
+  - {fileID: 370042733}
+  - {fileID: 898012587}
+  - {fileID: 1721306799}
+  - {fileID: 1554609796}
+  - {fileID: 1904497986}
+  - {fileID: 219729366}
+  - {fileID: 1369553821}
+  norTexts:
+  - key: login_popup_email_guide_1
+    text: {fileID: 485049199}
+  - key: login_popup_password_guide_1
+    text: {fileID: 1709535224}
+  - key: login_popup_email_guide_2
+    text: {fileID: 113066682}
+  - key: login_popup_password_guide_2
+    text: {fileID: 74419772}
+  - key: login_popup_display_name_guide
+    text: {fileID: 1261749508}
+  - key: login_popup_email_guide_1
+    text: {fileID: 1226253855}
 --- !u!1 &1524311781
 GameObject:
   m_ObjectHideFlags: 0
@@ -96394,7 +96974,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -12.3498535, y: -171.99988}
+  m_AnchoredPosition: {x: -12.349731, y: -171.99951}
   m_SizeDelta: {x: -102.38, y: -1716.13}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1540078559
@@ -105360,7 +105940,7 @@ MonoBehaviour:
       m_Calls: []
   m_text: NO
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 50736f3ec3a63dd48b5b179bc4278cfb, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 7317eec8898dcfa4789df435953d577f, type: 2}
   m_sharedMaterial: {fileID: 328957574042116674, guid: 50736f3ec3a63dd48b5b179bc4278cfb, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
@@ -107201,6 +107781,8 @@ MonoBehaviour:
     price: 0
     name: 
     hp: 0
+    mp: 0
+    currentMP: 0
     icon: {fileID: 0}
     isUnlock: 0
     heroImage: {fileID: 0}
@@ -116577,6 +117159,8 @@ MonoBehaviour:
     price: 0
     name: 
     hp: 0
+    mp: 0
+    currentMP: 0
     icon: {fileID: 0}
     isUnlock: 0
     heroImage: {fileID: 0}
@@ -117323,6 +117907,8 @@ MonoBehaviour:
     price: 0
     name: Itsui
     hp: 5
+    mp: 0
+    currentMP: 0
     icon: {fileID: 21300000, guid: d2deced4e423b8d4d89e5959524325e5, type: 3}
     isUnlock: 1
     heroImage: {fileID: 21300000, guid: 87739e5e884bd284180ca5851abadabd, type: 3}
@@ -117333,6 +117919,8 @@ MonoBehaviour:
     price: 0
     name: Nigou
     hp: 7
+    mp: 0
+    currentMP: 0
     icon: {fileID: 21300000, guid: e8aa979cde5c5de4ca1c58800a529172, type: 3}
     isUnlock: 0
     heroImage: {fileID: 21300000, guid: b93af5c73b47705488d56795c442c9b2, type: 3}
@@ -117343,6 +117931,8 @@ MonoBehaviour:
     price: 29999
     name: Skulz
     hp: 8
+    mp: 0
+    currentMP: 0
     icon: {fileID: 21300000, guid: 1da4970e07482834db5dc34c080253db, type: 3}
     isUnlock: 0
     heroImage: {fileID: 21300000, guid: 6df6b1b0e05455b4788ae6e05c092a1e, type: 3}
@@ -117353,6 +117943,8 @@ MonoBehaviour:
     price: 29999
     name: Akale
     hp: 8
+    mp: 0
+    currentMP: 0
     icon: {fileID: 21300000, guid: e897bdb2bf5f51540a032531e4b0fd67, type: 3}
     isUnlock: 0
     heroImage: {fileID: 21300000, guid: 2d6afc26bc3c1e74eb8b2776021dc0ce, type: 3}
@@ -117416,7 +118008,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -12.3498535, y: -161.77014}
+  m_AnchoredPosition: {x: -12.349731, y: -161.76978}
   m_SizeDelta: {x: -102.38, y: -831.9}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1905144567

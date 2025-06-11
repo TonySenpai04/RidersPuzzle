@@ -212,7 +212,7 @@ public class AccountLogin : MonoBehaviour
             return;
         }
 
-        errorTextRegister.text = "✅ Đăng ký thành công!";
+        errorTextRegister.text = LocalizationManager.instance.GetLocalizedText("login_popup_register_success");
         emailLogin.text = emailRegister.text;
         passwordLogin.text = passwordRegister.text;
         loadingSpning.gameObject.SetActive(false);

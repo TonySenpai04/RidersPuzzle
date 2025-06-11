@@ -30,9 +30,10 @@ public class HeroInfoManager : MonoBehaviour
             DataHero hero = heroManager.heroDatas.FirstOrDefault(h => h.id == id);
             panelInfo.gameObject.SetActive (true);
             txtHealth.text = hero.hp.ToString();
-            ApplyText.instance.UpdateSkillInfoStage(id);
+            // ApplyText.instance.UpdateSkillInfoStage(id);
+            ApplyTextManager.instance.UpdateSkillInfoStage(id);
             //   txtSkill.text = hero.skillDescription;
-          //  UpdateArrowPosition(clickedObject);
+            //  UpdateArrowPosition(clickedObject);
 
 
         }
@@ -44,7 +45,8 @@ public class HeroInfoManager : MonoBehaviour
         DataHero hero = heroManager.heroDatas.FirstOrDefault(h => h.id == PlayerController.instance.currentHero.id); 
         panelInfoInGame.gameObject.SetActive(true);
         txtHealthInGame.text = hero.hp.ToString();
-        ApplyText.instance.UpdateSkillInfoOnStage(PlayerController.instance.currentHero.id);
+        // ApplyText.instance.UpdateSkillInfoOnStage(PlayerController.instance.currentHero.id);
+        ApplyTextManager.instance.UpdateSkillInfoOnStage(PlayerController.instance.currentHero.id);
         // txtSkillInGame.text = hero.skillDescription;
     }
     private void UpdateArrowPosition(RectTransform clickedObject)

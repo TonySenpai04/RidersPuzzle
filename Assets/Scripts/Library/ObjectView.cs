@@ -43,7 +43,8 @@ public class ObjectView : MonoBehaviour
             HiddenObject obj = seenObjects[index];
             SetObject(obj.id, obj.sprite, obj.name);
             BackgroundManager.instance.SetObjectBg(id);
-            ApplyText.instance.UpdateObjectInfo(id);
+            //  ApplyText.instance.UpdateObjectInfo(id);
+            ApplyTextManager.instance.UpdateObjectInfo(id);
         }
     }
     public void NextObject()
