@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class GameManager : MonoBehaviour
 {
@@ -25,7 +26,9 @@ public class GameManager : MonoBehaviour
     private bool hasPlayedWinSound = false; 
     private bool hasPlayedLoseSound = false;
 
-
+    public TextMeshProUGUI goldRewardTXt;
+    public TextMeshProUGUI expRewardTxt;
+    public Image expRewardImg;
     private void Awake()
     {
         instance = this; 
@@ -165,7 +168,14 @@ public class GameManager : MonoBehaviour
                 AchievementManager.instance.UpdateQuest(quest.questId, 1, 0);
             }
             LevelManager.instance.UnlockNextLevel();
-            hasPlayedWinSound = true;
+            ResourceManager.Instance.AddResource(0, 1, 20);
+            goldRewardTXt.text = "20";
+            expRewardImg.sprite = ResourceManager.Instance.resourceInfos.Find(r =>
+                    r.resourceType == 2 && r.resourceId == StageHeroController.instance.currentId).icon;
+            ResourceManager.Instance.AddResource(2, StageHeroController.instance.currentId, 50);
+            expRewardTxt.text = "50";
+
+          hasPlayedWinSound = true;
         }
         // SaveGameManager.instance.SaveLevelProgress(LevelManager.instance.GetCurrentLevelData().level, true, true);
         panelWin.SetActive(true);

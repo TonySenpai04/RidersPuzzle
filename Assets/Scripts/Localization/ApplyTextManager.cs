@@ -35,6 +35,7 @@ public class ApplyTextManager : MonoBehaviour, ILocalizeObject
     [Header("Quest Texts")] public List<LocalizedTextItem> questTexts = new();
     [Header("Setting Texts")] public List<LocalizedTextItem> settingTexts = new();
     [Header("Story Texts")] public List<LocalizedTextItem> storyTexts = new();
+    [Header("Enum Type Texts")] public List<LocalizedTextItem> enumTypeTexts = new();
     [Header("Font Targets")] public List<TMP_Text> fontTargets = new();
     [Header("Nor texts")]
     public List<LocalizedTextNorItem> norTexts = new();
@@ -51,6 +52,8 @@ public class ApplyTextManager : MonoBehaviour, ILocalizeObject
     {
         UpdateLibInfo();
         UpdateToturialInfo();
+        UpdateEnumType();
+    
 
     }
     private TMP_Text GetTextByKey(string key)
@@ -206,9 +209,18 @@ public class ApplyTextManager : MonoBehaviour, ILocalizeObject
         ApplyLocalizedTexts(questTexts, textLocalizer);
         ApplyLocalizedTexts(loginTexts, textLocalizer);
         ApplyLocalizedTexts(storyTexts, textLocalizer);
+        ApplyLocalizedTexts(enumTypeTexts, textLocalizer);
         ApplyLocalizedNorTexts(norTexts, textLocalizer);
     }
-
+    void UpdateEnumType()
+    {
+        var richText = LocalizationManager.instance.GetLocalizedRichText();
+        var plainText = LocalizationManager.instance.GetLocalizedTexts();
+        foreach (var key in enumTypeTexts)
+        {
+            SetInfo(key.key, GetTextByKey(key.key), richText, plainText);
+        }
+    }
     public void ApplyFont(ref Dictionary<string, TMP_FontAsset> localizedFonts)
     {
         var fontLocalizer = new FontLocalizer(localizedFonts);

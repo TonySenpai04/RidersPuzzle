@@ -30,7 +30,12 @@ FALSE,setting_credit,Credit,Credit,Roboto-Regular SDF,Đội ngũ phát triển,
 FALSE,title_notification,Notification,Notification,RobotoSemi-Bold SDF,Thông báo,RobotoSemi-Bold SDF,
 FALSE,popup_detail_quit,Are you sure to quit this stage?,Are you sure to quit this stage?,Roboto-Regular SDF,Bạn có chắc chắn muốn thoát màn chơi này?,Roboto-Regular SDF,
 FALSE,popup_detail_language_change,Game will be reloaded to update new changes.,Game will be reloaded to update new changes.,Roboto-Regular SDF,Trò chơi sẽ được tải lại để cập nhật những thay đổi mới.,Roboto-Regular SDF,
-FALSE,popup_detail_credit,Thank you for playing our game! Developer: Tony & Glory. Game designer: KazuD. Don’t hesitate to leave review us on store. Support mail: nhatlongnguyen1507@gmail.com,Thank you for playing our game! Developer: Tony & Glory. Game designer: KazuD. Don’t hesitate to leave review us on store. Support mail: nhatlongnguyen1507@gmail.com,Roboto-Regular SDF,Cảm ơn các bạn đã dành thời gian chơi game! Developer: Tony & Glory. Đừng ngại để lại đánh giá cho game trên store nhé! Email hỗ trợ: nhatlongnguyen1507@gmail.com,Roboto-Regular SDF,
+FALSE,popup_detail_credit,Thank you for playing our game! Developer: Tony & Glory. Game designer: KazuD. Don’t hesitate to leave review us on store. Support mail: nhatlongnguyen1507@gmail.com,Thank you for playing our game! Developer: Tony & Glory. Game designer: KazuD. Don’t hesitate to leave review us on store. Support mail: nhatlongnguyen1507@gmail.com,Roboto-Regular SDF,"Cảm ơn các bạn đã dành thời gian chơi game!
+Lập trình viên: Tony.
+Game Designer: KazuD
+Cùng với sự góp sức của Glory, Nga-chan!
+Đừng ngại để lại đánh giá cho game trên cửa hàng nhé!
+Email hỗ trợ: nhatlongnguyen1507@gmail.com",Roboto-Regular SDF,
 FALSE,button_yes,YES,YES,RobotoSemi-Bold SDF,CÓ,RobotoSemi-Bold SDF,
 FALSE,button_no,NO,NO,RobotoSemi-Bold SDF,KHÔNG,RobotoSemi-Bold SDF,
 FALSE,button_ok,OK,OK,RobotoSemi-Bold SDF,OK,RobotoSemi-Bold SDF,
@@ -125,3 +130,15 @@ FALSE,loading_screen_tip_3,Don't forget claim daily gift in Shop everyday!,Don't
 FALSE,loading_screen_tip_4,Each Rider has a unique skill.,Each Rider has a unique skill.,Roboto-Regular SDF,Mỗi Rider đều có một kỹ năng riêng biệt.,Roboto-Regular SDF,
 FALSE,loading_screen_tip_5,Each chapter of story is unlocked after winning every 30 stages,Each chapter of story is unlocked after winning every 30 stages,Roboto-Regular SDF,Mỗi chương truyện được mở khoá khi thắng 30 màn chơi.,Roboto-Regular SDF,
 FALSE,quest_stamp_earn_tip,You can earn more stamp tomorrow,You can earn more stamp tomorrow,Roboto-Regular SDF,Bạn có thể nhận thêm dấu ấn vào ngày mai,Roboto-Regular SDF,
+FALSE,stage_all_completed,All current stages have been completed,All current stages have been completed,Roboto-Regular SDF,Bạn đã hoàn thành tất cả màn chơi hiện tại,Roboto-Regular SDF,
+FALSE,laboratory_title,LABORATORY,LABORATORY,RobotoSemi-Bold SDF,PHÒNG THÍ NGHIỆM,RobotoSemi-Bold SDF,
+FALSE,button_rider_enhance,RIDER ENHANCE,RIDER ENHANCE,RobotoSemi-Bold SDF,NÂNG CẤP RIDER,RobotoSemi-Bold SDF,
+FALSE,button_inventory,INVENTORY,INVENTORY,RobotoSemi-Bold SDF,TÚI ĐỒ,RobotoSemi-Bold SDF,
+FALSE,button_level_up,LEVEL UP,LEVEL UP,RobotoSemi-Bold SDF,NÂNG CẤP,RobotoSemi-Bold SDF,
+FALSE,button_regen,REGEN,REGEN,RobotoSemi-Bold SDF,HỒI PHỤC MP,RobotoSemi-Bold SDF,
+FALSE,succes_rate,Success rate:,Success rate:,Roboto-Regular SDF,Tỷ lệ thành công:,RobotoSemi-Bold SDF,
+FALSE,level_up_failed,Level up failed,Level up failed,Roboto-Regular SDF,Lên cấp không thành công,Roboto-Regular SDF,
+FALSE,level_up_succeeded,Level up succeeded,Level up succeeded,Roboto-Regular SDF,Lên cấp thành công,Roboto-Regular SDF,
+FALSE,button_cancel,CANCEL,CANCEL,RobotoSemi-Bold SDF,HỦY BỎ,RobotoSemi-Bold SDF,
+FALSE,level_title,LEVEL,LEVEL,Roboto-Regular SDF,CẤP,Roboto-Regular SDF,
+FALSE,rider_enhance,RIDER ENHANCE,RIDER ENHANCE,RobotoSemi-Bold SDF,NÂNG CẤP RIDER,RobotoSemi-Bold SDF,

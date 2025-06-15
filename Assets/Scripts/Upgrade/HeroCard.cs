@@ -17,7 +17,7 @@ public class HeroCard : MonoBehaviour
         this.heroID = heroID;
         this.upgradeView = upgradeView;
         this.heroCardview = heroCardView;
-        levelTxt.text = "LEVEL "+level.ToString();
+        levelTxt.text = LocalizationManager.instance.GetLocalizedText("level_title") + " " +level.ToString();
         healthTxt.text = health.ToString();
         heroImg.sprite = heroSprite;
     }

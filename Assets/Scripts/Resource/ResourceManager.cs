@@ -75,6 +75,18 @@ public class ResourceManager : MonoBehaviour
         }
         SaveResources();
     }
+    public void TestAdd()
+    {
+        SetResource(0,1,100000000);
+        SetResource(2, 1001, 100000000);
+        SetResource(2, 1002, 100000000);
+        SetResource(2, 1003, 100000000);
+        SetResource(2, 1004, 100000000);
+        SetResource(3, 1001, 100000000);
+        SetResource(3, 1002, 100000000);
+        SetResource(3, 1003, 100000000);
+        SetResource(3, 1004, 100000000);
+    }
     public void SetResource(int type, int id, int amount)
     {
         var key = (type, id);

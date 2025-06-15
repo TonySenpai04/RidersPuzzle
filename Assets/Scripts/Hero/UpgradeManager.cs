@@ -90,6 +90,33 @@ public class UpgradeManager : MonoBehaviour
             return false;
         }
     }
-    
+    public float GetRengenMP()
+    {
+        return ReadCSVDataHeroStat.instance.GetRegenAmount();
+    }
+    public void RegenMP(int heroID,int amount)
+    {
+        var heroDatas = HeroManager.instance.heroDatas;
+        int index = heroDatas.FindIndex(h => h.id == heroID);
+        if (index == -1)
+        {
+            Debug.LogWarning("❌ Không tìm thấy hero.");
+            return;
+        }
+
+        DataHero heroData = heroDatas[index];
+        var currentData = ReadCSVDataHeroStat.instance.GetHeroLevelData(heroID, heroData.level);
+
+        DataHero hero = heroDatas[index];
+        
+        hero.currentMP +=amount;
+       
+        heroDatas[index] = hero;
+
+        HeroManager.instance.SaveHeroesData();
+        HeroManager.instance.SaveHeroesDataToFirebase();
+
+    }
+
 }
 

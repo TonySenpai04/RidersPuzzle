@@ -1,0 +1,23 @@
+duplicated,key,Origin,English (en),Font,Vietnamese (vi),Font
+FALSE,rider_stat_type_1,HP,HP,Roboto-Regular SDF,HP,Roboto-Regular SDF
+FALSE,rider_stat_type_2,MP,MP,Roboto-Regular SDF,MP,Roboto-Regular SDF
+FALSE,feature_1,ADVENTURE,ADVENTURE,Roboto-Regular SDF,THÁM HIỂM,Roboto-Regular SDF
+FALSE,feature_2,RIDECODEX,RIDECODEX,Roboto-Regular SDF,RIDECODEX,Roboto-Regular SDF
+FALSE,feature_3,SHOP,SHOP,Roboto-Regular SDF,CỬA HÀNG,Roboto-Regular SDF
+FALSE,feature_4,DAILY QUEST,DAILY QUEST,Roboto-Regular SDF,NHIỆM VỤ HÀNG NGÀY,Roboto-Regular SDF
+FALSE,feature_5,LABROTORY,LABROTORY,Roboto-Regular SDF,PHÒNG THÍ NGHIỆM,Roboto-Regular SDF
+FALSE,feature_1_mode_1,Endless,Endless,Roboto-Regular SDF,Vô Tận,Roboto-Regular SDF
+FALSE,feature_1_mode_2,Labyrinth,Labyrinth,Roboto-Regular SDF,Mê Cung,Roboto-Regular SDF
+FALSE,resource_type_0,Currency,Currency,Roboto-Regular SDF,Tiền tệ,Roboto-Regular SDF
+FALSE,resource_type_1,Avatar,Avatar,Roboto-Regular SDF,Ảnh đại diện,Roboto-Regular SDF
+FALSE,resource_type_2,Rider EXP,Rider EXP,Roboto-Regular SDF,Rider EXP,Roboto-Regular SDF
+FALSE,resource_type_3,Rider MP,Rider MP,Roboto-Regular SDF,Rider MP,Roboto-Regular SDF
+FALSE,exp_1001,{0} EXP,{0} EXP,Roboto-Regular SDF,EXP {0},Roboto-Regular SDF
+FALSE,exp_1002,{0} EXP,{0} EXP,Roboto-Regular SDF,EXP {0},Roboto-Regular SDF
+FALSE,exp_1003,{0} EXP,{0} EXP,Roboto-Regular SDF,EXP {0},Roboto-Regular SDF
+FALSE,exp_1004,{0} EXP,{0} EXP,Roboto-Regular SDF,EXP {0},Roboto-Regular SDF
+FALSE,mp_1001,{0} Mastery Point,{0} Mastery Point,Roboto-Regular SDF,Điểm thông thạo {0},Roboto-Regular SDF
+FALSE,mp_1002,{0} Mastery Point,{0} Mastery Point,Roboto-Regular SDF,Điểm thông thạo {0},Roboto-Regular SDF
+FALSE,mp_1003,{0} Mastery Point,{0} Mastery Point,Roboto-Regular SDF,Điểm thông thạo {0},Roboto-Regular SDF
+FALSE,mp_1004,{0} Mastery Point,{0} Mastery Point,Roboto-Regular SDF,Điểm thông thạo {0},Roboto-Regular SDF
+FALSE,resource_type_0_id_1,Hapi,Hapi,Roboto-Regular SDF,Hapi,

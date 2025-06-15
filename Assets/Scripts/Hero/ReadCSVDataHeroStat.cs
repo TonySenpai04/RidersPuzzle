@@ -26,12 +26,21 @@ public class UpgradeRequirement
     public int resourceId;
     public int amount;
 }
+[System.Serializable]
+public class RegenRequirement
+{
+    public int resourceType;
+    public int resourceId;
+    public int amount;
+}
 
 public class ReadCSVDataHeroStat : MonoBehaviour
 {
     public List<TextAsset> textAssets;
+    public TextAsset regenAsset;
     public static ReadCSVDataHeroStat instance;
     public List<RiderData> riderDatas;
+    public RegenRequirement regenDatas;
     public void Awake()
     {
         instance=this;
@@ -40,6 +49,8 @@ public class ReadCSVDataHeroStat : MonoBehaviour
         {
             LoadRiderUpgradeData(textAsset);
         }
+        LoadRegenData(regenAsset);
+        Debug.Log(regenDatas.amount+"-"+regenDatas.resourceId+"-"+regenDatas.resourceType);
         foreach (RiderData rider in riderDatas)
         {
             // Debug Rider ID và Name trong một dòng
@@ -72,6 +83,38 @@ public class ReadCSVDataHeroStat : MonoBehaviour
 
 
     }
+    public float GetRegenAmount()
+    {
+        return regenDatas.amount;
+    }
+    public void LoadRegenData(TextAsset csvFile)
+    {
+
+        var lines = csvFile.text.Split('\n');
+        for (int i = 1; i < lines.Length; i++) // Bỏ dòng header
+        {
+            var line = lines[i].Trim();
+            if (string.IsNullOrWhiteSpace(line)) continue;
+
+            var parts = line.Split(',');
+
+
+
+            int resourceType = int.Parse(parts[1]);
+            int resourceId = int.Parse(parts[2]);
+            int amount = int.Parse(parts[3]);
+            regenDatas.amount = amount;
+            regenDatas.resourceType = resourceType;
+            regenDatas.resourceId = resourceId;
+
+            
+
+
+        }
+
+      
+    }
+
     public void LoadRiderUpgradeData(TextAsset csvFile)
     {
         var riders = new Dictionary<int, RiderData>();
@@ -138,6 +181,13 @@ public class ReadCSVDataHeroStat : MonoBehaviour
         var rider = riderDatas.FirstOrDefault(r => r.riderId == heroId);
         if (rider == null) return null;
         return rider.levels.FirstOrDefault(l => l.level == level);
+    }
+    public int GetMaxLevel(int heroId)
+    {
+        var rider = riderDatas.FirstOrDefault(r => r.riderId == heroId);
+        if (rider == null || rider.levels.Count == 0) return 0;
+
+        return rider.levels.Max(l => l.level);
     }
 
 }
