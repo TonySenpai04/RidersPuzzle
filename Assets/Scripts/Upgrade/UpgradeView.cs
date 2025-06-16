@@ -139,6 +139,10 @@ public class UpgradeView : MonoBehaviour
         regenBtn.interactable = canRegen;
         regenBtn.image.sprite = canRegen ? levelupActive : levelupNotActive;
         levelupBtn.image.sprite = canUpgrade ? levelupActive : levelupNotActive;
+        if (!canUpgrade)
+        {
+            popupUpgrade.SetActive(false);
+        }
         SetlevelUpData(currentData, upgradeData);
         UpdateLevelCircle(currentData.level);
     }
@@ -149,7 +153,7 @@ public class UpgradeView : MonoBehaviour
         currentMP = HeroManager.instance.heroDatas.Find(h => h.id == currentID).currentMP;
         if (maxMp <= 0) {
             mpBar.value = 0;
-            mpBarFillTxt.text = "";
+            mpBarFillTxt.text = "0MP";
             return;
         }
         float fillAmount = Mathf.Clamp01((float)currentMP / maxMp);

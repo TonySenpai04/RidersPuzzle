@@ -210,7 +210,7 @@ public class AchievementManager : MonoBehaviour
         {
             if (quest.CheckCompletion())
             {
-                Debug.Log($"Quest {quest.questId} completed!");
+               // Debug.Log($"Quest {quest.questId} completed!");
             }
         }
     }

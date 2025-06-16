@@ -47,10 +47,12 @@ public class ResourceManager : MonoBehaviour
 
     
     }
-    private async void Start()
+    private  void Start()
     {
-        await Task.Delay(3500);
+        
         LoadResources();
+    
+       
     }
     public int GetQuantity(int type, int id)
     {
@@ -134,7 +136,7 @@ public class ResourceManager : MonoBehaviour
             resourceDict = wrapper.ToDictionary();
 
         }
-        LoadResourcesFromFirebase();
+        
         SetResource(0,1,  GoldManager.instance.GetGold());
         Debug.Log("da load");
 
@@ -185,8 +187,10 @@ public class ResourceManager : MonoBehaviour
                 if (task.IsCompletedSuccessfully && task.Result.Exists)
                 {
                     string json = task.Result.GetRawJsonValue();
+                    Debug.Log(json);
                     var wrapper = JsonUtility.FromJson<ResourceSaveWrapper>(json);
                     resourceDict = wrapper.ToDictionary();
+                    SetResource(0, 1, GoldManager.instance.GetGold());
                     Debug.Log("Resources loaded from Firebase");
                 }
                 else

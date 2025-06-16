@@ -158,7 +158,7 @@ public class AccountLogin : MonoBehaviour
         AchievementManager.instance.SyncLocalQuestsToFirebaseIfNotExist();
         AchievementManager.instance.LoadQuestData();
         HeroManager.instance.LoadHeroesDataFromFirebase();
-
+        ResourceManager.Instance.LoadResourcesFromFirebase();
         SaveLoginState();
         UpdateUIAfterLogin();
     }
