@@ -51,6 +51,7 @@ public class UpgradeView : MonoBehaviour
     public int maxLevel;
     public RectTransform levelPointer;
     public float radius = 100f;
+    public Button regenAccessBtn;
     public void SetUpgradeView(RiderUpgradeLevel currentData, RiderUpgradeLevel upgradeData)
     {
         int hepi = 0;
@@ -214,22 +215,37 @@ public class UpgradeView : MonoBehaviour
     public void OnPlusClicked()
     {
         int missing = maxMp - currentMP;
-
+        Color normalColor = Color.black;
+        Color redColor = Color.red;
+        float amount = UpgradeManager.Instance.GetRengenMP() * regenAmount;
         if (regenAmount < missing)
         {
             regenAmount++;
-            regenAmountTxt.text = (UpgradeManager.Instance.GetRengenMP() * regenAmount).ToString();
+            regenAmountTxt.text = amount.ToString();
+            bool hasRegen = amount > ResourceManager.Instance.GetQuantity(ReadCSVDataHeroStat.instance.regenDatas.resourceId,
+                 ReadCSVDataHeroStat.instance.regenDatas.resourceType);
+             regenAmountTxt.color= hasRegen? normalColor : redColor;
+            regenAccessBtn.interactable = hasRegen;
         }
     }
 
     public void OnMinusClicked()
     {
         regenAmount--;
-        regenAmountTxt.text = (UpgradeManager.Instance.GetRengenMP() * regenAmount).ToString();
+        Color normalColor = Color.black;
+        Color redColor = Color.red;
+        float amount = UpgradeManager.Instance.GetRengenMP() * regenAmount;
+        regenAmountTxt.text = amount.ToString();
+        bool hasRegen = amount > ResourceManager.Instance.GetQuantity(ReadCSVDataHeroStat.instance.regenDatas.resourceId,
+                ReadCSVDataHeroStat.instance.regenDatas.resourceType);
+        regenAmountTxt.color = hasRegen ? normalColor : redColor;
+        regenAccessBtn.interactable = hasRegen;
         if (regenAmount < 1)
         {
             regenAmount = maxMp - currentMP;
             regenAmountTxt.text = (UpgradeManager.Instance.GetRengenMP() * regenAmount).ToString();
+            regenAmountTxt.color = hasRegen ? normalColor : redColor;
+            regenAccessBtn.interactable = hasRegen;
         }
     }
     public void OnClickRegen()
@@ -245,6 +261,9 @@ public class UpgradeView : MonoBehaviour
         ResourceManager.Instance.ConsumeResource(0, 1, (int)UpgradeManager.Instance.GetRengenMP() * regenAmount);
         currentMP = HeroManager.instance.heroDatas.Find(h => h.id == currentID).currentMP;
         currentRegenTxt.text = LocalizationManager.instance.GetLocalizedText("rider_stat_type_2") + ": " + currentMP.ToString();
+        int newLevel = HeroManager.instance.GetHero(currentID).Value.level;
+        var newCurrentData = ReadCSVDataHeroStat.instance.GetHeroLevelData(currentID, newLevel);
+        UpdateMP(newCurrentData);
     }
     private void UpdateLevelCircle(int currentLevel)
     {
@@ -281,6 +300,7 @@ public class UpgradeView : MonoBehaviour
             var newUpgradeData = ReadCSVDataHeroStat.instance.GetHeroLevelData(currentID, newLevel + 1);
             UpdateLevelCircle(newCurrentData.level);
             UpdateMP(newCurrentData);
+            UpdateLevelCircle(newCurrentData.level);
             if (newCurrentData != null && newUpgradeData != null)
             {
                 // Gọi lại hàm để update UI
@@ -298,6 +318,12 @@ public class UpgradeView : MonoBehaviour
         }
         else
         {
+            int newLevel = HeroManager.instance.GetHero(currentID).Value.level; // Giả sử bạn có field `level`
+            var newCurrentData = ReadCSVDataHeroStat.instance.GetHeroLevelData(currentID, newLevel);
+            var newUpgradeData = ReadCSVDataHeroStat.instance.GetHeroLevelData(currentID, newLevel + 1);
+            UpdateLevelCircle(newCurrentData.level);
+            UpdateMP(newCurrentData);
+            SetUpgradeView(newCurrentData, newUpgradeData);
             NotiManager.instance.ShowNotification(LocalizationManager.instance.GetLocalizedText("level_up_failed"));
         }
     }
