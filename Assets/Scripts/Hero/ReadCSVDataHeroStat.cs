@@ -50,7 +50,7 @@ public class ReadCSVDataHeroStat : MonoBehaviour
             LoadRiderUpgradeData(textAsset);
         }
         LoadRegenData(regenAsset);
-        Debug.Log(regenDatas.amount+"-"+regenDatas.resourceId+"-"+regenDatas.resourceType);
+
         foreach (RiderData rider in riderDatas)
         {
             // Debug Rider ID và Name trong một dòng
