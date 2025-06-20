@@ -22,7 +22,7 @@ public class InventoryPanelUI : MonoBehaviour
     {
         if (items.Count <= 0)
             return;
-       // RefreshAll();
+        RefreshAll();
     }
     void RefreshAll()      
     {
