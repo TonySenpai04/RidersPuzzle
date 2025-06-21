@@ -39,7 +39,7 @@ public class HiddenObjectManager : MonoBehaviour
             {
                 powerUpObjects.Add(obj);
             }
-            else
+            else if(obj.type == HiddenObject.ObjectType.Obstacle)
             {
                 obstacleObjects.Add(obj);
             }
