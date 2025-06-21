@@ -14,12 +14,15 @@ public class UpgadeUIController : MonoBehaviour
     }
     private void OnEnable()
     {
+        Refressh();
+    }
+    public void Refressh()
+    {
         btnGroup.SetActive(true);
         UpgradeView.SetActive(false);
         enhaceView.SetActive(false);
         inventoryView.SetActive(false);
     }
-
   
     void Update()
     {

@@ -39975,15 +39975,15 @@ MonoBehaviour:
   - resourceType: 2
     resourceId: 1001
     resourceName: Rider 1001 EXP
-    icon: {fileID: 21300000, guid: 095889a8437ede9459f63d706f92fb9b, type: 3}
+    icon: {fileID: 21300000, guid: c639a302ca930a249815d3ae84eb5166, type: 3}
   - resourceType: 2
     resourceId: 1002
     resourceName: Rider 1002 EXP
-    icon: {fileID: 21300000, guid: dc91153bfdf7124488c1656062ec0f36, type: 3}
+    icon: {fileID: 21300000, guid: 178f127ac44600245a7554bf96834ddb, type: 3}
   - resourceType: 2
     resourceId: 1003
     resourceName: Rider 1003 EXP
-    icon: {fileID: 21300000, guid: b6f4028f2c4261c42ba5b4b76b405284, type: 3}
+    icon: {fileID: 21300000, guid: 48d4497dc4a54234087e324f1a39fce5, type: 3}
   - resourceType: 3
     resourceId: 1001
     resourceName: Rider 1001 Mastery
@@ -40003,7 +40003,7 @@ MonoBehaviour:
   - resourceType: 2
     resourceId: 1004
     resourceName: Rider 1004 EXP
-    icon: {fileID: 21300000, guid: e2b8fc01d87e525479be42d9fe0c5f83, type: 3}
+    icon: {fileID: 21300000, guid: 1776e27b6d2ce94499f754f57d08f884, type: 3}
 --- !u!1 &879700400
 GameObject:
   m_ObjectHideFlags: 0
@@ -40909,6 +40909,18 @@ MonoBehaviour:
         m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
         m_MethodName: SetActive
         m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 1
+        m_CallState: 2
+      - m_Target: {fileID: 1967459130}
+        m_TargetAssemblyTypeName: UpgadeUIController, Assembly-CSharp
+        m_MethodName: Refressh
+        m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
