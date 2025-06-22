@@ -1,11 +1,20 @@
 duplicated,key,Origin,English (en),Font,Vietnamese (vi),Font,Rich text
-FALSE,patch_note_infor,"- Added ""You can earn a stamp tomorrow"" notification after receiving a stamp during the day
-- Increased stage limit from 240 to 270
-- Added story chapter 9","- Added ""You can earn a stamp tomorrow"" notification after receiving a stamp during the day
-- Increased stage limit from 240 to 270
-- Added story chapter 9",Roboto-Regular SDF,"- Thêm thông báo ""You can earn a stamp tomorrow"" sau khi nhận stamp trong ngày
-- Tăng giới hạn stage từ 240 lên 270
-- Thêm story chapter 9",Roboto-Regular SDF,
+FALSE,patch_note_infor,"- New feature: Labrotory. Players can upgrade riders and view inventory items in Labrotory.
+- Add rewards for winning a stage
+- Increased stage limit from 270 to 300
+- Added story chapter 10
+- Optimize UI in battle
+- Fixes some bugs","- New feature: Labrotory. Players can upgrade riders and view inventory items in Labrotory.
+- Add rewards for winning a stage
+- Increased stage limit from 270 to 300
+- Added story chapter 10
+- Optimize UI in battle
+- Fixes some bugs",Roboto-Regular SDF,"- Tính năng mới: Phòng thí nghiệm. Tại đây, người chơi có thể nâng cấp rider và xem vật phẩm trong túi đồ.
+- Thêm phần thưởng khi thắng một màn chơi
+- Tăng giới hạn stage từ 270 lên 300
+- Thêm cốt truyện chương 10
+- Cải thiện giao diện trong trận
+- Sửa một số lỗi ",Roboto-Regular SDF,
 FALSE,loading,Loading...,Loading...,Roboto-Italic SDF,Đang tải game...,Roboto-Italic SDF,
 FALSE,button_start,START YOUR JOURNEY,START YOUR JOURNEY,RobotoSemi-Bold SDF,BẮT ĐẦU CHƠI,RobotoSemi-Bold SDF,
 FALSE,title_choose_a_stage,Choose a stage,Choose a stage,RobotoSemi-Bold SDF,Chọn màn chơi,RobotoSemi-Bold SDF,
@@ -30,10 +39,17 @@ FALSE,setting_credit,Credit,Credit,Roboto-Regular SDF,Đội ngũ phát triển,
 FALSE,title_notification,Notification,Notification,RobotoSemi-Bold SDF,Thông báo,RobotoSemi-Bold SDF,
 FALSE,popup_detail_quit,Are you sure to quit this stage?,Are you sure to quit this stage?,Roboto-Regular SDF,Bạn có chắc chắn muốn thoát màn chơi này?,Roboto-Regular SDF,
 FALSE,popup_detail_language_change,Game will be reloaded to update new changes.,Game will be reloaded to update new changes.,Roboto-Regular SDF,Trò chơi sẽ được tải lại để cập nhật những thay đổi mới.,Roboto-Regular SDF,
-FALSE,popup_detail_credit,Thank you for playing our game! Developer: Tony & Glory. Game designer: KazuD. Don’t hesitate to leave review us on store. Support mail: nhatlongnguyen1507@gmail.com,Thank you for playing our game! Developer: Tony & Glory. Game designer: KazuD. Don’t hesitate to leave review us on store. Support mail: nhatlongnguyen1507@gmail.com,Roboto-Regular SDF,"Cảm ơn các bạn đã dành thời gian chơi game!
+FALSE,popup_detail_credit,"Thank you for playing our game! 
+Developer: Tony. 
+Game designer: KazuD. 
+Don’t hesitate to leave review us on store. 
+Support mail: nhatlongnguyen1507@gmail.com","Thank you for playing our game! 
+Developer: Tony. 
+Game designer: KazuD. 
+Don’t hesitate to leave review us on store. 
+Support mail: nhatlongnguyen1507@gmail.com",Roboto-Regular SDF,"Cảm ơn các bạn đã dành thời gian chơi game!
 Lập trình viên: Tony.
-Game Designer: KazuD
-Cùng với sự góp sức của Glory, Nga-chan!
+Game Designer: KazuD.
 Đừng ngại để lại đánh giá cho game trên cửa hàng nhé!
 Email hỗ trợ: nhatlongnguyen1507@gmail.com",Roboto-Regular SDF,
 FALSE,button_yes,YES,YES,RobotoSemi-Bold SDF,CÓ,RobotoSemi-Bold SDF,
@@ -135,10 +151,10 @@ FALSE,laboratory_title,LABORATORY,LABORATORY,RobotoSemi-Bold SDF,PHÒNG THÍ NGH
 FALSE,button_rider_enhance,RIDER ENHANCE,RIDER ENHANCE,RobotoSemi-Bold SDF,NÂNG CẤP RIDER,RobotoSemi-Bold SDF,
 FALSE,button_inventory,INVENTORY,INVENTORY,RobotoSemi-Bold SDF,TÚI ĐỒ,RobotoSemi-Bold SDF,
 FALSE,button_level_up,LEVEL UP,LEVEL UP,RobotoSemi-Bold SDF,NÂNG CẤP,RobotoSemi-Bold SDF,
-FALSE,button_regen,REGEN,REGEN,RobotoSemi-Bold SDF,HỒI PHỤC MP,RobotoSemi-Bold SDF,
+FALSE,button_regen,REGEN,REGEN,RobotoSemi-Bold SDF,HỒI PHỤC,RobotoSemi-Bold SDF,
 FALSE,succes_rate,Success rate:,Success rate:,Roboto-Regular SDF,Tỷ lệ thành công:,RobotoSemi-Bold SDF,
-FALSE,level_up_failed,Level up failed,Level up failed,Roboto-Regular SDF,Lên cấp không thành công,Roboto-Regular SDF,
+FALSE,level_up_failed,Level up failed,Level up failed,Roboto-Regular SDF,Lên cấp thất bại,Roboto-Regular SDF,
 FALSE,level_up_succeeded,Level up succeeded,Level up succeeded,Roboto-Regular SDF,Lên cấp thành công,Roboto-Regular SDF,
-FALSE,button_cancel,CANCEL,CANCEL,RobotoSemi-Bold SDF,HỦY BỎ,RobotoSemi-Bold SDF,
+FALSE,button_cancel,CANCEL,CANCEL,RobotoSemi-Bold SDF,HỦY,RobotoSemi-Bold SDF,
 FALSE,level_title,LEVEL,LEVEL,Roboto-Regular SDF,CẤP,Roboto-Regular SDF,
 FALSE,rider_enhance,RIDER ENHANCE,RIDER ENHANCE,RobotoSemi-Bold SDF,NÂNG CẤP RIDER,RobotoSemi-Bold SDF,

@@ -1,0 +1,3 @@
+﻿internal class ReadCSVLocalizeEconomy : ReadCSVLocalizeBase
+{
+}

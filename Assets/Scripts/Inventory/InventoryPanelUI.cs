@@ -12,7 +12,8 @@ public class InventoryPanelUI : MonoBehaviour
     // cache để update nhanh không tạo‑xoá mỗi lần
     readonly Dictionary<(int, int), InventoryUIItem> lookup = new();
     [SerializeField] List<InventoryUIItem> items;
-
+    [SerializeField] TextMeshProUGUI nameItemTxt;
+    [SerializeField] TextMeshProUGUI desItemTxt;
     void Start()
     {
         BuildResourceCells();                                  
@@ -76,7 +77,33 @@ public class InventoryPanelUI : MonoBehaviour
                                          // Nếu muốn đổi cả tên, thêm TMP_Text và gán info.resourceName ở đây
                                          // itemInfoName.text = info.resourceName;
 
-        itemInfo.SetActive(true);        // bật khung thông tin
+        itemInfo.SetActive(true);
+        string expKey = $"exp_{key.Item2}";
+        string usageExpKey = $"usage_exp_{key.Item2}";
+        string heroNameKey = $"hero_name_{key.Item2}";
+        string mpKey = $"mp_{key.Item2}";
+        string usageMpKey = $"usage_mp_{key.Item2}";
+        string hapikey = $"resource_type_{key.Item1}_id_{key.Item2}";
+        string usageHapikey = $"usage_resource_type_{key.Item1}_id_{key.Item2}";
+        string heroName = LocalizationManager.instance.GetLocalizedText(heroNameKey, "Hero");
+        if (key.Item1 == 2)
+        {
+           
+           
+            nameItemTxt.text = LocalizationManager.instance.GetLocalizedText(expKey, heroName);
+            desItemTxt.text= LocalizationManager.instance.GetLocalizedText(usageExpKey, heroName);
+        }
+        else if(key.Item1 == 3)
+        {
+       
+            nameItemTxt.text = LocalizationManager.instance.GetLocalizedText(mpKey, heroName);
+            desItemTxt.text = LocalizationManager.instance.GetLocalizedText(usageMpKey, heroName);
+        }
+        else
+        {
+            nameItemTxt.text = LocalizationManager.instance.GetLocalizedText(hapikey);
+            desItemTxt.text = LocalizationManager.instance.GetLocalizedText(usageHapikey);
+        }
     }
 
 }

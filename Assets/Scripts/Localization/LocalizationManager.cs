@@ -15,6 +15,7 @@ public class LocalizationManager : MonoBehaviour
     [SerializeField] private TextAsset storyAsset;
     [SerializeField] private TextAsset questAsset;
     [SerializeField] private TextAsset enumTypeAsset;
+    [SerializeField] private TextAsset economyTypeAsset;
     [SerializeField] private ApplyText applyTextScript;
     [SerializeField] private ApplyTextManager applyTextManager;
     private Dictionary<string, string> richText;
@@ -25,6 +26,7 @@ public class LocalizationManager : MonoBehaviour
     private IReadDataLocalize readCSVLocalizeStory;
     private IReadDataLocalize readCSVLocalizeQuest;
     private IReadDataLocalize readCSVLocalizeEnumType;
+    private IReadDataLocalize readCSVLocalizeEconomy;
     void Awake()
     {
         instance = this;
@@ -44,6 +46,7 @@ public class LocalizationManager : MonoBehaviour
         readCSVLocalizeStory = new ReadCSVLocalizeStory();
         readCSVLocalizeQuest= new ReadCSVLocalizeQuest();
         readCSVLocalizeEnumType = new ReadCSVLocalizeEnumType();
+        readCSVLocalizeEconomy = new ReadCSVLocalizeEconomy();
     }
 
     public void LoadData()
@@ -67,6 +70,7 @@ public class LocalizationManager : MonoBehaviour
         readCSVLocalizeStory.LoadLocalization(currentLanguage, localizedTexts, localizedFonts, storyAsset, richText);
         readCSVLocalizeQuest.LoadLocalization(currentLanguage, localizedTexts, localizedFonts, questAsset, richText);
         readCSVLocalizeEnumType.LoadLocalization(currentLanguage, localizedTexts, localizedFonts, enumTypeAsset, richText);
+        readCSVLocalizeEconomy.LoadLocalization(currentLanguage, localizedTexts, localizedFonts, economyTypeAsset, richText);
         //foreach (var text in localizedTexts)
         //{
         //    Debug.Log(text.Key + "-" + text.Value);
