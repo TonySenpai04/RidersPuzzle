@@ -9,16 +9,19 @@ public class HeroCard : MonoBehaviour
     [SerializeField] private int heroID;
     [SerializeField] private TextMeshProUGUI levelTxt;
     [SerializeField] private TextMeshProUGUI healthTxt;
+    [SerializeField] private TextMeshProUGUI mpTxt;
     [SerializeField] private Image heroImg;
+
     public UpgradeView upgradeView; 
     public GameObject heroCardview;
-    public void SetData(int heroID,UpgradeView upgradeView,GameObject heroCardView,int level,int health,Sprite heroSprite)
+    public void SetData(int heroID,UpgradeView upgradeView,GameObject heroCardView,int level,int health,int mp,Sprite heroSprite)
     {
         this.heroID = heroID;
         this.upgradeView = upgradeView;
         this.heroCardview = heroCardView;
         levelTxt.text = LocalizationManager.instance.GetLocalizedText("level_title") + " " +level.ToString();
         healthTxt.text = health.ToString();
+        mpTxt.text = mp.ToString();
         heroImg.sprite = heroSprite;
     }
     public void OnClickHeroCard()
@@ -54,5 +57,6 @@ public class HeroCard : MonoBehaviour
         heroID = hero.id;
         levelTxt.text = $"Lv. {hero.level}";
         healthTxt.text = $"HP: {hero.hp}";
+       
     }
 }

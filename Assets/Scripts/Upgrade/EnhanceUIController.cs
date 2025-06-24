@@ -17,7 +17,7 @@ public class EnhanceUIController : MonoBehaviour
         {
             var heroCardIns = Instantiate(heroCard, heroCardScrollview);
             var hero = HeroManager.instance.heroDatas[i];
-            heroCardIns.SetData(hero.id, upgradeView, heroCardview, hero.level, hero.hp, heroCardSprites[i]);
+            heroCardIns.SetData(hero.id, upgradeView, heroCardview, hero.level, hero.hp,hero.mp, heroCardSprites[i]);
             heroCards.Add(heroCardIns);
         }
      
@@ -31,7 +31,7 @@ public class EnhanceUIController : MonoBehaviour
             {
 
                 var hero = HeroManager.instance.heroDatas[i];
-                heroCards[i].SetData(hero.id, upgradeView, heroCardview, hero.level, hero.hp, heroCardSprites[i]);
+                heroCards[i].SetData(hero.id, upgradeView, heroCardview, hero.level, hero.hp,hero.mp, heroCardSprites[i]);
                
             }
         }
