@@ -134,7 +134,8 @@ public class ReadCSVDataHeroStat : MonoBehaviour
             int level = int.Parse(parts[2]);
             int hp = int.Parse(parts[3]);
             int mastery = int.Parse(parts[4]);
-            float upgradeRate = float.Parse(parts[5]);
+            float upgradeRate= float.Parse(parts[5], System.Globalization.CultureInfo.InvariantCulture);
+  
 
             var reqs = new List<UpgradeRequirement>();
             for (int j = 0; j < 3; j++)

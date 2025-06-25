@@ -19,7 +19,7 @@ public class LibraryController : MonoBehaviour
     [SerializeField] private HeroLibraryController heroLibraryController;
     private void Start()
     {
-        heroTxt.text = HeroManager.instance.HeroOwnedQuantity()+"/11";
+        heroTxt.text = HeroManager.instance.HeroOwnedQuantity()+"/13";
         objectTxt.text = HiddenObjectManager.instance.GetSeenObject().Count
             + "/" + HiddenObjectManager.instance.ObjectQuantity();
          int unlockCount = LevelManager.instance.GetAllLevelComplete() / 30;
@@ -35,7 +35,7 @@ public class LibraryController : MonoBehaviour
         objectview.SetActive(false);
         toturialView.SetActive(false);
         riderView.SetActive(false);
-        heroTxt.text = HeroManager.instance.HeroOwnedQuantity() + "/11" ;
+        heroTxt.text = HeroManager.instance.HeroOwnedQuantity() + "/13" ;
         objectTxt.text = HiddenObjectManager.instance.GetSeenObject().Count
             + "/" + HiddenObjectManager.instance.ObjectQuantity();
         int unlockCount = LevelManager.instance.GetAllLevelComplete() / 30;

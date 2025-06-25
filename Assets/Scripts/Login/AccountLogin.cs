@@ -101,7 +101,7 @@ public class AccountLogin : MonoBehaviour
     {
         FirebaseAuth.DefaultInstance.SignOut();
         Debug.Log("🚪 Đã đăng xuất");
-
+        FirebaseDataManager.Instance.currentUser=null;
         if (File.Exists(path)) File.Delete(path);
         QuestManager.instance.SyncLocalQuestsToFirebaseIfNotExist();
         QuestManager.instance.LoadQuests();
@@ -155,6 +155,7 @@ public class AccountLogin : MonoBehaviour
 
         QuestManager.instance.SyncLocalQuestsToFirebaseIfNotExist();
         QuestManager.instance.LoadQuests();
+        GoldManager.instance.LoadCloudData();
         AchievementManager.instance.SyncLocalQuestsToFirebaseIfNotExist();
         AchievementManager.instance.LoadQuestData();
         HeroManager.instance.LoadHeroesDataFromFirebase();

@@ -187,7 +187,7 @@ public class UpgradeView : MonoBehaviour
         var hero = HeroManager.instance.GetHero(this.currentID);
         if (upgradeData == null)
             return;
-        successRatetxt.text = upgradeData.upgradeRate*100 + "%";
+        successRatetxt.text = successRatetxt.text = string.Format("{0:0}%", upgradeData.upgradeRate * 100f);
         currentHpTxt.text = LocalizationManager.instance.GetLocalizedText("rider_stat_type_1") + " " +currentData.hp.ToString() ;
         currentMpTxt.text = LocalizationManager.instance.GetLocalizedText("rider_stat_type_2") + " " + currentData.masteryPoint.ToString();
         upgradeHpTxt.text = upgradeData.hp.ToString() ;

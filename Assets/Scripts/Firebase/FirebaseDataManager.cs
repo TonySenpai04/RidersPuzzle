@@ -36,7 +36,7 @@ public class FirebaseDataManager : MonoBehaviour
 
     private FirebaseAuth auth;
     private DatabaseReference dbRef;
-    private FirebaseUser currentUser;
+    public FirebaseUser currentUser;
     public string username;
 
 

@@ -96,10 +96,6 @@ public class ResourceManager : MonoBehaviour
             resourceDict[key] = 0;
 
         resourceDict[key] = amount;
-        if (key == (0, 1))
-        {
-            GoldManager.instance.ResetGold(amount);
-        }
         SaveResources();
     }
     public bool ConsumeResource(int type, int id, int amount)
