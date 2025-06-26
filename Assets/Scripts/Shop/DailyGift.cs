@@ -54,7 +54,7 @@ public class DailyGift : MonoBehaviour
 
     public void ClaimGift()
     {
-        string serverDate = TimeManager.Instance.ServerDate;
+        string serverDate = TimeManager.Instance.GetEffectiveDateForDailyQuest();
 
         if (serverDate == null)
         {
