@@ -260,7 +260,7 @@ public class AchievementManager : MonoBehaviour
             {
                 quest.UpdateProgress(progress);
                 quest.UpdateProgress(progress, progress2);
-                if (quest.CheckCompletion())
+                if (quest.CheckCompletion() && !quest.isReward)
                 {
                     NotiManager.instance.ShowMultipleNotiRedDots(new List<string> { "questcomplete", "achievement" });
                     Debug.Log($"Quest {quest.questId} completed!");

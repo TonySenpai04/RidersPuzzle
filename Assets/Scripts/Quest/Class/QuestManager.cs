@@ -348,7 +348,7 @@ public class QuestManager : MonoBehaviour
                 quest.UpdateProgress(progress);
                 quest.UpdateProgress(progress, progress2);
                 GetQuestById("013").UpdateProgress(activeQuests.Where(h => h.CheckCompletion()).Count());
-                if (quest.CheckCompletion())
+                if (quest.CheckCompletion()&&!quest.isReward)
                 {
                     NotiManager.instance.ShowMultipleNotiRedDots(new List<string> { "quest", "questcomplete" });
                     Debug.Log($"Quest {quest.questId} completed!");

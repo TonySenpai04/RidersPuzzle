@@ -100,7 +100,8 @@ public class HiddenObjectManager : MonoBehaviour
             SeenObjectsData data = JsonUtility.FromJson<SeenObjectsData>(json);
             foreach (int id in data.seenObjectIds)
             {
-                SetSeenObjectById(id);
+                allObjects.FirstOrDefault(h => h.id == id).isSeen = true;
+                SaveSeenObjects();
             }
         }
     }
