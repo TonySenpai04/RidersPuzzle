@@ -41,4 +41,5 @@ public class LibraryController : MonoBehaviour
         int unlockCount = LevelManager.instance.GetAllLevelComplete() / 30;
         storyTxt.text = unlockCount.ToString() + "/" + StoryManager.instance.stories.Count.ToString();
     }
+    
 }

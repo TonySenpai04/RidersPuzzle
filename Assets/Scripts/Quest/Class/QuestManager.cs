@@ -350,6 +350,7 @@ public class QuestManager : MonoBehaviour
                 GetQuestById("013").UpdateProgress(activeQuests.Where(h => h.CheckCompletion()).Count());
                 if (quest.CheckCompletion())
                 {
+                    NotiManager.instance.ShowMultipleNotiRedDots(new List<string> { "quest", "questcomplete" });
                     Debug.Log($"Quest {quest.questId} completed!");
                     if (!questData.hasReceivedStampToday)
                     {

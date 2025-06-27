@@ -26,7 +26,7 @@ public class DailyGift : MonoBehaviour
             yield return null;
         }
 
-        string serverDate = TimeManager.Instance.ServerDate;
+        string serverDate = TimeManager.Instance.GetEffectiveDateForDailyQuest();
         DailyGiftData giftData = LoadGiftData();
 
         if (giftData.lastClaimDate == serverDate)

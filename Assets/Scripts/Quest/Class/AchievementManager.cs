@@ -206,13 +206,13 @@ public class AchievementManager : MonoBehaviour
     }
     private void FixedUpdate()
     {
-        foreach(var quest in activeQuests)
-        {
-            if (quest.CheckCompletion())
-            {
-               // Debug.Log($"Quest {quest.questId} completed!");
-            }
-        }
+        //foreach(var quest in activeQuests)
+        //{
+        //    if (quest.CheckCompletion())
+        //    {
+        //       // Debug.Log($"Quest {quest.questId} completed!");
+        //    }
+        //}
     }
     public void LoadQuestData()
     {
@@ -262,6 +262,7 @@ public class AchievementManager : MonoBehaviour
                 quest.UpdateProgress(progress, progress2);
                 if (quest.CheckCompletion())
                 {
+                    NotiManager.instance.ShowMultipleNotiRedDots(new List<string> { "questcomplete", "achievement" });
                     Debug.Log($"Quest {quest.questId} completed!");
                 
                 }

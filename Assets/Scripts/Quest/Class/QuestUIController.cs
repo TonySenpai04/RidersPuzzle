@@ -131,7 +131,10 @@ public class QuestUIController : MonoBehaviour
         {
             CompleteAll.gameObject.SetActive(true);
         }
-
+        if(currentCompleteQuest == 0 && AchivementUIController.instance.currentCompleteQuest == 0)
+        {
+            NotiManager.instance.ClearNotiRedDot("questcomplete");
+        }
   
 
     }

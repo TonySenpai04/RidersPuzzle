@@ -10,7 +10,7 @@ public abstract class HiddenObject : MonoBehaviour
     public bool isPandora=false;
     public Sprite sprite;
     public bool isSeen;
-
+    public bool isFirstSeen;
     public enum ObjectType
     {
         PowerUp,   

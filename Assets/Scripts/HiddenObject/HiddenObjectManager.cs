@@ -47,8 +47,17 @@ public class HiddenObjectManager : MonoBehaviour
     }
     public void  SetSeenObjectById(int id)
     {
-         allObjects.FirstOrDefault(h=>h.id==id).isSeen = true;
-        SaveSeenObjects();
+        var obj = allObjects.FirstOrDefault(h => h.id == id);
+        if (obj != null && !obj.isSeen)
+        {
+            obj.isSeen = true;
+            obj.isFirstSeen = true;
+            NotiManager.instance.ShowNotiRedDot("library");
+            NotiManager.instance.ShowNotiRedDot("object");
+            SaveSeenObjects();
+        }
+        // allObjects.FirstOrDefault(h=>h.id==id).isSeen = true;
+        //SaveSeenObjects();
     }
     public List<HiddenObject> GetSeenObject()
     {

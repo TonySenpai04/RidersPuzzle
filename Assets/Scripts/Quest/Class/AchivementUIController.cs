@@ -15,7 +15,7 @@ public class AchivementUIController : MonoBehaviour
     [SerializeField] private Transform content;
     [SerializeField] private Button CompleteAll;
     [SerializeField] private TextMeshProUGUI completedTxt;
-    [SerializeField] private int currentCompleteQuest;
+    [SerializeField] public int currentCompleteQuest;
     [SerializeField] private TextMeshProUGUI completeText;
     [SerializeField] private GameObject rewardObj;
     [SerializeField] private TextMeshProUGUI rewardTxt;
@@ -23,7 +23,11 @@ public class AchivementUIController : MonoBehaviour
     [SerializeField] private Sprite selectSprite;
     [SerializeField] private TextMeshProUGUI totalCompletedTxt;
     List<QuestBase> questsToShow;
-
+    public static AchivementUIController instance;
+    private void Awake()
+    {
+        instance=this;
+    }
     void Start()
     {
         Init();
