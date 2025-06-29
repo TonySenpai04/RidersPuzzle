@@ -22,6 +22,7 @@ public class RiderShopController : MonoBehaviour
     [SerializeField] private Button sortDefaultBtn;
     [SerializeField] private Button sortByIdBtn;
     [SerializeField] private Button sortByPriceBtn;
+
     void Start()
     {
         Init();
@@ -137,6 +138,9 @@ public class RiderShopController : MonoBehaviour
 
             HeroManager.instance.UnlockHero(id);
             heroShopitem.UpdateHero();
+            NewBoughtHeroManager.instance.AddNewHero(id);
+
+            NotiManager.instance.ShowMultipleNotiRedDots(new List<string> { "upgrade", "enhance" });
             Debug.Log($"Mua thành công hero {id}");
         }
         else

@@ -7,6 +7,7 @@ public class StoryLibrary:MonoBehaviour
     [SerializeField] private string id;
     [SerializeField] private Image storyImage;
     [SerializeField] private TextMeshProUGUI txtID;
+    [SerializeField] private GameObject redNotiDot;
 
     public string Id { get => id; set => id = value; }
 
@@ -38,6 +39,7 @@ public class StoryLibrary:MonoBehaviour
             txtID.gameObject.SetActive(false);
             storyImage.gameObject.SetActive(true);
             storyImage.sprite = hiddenObject.sprite;
+            redNotiDot.SetActive(StoryManager.instance.IsNewStory(this.Id));
         }
         else
         {
