@@ -140,7 +140,7 @@ public class RiderShopController : MonoBehaviour
             heroShopitem.UpdateHero();
             NewBoughtHeroManager.instance.AddNewHero(id);
 
-            NotiManager.instance.ShowMultipleNotiRedDots(new List<string> { "upgrade", "enhance" });
+            NotiManager.instance.ShowMultipleNotiRedDots(new List<string> { "library", "riderlib" });
             Debug.Log($"Mua thành công hero {id}");
         }
         else

@@ -24,7 +24,7 @@ public class HeroCard : MonoBehaviour
         healthTxt.text = health.ToString();
         mpTxt.text = mp.ToString();
         heroImg.sprite = heroSprite;
-        redNotiDot.gameObject.SetActive(NewBoughtHeroManager.instance.IsNewHero(heroID));
+      //  redNotiDot.gameObject.SetActive(NewBoughtHeroManager.instance.IsNewHero(heroID));
 
 
     }
@@ -54,16 +54,16 @@ public class HeroCard : MonoBehaviour
         upgradeView.currentID = heroID;
         upgradeView.SetUpgradeView(currentData, nextData);
         heroCardview.SetActive(false);
-        if (NewBoughtHeroManager.instance.IsNewHero(heroID))
-        {
-            NewBoughtHeroManager.instance.RemoveHero(heroID);
-            redNotiDot.gameObject.SetActive(false);
+        //if (NewBoughtHeroManager.instance.IsNewHero(heroID))
+        //{
+        //    NewBoughtHeroManager.instance.RemoveHero(heroID);
+        //    redNotiDot.gameObject.SetActive(false);
 
-            if (NewBoughtHeroManager.instance.AllSeen())
-            {
-                NotiManager.instance.ClearMultipleNotiRedDots(new List<string> { "upgrade", "enhance" });
-            }
-        }
+        //    if (NewBoughtHeroManager.instance.AllSeen())
+        //    {
+        //        NotiManager.instance.ClearMultipleNotiRedDots(new List<string> { "upgrade", "enhance" });
+        //    }
+        //}
 
 
     }

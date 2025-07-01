@@ -41,5 +41,27 @@ public class LibraryController : MonoBehaviour
         int unlockCount = LevelManager.instance.GetAllLevelComplete() / 30;
         storyTxt.text = unlockCount.ToString() + "/" + StoryManager.instance.stories.Count.ToString();
     }
-    
+    private void FixedUpdate()
+    {
+        UpdateLibraryRedDot();
+    }
+    public void UpdateLibraryRedDot()
+    {
+        bool hasStoryDot = NotiManager.instance.IsRedDotActive("storylib");
+        bool hasHeroDot = NotiManager.instance.IsRedDotActive("riderlib");
+        bool hasObjectDot = NotiManager.instance.IsRedDotActive("object");
+
+        bool shouldShowLibraryDot = hasStoryDot || hasHeroDot || hasObjectDot;
+
+        if (shouldShowLibraryDot)
+        {
+            NotiManager.instance.ShowNotiRedDot("library");
+        }
+        else
+        {
+            NotiManager.instance.ClearNotiRedDot("library");
+        }
+    }
+
+
 }

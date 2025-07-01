@@ -62,6 +62,16 @@ public class HeroLibraryController : MonoBehaviour
     {
 
         HeroView.SetHero(id);
+        if (NewBoughtHeroManager.instance.IsNewHero(id))
+        {
+            NewBoughtHeroManager.instance.RemoveHero(id);
+            //redNotiDot.gameObject.SetActive(false);
+
+            if (NewBoughtHeroManager.instance.AllSeen())
+            {
+                NotiManager.instance.ClearMultipleNotiRedDots(new List<string> { "riderlib"});
+            }
+        }
         this.HeroView.gameObject.SetActive(true);
         heroParent.gameObject.SetActive(false);
         BackgroundManager.instance.SetHeroBg();

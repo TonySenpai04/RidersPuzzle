@@ -37,7 +37,7 @@ public class NotiManager : MonoBehaviour
     [SerializeField] private List<RedDotItem> redDots = new List<RedDotItem>();
 
     private Dictionary<string, GameObject> redDotDict = new Dictionary<string, GameObject>();
-    private RedNotiData redNotiData = new RedNotiData();
+    [SerializeField] private RedNotiData redNotiData = new RedNotiData();
     private const string LAST_LOGIN_DATE_KEY = "LastLoginDate";
     [SerializeField] private string saveDailyGiftFilePath;
 
@@ -195,6 +195,11 @@ public class NotiManager : MonoBehaviour
             return JsonUtility.FromJson<DailyGiftData>(json);
         }
         return new DailyGiftData();
+    }
+    public bool IsRedDotActive(string name)
+    {
+        var item = redNotiData.redNotiList.Find(x => x.name == name);
+        return item != null && item.isShow;
     }
 
 }

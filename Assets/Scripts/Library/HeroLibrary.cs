@@ -11,7 +11,7 @@ public class HeroLibrary : MonoBehaviour
     [SerializeField] private TextMeshProUGUI txtID;
     [SerializeField] private TextMeshProUGUI txtID2;
     [SerializeField] private HeroView heroView;
-
+    [SerializeField] public Image redNotiDot;
     public int Id { get => id; set => id = value; }
 
     private void Start()
@@ -37,6 +37,7 @@ public class HeroLibrary : MonoBehaviour
         this.heroImage.sprite = heroSprite;
         this.txtID.text = id.ToString();
         this.txtID2.text = id.ToString();
+        redNotiDot.gameObject.SetActive(NewBoughtHeroManager.instance.IsNewHero(id));
     }
     private void OnEnable()
     {
@@ -46,6 +47,7 @@ public class HeroLibrary : MonoBehaviour
             txtID.gameObject.SetActive(false);
             heroImage.gameObject.SetActive(true);
             heroImage.sprite = hero.Value.heroImage;
+            redNotiDot.gameObject.SetActive(NewBoughtHeroManager.instance.IsNewHero(id));
         }
         else
         {

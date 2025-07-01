@@ -8668,6 +8668,81 @@ MonoBehaviour:
   vn: {fileID: 2055641156}
   notiChange: {fileID: 400520521}
   setting: {fileID: 1252351879}
+--- !u!1 &174099851
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 174099854}
+  - component: {fileID: 174099853}
+  - component: {fileID: 174099852}
+  m_Layer: 5
+  m_Name: Image
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 0
+--- !u!114 &174099852
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 174099851}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_RaycastTarget: 1
+  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
+  m_Maskable: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  m_Sprite: {fileID: 21300000, guid: 88d0e7d3d2b53ad4b80d1ed88c762800, type: 3}
+  m_Type: 0
+  m_PreserveAspect: 0
+  m_FillCenter: 1
+  m_FillMethod: 4
+  m_FillAmount: 1
+  m_FillClockwise: 1
+  m_FillOrigin: 0
+  m_UseSpriteMesh: 0
+  m_PixelsPerUnitMultiplier: 1
+--- !u!222 &174099853
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 174099851}
+  m_CullTransparentMesh: 1
+--- !u!224 &174099854
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 174099851}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 2006926063}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 1, y: 1}
+  m_AnchorMax: {x: 1, y: 1}
+  m_AnchoredPosition: {x: -5.799988, y: -15.699997}
+  m_SizeDelta: {x: 50, y: 50}
+  m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &175776117
 GameObject:
   m_ObjectHideFlags: 0
@@ -16233,7 +16308,7 @@ MonoBehaviour:
   m_Content: {fileID: 1592250046}
   m_Horizontal: 0
   m_Vertical: 1
-  m_MovementType: 1
+  m_MovementType: 2
   m_Elasticity: 0.1
   m_Inertia: 1
   m_DecelerationRate: 0.135
@@ -18026,7 +18101,7 @@ MonoBehaviour:
   m_Content: {fileID: 418001222}
   m_Horizontal: 0
   m_Vertical: 1
-  m_MovementType: 1
+  m_MovementType: 2
   m_Elasticity: 0.1
   m_Inertia: 1
   m_DecelerationRate: 0.135
@@ -21499,7 +21574,7 @@ MonoBehaviour:
   m_Content: {fileID: 1646736414}
   m_Horizontal: 0
   m_Vertical: 1
-  m_MovementType: 1
+  m_MovementType: 2
   m_Elasticity: 0.1
   m_Inertia: 1
   m_DecelerationRate: 0.135
@@ -24474,7 +24549,7 @@ MonoBehaviour:
   m_Content: {fileID: 1132109304}
   m_Horizontal: 0
   m_Vertical: 1
-  m_MovementType: 1
+  m_MovementType: 2
   m_Elasticity: 0.1
   m_Inertia: 1
   m_DecelerationRate: 0.135
@@ -30541,7 +30616,7 @@ MonoBehaviour:
   m_Content: {fileID: 1592084328}
   m_Horizontal: 0
   m_Vertical: 1
-  m_MovementType: 1
+  m_MovementType: 2
   m_Elasticity: 0.1
   m_Inertia: 1
   m_DecelerationRate: 0.135
@@ -39849,7 +39924,7 @@ MonoBehaviour:
   m_Content: {fileID: 699068825}
   m_Horizontal: 0
   m_Vertical: 1
-  m_MovementType: 1
+  m_MovementType: 2
   m_Elasticity: 0.1
   m_Inertia: 1
   m_DecelerationRate: 0.135
@@ -52341,6 +52416,10 @@ MonoBehaviour:
     redDotObject: {fileID: 1825549558}
   - name: enhance
     redDotObject: {fileID: 1292410006}
+  - name: riderlib
+    redDotObject: {fileID: 174099851}
+  redNotiData:
+    redNotiList: []
   saveDailyGiftFilePath: 
 --- !u!4 &1143238397
 Transform:
@@ -54783,18 +54862,6 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-      - m_Target: {fileID: 1143238396}
-        m_TargetAssemblyTypeName: NotiManager, Assembly-CSharp
-        m_MethodName: ClearNotiRedDot
-        m_Mode: 5
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: library
-          m_BoolArgument: 0
-        m_CallState: 2
       - m_Target: {fileID: 1630870846}
         m_TargetAssemblyTypeName: BackgroundManager, Assembly-CSharp
         m_MethodName: SetDefaultBg
@@ -56757,7 +56824,7 @@ MonoBehaviour:
   m_Content: {fileID: 223786248}
   m_Horizontal: 0
   m_Vertical: 1
-  m_MovementType: 1
+  m_MovementType: 2
   m_Elasticity: 0.1
   m_Inertia: 1
   m_DecelerationRate: 0.135
@@ -57854,7 +57921,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: -101.33003}
+  m_AnchoredPosition: {x: 0, y: -101.33002}
   m_SizeDelta: {x: 0, y: -427.45}
   m_Pivot: {x: 0, y: 1}
 --- !u!114 &1268928385
@@ -58383,7 +58450,7 @@ MonoBehaviour:
   m_Content: {fileID: 775776273}
   m_Horizontal: 0
   m_Vertical: 1
-  m_MovementType: 1
+  m_MovementType: 2
   m_Elasticity: 0.1
   m_Inertia: 1
   m_DecelerationRate: 0.135
@@ -76931,7 +76998,7 @@ MonoBehaviour:
   m_Content: {fileID: 1435654973}
   m_Horizontal: 0
   m_Vertical: 1
-  m_MovementType: 1
+  m_MovementType: 2
   m_Elasticity: 0.1
   m_Inertia: 1
   m_DecelerationRate: 0.135
@@ -78104,6 +78171,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1646736414}
   - component: {fileID: 1646736415}
+  - component: {fileID: 1646736416}
   m_Layer: 5
   m_Name: Content
   m_TagString: Untagged
@@ -78154,6 +78222,20 @@ MonoBehaviour:
   m_Spacing: {x: 10, y: 10}
   m_Constraint: 0
   m_ConstraintCount: 2
+--- !u!114 &1646736416
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1646736413}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3245ec927659c4140ac4f8d17403cc18, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_HorizontalFit: 0
+  m_VerticalFit: 2
 --- !u!1 &1653752342
 GameObject:
   m_ObjectHideFlags: 0
@@ -90959,7 +91041,7 @@ MonoBehaviour:
   m_Content: {fileID: 1253105548}
   m_Horizontal: 0
   m_Vertical: 1
-  m_MovementType: 1
+  m_MovementType: 2
   m_Elasticity: 0.1
   m_Inertia: 1
   m_DecelerationRate: 0.135
@@ -93481,6 +93563,7 @@ RectTransform:
   m_Children:
   - {fileID: 557112850}
   - {fileID: 591291098}
+  - {fileID: 174099854}
   m_Father: {fileID: 1908733948}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
