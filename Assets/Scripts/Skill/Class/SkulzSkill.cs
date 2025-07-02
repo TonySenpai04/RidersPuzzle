@@ -49,7 +49,6 @@ internal class SkulzSkill : BaseSkill
             {
                 int targetRow = currentRow + direction.x * i;
                 int targetCol = currentCol + direction.y * i;
-
                 if (targetRow >= 0 && targetRow < gridController.rows &&
                     targetCol >= 0 && targetCol < gridController.cols)
                 {

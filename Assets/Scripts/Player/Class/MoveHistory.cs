@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 public class MoveHistory:IMoveHistory
@@ -23,7 +24,14 @@ public class MoveHistory:IMoveHistory
             Debug.Log(item);
         }
     }
-
+    public Tuple<int, int> GetSecondLastMove()
+    {
+        if (moveHistory.Count >= 2)
+        {
+            return moveHistory.Reverse().Skip(1).First(); // Lấy phần tử kế cuối
+        }
+        return null;
+    }
     // Truy xuất vị trí cuối cùng và xóa khỏi lịch sử
     public Tuple<int, int> UndoMove()
     {

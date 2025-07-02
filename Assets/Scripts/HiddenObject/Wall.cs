@@ -92,18 +92,30 @@ public class Wall : HiddenObject
             {
                 GameObject HI = Instantiate(this.gameObject, cell.transform.position, Quaternion.identity);
                 LevelManager.instance.AddHiddenObjectToCurrentLevel(currentRow, currentCol, HI);
+              
                 HI.transform.SetParent(cell.transform);
                 Destroy(this.gameObject);
 
             }
             else
             {
+                
                 PlayerController.instance.movementController.UndoLastMove(1);
+                //currentPos = PlayerController.instance.movementController.GetPos();
+                //currentRow = currentPos.Item1 + direction.x;
+                //currentCol = currentPos.Item2 + direction.y;
+                //PlayerController.instance.movementController.moveHistory.AddMove(currentRow, currentCol);
+
             }
         }
         else
         {
+          
             PlayerController.instance.movementController.UndoLastMove(1);
+            //currentPos = PlayerController.instance.movementController.GetPos();
+            //currentRow = currentPos.Item1 + direction.x;
+            //currentCol = currentPos.Item2 + direction.y;
+            //PlayerController.instance.movementController.moveHistory.AddMove(currentRow, currentCol);;
         }
 
     }

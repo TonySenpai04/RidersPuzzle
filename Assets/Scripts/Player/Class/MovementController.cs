@@ -13,7 +13,8 @@ public class MovementController : MonoBehaviour
     [SerializeField] private Vector3 targetPosition; 
     [SerializeField] private float moveSpeed = 5.0f;
     [SerializeField] private AnimationController animationController;
-    private IMoveHistory moveHistory;
+    private Vector2Int lastDirection = Vector2Int.zero;
+    public IMoveHistory moveHistory;
     public INumberOfMoves numberOfMoves;
     public IImmortal immortal;
     private void Awake()
@@ -67,6 +68,7 @@ public class MovementController : MonoBehaviour
 
     private void ExecuteMove(int newRow, int newCol)
     {
+        lastDirection = new Vector2Int(newRow - currentRow, newCol - currentCol);
         moveHistory.AddMove(currentRow, currentCol);
         SetPosition(newRow, newCol);
         numberOfMoves.ReduceeMove(1);
@@ -78,8 +80,11 @@ public class MovementController : MonoBehaviour
     {
         for (int i = 0; i < steps && moveHistory.HasHistory(); i++)
         {
+            Tuple<int, int> to = GetPos();
+
             Tuple<int, int> lastPosition = moveHistory.UndoMove();
             SetPosition(lastPosition.Item1, lastPosition.Item2);
+            moveHistory.AddMove(to.Item1,to.Item2);
         }
     }
 
@@ -89,7 +94,11 @@ public class MovementController : MonoBehaviour
             ? moveHistory.GetLastMove()
             : Tuple.Create(currentRow - 1, currentCol);
 
-        return new Vector2Int(currentRow - lastPosition.Item1, currentCol - lastPosition.Item2);
+        //return new Vector2Int(currentRow - lastPosition.Item1, currentCol - lastPosition.Item2);
+        return lastDirection;
+
+
+
     }
 
     public void MoveForward(int steps)
