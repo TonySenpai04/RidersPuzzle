@@ -131,11 +131,21 @@ public class QuestUIController : MonoBehaviour
         {
             CompleteAll.gameObject.SetActive(true);
         }
-        if(currentCompleteQuest == 0 && AchivementUIController.instance.currentCompleteQuest == 0)
+    
+        bool hasQuestDot = NotiManager.instance.IsRedDotActive("achievement");
+        bool hasAchievementDot = NotiManager.instance.IsRedDotActive("quest");
+
+        bool shouldShowLibraryDot =  hasQuestDot || hasAchievementDot;
+
+        if (shouldShowLibraryDot)
+        {
+            NotiManager.instance.ShowNotiRedDot("questcomplete");
+        }
+        else
         {
             NotiManager.instance.ClearNotiRedDot("questcomplete");
         }
-  
+
 
     }
     public void CompleteQuestReward()
