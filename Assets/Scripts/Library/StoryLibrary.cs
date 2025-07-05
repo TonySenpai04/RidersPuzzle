@@ -24,12 +24,18 @@ public class StoryLibrary:MonoBehaviour
         this.storyImage.sprite = storyImage;
         this.txtID.text = id;
         txtID.gameObject.SetActive(false);
+       
     }
     private void OnEnable()
     {
 
         UpdateVisibility();
 
+    }
+    private void FixedUpdate()
+    {
+
+        redNotiDot.SetActive(StoryManager.instance.IsNewStory(this.Id));
     }
     public void UpdateVisibility()
     {

@@ -122,6 +122,7 @@ public class AchivementUIController : MonoBehaviour
                 completedQuests.Add(quest); // Đánh dấu để xóa sau
             }
         }
+        NotiManager.instance.ClearNotiRedDot("achievement");
         rewardObj.SetActive(true);
         rewardTxt.text = reward.ToString();
         StartCoroutine(ShowRewardTemporarily());

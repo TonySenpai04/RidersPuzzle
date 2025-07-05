@@ -81,6 +81,7 @@ public class StoryView : MonoBehaviour
         if (index >= 0 && index < seenStories.Count)
         {
             SetData(seenStories[index].id);
+            StoryManager.instance.MarkStoryAsSeen(seenStories[index].id);
         }
     }
 
@@ -89,6 +90,7 @@ public class StoryView : MonoBehaviour
         if (currentIndex < seenStories.Count - 1)
         {
             currentIndex++;
+            
             LoadStory(currentIndex);
         }
     }

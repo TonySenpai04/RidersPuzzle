@@ -42,10 +42,10 @@ public class SwipeDetector : ISwipeDetector
     if (Mathf.Abs(deltaX) > swipeThreshold && Mathf.Abs(deltaX) > Mathf.Abs(deltaY))
     {
         if (deltaX < 0)
-            OnSwipeLeft?.Invoke();  // Vuốt trái
-        else
-            OnSwipeRight?.Invoke(); // Vuốt phải
-    }
+                OnSwipeRight?.Invoke(); // Vuốt trái
+            else
+                OnSwipeLeft?.Invoke();  // Vuốt phải
+        }
 }
 
 }

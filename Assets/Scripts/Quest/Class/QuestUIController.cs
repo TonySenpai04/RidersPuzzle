@@ -158,7 +158,7 @@ public class QuestUIController : MonoBehaviour
         rewardObj.SetActive(true);
         rewardTxt.text= reward.ToString();
         StartCoroutine(ShowRewardTemporarily());
-
+        NotiManager.instance.ClearNotiRedDot("quest");
         // Xóa các quest đã hoàn thành khỏi danh sách và UI
         foreach (QuestUI quest in completedQuests)
         {
