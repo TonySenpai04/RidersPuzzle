@@ -116,6 +116,7 @@ public class QuestUIController : MonoBehaviour
         {
             CompleteAll.GetComponent<Image>().sprite= unselectSprite;
             CompleteAll.interactable = false;
+            NotiManager.instance.ClearNotiRedDot("quest");
         }
         else
         {

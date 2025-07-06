@@ -33,46 +33,29 @@ public class StoryManager : MonoBehaviour
     private string newStoryPath => Path.Combine(Application.persistentDataPath, "NewStoryIds.json");
 
 
+    private string currentUID = "guest";
+
+    //public int count;
+    //public bool isLoaded = false;
+
     private void Awake()
     {
         instance = this;
+    }
+
+    // Gọi khi login / logout (sau khi có UID hoặc guest)
+    public void Init(string uid)
+    {
+        currentUID = string.IsNullOrEmpty(uid) ? "guest" : uid;
+        foreach (var story in stories)
+        {
+            story.isSeen = false;
+        }
+
         LoadSeenStories();
         LoadNewStories();
         UpdateStoryQuantity();
-        isLoaded = !File.Exists(loginDataPath); // Nếu chưa có login file thì bắt đầu unlock
-    }
-
-    private void FixedUpdate()
-    {
-        if (isLoaded)
-        {
-            int levelWinCount = LevelManager.instance.GetAllLevelComplete();
-            int storyToUnlock = levelWinCount / 30;
-            UnlockStories(storyToUnlock);
-        }
-    }
-    public bool IsNewStory(string id)
-    {
-        return newStoryIds.Contains(id);
-    }
-    private void SaveNewStories()
-    {
-        var data = new StorySeenData { seenStoryIds = newStoryIds };
-        string json = JsonUtility.ToJson(data);
-        File.WriteAllText(newStoryPath, json);
-    }
-    private void LoadNewStories()
-    {
-        if (File.Exists(newStoryPath))
-        {
-            string json = File.ReadAllText(newStoryPath);
-            var data = JsonUtility.FromJson<StorySeenData>(json);
-            newStoryIds = data.seenStoryIds ?? new List<string>();
-        }
-        else
-        {
-            newStoryIds = new List<string>();
-        }
+        UnlockStories(LevelManager.instance.GetAllLevelComplete() / 30);
     }
 
     public void UpdateStoryQuantity()
@@ -80,10 +63,9 @@ public class StoryManager : MonoBehaviour
         count = LevelManager.instance.GetAllLevelComplete() / 30;
     }
 
-    public Story GetByStoryId(string id)
-    {
-        return stories.Find(s => s.id == id);
-    }
+    public Story GetByStoryId(string id) => stories.Find(s => s.id == id);
+
+    public bool IsNewStory(string id) => newStoryIds.Contains(id);
 
     private void UnlockStories(int unlockCount)
     {
@@ -91,28 +73,23 @@ public class StoryManager : MonoBehaviour
 
         for (int i = 0; i < stories.Count; i++)
         {
+            var story = stories[i];
+
             if (i < unlockCount)
             {
-                Story story = stories[i];
-
                 if (!seenStoryIds.Contains(story.id))
                 {
                     seenStoryIds.Add(story.id);
                     newStoryIds.Add(story.id);
                     NotiManager.instance.ShowMultipleNotiRedDots(new List<string> { "storylib", "library" });
-                    story.isSeen = true;
                     Debug.Log($"🔓 Story mới mở: {story.id}");
                     hasNewStory = true;
                 }
-
-                else
-                {
-                    story.isSeen = true;
-                }
+                story.isSeen = true;
             }
             else
             {
-                stories[i].isSeen = false;
+                story.isSeen = false;
             }
         }
 
@@ -121,8 +98,8 @@ public class StoryManager : MonoBehaviour
             SaveSeenStories();
             SaveNewStories();
         }
-
     }
+
     public void MarkStoryAsSeen(string id)
     {
         if (newStoryIds.Contains(id))
@@ -130,25 +107,34 @@ public class StoryManager : MonoBehaviour
             newStoryIds.Remove(id);
             SaveNewStories();
         }
+
         if (newStoryIds.Count == 0)
         {
             NotiManager.instance.ClearMultipleNotiRedDots(new List<string> { "storylib" });
         }
     }
 
+    private string GetSeenPath() => Path.Combine(Application.persistentDataPath, $"SeenStories_{currentUID}.json");
+    private string GetNewPath() => Path.Combine(Application.persistentDataPath, $"NewStories_{currentUID}.json");
+
     private void SaveSeenStories()
     {
-        StorySeenData data = new StorySeenData { seenStoryIds = seenStoryIds };
-        string json = JsonUtility.ToJson(data);
-        File.WriteAllText(seenStoryPath, json);
+        var data = new StorySeenData { seenStoryIds = seenStoryIds };
+        File.WriteAllText(GetSeenPath(), JsonUtility.ToJson(data));
+    }
+
+    private void SaveNewStories()
+    {
+        var data = new StorySeenData { seenStoryIds = newStoryIds };
+        File.WriteAllText(GetNewPath(), JsonUtility.ToJson(data));
     }
 
     private void LoadSeenStories()
     {
-        if (File.Exists(seenStoryPath))
+        string path = GetSeenPath();
+        if (File.Exists(path))
         {
-            string json = File.ReadAllText(seenStoryPath);
-            StorySeenData data = JsonUtility.FromJson<StorySeenData>(json);
+            var data = JsonUtility.FromJson<StorySeenData>(File.ReadAllText(path));
             seenStoryIds = data.seenStoryIds ?? new List<string>();
         }
         else
@@ -161,4 +147,37 @@ public class StoryManager : MonoBehaviour
             story.isSeen = seenStoryIds.Contains(story.id);
         }
     }
+
+    private void LoadNewStories()
+    {
+        string path = GetNewPath();
+        if (File.Exists(path))
+        {
+            var data = JsonUtility.FromJson<StorySeenData>(File.ReadAllText(path));
+            newStoryIds = data.seenStoryIds ?? new List<string>();
+        }
+        else
+        {
+            newStoryIds = new List<string>();
+        }
+    }
+    public void CheckAndUnlockNewStories()
+    {
+        int unlockCount = LevelManager.instance.GetAllLevelComplete() / 30;
+        UnlockStories(unlockCount);
+    }
+    private void FixedUpdate()
+    {
+        CheckAndUnlockNewStories();
+
+        if (newStoryIds.Count > 0)
+        {
+            NotiManager.instance.ShowMultipleNotiRedDots(new List<string> { "storylib" ,"library"});
+        }
+        else
+        {
+            NotiManager.instance.ClearMultipleNotiRedDots(new List<string> { "storylib", "library" });
+        }
+    }
+
 }

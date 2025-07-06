@@ -40,7 +40,7 @@ public class NotiManager : MonoBehaviour
     [SerializeField] private RedNotiData redNotiData = new RedNotiData();
     private const string LAST_LOGIN_DATE_KEY = "LastLoginDate";
     [SerializeField] private string saveDailyGiftFilePath;
-
+    private string currentUID;
     public string notiPath => Path.Combine(Application.persistentDataPath, "Noti.json");
     private void Awake()
     {
@@ -109,6 +109,13 @@ public class NotiManager : MonoBehaviour
             redNotiData.redNotiList.Add(new RedNotiItem { name = name, isShow = isShow });
         }
     }
+    public void Init(string uid)
+    {
+        currentUID = string.IsNullOrEmpty(uid) ? "guest" : uid;
+        LoadLocal();
+    }
+
+    private string GetPath() => Path.Combine(Application.persistentDataPath, $"Noti_{currentUID}.json");
 
     public void LoadLocal()
     {
@@ -129,8 +136,8 @@ public class NotiManager : MonoBehaviour
         {
             foreach (var dot in redDots)
             {
-                dot.redDotObject.SetActive(true);
-                redNotiData.redNotiList.Add(new RedNotiItem { name = dot.name, isShow = true });
+                dot.redDotObject.SetActive(false);
+                redNotiData.redNotiList.Add(new RedNotiItem { name = dot.name, isShow = false });
             }
             SaveRedDots();
         }
@@ -169,6 +176,26 @@ public class NotiManager : MonoBehaviour
             }
         }
         SaveRedDots();
+    }
+    private void Update()
+    {
+        UpdateLibraryRedDot();
+    }
+    public void UpdateLibraryRedDot()
+    {
+        bool hasStoryDot =IsRedDotActive("storylib");
+        bool hasHeroDot = IsRedDotActive("riderlib");
+        bool hasObjectDot = IsRedDotActive("object");
+
+        bool shouldShowLibraryDot = hasStoryDot || hasHeroDot || hasObjectDot;
+        if (shouldShowLibraryDot)
+        {
+           ShowNotiRedDot("library");
+        }
+        else
+        {
+           ClearNotiRedDot("library");
+        }
     }
     public void ShowMultipleNotiRedDots(List<string> names)
     {

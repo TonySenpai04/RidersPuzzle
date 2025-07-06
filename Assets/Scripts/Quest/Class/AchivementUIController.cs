@@ -87,6 +87,7 @@ public class AchivementUIController : MonoBehaviour
         {
             CompleteAll.GetComponent<Image>().sprite = unselectSprite;
             CompleteAll.interactable = false;
+            NotiManager.instance.ClearNotiRedDot("achievement");
         }
         else
         {
@@ -102,6 +103,7 @@ public class AchivementUIController : MonoBehaviour
         {
             CompleteAll.gameObject.SetActive(true);
         }
+
 
 
     }

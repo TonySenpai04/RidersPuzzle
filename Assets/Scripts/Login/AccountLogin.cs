@@ -103,6 +103,8 @@ public class AccountLogin : MonoBehaviour
         Debug.Log("🚪 Đã đăng xuất");
         FirebaseDataManager.Instance.currentUser=null;
         if (File.Exists(path)) File.Delete(path);
+        StoryManager.instance.Init("guest");
+        NotiManager.instance.Init("guest");
         QuestManager.instance.SyncLocalQuestsToFirebaseIfNotExist();
         QuestManager.instance.LoadQuests();
         AchievementManager.instance.SyncLocalQuestsToFirebaseIfNotExist();
@@ -152,7 +154,7 @@ public class AccountLogin : MonoBehaviour
     private void HandleSuccessfulLogin()
     {
         LoadUserDataFromFirebase();
-
+        
         QuestManager.instance.SyncLocalQuestsToFirebaseIfNotExist();
         QuestManager.instance.LoadQuests();
         GoldManager.instance.LoadCloudData();
@@ -162,6 +164,11 @@ public class AccountLogin : MonoBehaviour
         ResourceManager.Instance.LoadResourcesFromFirebase();
         SaveLoginState();
         UpdateUIAfterLogin();
+        string uid = FirebaseDataManager.Instance.GetCurrentUser()?.UserId ?? "guest";
+
+        // ✅ Khởi tạo lại dữ liệu theo tài khoản
+        StoryManager.instance.Init(uid);
+        NotiManager.instance.Init(uid);
     }
 
     private void LoadUserDataFromFirebase()

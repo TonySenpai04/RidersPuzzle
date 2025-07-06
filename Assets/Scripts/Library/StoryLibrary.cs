@@ -32,11 +32,11 @@ public class StoryLibrary:MonoBehaviour
         UpdateVisibility();
 
     }
-    private void FixedUpdate()
-    {
+    //private void FixedUpdate()
+    //{
 
-        redNotiDot.SetActive(StoryManager.instance.IsNewStory(this.Id));
-    }
+    //    redNotiDot.SetActive(StoryManager.instance.IsNewStory(this.Id));
+    //}
     public void UpdateVisibility()
     {
         var hiddenObject = StoryManager.instance.GetByStoryId(this.Id);
@@ -45,13 +45,17 @@ public class StoryLibrary:MonoBehaviour
             txtID.gameObject.SetActive(false);
             storyImage.gameObject.SetActive(true);
             storyImage.sprite = hiddenObject.sprite;
-            redNotiDot.SetActive(StoryManager.instance.IsNewStory(this.Id));
+            
         }
         else
         {
             txtID.gameObject.SetActive(true);
             storyImage.gameObject.SetActive(false);
+            redNotiDot.SetActive(false);
+            StoryManager.instance.MarkStoryAsSeen(id);
         }
+
+        redNotiDot.SetActive(StoryManager.instance.IsNewStory(this.Id));
     }
     public void SetSeenObject(bool isSeen)
     {

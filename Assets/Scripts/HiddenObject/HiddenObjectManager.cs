@@ -104,6 +104,13 @@ public class HiddenObjectManager : MonoBehaviour
                 SaveSeenObjects();
             }
         }
+        else
+        {
+            foreach (var obj in allObjects)
+            {
+                obj.isSeen = false;
+            }
+        }
     }
 
     public HiddenObject GetRandomObstacle()
