@@ -177,26 +177,7 @@ public class NotiManager : MonoBehaviour
         }
         SaveRedDots();
     }
-    private void Update()
-    {
-        UpdateLibraryRedDot();
-    }
-    public void UpdateLibraryRedDot()
-    {
-        bool hasStoryDot =IsRedDotActive("storylib");
-        bool hasHeroDot = IsRedDotActive("riderlib");
-        bool hasObjectDot = IsRedDotActive("object");
-
-        bool shouldShowLibraryDot = hasStoryDot || hasHeroDot || hasObjectDot;
-        if (shouldShowLibraryDot)
-        {
-           ShowNotiRedDot("library");
-        }
-        else
-        {
-           ClearNotiRedDot("library");
-        }
-    }
+ 
     public void ShowMultipleNotiRedDots(List<string> names)
     {
         foreach (var name in names)

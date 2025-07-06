@@ -176,7 +176,7 @@ public class StoryManager : MonoBehaviour
         }
         else
         {
-            NotiManager.instance.ClearMultipleNotiRedDots(new List<string> { "storylib", "library" });
+            NotiManager.instance.ClearMultipleNotiRedDots(new List<string> { "storylib"});
         }
     }
 
