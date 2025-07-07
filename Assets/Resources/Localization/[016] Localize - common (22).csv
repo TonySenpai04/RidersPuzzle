@@ -1,19 +1,7 @@
 duplicated,key,Origin,English (en),Font,Vietnamese (vi),Font,Rich text
-FALSE,patch_note_infor,"- New feature: Labrotory. Players can upgrade riders and view inventory items in Labrotory.
-- Add rewards for winning a stage
-- Increased stage limit from 270 to 300
-- Added story chapter 10
-- Optimize UI in battle
-- Fixes some bugs","- New feature: Labrotory. Players can upgrade riders and view inventory items in Labrotory.
-- Add rewards for winning a stage
-- Increased stage limit from 270 to 300
-- Added story chapter 10
-- Optimize UI in battle
-- Fixes some bugs",Roboto-Regular SDF,"- Tính năng mới: Phòng thí nghiệm. Tại đây, người chơi có thể nâng cấp rider và xem vật phẩm trong túi đồ.
-- Thêm phần thưởng khi thắng một màn chơi
-- Tăng giới hạn stage từ 270 lên 300
-- Thêm cốt truyện chương 10
-- Cải thiện giao diện trong trận
+FALSE,patch_note_infor,"- Optimize UI/UX
+- Fixes some bugs","- Optimize UI/UX
+- Fixes some bugs",Roboto-Regular SDF,"- Cải thiện giao diện và tối ưu trải nghiệm người dùng
 - Sửa một số lỗi ",Roboto-Regular SDF,
 FALSE,loading,Loading...,Loading...,Roboto-Italic SDF,Đang tải game...,Roboto-Italic SDF,
 FALSE,button_start,START YOUR JOURNEY,START YOUR JOURNEY,RobotoSemi-Bold SDF,BẮT ĐẦU CHƠI,RobotoSemi-Bold SDF,
@@ -152,10 +140,12 @@ FALSE,button_rider_enhance,RIDER ENHANCE,RIDER ENHANCE,RobotoSemi-Bold SDF,NÂNG
 FALSE,button_inventory,INVENTORY,INVENTORY,RobotoSemi-Bold SDF,TÚI ĐỒ,RobotoSemi-Bold SDF,
 FALSE,button_level_up,LEVEL UP,LEVEL UP,RobotoSemi-Bold SDF,NÂNG CẤP,RobotoSemi-Bold SDF,
 FALSE,button_regen,REGEN,REGEN,RobotoSemi-Bold SDF,HỒI PHỤC,RobotoSemi-Bold SDF,
-FALSE,succes_rate,Success rate:,Success rate:,Roboto-Regular SDF,Tỷ lệ thành công:,RobotoSemi-Bold SDF,
+FALSE,succes_rate,Success rate:,Success rate:,Roboto-Regular SDF,Tỷ lệ thành công:,Roboto-Regular SDF,
 FALSE,level_up_failed,Level up failed,Level up failed,Roboto-Regular SDF,Lên cấp thất bại,Roboto-Regular SDF,
 FALSE,level_up_succeeded,Level up succeeded,Level up succeeded,Roboto-Regular SDF,Lên cấp thành công,Roboto-Regular SDF,
 FALSE,button_cancel,CANCEL,CANCEL,RobotoSemi-Bold SDF,HỦY,RobotoSemi-Bold SDF,
 FALSE,level_title,LEVEL,LEVEL,Roboto-Regular SDF,CẤP,Roboto-Regular SDF,
 FALSE,rider_enhance,RIDER ENHANCE,RIDER ENHANCE,RobotoSemi-Bold SDF,NÂNG CẤP RIDER,RobotoSemi-Bold SDF,
 FALSE,inventory_help_content,Use resources from playing stages to level up and regen rider stats.,Use resources from playing stages to level up and regen rider stats.,Roboto-Regular SDF,Sử dụng tài nguyên từ các màn chơi để tăng cấp và phục hồi chỉ số của rider.,Roboto-Regular SDF,
+FALSE,tag_not_owned,NOT OWNED,NOT OWNED,Roboto-Regular SDF,CHƯA CÓ,Roboto-Regular SDF,
+FALSE,warning_not_enough_hapi,Not enough Hapi,Not enough Hapi,Roboto-Regular SDF,Không đủ Hapi,Roboto-Regular SDF,

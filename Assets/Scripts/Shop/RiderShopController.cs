@@ -145,7 +145,7 @@ public class RiderShopController : MonoBehaviour
         }
         else
         {
-            NotiManager.instance.ShowNotification("not enough gold ");
+            NotiManager.instance.ShowNotification(LocalizationManager.instance.GetLocalizedText("warning_not_enough_hapi"));
         }
     }
     public void SetHeroView(int id)

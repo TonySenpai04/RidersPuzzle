@@ -133,7 +133,7 @@ public class HeroManager : MonoBehaviour
         {
             string json = File.ReadAllText(path);
             UnlockHeroData data = JsonUtility.FromJson<UnlockHeroData>(json);
-            if (data.seenHeroIds.Count == 0)
+            if (data.seenHeroIds.Count <=1)
             {
                 data.seenHeroIds.Add(1001);
 

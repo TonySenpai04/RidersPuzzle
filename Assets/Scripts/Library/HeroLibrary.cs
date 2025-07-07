@@ -11,6 +11,8 @@ public class HeroLibrary : MonoBehaviour
     [SerializeField] private TextMeshProUGUI txtID;
     [SerializeField] private TextMeshProUGUI txtID2;
     [SerializeField] private HeroView heroView;
+    [SerializeField] public Image notOwnedImg;
+    [SerializeField] public TextMeshProUGUI notOwnedTxt;
     [SerializeField] public Image redNotiDot;
     public int Id { get => id; set => id = value; }
 
@@ -21,6 +23,8 @@ public class HeroLibrary : MonoBehaviour
         {
             txtID.gameObject.SetActive(false);
             heroImage.gameObject.SetActive(true);
+            notOwnedImg.gameObject.SetActive(!hero.Value.isUnlock);
+            notOwnedTxt.text = LocalizationManager.instance.GetLocalizedText("tag_not_owned");
         }
         else
         {
@@ -48,12 +52,15 @@ public class HeroLibrary : MonoBehaviour
             heroImage.gameObject.SetActive(true);
             heroImage.sprite = hero.Value.heroImage;
             redNotiDot.gameObject.SetActive(NewBoughtHeroManager.instance.IsNewHero(id));
+            notOwnedImg.gameObject.SetActive(!hero.Value.isUnlock);
+            notOwnedTxt.text = LocalizationManager.instance.GetLocalizedText("tag_not_owned");
         }
         else
         {
             txtID.gameObject.SetActive(true);
             heroImage.gameObject.SetActive(false);
+           
         }
-
+        
     }
 }

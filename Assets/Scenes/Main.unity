@@ -58155,7 +58155,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: -101.33002}
+  m_AnchoredPosition: {x: 0, y: -101.33003}
   m_SizeDelta: {x: 0, y: -427.45}
   m_Pivot: {x: 0, y: 1}
 --- !u!114 &1268928385
@@ -71112,7 +71112,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   riderAsset: {fileID: 4900000, guid: afaad02e98f903c48995a602c15f44c7, type: 3}
   objectAsset: {fileID: 4900000, guid: 7f40a367a8118fb40b41ddd6694c7ecd, type: 3}
-  commonAsset: {fileID: 4900000, guid: f45812a5a56f36342bba0d3a7c7f43e2, type: 3}
+  commonAsset: {fileID: 4900000, guid: ab65a79589a39e146a6083272873ddfa, type: 3}
   storyAsset: {fileID: 4900000, guid: 47c117dfc26490d47b7aa7fc805d84ac, type: 3}
   questAsset: {fileID: 4900000, guid: 6fcfadc2eedd3314ebce4d11d3fef2b8, type: 3}
   enumTypeAsset: {fileID: 4900000, guid: 25eefb5226973fb4d85a0fe026f6b397, type: 3}
@@ -71382,6 +71382,10 @@ MonoBehaviour:
     text: {fileID: 1052777514}
   - key: button_daily_quest
     text: {fileID: 1075429226}
+  - key: inventory_help_content
+    text: {fileID: 2079730344}
+  - key: rider_enhance
+    text: {fileID: 1979644055}
   shopTexts:
   - key: shop_title
     text: {fileID: 933763902}
@@ -72536,7 +72540,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -12.349548, y: -171.99933}
+  m_AnchoredPosition: {x: -12.349487, y: -171.99945}
   m_SizeDelta: {x: -102.38, y: -1716.13}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1540078559
@@ -74001,7 +74005,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: -135.8}
+  m_AnchoredPosition: {x: 0, y: -212}
   m_SizeDelta: {x: 200, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1564656136
@@ -83839,7 +83843,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -37.999878, y: 779.00006}
+  m_AnchoredPosition: {x: -37.999863, y: 779.00006}
   m_SizeDelta: {x: -75.99997, y: -1844.3}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1778367463
@@ -89778,7 +89782,7 @@ MonoBehaviour:
     mp: 0
     currentMP: 0
     icon: {fileID: 21300000, guid: e8aa979cde5c5de4ca1c58800a529172, type: 3}
-    isUnlock: 0
+    isUnlock: 1
     heroImage: {fileID: 21300000, guid: b93af5c73b47705488d56795c442c9b2, type: 3}
     skillDescription: 
     story: 
@@ -89876,7 +89880,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -12.349548, y: -161.76959}
+  m_AnchoredPosition: {x: -12.349487, y: -161.76971}
   m_SizeDelta: {x: -102.38, y: -831.9}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1905144567
@@ -92318,7 +92322,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: ABOUT HAPI
+  m_text: RIDER ENHANCE
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 7317eec8898dcfa4789df435953d577f, type: 2}
   m_sharedMaterial: {fileID: -6687790196517014331, guid: 7317eec8898dcfa4789df435953d577f, type: 2}
@@ -96217,7 +96221,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Hapi is a common money which could be found while playing and doing quests
+  m_text: Use resources from playing stages to level up and regen rider stats.
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 411472425fe4d1c42b2f62613338e988, type: 2}
   m_sharedMaterial: {fileID: 884937910096872386, guid: 411472425fe4d1c42b2f62613338e988, type: 2}
