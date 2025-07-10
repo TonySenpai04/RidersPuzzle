@@ -149,3 +149,5 @@ FALSE,rider_enhance,RIDER ENHANCE,RIDER ENHANCE,RobotoSemi-Bold SDF,NÂNG CẤP 
 FALSE,inventory_help_content,Use resources from playing stages to level up and regen rider stats.,Use resources from playing stages to level up and regen rider stats.,Roboto-Regular SDF,Sử dụng tài nguyên từ các màn chơi để tăng cấp và phục hồi chỉ số của rider.,Roboto-Regular SDF,
 FALSE,tag_not_owned,NOT OWNED,NOT OWNED,Roboto-Regular SDF,CHƯA CÓ,Roboto-Regular SDF,
 FALSE,warning_not_enough_hapi,Not enough Hapi,Not enough Hapi,Roboto-Regular SDF,Không đủ Hapi,Roboto-Regular SDF,
+FALSE,stage_failed_guide,Unlucky! Why don't you  try other Rider?,Unlucky! Why don't you  try other Rider?,Roboto-Regular SDF,Tiếc quá! Hãy thử Rider khác nhé!,Roboto-Regular SDF,
+FALSE,warning_character,Please select a character,Please select a character,Roboto-Regular SDF,Vui lòng chọn một nhân vật!,Roboto-Regular SDF,

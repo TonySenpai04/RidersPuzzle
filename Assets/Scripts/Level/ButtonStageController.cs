@@ -169,7 +169,7 @@ public class ButtonStageController : MonoBehaviour
         }
         else
         {
-            ShowNotification("Please select a character!");
+            ShowNotification(LocalizationManager.instance.GetLocalizedText("warning_character"));
         }
     }
     private void StartLevel(int levelIndex)
