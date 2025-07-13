@@ -22,7 +22,7 @@ public class HeroShopItem : MonoBehaviour
     public Button ExchangeBtn { get => exchangeBtn; set => exchangeBtn = value; }
     private void Start()
     {
-        exchangeBtn.gameObject.SetActive(false); 
+       // exchangeBtn.gameObject.SetActive(false); 
 
        
     }
@@ -38,6 +38,7 @@ public class HeroShopItem : MonoBehaviour
         if(hero != null)
         {
             heroName.text = hero.Value.name;
+            exchangeBtn.gameObject.SetActive(!hero.Value.isUnlock);
             if (hero.Value.isUnlock)
             {
                 onwed.gameObject.SetActive(true);
@@ -64,6 +65,7 @@ public class HeroShopItem : MonoBehaviour
         if (hero != null)
         {
             heroName.text = hero.Value.name;
+            exchangeBtn.gameObject.SetActive(!hero.Value.isUnlock);
             if (hero.Value.isUnlock)
             {
                 onwed.gameObject.SetActive(true);

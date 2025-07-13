@@ -42,13 +42,13 @@ public class DailyGift : MonoBehaviour
             //giftButton.GetComponentInChildren<TextMeshProUGUI>().text = "FREE";
             giftButton.onClick.AddListener(() => ShowExchangeBtn());
             giftButton.onClick.AddListener(() => SoundManager.instance.PlaySFX("Click Sound"));
-            exChangeBtn.onClick.AddListener(ClaimGift);
+            giftButton.onClick.AddListener(ClaimGift);
         }
     }
     public void ShowExchangeBtn()
     {
 
-        exChangeBtn.gameObject.SetActive(!exChangeBtn.gameObject.activeSelf);
+        //exChangeBtn.gameObject.SetActive(!exChangeBtn.gameObject.activeSelf);
     }
    
 

@@ -97,20 +97,20 @@ public class RiderShopController : MonoBehaviour
         hero.BuyBtn.onClick.AddListener(() =>
         {
             SoundManager.instance.PlaySFX("Click Sound");
-            hero.ExchangeBtn.gameObject.SetActive(!hero.ExchangeBtn.gameObject.activeSelf);
-            foreach(var heroItem in heroShops)
-            {
-                if (heroItem != hero)
-                {
-                    heroItem.ExchangeBtn.gameObject.SetActive(false);
-                }
-            }
-            if (hero.ExchangeBtn.gameObject.activeSelf)
+            //hero.ExchangeBtn.gameObject.SetActive(!hero.ExchangeBtn.gameObject.activeSelf);
+            //foreach(var heroItem in heroShops)
+            //{
+            //    if (heroItem != hero)
+            //    {
+            //        heroItem.ExchangeBtn.gameObject.SetActive(false);
+            //    }
+            //}
+            //if (hero.ExchangeBtn.gameObject.activeSelf)
 
-                grid.spacing = new Vector2(grid.spacing.x, 140);
+            //    grid.spacing = new Vector2(grid.spacing.x, 140);
 
-            else
-                grid.spacing = new Vector2(grid.spacing.x, 50);
+            //else
+            //    grid.spacing = new Vector2(grid.spacing.x, 50);
         });
     
     }

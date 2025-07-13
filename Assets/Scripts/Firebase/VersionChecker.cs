@@ -43,13 +43,26 @@ public class VersionChecker : MonoBehaviour
 
                 Debug.Log("\n📥 Latest version from server: [" + latestVersion + "]");
                 Debug.Log("\n📦 Current version from build: [" + currentVersion + "]");
+                string savedVersion = LoadSavedVersion();
 
-                if (!string.IsNullOrEmpty(latestVersion) && latestVersion != currentVersion)
+                // Nếu chưa có file -> dùng currentVersion làm bản cũ để so sánh
+                if (string.IsNullOrEmpty(savedVersion))
                 {
+                    savedVersion = currentVersion;
+                    SaveVersionToFile(savedVersion);
+                    NotiManager.instance.ShowMultipleNotiRedDots(new List<string> { "new", "newbtn" });
+                    Debug.Log("📂 Không tìm thấy version.json, dùng currentVersion làm mặc định: " + savedVersion);
+                }
+
+                if (string.IsNullOrEmpty(savedVersion) || savedVersion != latestVersion)
+                {
+                    //if (!string.IsNullOrEmpty(latestVersion) && latestVersion != currentVersion)
+                    //{
                     popup.SetActive(true);
                     sliderController.HideSlider();
                     NotiManager.instance.ShowMultipleNotiRedDots(new List<string> { "new", "newbtn" });
                     Debug.Log("⚠️ Cần cập nhật phiên bản!");
+                    SaveVersionToFile(latestVersion);
                 }
                 else
                 {
@@ -60,13 +73,25 @@ public class VersionChecker : MonoBehaviour
             }
         }
     }
-    public void SaveVersion()
+    void SaveVersionToFile(string serverVersion)
     {
-        var data = new VersionData { version = currentVersion };
+        var data = new VersionData { version = serverVersion };
         string json = JsonUtility.ToJson(data);
         File.WriteAllText(goldPath, json);
-       
+        Debug.Log($"💾 Đã lưu version server [{serverVersion}] vào version.json.");
     }
+
+    string LoadSavedVersion()
+    {
+        if (File.Exists(goldPath))
+        {
+            string json = File.ReadAllText(goldPath);
+            VersionData data = JsonUtility.FromJson<VersionData>(json);
+            return data?.version ?? "";
+        }
+        return "";
+    }
+
 }
 public class VersionData {
     public string version;
