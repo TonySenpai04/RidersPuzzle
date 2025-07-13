@@ -17,6 +17,7 @@ public class InventoryUIItem : MonoBehaviour
         SetIcon(icon);
         SetQuantity(qty);
         button.onClick.AddListener(() => onClick?.Invoke(Key));
+        button.onClick.AddListener(() => SoundManager.instance.PlaySFX("Click Sound"));
     }
     public void SetIcon(Sprite s) => iconImg.sprite = s;
 

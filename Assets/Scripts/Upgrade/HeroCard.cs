@@ -30,6 +30,7 @@ public class HeroCard : MonoBehaviour
     }
     public void OnClickHeroCard()
     {
+        SoundManager.instance.PlaySFX("Click Sound");
         upgradeView.gameObject.SetActive(true);
         var heroDatas = HeroManager.instance.heroDatas;
         int index = heroDatas.FindIndex(h => h.id == heroID);
