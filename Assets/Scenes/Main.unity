@@ -69710,7 +69710,7 @@ MonoBehaviour:
   - name: Touch Positive Object
     clip: {fileID: 8300000, guid: b3271a783316d5942b60a8dad881768c, type: 3}
   - name: Start Screen
-    clip: {fileID: 8300000, guid: 182341dfffd26704c9d658bbb5650f73, type: 3}
+    clip: {fileID: 8300000, guid: bc3c7f1fcdc09a44cb477400a5f816cf, type: 3}
   - name: Touch Negative Object
     clip: {fileID: 8300000, guid: e8116995a3cfc834a81024b9f9974666, type: 3}
   heroSounds:
