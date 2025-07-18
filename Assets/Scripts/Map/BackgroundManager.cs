@@ -84,6 +84,7 @@ public class BackgroundManager : MonoBehaviour
         {
             int randomIndex = Random.Range(0, gridArts.Count);
             selectedPair = gridArts[randomIndex];
+            background.sprite = backgroundArts[randomIndex];
             int index = 0; 
             foreach (var cell in gridController.grid)
             {
@@ -109,15 +110,15 @@ public class BackgroundManager : MonoBehaviour
     }
     private void UpdateBackgroundArt()
     {
-        if (backgroundArts.Count > 0)
-        {
-            int randomIndex = Random.Range(0, backgroundArts.Count);
-            background.sprite = backgroundArts[randomIndex];
-        }
-        else
-        {
-            Debug.LogWarning("Danh sách background arts rỗng!");
-        }
+        //if (backgroundArts.Count > 0)
+        //{
+        //    int randomIndex = Random.Range(0, backgroundArts.Count);
+        //    background.sprite = backgroundArts[randomIndex];
+        //}
+        //else
+        //{
+        //    Debug.LogWarning("Danh sách background arts rỗng!");
+        //}
     }
 
 }

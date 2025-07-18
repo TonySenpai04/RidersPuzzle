@@ -58267,7 +58267,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 5c488590512c60b4f81b583c8c0a6216, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 9e003f182fea4af4d893a5074e2b4784, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -77682,12 +77682,9 @@ MonoBehaviour:
   background: {fileID: 568802328}
   gridController: {fileID: 1200757503}
   backgroundArts:
-  - {fileID: 21300000, guid: b5552a38604ebf6499dd6f247d367769, type: 3}
-  - {fileID: 21300000, guid: a3f595497e76cdc48b8b49838d16ea30, type: 3}
-  - {fileID: 21300000, guid: 87c51eb990d035544b77730211cf0a37, type: 3}
-  - {fileID: 21300000, guid: cd9946e5c53914749b230031196269da, type: 3}
-  - {fileID: 21300000, guid: ff5bb548d1e803f43be5a78342170197, type: 3}
-  - {fileID: 21300000, guid: 1fdb2494719ffa944988de06354634f0, type: 3}
+  - {fileID: 21300000, guid: 7bf89577a18c3574da86aa7dd27be656, type: 3}
+  - {fileID: 21300000, guid: 281776161620cc8439742545da059785, type: 3}
+  - {fileID: 21300000, guid: c0c758c99e0f5cb408bf0ad9d3be311e, type: 3}
   gridArts:
   - sprite1: {fileID: 21300000, guid: fccae9f75a4ae22439df1110fb3ce968, type: 3}
     sprite2: {fileID: 21300000, guid: ce81898a5fcb108459d5bae034f2d824, type: 3}
@@ -77700,8 +77697,8 @@ MonoBehaviour:
   objectPowerUpBg: {fileID: 21300000, guid: abf75439ae6812d4caf08f42a02cbcf1, type: 3}
   objObstacleBg: {fileID: 21300000, guid: a1d6145c757f56a46bddebd9aca2dda6, type: 3}
   pandoraboxBg: {fileID: 21300000, guid: d4b69d611ba0c8a469a53ea4beb838d7, type: 3}
-  defaultBg: {fileID: 21300000, guid: 5c488590512c60b4f81b583c8c0a6216, type: 3}
-  upgradeBg: {fileID: 21300000, guid: 26f7fc89b5064464cbe928259654c996, type: 3}
+  defaultBg: {fileID: 21300000, guid: 9e003f182fea4af4d893a5074e2b4784, type: 3}
+  upgradeBg: {fileID: 21300000, guid: ba8a9df56bdfd9445a1365f3ffb9ed36, type: 3}
   enhanceBg: {fileID: 21300000, guid: 689172abc1ecfa542ae06f61be3ebe9e, type: 3}
 --- !u!1 &1636976304
 GameObject:
@@ -95354,7 +95351,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -2.0699463, y: 0}
+  m_AnchoredPosition: {x: -2.0698853, y: 0}
   m_SizeDelta: {x: 53.67, y: 41.29}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &2031026245
