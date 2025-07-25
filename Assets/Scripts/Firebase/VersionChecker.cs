@@ -54,22 +54,46 @@ public class VersionChecker : MonoBehaviour
                     Debug.Log("📂 Không tìm thấy version.json, dùng currentVersion làm mặc định: " + savedVersion);
                 }
 
-                if (string.IsNullOrEmpty(savedVersion) || savedVersion != latestVersion)
+                if (latestVersion != currentVersion)
                 {
-                    //if (!string.IsNullOrEmpty(latestVersion) && latestVersion != currentVersion)
-                    //{
+                    // Có version mới hơn hiện tại → yêu cầu cập nhật
                     popup.SetActive(true);
                     sliderController.HideSlider();
                     NotiManager.instance.ShowMultipleNotiRedDots(new List<string> { "new", "newbtn" });
                     Debug.Log("⚠️ Cần cập nhật phiên bản!");
                     SaveVersionToFile(latestVersion);
                 }
+                else if (savedVersion != latestVersion)
+                {
+                    // App đang ở bản mới nhất rồi, nhưng version.json vẫn là bản cũ → cập nhật file và hiển thị red dot
+                    NotiManager.instance.ShowMultipleNotiRedDots(new List<string> { "new", "newbtn" });
+                    SaveVersionToFile(latestVersion);
+                    Debug.Log("📌 Đã cập nhật version.json vì có version mới nhưng app đã đúng phiên bản.");
+                }
                 else
                 {
+                    // Mọi thứ đều ok
                     popup.SetActive(false);
                     sliderController.ShowSlider();
                     Debug.Log("✅ Phiên bản hiện tại đã là mới nhất!");
                 }
+
+                //if (string.IsNullOrEmpty(savedVersion) || savedVersion != latestVersion)
+                //{
+                //    //if (!string.IsNullOrEmpty(latestVersion) && latestVersion != currentVersion)
+                //    //{
+                //    popup.SetActive(true);
+                //    sliderController.HideSlider();
+                //    NotiManager.instance.ShowMultipleNotiRedDots(new List<string> { "new", "newbtn" });
+                //    Debug.Log("⚠️ Cần cập nhật phiên bản!");
+                //    SaveVersionToFile(latestVersion);
+                //}
+                //else
+                //{
+                //    popup.SetActive(false);
+                //    sliderController.ShowSlider();
+                //    Debug.Log("✅ Phiên bản hiện tại đã là mới nhất!");
+                //}
             }
         }
     }
