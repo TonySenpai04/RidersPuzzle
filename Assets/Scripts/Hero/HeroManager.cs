@@ -18,6 +18,7 @@ public struct DataHero
     public Sprite icon;
     public bool isUnlock;
     public Sprite heroImage;
+    public Sprite heroCardImage;
     public string skillDescription;
     public string story;
     public int level;

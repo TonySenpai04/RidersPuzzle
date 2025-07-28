@@ -8,7 +8,7 @@ public class GattaiFusionUI : MonoBehaviour
     public List<int> selectedHeroes = new List<int>();
     public SkillFushionButton skillButtonPrefab;
     public Transform skillButtonContainer;
-    public Button okButton;
+    public Button heroConfirmButton;
     public HeroFusionButton heroButtonPrefab;
     public Transform heroButtonContainer;
     private int selectedSkillIndex = -1;
@@ -18,18 +18,76 @@ public class GattaiFusionUI : MonoBehaviour
     public int totalHP;
     public int totalId;
     public int masteryPoints=5;
+    public GameObject skillsView;
+    public GameObject herosView;
     private void Start()
     {
-        foreach (var heroData in HeroManager.instance.GetUnlockHero())
-        {
-            HeroFusionButton button = Instantiate(heroButtonPrefab, heroButtonContainer);
-            button.SetData(heroData.id, heroData.icon, OnClickHeroButton);
-            heros.Add(button);
+        //foreach (var heroData in HeroManager.instance.GetUnlockHero())
+        //{
+        //    HeroFusionButton button = Instantiate(heroButtonPrefab, heroButtonContainer);
+        //    button.SetData(heroData.id, heroData.heroCardImage,heroData.level,heroData.hp,heroData.mp, OnClickHeroButton);
+        //    heros.Add(button);
 
+        //}
+        heroConfirmButton.onClick.AddListener(() => ShowSkill());
+        heroConfirmButton.gameObject.SetActive(false);
+
+    }
+    public void CreateButtons()
+    {
+        var unlockHeros = HeroManager.instance.GetUnlockHero();
+        int index = 0;
+
+        foreach (var heroData in unlockHeros)
+        {
+            if (index < heros.Count)
+            {
+                heros[index].SetData(
+                    heroData.id,
+                    heroData.heroCardImage,
+                    heroData.level,
+                    heroData.hp,
+                    heroData.mp,
+                    OnClickHeroButton);
+                heros[index].gameObject.SetActive(true);
+            }
+            else
+            {
+                var button = Instantiate(heroButtonPrefab, heroButtonContainer);
+                button.SetData(
+                    heroData.id,
+                    heroData.heroCardImage,
+                    heroData.level,
+                    heroData.hp,
+                    heroData.mp,
+                    OnClickHeroButton);
+                heros.Add(button);
+            }
+            index++;
         }
-        okButton.onClick.AddListener(() => OnClickOKFusion());
+
+        for (int i = index; i < heros.Count; i++)
+        {
+            heros[i].gameObject.SetActive(false);
+        }
+
+
+    }
+    public void ShowSkill()
+    {
+        if (selectedHeroes.Count >= 3)
+        {
+            skillsView.SetActive(true);
+            ShowSkillSelection();
+            herosView.SetActive(false );
+        }
         
     }
+    private void OnEnable()
+    {
+        CreateButtons();
+    }
+
     public void OnClickHeroButton(int heroID)
     {
         bool isSelected = selectedHeroes.Contains(heroID);
@@ -57,11 +115,11 @@ public class GattaiFusionUI : MonoBehaviour
 
         if (selectedHeroes.Count >= 3)
         {
-            ShowSkillSelection();
+            heroConfirmButton.gameObject.SetActive(true);
         }
         else
         {
-            ClearSkillSelection();
+            heroConfirmButton.gameObject.SetActive(false);
         }
     }
 
@@ -78,12 +136,13 @@ public class GattaiFusionUI : MonoBehaviour
             {
                 availableSkills.Add(skill);
                 SkillFushionButton skillBtn = Instantiate(skillButtonPrefab, skillButtonContainer);
-                skillBtn.SetData(availableSkills.Count - 1, HeroManager.instance.GetHero(id).Value.name, OnClickSkillButton);
+                skillBtn.SetData(availableSkills.Count - 1,
+                    LocalizationManager.instance.GetLocalizedText($"skill_info_hero_{id}"), OnClickSkillButton);
                 skills.Add(skillBtn);
             }
         }
 
-        okButton.gameObject.SetActive(true);
+        heroConfirmButton.gameObject.SetActive(true);
     }
 
     void ClearSkillSelection()
@@ -92,7 +151,7 @@ public class GattaiFusionUI : MonoBehaviour
         {
             Destroy(child.gameObject);
         }
-        okButton.gameObject.SetActive(false);
+        heroConfirmButton.gameObject.SetActive(false);
         selectedSkillIndex = -1;
     }
 

@@ -3,11 +3,8 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
-[Serializable]
-public struct HeroCardSprite {
-    public int id;
-    public Sprite img;
-}
+
+
 
 public class ChangeHeroUIController : MonoBehaviour
 {
@@ -15,7 +12,6 @@ public class ChangeHeroUIController : MonoBehaviour
     [SerializeField] private ChangeHeroButton changeHeroButton;
     [SerializeField] private List<ChangeHeroButton> changeHeroButtons;
     [SerializeField] private RectTransform buttonParent;
-    [SerializeField] private List<HeroCardSprite> heroCardSprites;
 
     public void CreateButtons()
     {
@@ -25,12 +21,10 @@ public class ChangeHeroUIController : MonoBehaviour
         {
             if (!heroData.isUnlock) continue;
 
-            Sprite sprite = heroCardSprites.Find(h => h.id == heroData.id).img;
-
             if (index < changeHeroButtons.Count)
             {
                 changeHeroButtons[index].SetData(heroData.id, heroData.level, heroData.hp,
-                    heroData.mp, sprite, (id) =>
+                    heroData.mp, heroData.heroCardImage, (id) =>
                     {
                         StageHeroController.SetHeroID(id); 
                         UpdateSelection(id);              
@@ -42,7 +36,7 @@ public class ChangeHeroUIController : MonoBehaviour
             {
                 var button = Instantiate(changeHeroButton, buttonParent);
                 button.SetData(heroData.id, heroData.level, heroData.hp, heroData.mp,
-                    sprite, (id) =>
+                    heroData.heroCardImage, (id) =>
                     {
                         StageHeroController.SetHeroID(id); 
                         UpdateSelection(id);            
