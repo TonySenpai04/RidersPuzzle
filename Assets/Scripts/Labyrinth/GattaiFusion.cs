@@ -151,6 +151,7 @@ public class GattaiFusionUI : MonoBehaviour
         {
             Destroy(child.gameObject);
         }
+        skills.Clear();
         heroConfirmButton.gameObject.SetActive(false);
         selectedSkillIndex = -1;
     }
