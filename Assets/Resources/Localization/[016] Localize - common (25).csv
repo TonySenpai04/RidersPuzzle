@@ -1,7 +1,10 @@
 duplicated,key,Origin,English (en),Font,Vietnamese (vi),Font,Rich text
-FALSE,patch_note_infor,"- Optimize UI/UX
-- Fixes some bugs","- Optimize UI/UX
-- Fixes some bugs",Roboto-Regular SDF,"- Cải thiện giao diện và tối ưu trải nghiệm người dùng
+FALSE,patch_note_infor,"- Add new rider: Bildes - the loyal soldier
+- Optimize UI/UX
+- Fixes some bugs","- Add new rider: Bildes - the loyal soldier
+- Optimize UI/UX
+- Fixes some bugs",Roboto-Regular SDF,"- Thêm rider mới: Bildes - người cận vệ trung thành
+- Cải thiện giao diện và tối ưu trải nghiệm người dùng
 - Sửa một số lỗi ",Roboto-Regular SDF,
 FALSE,loading,Loading...,Loading...,Roboto-Italic SDF,Đang tải game...,Roboto-Italic SDF,
 FALSE,button_start,START YOUR JOURNEY,START YOUR JOURNEY,RobotoSemi-Bold SDF,BẮT ĐẦU CHƠI,RobotoSemi-Bold SDF,

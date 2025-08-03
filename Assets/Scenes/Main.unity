@@ -74953,7 +74953,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   riderAsset: {fileID: 4900000, guid: 1b8ed9fedea1c424f9c7797c8fbe6b8f, type: 3}
   objectAsset: {fileID: 4900000, guid: 7f40a367a8118fb40b41ddd6694c7ecd, type: 3}
-  commonAsset: {fileID: 4900000, guid: 0a8f6bdc7d799f44e9be8e7f1f706e5a, type: 3}
+  commonAsset: {fileID: 4900000, guid: 0499c940514176b458e9f59bcc89c061, type: 3}
   storyAsset: {fileID: 4900000, guid: 47c117dfc26490d47b7aa7fc805d84ac, type: 3}
   questAsset: {fileID: 4900000, guid: 6fcfadc2eedd3314ebce4d11d3fef2b8, type: 3}
   enumTypeAsset: {fileID: 4900000, guid: 21003875ca93c734e97f68cc54d56a26, type: 3}
