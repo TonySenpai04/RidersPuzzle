@@ -1,4 +1,4 @@
-using NUnit.Framework;
+﻿using NUnit.Framework;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -29,25 +29,34 @@ public class BildesSkill : BaseSkill
             int destroyCount = Mathf.Min(lostHp, objectCount);
             int healAmount = lostHp - destroyCount; 
 
-            int destroyed = 0;
-            for (int row = 0; row < gridController.rows; row++)
+            List<GameObject> hiddenObjects = new List<GameObject>();
+        for (int row = 0; row < gridController.rows; row++)
+        {
+            for (int col = 0; col < gridController.cols; col++)
             {
-                for (int col = 0; col < gridController.cols; col++)
+                GameObject obj = LevelManager.instance.CheckForHiddenObject(row, col);
+                if (obj != null)
                 {
-                    if (destroyed >= destroyCount)
-                        break;
-
-                    GameObject obj = LevelManager.instance.CheckForHiddenObject(row, col);
-                    if (obj != null)
-                    {
-
-                        obj.GetComponent<HiddenObject>().DestroyObject();
-                        destroyed++;
-                    }
+                    hiddenObjects.Add(obj);
                 }
-                if (destroyed >= destroyCount)
-                    break;
             }
+        }
+
+        // 2. Trộn ngẫu nhiên danh sách
+        for (int i = 0; i < hiddenObjects.Count; i++)
+        {
+            GameObject temp = hiddenObjects[i];
+            int randomIndex = Random.Range(i, hiddenObjects.Count);
+            hiddenObjects[i] = hiddenObjects[randomIndex];
+            hiddenObjects[randomIndex] = temp;
+        }
+
+        // 3. Xóa ngẫu nhiên `destroyCount` object đầu tiên
+        for (int i = 0; i < destroyCount && i < hiddenObjects.Count; i++)
+        {
+            hiddenObjects[i].GetComponent<HiddenObject>().DestroyObject();
+        }
+
 
 
             if (healAmount > 0)

@@ -51,7 +51,7 @@ public class ChangeHeroUIController : MonoBehaviour
         {
             changeHeroButtons[i].gameObject.SetActive(false);
         }
-        buttonParent.anchoredPosition = new Vector2(155,buttonParent.anchoredPosition.y);
+       // buttonParent.anchoredPosition = new Vector2(155,buttonParent.anchoredPosition.y);
     }
     public void UpdateSelection(int selectedHeroId)
     {
