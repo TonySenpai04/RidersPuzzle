@@ -31,7 +31,7 @@ public class HeroCard : MonoBehaviour
     public void OnClickHeroCard()
     {
         SoundManager.instance.PlaySFX("Click Sound");
-        upgradeView.gameObject.SetActive(true);
+       
         var heroDatas = HeroManager.instance.heroDatas;
         int index = heroDatas.FindIndex(h => h.id == heroID);
         if (index == -1)
@@ -46,12 +46,16 @@ public class HeroCard : MonoBehaviour
 
         var nextData = ReadCSVDataHeroStat.instance.GetHeroLevelData(heroID, nextLevel);
         var currentData = ReadCSVDataHeroStat.instance.GetHeroLevelData(heroID, heroData.level);
+        if(currentData == null)
+        {
+            return;
+        }
         if (nextData == null)
         {
             Debug.Log("✅ Hero đã đạt cấp tối đa.");
             
         }
-
+        upgradeView.gameObject.SetActive(true);
         upgradeView.currentID = heroID;
         upgradeView.SetUpgradeView(currentData, nextData);
         heroCardview.SetActive(false);

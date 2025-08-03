@@ -10,14 +10,14 @@ public class EnhanceUIController : MonoBehaviour
     [SerializeField] private GameObject heroCardview;
     [SerializeField] private RectTransform heroCardScrollview;
     [SerializeField] private List<HeroCard> heroCards;
-    [SerializeField] private List<Sprite> heroCardSprites;
+
     void Start()
     {
         for(int i=0;i< HeroManager.instance.heroDatas.Count; i++)
         {
             var heroCardIns = Instantiate(heroCard, heroCardScrollview);
             var hero = HeroManager.instance.heroDatas[i];
-            heroCardIns.SetData(hero.id, upgradeView, heroCardview, hero.level, hero.hp,hero.mp, heroCardSprites[i]);
+            heroCardIns.SetData(hero.id, upgradeView, heroCardview, hero.level, hero.hp,hero.mp, hero.heroCardImage);
             heroCards.Add(heroCardIns);
         }
      
@@ -31,7 +31,7 @@ public class EnhanceUIController : MonoBehaviour
             {
 
                 var hero = HeroManager.instance.heroDatas[i];
-                heroCards[i].SetData(hero.id, upgradeView, heroCardview, hero.level, hero.hp,hero.mp, heroCardSprites[i]);
+                heroCards[i].SetData(hero.id, upgradeView, heroCardview, hero.level, hero.hp,hero.mp,hero.heroCardImage);
                
             }
         }

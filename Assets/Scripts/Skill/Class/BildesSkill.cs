@@ -3,10 +3,10 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class NewSkill : BaseSkill
+public class BildesSkill : BaseSkill
 {
 
-    public NewSkill(GridController gridController, int skillAmount, int id)
+    public BildesSkill(GridController gridController, int skillAmount, int id)
     {
         this.gridController = gridController;
         this.maxSkillAmount = skillAmount;

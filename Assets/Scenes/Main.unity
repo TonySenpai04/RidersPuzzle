@@ -23793,7 +23793,7 @@ GameObject:
   - component: {fileID: 466635149}
   - component: {fileID: 466635148}
   m_Layer: 0
-  m_Name: UpdateHeroManager
+  m_Name: UpgradeHeroManager
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -23831,6 +23831,7 @@ MonoBehaviour:
   - {fileID: 4900000, guid: b6dd01ac515956144adbac567ab5e880, type: 3}
   - {fileID: 4900000, guid: f9b3444061334fc48833eb222a0e720b, type: 3}
   - {fileID: 4900000, guid: 363ba238be5d9194d8470bae8bd4402d, type: 3}
+  - {fileID: 4900000, guid: fdac946b5a06f1945a2c6637405c76be, type: 3}
   regenAsset: {fileID: 4900000, guid: d7926b1d3ee40c74b94c62e1f440d716, type: 3}
   riderDatas: []
   regenDatas:
@@ -28497,7 +28498,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0.5}
   m_AnchorMax: {x: 1, y: 0.5}
-  m_AnchoredPosition: {x: -7.4293823, y: 68.18}
+  m_AnchoredPosition: {x: -7.4292603, y: 68.18}
   m_SizeDelta: {x: -276.8, y: 106.5}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &558138679
@@ -42216,6 +42217,14 @@ MonoBehaviour:
     resourceId: 1004
     resourceName: Rider 1004 EXP
     icon: {fileID: 21300000, guid: 1776e27b6d2ce94499f754f57d08f884, type: 3}
+  - resourceType: 2
+    resourceId: 1005
+    resourceName: Rider 1005 EXP
+    icon: {fileID: 21300000, guid: a1d1183b18a4fc244bbfa2862fd2ec10, type: 3}
+  - resourceType: 3
+    resourceId: 1005
+    resourceName: Rider 1005 Mastery
+    icon: {fileID: 21300000, guid: b39bdc3cae78ee0468a21740dc4f077a, type: 3}
 --- !u!1 &879700400
 GameObject:
   m_ObjectHideFlags: 0
@@ -55959,11 +55968,6 @@ MonoBehaviour:
   heroCardview: {fileID: 1168515261}
   heroCardScrollview: {fileID: 775776273}
   heroCards: []
-  heroCardSprites:
-  - {fileID: 21300000, guid: a91abaa1e1710bb469ac298d1e6d0c1d, type: 3}
-  - {fileID: 21300000, guid: 45cf0a0da01c4f945a7deee1e4fe7e31, type: 3}
-  - {fileID: 21300000, guid: b061e7a914a6a9942870851819896c72, type: 3}
-  - {fileID: 21300000, guid: 0320d103935baa34b89bd26778070f8a, type: 3}
 --- !u!1 &1168902110
 GameObject:
   m_ObjectHideFlags: 0
@@ -73542,6 +73546,11 @@ MonoBehaviour:
     - {fileID: 8300000, guid: eb3e231e5f0db2a439fd7d6aaf921ad9, type: 3}
     - {fileID: 8300000, guid: 93ef07cf6de3a1f4b91de1cbb61099ae, type: 3}
     - {fileID: 8300000, guid: 2b91d92a00f10ca4f9025d21d40d9099, type: 3}
+  - id: 1005
+    clip:
+    - {fileID: 8300000, guid: f2b9f2ede78219448a5862a8b88092c6, type: 3}
+    - {fileID: 8300000, guid: 56b69f760a83af74a8d52b7586711678, type: 3}
+    - {fileID: 8300000, guid: 12615e0f434384e43bd1e16dc09df46d, type: 3}
   musicSource: {fileID: 177291674}
   sFXSource: {fileID: 1738793584}
 --- !u!4 &1499561385
@@ -74942,13 +74951,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6ff3e288d79d4f84e93124c12281f950, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  riderAsset: {fileID: 4900000, guid: afaad02e98f903c48995a602c15f44c7, type: 3}
+  riderAsset: {fileID: 4900000, guid: 1b8ed9fedea1c424f9c7797c8fbe6b8f, type: 3}
   objectAsset: {fileID: 4900000, guid: 7f40a367a8118fb40b41ddd6694c7ecd, type: 3}
   commonAsset: {fileID: 4900000, guid: 0a8f6bdc7d799f44e9be8e7f1f706e5a, type: 3}
   storyAsset: {fileID: 4900000, guid: 47c117dfc26490d47b7aa7fc805d84ac, type: 3}
   questAsset: {fileID: 4900000, guid: 6fcfadc2eedd3314ebce4d11d3fef2b8, type: 3}
-  enumTypeAsset: {fileID: 4900000, guid: 25eefb5226973fb4d85a0fe026f6b397, type: 3}
-  economyTypeAsset: {fileID: 4900000, guid: 5d65f794497a77948911593a999cd706, type: 3}
+  enumTypeAsset: {fileID: 4900000, guid: 21003875ca93c734e97f68cc54d56a26, type: 3}
+  economyTypeAsset: {fileID: 4900000, guid: b0c6d4cef0f40ff4f840c124f8cbcd3b, type: 3}
   applyTextScript: {fileID: 1519185842}
   applyTextManager: {fileID: 1519185846}
 --- !u!114 &1519185846
@@ -76374,7 +76383,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -12.349304, y: -172.00006}
+  m_AnchoredPosition: {x: -12.349182, y: -172.0003}
   m_SizeDelta: {x: -102.38, y: -1716.13}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1540078559
@@ -95051,6 +95060,19 @@ MonoBehaviour:
     skillDescription: 
     story: 
     level: 0
+  - id: 1005
+    price: 29999
+    name: BILDES
+    hp: 8
+    mp: 0
+    currentMP: 0
+    icon: {fileID: 21300000, guid: 9a4504545871ff9468ab494eff5b9016, type: 3}
+    isUnlock: 0
+    heroImage: {fileID: 21300000, guid: 9df2cb9e04adba344ad2dd41337a6846, type: 3}
+    heroCardImage: {fileID: 21300000, guid: 22075cd7e4f84d24fb5de5f35dce218d, type: 3}
+    skillDescription: 
+    story: 
+    level: 0
 --- !u!4 &1904546905
 Transform:
   m_ObjectHideFlags: 0
@@ -95120,7 +95142,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -12.349304, y: -161.77008}
+  m_AnchoredPosition: {x: -12.349182, y: -161.77032}
   m_SizeDelta: {x: -102.38, y: -831.9}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1905144567
@@ -100569,7 +100591,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -2.0698242, y: 0}
+  m_AnchoredPosition: {x: -2.0697632, y: 0}
   m_SizeDelta: {x: 53.67, y: 41.29}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &2031026245

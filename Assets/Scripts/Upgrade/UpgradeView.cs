@@ -54,6 +54,7 @@ public class UpgradeView : MonoBehaviour
     public Button regenAccessBtn;
     public void SetUpgradeView(RiderUpgradeLevel currentData, RiderUpgradeLevel upgradeData)
     {
+       
         int hepi = 0;
         int exp = 0;
         int mastery = 0;
