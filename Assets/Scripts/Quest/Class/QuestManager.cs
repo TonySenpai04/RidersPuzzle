@@ -269,7 +269,7 @@ public class QuestManager : MonoBehaviour
     {
         QuestData questData = await LoadQuestData(); 
         string today  = TimeManager.Instance.GetEffectiveDateForDailyQuest();
-        string serverDate = TimeManager.Instance.ServerDate;
+        string serverDate = TimeManager.Instance.GetEffectiveDateForDailyQuest();
         DailyGiftData giftData = NotiManager.instance.LoadGiftData();
 
         if (giftData.lastClaimDate == serverDate)
