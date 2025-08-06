@@ -1,35 +1,35 @@
 ﻿using System.Collections.Generic;
+using Unity.VisualScripting;
 using Unity.VisualScripting.Antlr3.Runtime.Misc;
 using UnityEngine;
 using UnityEngine.UI;
 
 public class GattaiFusionUI : MonoBehaviour
 {
-    public List<int> selectedHeroes = new List<int>();
-    public SkillFushionButton skillButtonPrefab;
-    public Transform skillButtonContainer;
-    public Button heroConfirmButton;
-    public HeroFusionButton heroButtonPrefab;
-    public Transform heroButtonContainer;
-    private int selectedSkillIndex = -1;
-    private List<ISkill> availableSkills = new List<ISkill>();
-    public List<HeroFusionButton> heros;
-    public List<SkillFushionButton> skills;
-    public int totalHP;
-    public int totalId;
-    public int masteryPoints=5;
-    public GameObject skillsView;
-    public GameObject herosView;
+    [SerializeField] public List<int> selectedHeroes = new List<int>();
+    [SerializeField]private List<int> tempSelectedHeroes = new List<int>();
+    [SerializeField] private SkillFushionButton skillButtonPrefab;
+    [SerializeField] private Transform skillButtonContainer;
+    [SerializeField] private Button heroConfirmButton;
+    [SerializeField] private HeroFusionButton heroButtonPrefab;
+    [SerializeField] private Transform heroButtonContainer;
+    [SerializeField] private int selectedSkillIndex = -1;
+    [SerializeField] private List<ISkill> availableSkills = new List<ISkill>();
+    [SerializeField] private List<HeroFusionButton> heros;
+    [SerializeField] private List<SkillFushionButton> skills;
+    [SerializeField] private int totalHP;
+    [SerializeField] private int totalId;
+    [SerializeField] private int masteryPoints=5;
+    [SerializeField] private GameObject skillsView;
+    [SerializeField] private GameObject herosView;
+    [SerializeField] private GameObject selectView;
+    [SerializeField] private GameObject heroFushion;
+    [SerializeField] private Image  newHero;
+    [SerializeField] private DataHero newHeroData;
     private void Start()
     {
-        //foreach (var heroData in HeroManager.instance.GetUnlockHero())
-        //{
-        //    HeroFusionButton button = Instantiate(heroButtonPrefab, heroButtonContainer);
-        //    button.SetData(heroData.id, heroData.heroCardImage,heroData.level,heroData.hp,heroData.mp, OnClickHeroButton);
-        //    heros.Add(button);
-
-        //}
-        heroConfirmButton.onClick.AddListener(() => ShowSkill());
+        newHeroData = new DataHero();
+        heroConfirmButton.onClick.AddListener(() => ConfirmHeroSelection());
         heroConfirmButton.gameObject.SetActive(false);
 
     }
@@ -73,6 +73,11 @@ public class GattaiFusionUI : MonoBehaviour
 
 
     }
+    private void ConfirmHeroSelection()
+    {
+        selectedHeroes = new List<int>(tempSelectedHeroes);
+        ShowSkill();
+    }
     public void ShowSkill()
     {
         if (selectedHeroes.Count >= 3)
@@ -86,41 +91,39 @@ public class GattaiFusionUI : MonoBehaviour
     private void OnEnable()
     {
         CreateButtons();
+        skillsView.SetActive(false);
+        herosView.SetActive(false);
+        heroFushion.SetActive(false);
+        selectView.SetActive(true);
+
     }
 
     public void OnClickHeroButton(int heroID)
     {
-        bool isSelected = selectedHeroes.Contains(heroID);
+       
+        bool isSelected = tempSelectedHeroes.Contains(heroID);
 
         if (!isSelected)
         {
-
-            if (selectedHeroes.Count >= 5)
+            if (tempSelectedHeroes.Count >= 5)
             {
                 Debug.Log("Chỉ được chọn tối đa 5 Rider.");
                 return;
             }
-            selectedHeroes.Add(heroID);
+            tempSelectedHeroes.Add(heroID);
         }
         else
         {
-            selectedHeroes.Remove(heroID);
+            tempSelectedHeroes.Remove(heroID);
         }
-
+        SoundManager.instance.PlaySFX("Click Sound");
         foreach (var btn in heros)
         {
-            bool selected = selectedHeroes.Contains(btn.GetID());
+            bool selected = tempSelectedHeroes.Contains(btn.GetID());
             btn.SetHighlight(selected);
         }
 
-        if (selectedHeroes.Count >= 3)
-        {
-            heroConfirmButton.gameObject.SetActive(true);
-        }
-        else
-        {
-            heroConfirmButton.gameObject.SetActive(false);
-        }
+        heroConfirmButton.gameObject.SetActive(tempSelectedHeroes.Count >= 3);
     }
 
 
@@ -160,16 +163,13 @@ public class GattaiFusionUI : MonoBehaviour
     {
         if (selectedSkillIndex == index)
         {
-            // Click lần nữa để bỏ chọn
             Debug.Log("Bỏ chọn skill: " + availableSkills[index].GetSkillId());
             selectedSkillIndex = -1;
         }
         else
         {
-            // Chọn mới
             selectedSkillIndex = index;
             ApplyTextManager.instance.UpdateSkillInfoOnStage(availableSkills[index].GetSkillId());
-          //  ApplyText.instance.UpdateSkillInfoOnStage(availableSkills[index].GetSkillId());
             Debug.Log("Skill được chọn: " + availableSkills[index].GetSkillId());
         }
 
@@ -193,13 +193,15 @@ public class GattaiFusionUI : MonoBehaviour
         ISkill selectedSkill = availableSkills[selectedSkillIndex];
         SkillManager.instance.AddSkillPVE(totalId, selectedSkill);
         SkillManager.instance.SetSkillId(totalId);
-        DataHero data=new DataHero();
-        data.hp = totalHP;
-        data.id = totalId;
-
-        LabyrinthController.instance.SetGataiData(data);
-        LabyrinthController.instance.Randomlevel();
-        masteryPoints--;
+     
+        newHeroData.hp = totalHP;
+        newHeroData.id = totalId;
+        
+        //LabyrinthController.instance.SetGataiData(data);
+        //LabyrinthController.instance.Randomlevel();
+        //masteryPoints--;
+        //heroFushion.SetActive(true);
+       // PlayerController.instance.GetComponent<SpriteRenderer>().sprite = newHero.sprite;
         Debug.Log("Fusion thành công! HP: " + totalHP + " | Skill: " + selectedSkill.GetSkillId());
 
         // Reset lại

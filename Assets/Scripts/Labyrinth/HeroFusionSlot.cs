@@ -10,6 +10,8 @@ public class HeroFusionSlot : MonoBehaviour
     [SerializeField] private GameObject card;
     [SerializeField] private Image heroIcon;
     [SerializeField] private Button button;
+    [SerializeField] private Button heroButton;
+
     [SerializeField] private TextMeshProUGUI levelTxt;
     [SerializeField] private GameObject highlightBorder;
     [SerializeField] private TextMeshProUGUI healthTxt;
@@ -29,6 +31,7 @@ public class HeroFusionSlot : MonoBehaviour
     public void SetClickAction(System.Action onClickAction)
     {
         button.onClick.AddListener(() => onClickAction());
+        heroButton.onClick.AddListener(() => onClickAction());
 
     }
     public void ResetData()
