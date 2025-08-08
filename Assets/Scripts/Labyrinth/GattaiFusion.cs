@@ -40,6 +40,7 @@ public class GattaiFusionUI : MonoBehaviour
 
         foreach (var heroData in unlockHeros)
         {
+            if(heroData.currentMP<=0) continue;
             if (index < heros.Count)
             {
                 heros[index].SetData(
@@ -132,17 +133,29 @@ public class GattaiFusionUI : MonoBehaviour
         ClearSkillSelection();
         availableSkills.Clear();
 
-        foreach (int id in selectedHeroes)
+        for (int i = 0; i < 5; i++)
         {
-            ISkill skill = SkillManager.instance.GetSkillPVEById(id);
-            if (skill != null)
+            SkillFushionButton skillBtn = Instantiate(skillButtonPrefab, skillButtonContainer);
+            if (i < selectedHeroes.Count)
             {
-                availableSkills.Add(skill);
-                SkillFushionButton skillBtn = Instantiate(skillButtonPrefab, skillButtonContainer);
-                skillBtn.SetData(availableSkills.Count - 1,
-                    LocalizationManager.instance.GetLocalizedText($"skill_info_hero_{id}"), OnClickSkillButton);
-                skills.Add(skillBtn);
+                int id = selectedHeroes[i];
+                ISkill skill = SkillManager.instance.GetSkillPVEById(id);
+                if (skill != null)
+                {
+                    availableSkills.Add(skill);
+                    skillBtn.SetData(availableSkills.Count - 1,
+                        LocalizationManager.instance.GetLocalizedText($"skill_info_hero_{id}"), OnClickSkillButton);
+                }
+                else
+                {
+                    skillBtn.SetData(i, "", null);
+                }
             }
+            else
+            {
+                skillBtn.SetData(i, "", null);
+            }
+            skills.Add(skillBtn);
         }
 
         heroConfirmButton.gameObject.SetActive(true);
