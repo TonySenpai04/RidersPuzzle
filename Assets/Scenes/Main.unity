@@ -51984,6 +51984,7 @@ Transform:
   - {fileID: 873756089}
   - {fileID: 713256336}
   - {fileID: 466635147}
+  - {fileID: 2073728417}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1057070676
@@ -55797,7 +55798,6 @@ MonoBehaviour:
     redDotObject: {fileID: 174099851}
   redNotiData:
     redNotiList: []
-  saveDailyGiftFilePath: 
 --- !u!4 &1143238397
 Transform:
   m_ObjectHideFlags: 0
@@ -65394,7 +65394,6 @@ GameObject:
   - component: {fileID: 1316218168}
   - component: {fileID: 1316218167}
   - component: {fileID: 1316218166}
-  - component: {fileID: 1316218169}
   m_Layer: 5
   m_Name: Daily
   m_TagString: Untagged
@@ -65460,23 +65459,6 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &1316218169
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1316218165}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b9a862fae96b0594994584d97076895f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  saveFilePath: 
-  goldAmount: 8
-  giftButton: {fileID: 2088550032}
-  exChangeBtn: {fileID: 1193057541}
-  receiveGold: {fileID: 1478471316}
 --- !u!1 &1316386014
 GameObject:
   m_ObjectHideFlags: 0
@@ -103795,6 +103777,55 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2060644466}
   m_CullTransparentMesh: 1
+--- !u!1 &2073728415
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2073728417}
+  - component: {fileID: 2073728416}
+  m_Layer: 0
+  m_Name: DailyGiftManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &2073728416
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2073728415}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b9a862fae96b0594994584d97076895f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  saveFilePath: 
+  goldAmount: 8
+  giftButton: {fileID: 2088550032}
+  exChangeBtn: {fileID: 1193057541}
+  receiveGold: {fileID: 1478471316}
+--- !u!4 &2073728417
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2073728415}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0.15906604, y: 3.8301082, z: 25.91951}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1054705959}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &2073991443
 GameObject:
   m_ObjectHideFlags: 0
