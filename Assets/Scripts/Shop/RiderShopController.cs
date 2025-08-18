@@ -54,7 +54,7 @@ public class RiderShopController : MonoBehaviour
         {
             HeroShopItem hero = Instantiate(heroShopItemPrefabs, content.transform);
             hero.SetDataHero(heroData.id);
-            if (!heroData.isUnlock)
+            if (!heroData.isUnlock || heroData.isTrial)
             {
                 ShowExchangeBtn(hero);
                 hero.ExchangeBtn.onClick.AddListener(() => ShowBuyPopup(hero));

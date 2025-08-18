@@ -1432,12 +1432,12 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 1904546904}
         m_TargetAssemblyTypeName: HeroManager, Assembly-CSharp
-        m_MethodName: OnUpgradeHeroButtonClicked
-        m_Mode: 3
+        m_MethodName: TestTrial
+        m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 1002
+          m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: 
           m_BoolArgument: 0
@@ -17541,7 +17541,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 540, y: 204.23975}
+  m_AnchoredPosition: {x: 540, y: 204.23972}
   m_SizeDelta: {x: 1080, y: 408.48}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &322727872
@@ -41056,7 +41056,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 540, y: 204.23975}
+  m_AnchoredPosition: {x: 540, y: 204.23972}
   m_SizeDelta: {x: 1080, y: 408.48}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &828914359
@@ -84312,6 +84312,8 @@ MonoBehaviour:
     skillDescription: 
     story: 
     level: 0
+    isTrial: 0
+    trialExpireTimestamp: 0
   fadeDuration: 1
 --- !u!114 &1653752349
 MonoBehaviour:
@@ -96163,6 +96165,8 @@ MonoBehaviour:
     skillDescription: 
     story: 
     level: 0
+    isTrial: 0
+    trialExpireTimestamp: 0
   levelIndex: 0
   mazeEffects: []
 --- !u!1 &1894242616
@@ -97058,6 +97062,8 @@ MonoBehaviour:
     skillDescription: 
     story: 
     level: 0
+    isTrial: 0
+    trialExpireTimestamp: 0
   - id: 1002
     price: 0
     name: Nigou
@@ -97071,6 +97077,8 @@ MonoBehaviour:
     skillDescription: 
     story: 
     level: 0
+    isTrial: 0
+    trialExpireTimestamp: 0
   - id: 1003
     price: 29999
     name: Skulz
@@ -97084,6 +97092,8 @@ MonoBehaviour:
     skillDescription: 
     story: 
     level: 0
+    isTrial: 0
+    trialExpireTimestamp: 0
   - id: 1004
     price: 29999
     name: Akale
@@ -97097,6 +97107,8 @@ MonoBehaviour:
     skillDescription: 
     story: 
     level: 0
+    isTrial: 0
+    trialExpireTimestamp: 0
   - id: 1005
     price: 29999
     name: BILDES
@@ -97110,6 +97122,8 @@ MonoBehaviour:
     skillDescription: 
     story: 
     level: 0
+    isTrial: 0
+    trialExpireTimestamp: 0
 --- !u!4 &1904546905
 Transform:
   m_ObjectHideFlags: 0
@@ -102759,7 +102773,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -2.0698853, y: 0}
+  m_AnchoredPosition: {x: -2.0697632, y: 0}
   m_SizeDelta: {x: 53.67, y: 41.29}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &2031026245
@@ -105165,7 +105179,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: -381.75}
+  m_AnchoredPosition: {x: 0, y: -381.75003}
   m_SizeDelta: {x: 0, y: -1396.03}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &2097554288

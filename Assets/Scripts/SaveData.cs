@@ -14,7 +14,10 @@ public class LevelProgressData
 public class UnlockHeroData
 {
     public List<int> seenHeroIds;
-
+    public UnlockHeroData() 
+    {
+        seenHeroIds = new List<int>();
+    }
     public UnlockHeroData(List<int> ids)
     {
         seenHeroIds = ids;

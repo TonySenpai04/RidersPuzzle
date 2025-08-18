@@ -10,7 +10,7 @@ public class TimeManager : MonoBehaviour
     public string ServerDate { get; private set; }
     public DateTime ServerDateTime { get; private set; } // Lưu thời gian đầy đủ
     public bool IsTimeFetched  = false; // Đánh dấu đã lấy xong thời gian
-
+    private float elapsedTime = 0f;
     private void Awake()
     {
         if (Instance == null)
@@ -88,6 +88,16 @@ public class TimeManager : MonoBehaviour
         }
 
         return effectiveDateTime.ToString("yyyy-MM-dd");
+    }
+
+
+    private void Update()
+    {
+        if (IsTimeFetched)
+        {
+            elapsedTime += Time.deltaTime;
+            ServerDateTime = ServerDateTime.AddSeconds(Time.deltaTime);
+        }
     }
 
 

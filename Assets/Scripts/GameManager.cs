@@ -151,6 +151,7 @@ public class GameManager : MonoBehaviour
 
     private void HandleWin()
     {
+        HeroManager.instance.CheckHeroTrials();
         if (!hasPlayedWinSound)
         {
             SoundManager.instance.PlaySFX("Stage Clear");
@@ -187,6 +188,7 @@ public class GameManager : MonoBehaviour
 
     private void HandleLose()
     {
+        HeroManager.instance.CheckHeroTrials();
         if (!hasPlayedLoseSound)
         {
             SoundManager.instance.PlaySFX("Stage Failed");

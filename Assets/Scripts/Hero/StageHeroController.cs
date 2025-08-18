@@ -147,6 +147,16 @@ public class StageHeroController : MonoBehaviour
         File.WriteAllText(heroDataPath, json);
         Debug.Log($"Saved hero data to {heroDataPath}");
     }
+    private void OnEnable()
+    {
+
+        if (heroManager.heroTrialService != null && heroManager.IsTrialHero(currentId) && heroManager.IsTrialExpired(currentId))
+        {
+            Debug.LogWarning($"Hero {currentId} đã hết hạn trial → Chuyển về mặc định (1001).");
+            SetHeroID(1001); 
+        }
+
+    }
 
     private void LoadHeroData()
     {

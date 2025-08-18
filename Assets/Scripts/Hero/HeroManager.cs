@@ -22,6 +22,9 @@ public struct DataHero
     public string skillDescription;
     public string story;
     public int level;
+
+    public bool isTrial;
+    public long trialExpireTimestamp;
 }
 
 [System.Serializable]
@@ -41,14 +44,26 @@ public struct HeroProgress
     public int level;
     public int mp;
     public int currentMp;
+    public bool isTrial;
+    public long trialExpireTimestamp;
 
-    public HeroProgress(int id, int hp, int level,int mp,int currentMp)
+    //public HeroProgress(int id, int hp, int level,int mp,int currentMp)
+    //{
+    //    this.id = id;
+    //    this.hp = hp;
+    //    this.level = level;
+    //    this.mp=mp;
+    //    this.currentMp = currentMp;
+    //}
+    public HeroProgress(int id, int hp, int level, int mp, int currentMp, bool isTrial, long trialExpireTimestamp)
     {
         this.id = id;
         this.hp = hp;
         this.level = level;
-        this.mp=mp;
+        this.mp = mp;
         this.currentMp = currentMp;
+        this.isTrial = isTrial;
+        this.trialExpireTimestamp = trialExpireTimestamp;
     }
 }
 
@@ -65,16 +80,18 @@ public class HeroProgressList
 
 public class HeroManager : MonoBehaviour
 {
-     public List<DataHero> heroDatas;
-     public static HeroManager instance;
-     public Dictionary<int, int> heroLevels = new(); // heroId -> level
+    public List<DataHero> heroDatas;
+    public static HeroManager instance;
+    public Dictionary<int, int> heroLevels = new(); // heroId -> level
+    public IHeroProgressService heroProgressService;
+    public IHeroTrialService heroTrialService;
 
     void Awake()
     {
         instance = this;
-       LoadUnlockHero();
-    
-
+        LoadUnlockHero();
+        heroProgressService = new HeroProgressService();
+        heroTrialService = new HeroTrialService();
 
     }
     public DataHero? GetHero(int id)
@@ -110,7 +127,12 @@ public class HeroManager : MonoBehaviour
         int index = heroDatas.FindIndex(h => h.id == id);
         if (index != -1)
         {
-            DataHero hero = heroDatas[index]; 
+            DataHero hero = heroDatas[index];
+            if (hero.isTrial)
+            {
+                hero.isTrial = false;
+                hero.trialExpireTimestamp = 0;
+            }
             hero.isUnlock = true;           
             heroDatas[index] = hero;
             SaveUnlockHero();
@@ -123,138 +145,118 @@ public class HeroManager : MonoBehaviour
     }
     public void SaveUnlockHero()
     {
+        List<int> unlockHeroIds = heroDatas.Where(h => h.isUnlock).Select(h => h.id).ToList();
+        UnlockHeroData unlockData = new UnlockHeroData(unlockHeroIds);
         List<int> seenObjectIds = heroDatas.Where(h => h.isUnlock).Select(h => h.id).ToList();
         string json = JsonUtility.ToJson(new UnlockHeroData(seenObjectIds));
         File.WriteAllText(Application.persistentDataPath + "/unlockHeros.json", json);
+        if (FirebaseDataManager.Instance != null && FirebaseDataManager.Instance.GetCurrentUser() != null)
+        {
+            FirebaseDataManager.Instance.SaveData(
+                LevelManager.instance.GetAllLevelComplete(),
+                GoldManager.instance.GetGold(),
+                SaveGameManager.instance.LoadAllProgress(),
+                unlockData
+            );
+        }
+
     }
     public void LoadUnlockHero()
     {
-        string path = Application.persistentDataPath + "/unlockHeros.json";
-        if (File.Exists(path))
+        // 1. Luôn load local trước
+        UnlockHeroData localData = LoadLocalOrDefaultUnlockHero();
+
+        // 2. Nếu có Firebase → load tiếp server (ghi đè)
+        if (FirebaseDataManager.Instance != null && FirebaseDataManager.Instance.GetCurrentUser() != null)
         {
-            string json = File.ReadAllText(path);
-            UnlockHeroData data = JsonUtility.FromJson<UnlockHeroData>(json);
-            if (data.seenHeroIds.Count <=1)
+            FirebaseDataManager.Instance.LoadPlayerData((playerData) =>
             {
-                data.seenHeroIds.Add(1001);
-
-                data.seenHeroIds.Add(1002);
-            }
-            foreach (int id in data.seenHeroIds)
-            {
-                UnlockHero(id);
-            }
-        }
-    }
-
-    public void SaveHeroesData()
-    {
-        List<HeroProgress> progressList = heroDatas.Select(h => new HeroProgress(h.id, h.hp, h.level,h.mp,h.currentMP)).ToList();
-        string json = JsonUtility.ToJson(new HeroProgressList(progressList));
-        File.WriteAllText(Application.persistentDataPath + "/heroesData.json", json);
-    }
-
-
-
-    public void LoadHeroesData()
-    {
-        string path = Application.persistentDataPath + "/heroesData.json";
-        if (File.Exists(path))
-        {
-            string json = File.ReadAllText(path);
-            HeroProgressList data = JsonUtility.FromJson<HeroProgressList>(json);
-
-            foreach (var progress in data.heroProgresses)
-            {
-                int index = heroDatas.FindIndex(h => h.id == progress.id);
-                if (index != -1)
+                if (playerData != null && playerData.unlockHeroData != null && playerData.unlockHeroData.seenHeroIds.Count > 0)
                 {
-                    DataHero hero = heroDatas[index];
-                    hero.hp = progress.hp;
-                    hero.level = progress.level;
-                    hero.mp = progress.mp;
-                    hero.currentMP = progress.currentMp;
-                    heroDatas[index] = hero;
-                }
-            }
-        }
-    }
-    public void SaveHeroesDataToFirebase()
-    {
-        var user = FirebaseDataManager.Instance.GetCurrentUser();
-        if (user == null)
-        {
-            return;
-        }
-        List<HeroProgress> progressList = heroDatas
-            .Select(h => new HeroProgress(h.id, h.hp, h.level,h.mp, h.currentMP))
-            .ToList();
-      
+                    // Reset tất cả hero về false
+                    for (int i = 0; i < heroDatas.Count; i++)
+                    {
+                        var hero = heroDatas[i];
+                        hero.isUnlock = false;
+                        heroDatas[i] = hero;
+                    }
 
-        HeroProgressList wrapper = new HeroProgressList(progressList);
-        string json = JsonUtility.ToJson(wrapper);
+                    // Unlock theo Firebase
+                    foreach (int id in playerData.unlockHeroData.seenHeroIds)
+                    {
+                        UnlockHero(id);
+                    }
 
-        FirebaseDatabase.DefaultInstance
-            .RootReference
-            .Child("users")
-            .Child(user.UserId)
-            .Child("heroProgress")
-            .SetRawJsonValueAsync(json)
-            .ContinueWithOnMainThread(task =>
-            {
-                if (task.IsCompleted)
-                {
-                    Debug.Log("✅ Đã lưu hero progress lên Firebase.");
+                    Debug.Log("✅ Load hero từ Firebase thành công (ghi đè local).");
                 }
                 else
                 {
-                    Debug.LogError("❌ Lưu hero progress thất bại: " + task.Exception);
+                    // Nếu server chưa có → dùng localData và lưu ngược lại server
+                    playerData.unlockHeroData = localData;
+                    FirebaseDataManager.Instance.SavePlayerData(playerData);
+                    Debug.Log("☁️ Firebase chưa có → đồng bộ local lên server.");
                 }
             });
+        }
+    }
+
+    private UnlockHeroData LoadLocalOrDefaultUnlockHero()
+    {
+        string path = Application.persistentDataPath + "/unlockHeros.json";
+        UnlockHeroData data = new UnlockHeroData();
+
+        if (File.Exists(path))
+        {
+            string json = File.ReadAllText(path);
+            data = JsonUtility.FromJson<UnlockHeroData>(json);
+            Debug.Log("📂 Load hero từ local.");
+        }
+
+        // Nếu local rỗng thì tạo default hero
+        if (data.seenHeroIds == null || data.seenHeroIds.Count <= 1)
+        {
+            data.seenHeroIds = new List<int> { 1001, 1002 };
+            Debug.Log("🆕 Tạo default hero data.");
+        }
+
+        // Reset toàn bộ hero về false
+        for (int i = 0; i < heroDatas.Count; i++)
+        {
+            var hero = heroDatas[i];
+            hero.isUnlock = false;
+            heroDatas[i] = hero;
+        }
+
+        // Unlock theo danh sách
+        foreach (int id in data.seenHeroIds)
+        {
+            UnlockHero(id);
+        }
+
+        return data;
+    }
+
+
+    public void SaveHeroesData()
+    {
+        heroProgressService.SaveProgress(heroDatas);
+    }
+
+    public void LoadHeroesData()
+    {
+        heroProgressService.LoadProgress(heroDatas);
+      
+    }
+    public void SaveHeroesDataToFirebase()
+    {
+        heroProgressService.SaveProgressToFirebase(heroDatas);
+      
     }
 
     public void LoadHeroesDataFromFirebase()
     {
-        
-        var user = FirebaseDataManager.Instance.GetCurrentUser();
-        if (user == null)
-        {
-            return;
-        }
-     
-        FirebaseDatabase.DefaultInstance
-            .RootReference
-            .Child("users")
-            .Child(user.UserId)
-            .Child("heroProgress")
-            .GetValueAsync().ContinueWithOnMainThread(task =>
-            {
-                if (task.IsCompleted && task.Result.Exists)
-                {
-                    string json = task.Result.GetRawJsonValue();
-                    HeroProgressList data = JsonUtility.FromJson<HeroProgressList>(json);
+        heroProgressService.LoadProgressFromFirebase(heroDatas);
 
-                    foreach (var progress in data.heroProgresses)
-                    {
-                        int index = heroDatas.FindIndex(h => h.id == progress.id);
-                        if (index != -1)
-                        {
-                            DataHero hero = heroDatas[index];
-                            hero.hp = progress.hp;
-                            hero.level = progress.level;
-                            hero.mp=progress.mp;
-                            hero.currentMP = progress.currentMp;
-                            heroDatas[index] = hero;
-                        }
-                    }
-
-                    Debug.Log("✅ Đã load hero progress từ Firebase.");
-                }
-                else
-                {
-                    Debug.LogWarning("⚠️ Không tìm thấy heroProgress trong Firebase hoặc load lỗi.");
-                }
-            });
     }
     public void OnUpgradeHeroButtonClicked(int heroId)
     {
@@ -268,5 +270,56 @@ public class HeroManager : MonoBehaviour
         {
             Debug.Log("Nâng cấp thất bại! Không đủ tài nguyên hoặc đã max cấp.");
         }
+    }
+    public void TestTrial()
+    {
+        StartHeroTrial(1005, 1);
+    }
+
+    #region HERO TRIAL
+    public void StartHeroTrial(int heroId, int durationDays)
+    {
+         heroTrialService.StartTrial(heroDatas, heroId,durationDays);
+        SaveHeroesData();
+        SaveHeroesDataToFirebase();
+    }
+
+
+    public void CheckHeroTrials()
+    {
+        heroTrialService.CheckTrials(heroDatas);
+        SaveHeroesData();
+        SaveHeroesDataToFirebase();
+    }
+
+
+    public string GetTrialRemainingTime(int heroId)
+    {
+        return heroTrialService.GetTrialRemainingTime(heroDatas, heroId);
+    }
+
+    public List<(DataHero hero, string remainingTime)> GetAllTrialHeroes()
+    {
+        List<(DataHero hero, string remainingTime)> trials = new();
+        foreach (var hero in heroDatas)
+        {
+            if (hero.isTrial)
+            {
+                string timeStr = GetTrialRemainingTime(hero.id);
+                trials.Add((hero, timeStr));
+            }
+        }
+        return trials;
+    }
+    #endregion
+    public bool IsTrialHero(int heroId)
+    {
+      return  heroTrialService.IsTrialHero(heroDatas, heroId);
+    }
+
+    public bool IsTrialExpired(int heroId)
+    {
+        return heroTrialService.IsTrialExpired(heroDatas, heroId);
+
     }
 }

@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
@@ -41,9 +41,22 @@ public class HeroShopItem : MonoBehaviour
             exchangeBtn.gameObject.SetActive(!hero.Value.isUnlock);
             if (hero.Value.isUnlock)
             {
-                onwed.gameObject.SetActive(true);
-                ApplyTextManager.instance.textLocalizer.SetLocalizedText("shop_owned_rider", onwed);
-                priceTxt.gameObject.SetActive(false);
+                if (hero.Value.isTrial)
+                {
+                    // Đang unlock nhưng chỉ là trial → vẫn cho mua
+                    onwed.gameObject.SetActive(false);
+                    priceTxt.gameObject.SetActive(true);
+                    priceTxt.text = hero.Value.price.ToString();
+                    exchangeBtn.gameObject.SetActive(true);
+                }
+                else
+                {
+                    // Unlock vĩnh viễn
+                    onwed.gameObject.SetActive(true);
+                    ApplyTextManager.instance.textLocalizer.SetLocalizedText("shop_owned_rider", onwed);
+                    priceTxt.gameObject.SetActive(false);
+                    exchangeBtn.gameObject.SetActive(false);
+                }
 
             }
             else
@@ -51,6 +64,7 @@ public class HeroShopItem : MonoBehaviour
                 onwed.gameObject.SetActive(false);
                 priceTxt.gameObject.SetActive(true);
                 priceTxt.text = hero.Value.price.ToString();
+                exchangeBtn.gameObject.SetActive(true);
 
             }
             heroImage.sprite = hero.Value.heroImage;
@@ -65,12 +79,27 @@ public class HeroShopItem : MonoBehaviour
         if (hero != null)
         {
             heroName.text = hero.Value.name;
-            exchangeBtn.gameObject.SetActive(!hero.Value.isUnlock);
+           
             if (hero.Value.isUnlock)
             {
-                onwed.gameObject.SetActive(true);
-                ApplyTextManager.instance.textLocalizer.SetLocalizedText("shop_owned_rider", onwed);
-                priceTxt.gameObject.SetActive(false);
+                if (hero.Value.isTrial)
+                {
+                    // Đang unlock nhưng chỉ là trial → vẫn cho mua
+                    onwed.gameObject.SetActive(false);
+                    priceTxt.gameObject.SetActive(true);
+                    priceTxt.text = hero.Value.price.ToString();
+                    exchangeBtn.gameObject.SetActive(true);
+
+                }
+                else
+                {
+                    // Unlock vĩnh viễn
+                    onwed.gameObject.SetActive(true);
+                    ApplyTextManager.instance.textLocalizer.SetLocalizedText("shop_owned_rider", onwed);
+                    priceTxt.gameObject.SetActive(false);
+                    exchangeBtn.gameObject.SetActive(false);
+                }
+
 
             }
             else
@@ -78,6 +107,7 @@ public class HeroShopItem : MonoBehaviour
                 onwed.gameObject.SetActive(false);
                 priceTxt.gameObject.SetActive(true);
                 priceTxt.text = hero.Value.price.ToString();
+                exchangeBtn.gameObject.SetActive(true);
             }
             heroImage.sprite = hero.Value.heroImage;
         }
