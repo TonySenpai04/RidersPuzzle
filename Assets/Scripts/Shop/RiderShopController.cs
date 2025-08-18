@@ -136,7 +136,7 @@ public class RiderShopController : MonoBehaviour
             heroShopitem.BuyBtn.onClick.RemoveAllListeners();
             GoldManager.instance.SpendGold( heroPrice);
 
-            HeroManager.instance.UnlockHero(id);
+            HeroManager.instance.UnlockHeroPermanent(id);
             heroShopitem.UpdateHero();
             NewBoughtHeroManager.instance.AddNewHero(id);
 

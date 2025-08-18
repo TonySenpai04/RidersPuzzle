@@ -92,12 +92,18 @@ public class HeroManager : MonoBehaviour
         LoadUnlockHero();
         heroProgressService = new HeroProgressService();
         heroTrialService = new HeroTrialService();
+        
 
+    }
+    private void Start()
+    {
+        LoadHeroesData();
     }
     public DataHero? GetHero(int id)
     {
         return heroDatas.FirstOrDefault(h => h.id == id);
     }
+
     public int HeroOwnedQuantity()
     {
         int unlockedCount = heroDatas.Count(hero => hero.isUnlock);
@@ -128,11 +134,6 @@ public class HeroManager : MonoBehaviour
         if (index != -1)
         {
             DataHero hero = heroDatas[index];
-            if (hero.isTrial)
-            {
-                hero.isTrial = false;
-                hero.trialExpireTimestamp = 0;
-            }
             hero.isUnlock = true;           
             heroDatas[index] = hero;
             SaveUnlockHero();
@@ -143,97 +144,41 @@ public class HeroManager : MonoBehaviour
             Debug.LogError($"Hero với ID {id} không tồn tại!");
         }
     }
-    public void SaveUnlockHero()
+    public void UnlockHeroPermanent(int id)
     {
-        List<int> unlockHeroIds = heroDatas.Where(h => h.isUnlock).Select(h => h.id).ToList();
-        UnlockHeroData unlockData = new UnlockHeroData(unlockHeroIds);
+        int index = heroDatas.FindIndex(h => h.id == id);
+        if (index != -1)
+        {
+            DataHero hero = heroDatas[index];
+            // Nếu đang trial thì clear trial, vì đã mua thật
+            if (hero.isTrial)
+            {
+                hero.isTrial = false;
+                hero.trialExpireTimestamp = 0;
+            }
+            hero.isUnlock = true;
+            heroDatas[index] = hero;
+
+            SaveUnlockHero();
+        }
+        else
+        {
+            Debug.LogError($"Hero với ID {id} không tồn tại!");
+        }
+    }
+    public void SaveUnlockHero() {
         List<int> seenObjectIds = heroDatas.Where(h => h.isUnlock).Select(h => h.id).ToList();
         string json = JsonUtility.ToJson(new UnlockHeroData(seenObjectIds));
         File.WriteAllText(Application.persistentDataPath + "/unlockHeros.json", json);
-        if (FirebaseDataManager.Instance != null && FirebaseDataManager.Instance.GetCurrentUser() != null)
-        {
-            FirebaseDataManager.Instance.SaveData(
-                LevelManager.instance.GetAllLevelComplete(),
-                GoldManager.instance.GetGold(),
-                SaveGameManager.instance.LoadAllProgress(),
-                unlockData
-            );
-        }
-
+       
     }
-    public void LoadUnlockHero()
-    {
-        // 1. Luôn load local trước
-        UnlockHeroData localData = LoadLocalOrDefaultUnlockHero();
-
-        // 2. Nếu có Firebase → load tiếp server (ghi đè)
-        if (FirebaseDataManager.Instance != null && FirebaseDataManager.Instance.GetCurrentUser() != null)
-        {
-            FirebaseDataManager.Instance.LoadPlayerData((playerData) =>
-            {
-                if (playerData != null && playerData.unlockHeroData != null && playerData.unlockHeroData.seenHeroIds.Count > 0)
-                {
-                    // Reset tất cả hero về false
-                    for (int i = 0; i < heroDatas.Count; i++)
-                    {
-                        var hero = heroDatas[i];
-                        hero.isUnlock = false;
-                        heroDatas[i] = hero;
-                    }
-
-                    // Unlock theo Firebase
-                    foreach (int id in playerData.unlockHeroData.seenHeroIds)
-                    {
-                        UnlockHero(id);
-                    }
-
-                    Debug.Log("✅ Load hero từ Firebase thành công (ghi đè local).");
-                }
-                else
-                {
-                    // Nếu server chưa có → dùng localData và lưu ngược lại server
-                    playerData.unlockHeroData = localData;
-                    FirebaseDataManager.Instance.SavePlayerData(playerData);
-                    Debug.Log("☁️ Firebase chưa có → đồng bộ local lên server.");
-                }
-            });
-        }
-    }
-
-    private UnlockHeroData LoadLocalOrDefaultUnlockHero()
-    {
+    public void LoadUnlockHero() {
         string path = Application.persistentDataPath + "/unlockHeros.json";
-        UnlockHeroData data = new UnlockHeroData();
-
-        if (File.Exists(path))
-        {
-            string json = File.ReadAllText(path);
-            data = JsonUtility.FromJson<UnlockHeroData>(json);
-            Debug.Log("📂 Load hero từ local.");
-        }
-
-        // Nếu local rỗng thì tạo default hero
-        if (data.seenHeroIds == null || data.seenHeroIds.Count <= 1)
-        {
-            data.seenHeroIds = new List<int> { 1001, 1002 };
-            Debug.Log("🆕 Tạo default hero data.");
-        }
-
-        // Reset toàn bộ hero về false
-        for (int i = 0; i < heroDatas.Count; i++)
-        {
-            var hero = heroDatas[i];
-            hero.isUnlock = false;
-            heroDatas[i] = hero;
-        }
-
-        // Unlock theo danh sách
-        foreach (int id in data.seenHeroIds)
-        {
-            UnlockHero(id);
-        }
-
-        return data;
+        if (File.Exists(path)) { string json = File.ReadAllText(path); 
+            UnlockHeroData data = JsonUtility.FromJson<UnlockHeroData>(json); 
+            if (data.seenHeroIds.Count <= 1) { data.seenHeroIds.Add(1001); 
+                data.seenHeroIds.Add(1002); } 
+            foreach (int id in data.seenHeroIds) { UnlockHero(id); } } 
     }
 
 
