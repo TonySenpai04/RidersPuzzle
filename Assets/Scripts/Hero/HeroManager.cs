@@ -5,6 +5,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Threading.Tasks;
 using UnityEngine;
 [Serializable]
 public struct DataHero
@@ -92,13 +93,35 @@ public class HeroManager : MonoBehaviour
         LoadUnlockHero();
         heroProgressService = new HeroProgressService();
         heroTrialService = new HeroTrialService();
-        
+        LoadHeroesData();
+
 
     }
-    private void Start()
+    private async void Start()
     {
-        LoadHeroesData();
+        await Task.Delay(3000);
+        StartCoroutine(CheckTrialsWhenTimeReady());
     }
+
+    private IEnumerator CheckTrialsWhenTimeReady()
+    {
+        yield return new WaitUntil(() => TimeManager.Instance.IsTimeFetched);
+        CheckTrials();
+
+    
+    }
+    public  void CheckTrials()
+    {
+        heroTrialService.CheckTrials(heroDatas);
+        bool changed = heroTrialService.IsChangeTrials(heroDatas);
+
+        if (changed)
+        {
+            SaveHeroesData();
+            SaveHeroesDataToFirebase();
+        }
+    }
+
     public DataHero? GetHero(int id)
     {
         return heroDatas.FirstOrDefault(h => h.id == id);
@@ -120,10 +143,17 @@ public class HeroManager : MonoBehaviour
     }
     public void LoadCloudUnlockHero()
     {
+        for (int i = 0; i < heroDatas.Count; i++)
+        {
+            var hero = heroDatas[i];
+            hero.isUnlock = false;
+            heroDatas[i] = hero;
+        }
         FirebaseDataManager.Instance.LoadPlayerData((loadedData) =>
         {
             foreach (int id in loadedData.unlockHeroData.seenHeroIds)
             {
+
                 UnlockHero(id);
             }
         });
@@ -176,9 +206,23 @@ public class HeroManager : MonoBehaviour
         string path = Application.persistentDataPath + "/unlockHeros.json";
         if (File.Exists(path)) { string json = File.ReadAllText(path); 
             UnlockHeroData data = JsonUtility.FromJson<UnlockHeroData>(json); 
-            if (data.seenHeroIds.Count <= 1) { data.seenHeroIds.Add(1001); 
-                data.seenHeroIds.Add(1002); } 
-            foreach (int id in data.seenHeroIds) { UnlockHero(id); } } 
+            if (data.seenHeroIds.Count <= 1)
+            { 
+                data.seenHeroIds.Add(1001); 
+                 data.seenHeroIds.Add(1002); 
+            }
+            for (int i = 0; i < heroDatas.Count; i++)
+            {
+                var hero = heroDatas[i];
+                hero.isUnlock = false;   
+                heroDatas[i] = hero;
+            }
+            foreach (int id in data.seenHeroIds)
+            {
+                UnlockHero(id);
+            }
+        }
+    
     }
 
 
@@ -190,12 +234,14 @@ public class HeroManager : MonoBehaviour
     public void LoadHeroesData()
     {
         heroProgressService.LoadProgress(heroDatas);
-      
+
+
     }
     public void SaveHeroesDataToFirebase()
     {
         heroProgressService.SaveProgressToFirebase(heroDatas);
-      
+    
+
     }
 
     public void LoadHeroesDataFromFirebase()
@@ -218,7 +264,7 @@ public class HeroManager : MonoBehaviour
     }
     public void TestTrial()
     {
-        StartHeroTrial(1005, 1);
+       heroTrialService.StartTrialSeconds(heroDatas,1005, 30);
     }
 
     #region HERO TRIAL

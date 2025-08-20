@@ -80,7 +80,6 @@ public class TimeManager : MonoBehaviour
     {
         DateTime effectiveDateTime = IsTimeFetched ? ServerDateTime : DateTime.UtcNow.AddHours(7);
 
-        Debug.Log("Hour:" + effectiveDateTime.Hour+" -Minute:"+ effectiveDateTime.Minute);
 
         if (effectiveDateTime.Hour < 12)
         {

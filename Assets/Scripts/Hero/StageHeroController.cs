@@ -29,9 +29,7 @@ public class StageHeroController : MonoBehaviour
     void Start()
     {
         LoadHeroData();
-
         CreateButtons();
-
         LoadHeroID(currentId);
         skillManager.SetSkillId(currentId);
     }
@@ -61,7 +59,7 @@ public class StageHeroController : MonoBehaviour
     {
         for (int i = 0; i < heroButtons.Count; i++)
         {
-            bool isUnlockedInManager = heroManager.heroDatas[i].isUnlock;
+            bool isUnlockedInManager = heroManager.heroDatas[i].isUnlock || heroManager.heroDatas[i].isTrial;
             if (heroButtons[i].isUnlocked != isUnlockedInManager)
             {
                 heroButtons[i].UpdateButtonState(isUnlockedInManager, heroButtons[i].Index == currentId);
@@ -125,7 +123,7 @@ public class StageHeroController : MonoBehaviour
     }
     public bool isHero()
     {
-        return heroManager.heroDatas.Any(hero => hero.id == currentId && hero.isUnlock);
+        return heroManager.heroDatas.Any(hero => hero.id == currentId && (hero.isUnlock||hero.isTrial));
     }
     public DataHero GetCurrentHeroData()
     {
@@ -150,14 +148,20 @@ public class StageHeroController : MonoBehaviour
     private void OnEnable()
     {
 
-        if (heroManager.heroTrialService != null && heroManager.IsTrialHero(currentId) && heroManager.IsTrialExpired(currentId))
-        {
-            Debug.LogWarning($"Hero {currentId} đã hết hạn trial → Chuyển về mặc định (1001).");
-            SetHeroID(1001); 
-        }
+        CheckTrial();
 
     }
-
+    public void CheckTrial()
+    {
+       
+        if (heroManager.heroTrialService != null && heroManager.IsTrialHero(currentId)
+            && heroManager.IsTrialExpired(currentId))
+        {
+            Debug.LogWarning($"Hero {currentId} đã hết hạn trial → Chuyển về mặc định (1001).");
+            heroManager.CheckTrials();
+            SetHeroID(1001);
+        }
+    }
     private void LoadHeroData()
     {
         if (File.Exists(heroDataPath))
@@ -165,13 +169,40 @@ public class StageHeroController : MonoBehaviour
             string json = File.ReadAllText(heroDataPath);
             var data = JsonUtility.FromJson<SelectedHeroData>(json);
             currentId = data.SelectedHeroID;
+
+            int heroIndex = heroManager.heroDatas.FindIndex(h => h.id == currentId);
+
+            if (heroIndex == -1 || (!heroManager.heroDatas[heroIndex].isUnlock && !heroManager.heroDatas[heroIndex].isTrial))
+            {
+                Debug.LogWarning($"Hero {currentId} đã bị khóa/hết hạn trial → reset về mặc định (1001).");
+                currentId = 1001;
+                SaveHeroData();
+            }
+
             Debug.Log("Loaded hero data from JSON.");
         }
         else
         {
-            Debug.LogWarning("No saved hero data found. Using default hero ID (0).");
-            currentId = 0; // ID mặc định nếu không có dữ liệu
+            Debug.LogWarning("No saved hero data found. Using default hero ID (1001).");
+            currentId = 1001; // ID mặc định
+            SaveHeroData();
         }
     }
+
+    //private void LoadHeroData()
+    //{
+    //    if (File.Exists(heroDataPath))
+    //    {
+    //        string json = File.ReadAllText(heroDataPath);
+    //        var data = JsonUtility.FromJson<SelectedHeroData>(json);
+    //        currentId = data.SelectedHeroID;
+    //        Debug.Log("Loaded hero data from JSON.");
+    //    }
+    //    else
+    //    {
+    //        Debug.LogWarning("No saved hero data found. Using default hero ID (0).");
+    //        currentId = 0; // ID mặc định nếu không có dữ liệu
+    //    }
+    //}
 }
 

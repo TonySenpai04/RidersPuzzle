@@ -51,35 +51,35 @@ public class ReadCSVDataHeroStat : MonoBehaviour
         }
         LoadRegenData(regenAsset);
 
-        foreach (RiderData rider in riderDatas)
-        {
-            // Debug Rider ID và Name trong một dòng
-            string riderInfo = $"Rider ID: {rider.riderId}, Name: {rider.name}";
+        //foreach (RiderData rider in riderDatas)
+        //{
+        //    // Debug Rider ID và Name trong một dòng
+        //    string riderInfo = $"Rider ID: {rider.riderId}, Name: {rider.name}";
 
-            foreach (RiderUpgradeLevel level in rider.levels)
-            {
-                // Debug Level, HP và Mastery trong một dòng
-                string levelInfo = $"Level: {level.level}, HP: {level.hp}, Mastery: {level.masteryPoint},Upgrade Rate: {level.upgradeRate}";
+        //    foreach (RiderUpgradeLevel level in rider.levels)
+        //    {
+        //        // Debug Level, HP và Mastery trong một dòng
+        //        string levelInfo = $"Level: {level.level}, HP: {level.hp}, Mastery: {level.masteryPoint},Upgrade Rate: {level.upgradeRate}";
 
-                // Kiểm tra các yêu cầu nâng cấp (upgrade requirements)
-                if (level.upgradeRequirements != null && level.upgradeRequirements.Any())
-                {
-                    foreach (var req in level.upgradeRequirements)
-                    {
-                        // Debug yêu cầu nâng cấp: Type, ID và Số lượng
-                        string reqInfo = $"Req Type: {req.resourceType}, Req ID: {req.resourceId}, Amount: {req.amount}";
+        //        // Kiểm tra các yêu cầu nâng cấp (upgrade requirements)
+        //        if (level.upgradeRequirements != null && level.upgradeRequirements.Any())
+        //        {
+        //            foreach (var req in level.upgradeRequirements)
+        //            {
+        //                // Debug yêu cầu nâng cấp: Type, ID và Số lượng
+        //                string reqInfo = $"Req Type: {req.resourceType}, Req ID: {req.resourceId}, Amount: {req.amount}";
 
-                        // Kết hợp tất cả thông tin thành một dòng duy nhất
-                        Debug.Log($"{riderInfo} -> {levelInfo} -> {reqInfo}");
-                    }
-                }
-                else
-                {
-                    // Nếu không có yêu cầu nâng cấp
-                    Debug.Log($"{riderInfo} -> {levelInfo} -> No upgrade requirements.");
-                }
-            }
-        }
+        //                // Kết hợp tất cả thông tin thành một dòng duy nhất
+        //                Debug.Log($"{riderInfo} -> {levelInfo} -> {reqInfo}");
+        //            }
+        //        }
+        //        else
+        //        {
+        //            // Nếu không có yêu cầu nâng cấp
+        //            Debug.Log($"{riderInfo} -> {levelInfo} -> No upgrade requirements.");
+        //        }
+        //    }
+       // }
 
 
     }

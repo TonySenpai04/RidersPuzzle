@@ -16,6 +16,7 @@ public class GameManager : MonoBehaviour
     public TextMeshProUGUI stageTxt;
     public GameObject winCellPrefab;
     [Header("References")]
+    public StageHeroController stageHeroController;
     public MovementController movementController;
     public  GridController gridController;
     public static GameManager instance;
@@ -75,9 +76,10 @@ public class GameManager : MonoBehaviour
    
     public void LoadNextLevel()
     {
+        stageHeroController.CheckTrial();
         SoundManager.instance.StopSFX();
         LevelManager.instance.LoadNextLevel();
-
+       
         if (LevelManager.instance.isFinal())
         {
             NotiManager.instance.ShowNotificationInGame("Complete all current stages");
@@ -151,7 +153,6 @@ public class GameManager : MonoBehaviour
 
     private void HandleWin()
     {
-        HeroManager.instance.CheckHeroTrials();
         if (!hasPlayedWinSound)
         {
             SoundManager.instance.PlaySFX("Stage Clear");
@@ -188,7 +189,6 @@ public class GameManager : MonoBehaviour
 
     private void HandleLose()
     {
-        HeroManager.instance.CheckHeroTrials();
         if (!hasPlayedLoseSound)
         {
             SoundManager.instance.PlaySFX("Stage Failed");

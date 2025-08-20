@@ -257,7 +257,6 @@ public class LevelManager : MonoBehaviour
             Debug.LogWarning("Level index is out of range.");
             return;
         }
-        Debug.Log(lv);
        LoadLevel();
     }
     public bool isFinal()

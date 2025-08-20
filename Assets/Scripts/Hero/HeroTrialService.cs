@@ -32,7 +32,7 @@ public class HeroTrialService : IHeroTrialService
         {
             // Nếu chưa trial bao giờ thì bắt đầu mới
             hero.isTrial = true;
-            hero.isUnlock = true;
+         //   hero.isUnlock = true;
             hero.trialExpireTimestamp =
                 new DateTimeOffset(TimeManager.Instance.ServerDateTime.AddDays(durationDays)).ToUnixTimeSeconds();
 
@@ -55,7 +55,6 @@ public class HeroTrialService : IHeroTrialService
         if (!TimeManager.Instance.IsTimeFetched) return;
 
         long now = new DateTimeOffset(TimeManager.Instance.ServerDateTime).ToUnixTimeSeconds();
-
         for (int i = 0; i < _heroes.Count; i++)
         {
             var hero = _heroes[i];
@@ -104,4 +103,48 @@ public class HeroTrialService : IHeroTrialService
         int index = _heroes.FindIndex(h => h.id == updated.id);
         if (index != -1) _heroes[index] = updated;
     }
+    public void StartTrialSeconds(List<DataHero> _heroes, int heroId, int durationSeconds)
+    {
+        if (!TimeManager.Instance.IsTimeFetched) return;
+
+        int index = _heroes.FindIndex(h => h.id == heroId);
+        if (index == -1) return;
+
+        DataHero hero = _heroes[index];
+
+        if (hero.isUnlock && !hero.isTrial)
+        {
+            Debug.Log($"⚠️ Hero {heroId} đã sở hữu vĩnh viễn, không thể trial nữa.");
+            return;
+        }
+
+        hero.isTrial = true;
+        hero.trialExpireTimestamp =
+            new DateTimeOffset(TimeManager.Instance.ServerDateTime.AddSeconds(durationSeconds)).ToUnixTimeSeconds();
+
+        _heroes[index] = hero;
+        UpdateHero(_heroes, hero);
+
+        Debug.Log($"✅ Hero {heroId} bắt đầu trial trong {durationSeconds} giây. Hết hạn: {UnixTimeToDate(hero.trialExpireTimestamp)}");
+    }
+    public bool IsChangeTrials(List<DataHero> heroDatas)
+    {
+        bool hasChanged = false;
+
+        for (int i = 0; i < heroDatas.Count; i++)
+        {
+            var hero = heroDatas[i];
+            if (hero.isTrial && IsTrialExpired(heroDatas,hero.id))
+            {
+                hero.isTrial = false;
+                hero.isUnlock = false;
+                heroDatas[i] = hero; // nếu là struct
+                hasChanged = true;
+            }
+        }
+
+        return hasChanged;
+    }
+
+
 }

@@ -19,7 +19,7 @@ public class ChangeHeroUIController : MonoBehaviour
 
         foreach (var heroData in HeroManager.instance.heroDatas)
         {
-            if (!heroData.isUnlock) continue;
+            if (!heroData.isUnlock&& !heroData.isTrial) continue;
 
             if (index < changeHeroButtons.Count)
             {
@@ -51,7 +51,8 @@ public class ChangeHeroUIController : MonoBehaviour
         {
             changeHeroButtons[i].gameObject.SetActive(false);
         }
-       // buttonParent.anchoredPosition = new Vector2(155,buttonParent.anchoredPosition.y);
+        StageHeroController.CheckTrial();
+        UpdateSelection(StageHeroController.GetCurrentHeroData().id);
     }
     public void UpdateSelection(int selectedHeroId)
     {

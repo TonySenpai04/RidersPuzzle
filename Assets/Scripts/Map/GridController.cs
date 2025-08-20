@@ -131,7 +131,6 @@ public class GridController : MonoBehaviour
             foreach (var quest in QuestManager.instance.GetQuestsByType<TriggerEntityQuest>())
             {
                 QuestManager.instance.UpdateQuest(quest.questId, 1, hiddenObject.GetComponent<HiddenObject>().id);
-                Debug.Log(quest.questId);
             }
             hiddenObject.GetComponent<HiddenObject>().ActiveSkill();
 

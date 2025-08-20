@@ -72266,6 +72266,7 @@ MonoBehaviour:
   playZone: {fileID: 252246640}
   stageTxt: {fileID: 1178841095}
   winCellPrefab: {fileID: 8206346077416481700, guid: ea7a39dcc99b1384f9b6cfbb40cdc058, type: 3}
+  stageHeroController: {fileID: 361984740}
   movementController: {fileID: 1512594042}
   gridController: {fileID: 1200757503}
   isEnd: 0

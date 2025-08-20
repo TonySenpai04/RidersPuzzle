@@ -447,7 +447,6 @@ public class QuestManager : MonoBehaviour
             string json = snapshot.GetRawJsonValue();
             Debug.Log("✅ Load QuestData từ Firebase:\n" + json);
             QuestData data = JsonUtility.FromJson<QuestData>(json);
-            Debug.Log("Count:" + data.stampCount);
             //  SaveQuestData(data); 
             return data;
         }

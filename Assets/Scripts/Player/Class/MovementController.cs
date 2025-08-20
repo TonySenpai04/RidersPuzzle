@@ -112,7 +112,6 @@ public class MovementController : MonoBehaviour
             if (IsValidCell(newRow, newCol))
             {
                 SetPosition(newRow, newCol);
-                Debug.Log(newRow + "-" + newCol);
             }
             else break;
         }

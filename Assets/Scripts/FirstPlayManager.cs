@@ -110,7 +110,6 @@ public class FirstPlayManager : MonoBehaviour
             string json = File.ReadAllText(firstPlayPath);
             var data = JsonUtility.FromJson<FirstPlayData>(json);
             this.isFirst = data.isFirst;
-            Debug.Log("Loaded hero data from JSON.");
         }
         else
         {

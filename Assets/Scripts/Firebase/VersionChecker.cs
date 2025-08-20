@@ -39,10 +39,6 @@ public class VersionChecker : MonoBehaviour
             else
             {
                 string latestVersion = www.downloadHandler.text.Trim();
-                Debug.Log("📥 Latest version từ server: " + latestVersion);
-
-                Debug.Log("\n📥 Latest version from server: [" + latestVersion + "]");
-                Debug.Log("\n📦 Current version from build: [" + currentVersion + "]");
                 string savedVersion = LoadSavedVersion();
 
                 // Nếu chưa có file -> dùng currentVersion làm bản cũ để so sánh
