@@ -53,7 +53,8 @@ public class GameManager : MonoBehaviour
         targetCol = (int)level.endPos.y;
 
         SetupWinCell();
-        // ApplyText.instance.UpdateTitleStage(level.level);
+        stageHeroController.CheckTrial();
+        PlayerController.instance.SetCurrentData(stageHeroController.GetCurrentHeroData());
         ApplyTextManager.instance.UpdateTitleStage(level.level);
         backgroundController.UpdateRandomArt();
         PlayerController.instance.LoadLevel();
@@ -76,7 +77,7 @@ public class GameManager : MonoBehaviour
    
     public void LoadNextLevel()
     {
-        stageHeroController.CheckTrial();
+        
         SoundManager.instance.StopSFX();
         LevelManager.instance.LoadNextLevel();
        
@@ -86,6 +87,7 @@ public class GameManager : MonoBehaviour
         }
         else
         {
+     
             LoadLevel();
             isEnd = false;
         }
