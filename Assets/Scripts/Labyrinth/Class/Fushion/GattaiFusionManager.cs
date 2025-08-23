@@ -19,6 +19,7 @@ public class GattaiFusionManager : MonoBehaviour
     [SerializeField] private GameObject selectView;
     [SerializeField] private GameObject heroFushion;
     [SerializeField] private Image  newHero;
+    [SerializeField] private HeroFushionSlotController fushionSlotController;
 
     public CardFusionUI cardFusionUI;
     private IHeroSelection heroSelection;
@@ -249,17 +250,20 @@ public class GattaiFusionManager : MonoBehaviour
         herosView.SetActive(false);
         heroFushion.SetActive(false);
         selectView.SetActive(true);
+        fushionSlotController.UpdateSlotState();
     }
 
     private void OnConfirmHeroSelection()
     {
         List<int> selectedHeroes = heroSelection.GetSelectedHeroes();
+        Debug.Log(selectedHeroes.Count);
         if (selectedHeroes.Count >= 3)
         {
             skillsView.SetActive(true);
             skillSelection.CreateSkillButtons(selectedHeroes);
             herosView.SetActive(false);
         }
+     
     }
 
     public void OnClickOKFusion()

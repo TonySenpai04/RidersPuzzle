@@ -20,16 +20,25 @@ public class HeroFushionSlotController : MonoBehaviour
     }
     private void OnEnable()
     {
+        UpdateSlotState();
+    }
+    public void UpdateSlotState()
+    {
         warningPopup.SetActive(false);
         List<int> selectedHeroes = gattaiFusion.GetSelectedHeroes();
-        if (selectedHeroes.Count <= 0)
+        if (selectedHeroes.Count <3)
         {
+
             banner.SetActive(true);
             fuhsionBtn.SetActive(false);
+            foreach (var hero in heroFusionSlots)
+            {
+                hero.ResetData();
+            }
         }
         else
         {
-   
+
             for (int i = 0; i < heroFusionSlots.Count; i++)
             {
                 int count = selectedHeroes.Count;
@@ -45,7 +54,7 @@ public class HeroFushionSlotController : MonoBehaviour
                 }
             }
             banner.SetActive(false);
-            
+
             fuhsionBtn.SetActive(true);
         }
     }

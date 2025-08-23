@@ -41,6 +41,8 @@ public class HeroCard : MonoBehaviour
         }
 
         DataHero heroData = heroDatas[index];
+        if (!heroData.isUnlock)
+            return;
         int nextLevel = heroData.level + 1;
        
 

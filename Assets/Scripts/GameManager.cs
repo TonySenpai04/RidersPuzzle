@@ -175,18 +175,25 @@ public class GameManager : MonoBehaviour
             ResourceManager.Instance.AddResource(0, 1, 20);
             goldRewardTXt.text = "20";
             expRewardImg.sprite = ResourceManager.Instance.resourceInfos.Find(r =>
-                    r.resourceType == 2 && r.resourceId == StageHeroController.instance.currentId).icon;
-            ResourceManager.Instance.AddResource(2, StageHeroController.instance.currentId, 50);
-            expRewardTxt.text = "50";
-
-          hasPlayedWinSound = true;
+                    r.resourceType == 2 && r.resourceId == stageHeroController.currentId).icon;
+            if (HeroManager.instance.GetHero(stageHeroController.currentId).Value.isUnlock)
+            {
+                ResourceManager.Instance.AddResource(2, stageHeroController.currentId, 50);
+                expRewardTxt.text = "50";
+            }
+            else
+            {
+                expRewardTxt.text = "0";
+            }
+            panelWin.SetActive(true);
+            LevelManager.instance.ClearObject();
+            Destroy(objectWin, 0.5f);
+            objectWin = null;
+            isEnd = true;
+            hasPlayedWinSound = true;
         }
         // SaveGameManager.instance.SaveLevelProgress(LevelManager.instance.GetCurrentLevelData().level, true, true);
-        panelWin.SetActive(true);
-        LevelManager.instance.ClearObject();
-        Destroy(objectWin, 0.5f);
-        objectWin = null;
-        isEnd = true;
+        
     }
 
     private void HandleLose()
@@ -194,14 +201,15 @@ public class GameManager : MonoBehaviour
         if (!hasPlayedLoseSound)
         {
             SoundManager.instance.PlaySFX("Stage Failed");
+            panelLose.SetActive(true);
+            LevelManager.instance.ClearObject();
+            Destroy(objectWin, 0.5f);
+            objectWin = null;
+            isEnd = true;
             hasPlayedLoseSound = true;
         }
 
-        panelLose.SetActive(true);
-        LevelManager.instance.ClearObject();
-        Destroy(objectWin, 0.5f);
-        objectWin = null;
-        isEnd = true;
+       
     }
 
     private void ResetEndState()

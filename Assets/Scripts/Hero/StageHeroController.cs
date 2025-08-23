@@ -60,10 +60,10 @@ public class StageHeroController : MonoBehaviour
         for (int i = 0; i < heroButtons.Count; i++)
         {
             bool isUnlockedInManager = heroManager.heroDatas[i].isUnlock || heroManager.heroDatas[i].isTrial;
-            if (heroButtons[i].isUnlocked != isUnlockedInManager)
-            {
+           // if (heroButtons[i].isUnlocked != isUnlockedInManager)
+          //  {
                 heroButtons[i].UpdateButtonState(isUnlockedInManager, heroButtons[i].Index == currentId);
-            }
+           // }
         }
     }
     public void SetHeroID(int id)
@@ -154,12 +154,15 @@ public class StageHeroController : MonoBehaviour
     public void CheckTrial()
     {
        
-        if (heroManager.heroTrialService != null && heroManager.IsTrialHero(currentId)
-            && heroManager.IsTrialExpired(currentId))
+        if (heroManager.heroTrialService != null)
         {
-            Debug.LogWarning($"Hero {currentId} đã hết hạn trial → Chuyển về mặc định (1001).");
             heroManager.CheckTrials();
-            SetHeroID(1001);
+            if (heroManager.IsTrialHero(currentId)
+             && heroManager.IsTrialExpired(currentId))
+            {
+                Debug.LogWarning($"Hero {currentId} đã hết hạn trial → Chuyển về mặc định (1001).");
+                SetHeroID(1001);
+            }
         }
     }
     private void LoadHeroData()

@@ -96096,6 +96096,7 @@ MonoBehaviour:
   selectView: {fileID: 1813062463}
   heroFushion: {fileID: 1803621462}
   newHero: {fileID: 1341844134}
+  fushionSlotController: {fileID: 1813062467}
   cardFusionUI: {fileID: 71095503}
 --- !u!114 &1890777219
 MonoBehaviour:

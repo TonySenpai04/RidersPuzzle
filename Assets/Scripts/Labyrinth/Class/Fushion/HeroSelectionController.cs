@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -20,7 +21,19 @@ public class HeroSelectionController : IHeroSelection
 
     public void CreateHeroButtons()
     {
-        var unlockHeros = HeroManager.instance.GetUnlockHero();
+        selectedHeroes.RemoveAll(id =>
+        {
+            var hero = HeroManager.instance.GetHero(id);
+            return !hero.Value.isUnlock && !hero.Value.isTrial;
+        });
+        tempSelectedHeroes.RemoveAll(id =>
+        {
+            var hero = HeroManager.instance.GetHero(id);
+            return !hero.Value.isUnlock && !hero.Value.isTrial;
+        });
+        var unlockHeros  = HeroManager.instance.heroDatas
+            .Where(h => (h.isUnlock || h.isTrial) )
+            .ToList();
         int index = 0;
 
         foreach (var heroData in unlockHeros)
@@ -39,7 +52,7 @@ public class HeroSelectionController : IHeroSelection
             }
 
             btn.SetData(heroData.id, heroData.heroCardImage, heroData.level, heroData.hp, heroData.mp, SelectHero);
-            btn.SetHighlight(selectedHeroes.Contains(heroData.id)); // highlight theo hero đã confirm
+            btn.SetHighlight(selectedHeroes.Contains(heroData.id)); 
             btn.gameObject.SetActive(true);
             index++;
         }
@@ -48,6 +61,8 @@ public class HeroSelectionController : IHeroSelection
         {
             heroButtons[i].gameObject.SetActive(false);
         }
+        confirmButton.gameObject.SetActive(tempSelectedHeroes.Count >= 3);
+
     }
 
     public void SelectHero(int heroId)
