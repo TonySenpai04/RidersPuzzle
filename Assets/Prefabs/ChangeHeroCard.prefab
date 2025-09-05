@@ -919,7 +919,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   heroID: 0
-  levelTxt: {fileID: 408612073562345951}
+  levelTxt: {fileID: 5576475587345044289}
   healthTxt: {fileID: 408612073562345951}
   mpTxt: {fileID: 8532905016046696883}
   heroImg: {fileID: 3729796972394417382}

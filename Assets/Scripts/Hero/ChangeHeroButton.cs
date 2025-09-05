@@ -20,7 +20,7 @@ public class ChangeHeroButton : MonoBehaviour
         int mp, Sprite heroSprite,Action<int> onClickCallback)
     {
         this.heroID = heroID;
-        levelTxt.text = LocalizationManager.instance.GetLocalizedText("level_title") + " " + level.ToString();
+        levelTxt.SetText( LocalizationManager.instance.GetLocalizedText("level_title") + " " + level.ToString());
         healthTxt.text = health.ToString();
         mpTxt.text = mp.ToString();
         heroImg.sprite = heroSprite;
