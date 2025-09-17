@@ -78,6 +78,10 @@ public class ResourceManager : MonoBehaviour
         if (key ==(0, 1))
         {
             GoldManager.instance.AddGold(amount);
+            foreach (var quest in AchievementManager.instance.GetQuestsByType<CollectGoldQuest>())
+            {
+                AchievementManager.instance.UpdateQuest(quest.questId, amount, 0);
+            }
         }
         SaveResources();
     }

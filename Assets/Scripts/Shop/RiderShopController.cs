@@ -125,7 +125,7 @@ public class RiderShopController : MonoBehaviour
         }
 
         int heroPrice = hero.Value.price;
-        int currentGold = GoldManager.instance.GetGold();
+        int currentGold =ResourceManager.Instance.GetQuantity(0,1);
 
         if (currentGold >= heroPrice )
         {
@@ -134,12 +134,13 @@ public class RiderShopController : MonoBehaviour
             heroShopitem.ExchangeBtn.gameObject.SetActive(false);
             heroShopitem.ExchangeBtn.onClick.RemoveAllListeners();
             heroShopitem.BuyBtn.onClick.RemoveAllListeners();
-            GoldManager.instance.SpendGold( heroPrice);
-
+            ResourceManager.Instance.ConsumeResource(0,1, heroPrice);
             HeroManager.instance.UnlockHeroPermanent(id);
             heroShopitem.UpdateHero();
             NewBoughtHeroManager.instance.AddNewHero(id);
-
+            FirebaseDataManager.Instance.SaveData(LevelManager.instance.GetAllLevelComplete(),
+            GoldManager.instance.GetGold(), SaveGameManager.instance.LoadAllProgress(), 
+            HeroManager.instance.GetUnlockHeroID());
             NotiManager.instance.ShowMultipleNotiRedDots(new List<string> { "library", "riderlib" });
             Debug.Log($"Mua thành công hero {id}");
         }

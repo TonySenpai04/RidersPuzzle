@@ -200,7 +200,7 @@ public class HeroManager : MonoBehaviour
         List<int> seenObjectIds = heroDatas.Where(h => h.isUnlock).Select(h => h.id).ToList();
         string json = JsonUtility.ToJson(new UnlockHeroData(seenObjectIds));
         File.WriteAllText(Application.persistentDataPath + "/unlockHeros.json", json);
-       
+
     }
     public void LoadUnlockHero() {
         string path = Application.persistentDataPath + "/unlockHeros.json";

@@ -50,10 +50,7 @@ public class GoldManager : MonoBehaviour
         if (amount > 0)
         {
             currentGold += amount;
-            foreach (var quest in AchievementManager.instance.GetQuestsByType<CollectGoldQuest>())
-            {
-                AchievementManager.instance.UpdateQuest(quest.questId, amount, 0);
-            }
+           
             SaveGold();
         }
         else

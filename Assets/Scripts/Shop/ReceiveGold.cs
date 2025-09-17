@@ -31,7 +31,8 @@ public class ReceiveGold : MonoBehaviour
         ApplyTextManager.instance.textLocalizer.SetLocalizedText("shop_receive_package",
              nameGiftTxt);
         //nameGiftTxt.text = "You received";
-        GoldManager.instance.AddGold(goldAmount);
+        ResourceManager.Instance.AddResource(0,1,goldAmount);
+
         foreach (var quest in QuestManager.instance.GetQuestsByType<DailyGiftQuest>())
         {
             QuestManager.instance.UpdateQuest(quest.questId, 1, 0);

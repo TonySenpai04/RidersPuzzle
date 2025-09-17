@@ -117,7 +117,7 @@ public class AchivementUIController : MonoBehaviour
             QuestBase questBase = AchievementManager.instance.GetQuestById(quest.QuestID);
             if (questBase.CheckCompletion())
             {
-                GoldManager.instance.AddGold(questBase.reward);
+                ResourceManager.Instance.AddResource(0, 1, questBase.reward);
                 reward += questBase.reward;
                 questBase.isReward = true;
                 questBase.SaveQuest();

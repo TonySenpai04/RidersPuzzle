@@ -3,6 +3,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using System.Resources;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -159,7 +160,7 @@ public class QuestUIController : MonoBehaviour
             QuestBase questBase = QuestManager.instance.GetQuestById(quest.QuestID);
             if (questBase.CheckCompletion())
             {
-                GoldManager.instance.AddGold(questBase.reward);
+                ResourceManager.Instance.AddResource(0,1,questBase.reward);
                 reward += questBase.reward;
                 questBase.isReward = true;
                 questBase.SaveQuest();
