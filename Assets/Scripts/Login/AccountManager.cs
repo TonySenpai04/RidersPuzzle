@@ -12,7 +12,7 @@ using UnityEngine;
 using UnityEngine.Playables;
 using UnityEngine.UI;
 
-public class AccountLogin : MonoBehaviour
+public class AccountManager : MonoBehaviour
 {
     public InputField emailLogin;
     public InputField passwordLogin;
@@ -240,19 +240,50 @@ public class AccountLogin : MonoBehaviour
 
     public void Rename()
     {
-        if (string.IsNullOrEmpty(rename.text) || rename.text.Length >= 14)
+        string newName = rename.text.Trim();
+
+        if (string.IsNullOrEmpty(newName) || newName.Length >= 14)
+        {
+            Debug.LogWarning("⚠ Tên không hợp lệ.");
             return;
+        }
 
-        FirebaseDataManager.Instance.username = rename.text;
-        FirebaseDataManager.Instance.SaveData(
-            LevelManager.instance.GetAllLevelComplete(),
-            GoldManager.instance.GetGold(),
-            SaveGameManager.instance.LoadAllProgress(),
-            HeroManager.instance.GetUnlockHeroID());
+        // Check trùng tên trong DB
+        FirebaseDatabase.DefaultInstance.RootReference.Child("users")
+            .OrderByChild("playerData/name")
+            .EqualTo(newName)
+            .GetValueAsync().ContinueWithOnMainThread(task =>
+            {
+                if (task.IsFaulted || task.IsCanceled)
+                {
+                    Debug.LogError("❌ Lỗi khi kiểm tra tên: " + task.Exception);
+                    return;
+                }
 
-        nameText.text = rename.text;
-        renameObj.SetActive(false);
+                if (task.Result.Exists) // Có user đang dùng tên này
+                {
+                    Debug.LogWarning("⚠ Tên đã tồn tại, vui lòng chọn tên khác.");
+                    // TODO: Show popup báo cho user
+                }
+                else
+                {
+                    // ✅ Tên hợp lệ, tiến hành đổi tên
+                    FirebaseDataManager.Instance.username = newName;
+
+                    FirebaseDataManager.Instance.SaveData(
+                        LevelManager.instance.GetAllLevelComplete(),
+                        GoldManager.instance.GetGold(),
+                        SaveGameManager.instance.LoadAllProgress(),
+                        HeroManager.instance.GetUnlockHeroID());
+
+                    nameText.text = newName;
+                    renameObj.SetActive(false);
+
+                    Debug.Log("✅ Đổi tên thành công: " + newName);
+                }
+            });
     }
+
 
     public void ShowAccount()
     {
