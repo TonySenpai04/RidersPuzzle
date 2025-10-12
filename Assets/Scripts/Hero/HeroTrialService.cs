@@ -6,7 +6,7 @@ using System.Reflection;
 
 public class HeroTrialService : IHeroTrialService
 {
-   
+
     public void StartTrial(List<DataHero> _heroes, int heroId, int durationDays)
     {
         if (!TimeManager.Instance.IsTimeFetched) return;
@@ -32,7 +32,14 @@ public class HeroTrialService : IHeroTrialService
         {
             // Nếu chưa trial bao giờ thì bắt đầu mới
             hero.isTrial = true;
-         //   hero.isUnlock = true;
+            hero.level = 1;
+            var levelData = ReadCSVDataHeroStat.instance.GetHeroLevelData(hero.id, hero.level);
+            if (levelData != null)
+            {
+                hero.hp = levelData.hp;
+                hero.currentMP = levelData.masteryPoint;
+                hero.mp = levelData.masteryPoint;
+            }
             hero.trialExpireTimestamp =
                 new DateTimeOffset(TimeManager.Instance.ServerDateTime.AddDays(durationDays)).ToUnixTimeSeconds();
 
@@ -63,6 +70,14 @@ public class HeroTrialService : IHeroTrialService
                 hero.isTrial = false;
                 hero.isUnlock = false;
                 hero.trialExpireTimestamp = 0;
+                hero.level = 0;
+                var levelData = ReadCSVDataHeroStat.instance.GetHeroLevelData(hero.id, hero.level);
+                if (levelData != null)
+                {
+                    hero.hp = levelData.hp;
+                    hero.currentMP = levelData.masteryPoint;
+                    hero.mp = levelData.masteryPoint;
+                }
                 _heroes[i] = hero;
                 Debug.Log($"⛔ Trial Hero {hero.id} đã hết hạn.");
             }
@@ -93,9 +108,55 @@ public class HeroTrialService : IHeroTrialService
         if (remaining <= 0) return "Expired";
 
         var ts = TimeSpan.FromSeconds(remaining);
-        if (ts.TotalDays >= 1) return $"{(int)ts.TotalDays}d {ts.Hours}h {ts.Minutes}m";
-        if (ts.Hours >= 1) return $"{ts.Hours}h {ts.Minutes}m";
-        return $"{ts.Minutes}m {ts.Seconds}s";
+
+        int days = (int)ts.TotalDays;
+        int hours = ts.Hours;
+
+        return $"{days} day{(days != 1 ? "s" : "")} {hours} hour{(hours != 1 ? "s" : "")}";
+    }
+    public string GetTrialRemainingTime_Full(List<DataHero> _heroes, int heroId)
+    {
+        if (!TimeManager.Instance.IsTimeFetched) return "";
+        var hero = _heroes.FirstOrDefault(h => h.id == heroId);
+        if (!hero.isTrial) return "";
+
+        long now = new DateTimeOffset(TimeManager.Instance.ServerDateTime).ToUnixTimeSeconds();
+        long remaining = hero.trialExpireTimestamp - now;
+        if (remaining <= 0) return "Expired";
+
+
+        var ts = TimeSpan.FromSeconds(remaining);
+
+        int days = (int)ts.TotalDays;
+        int hours = ts.Hours;
+        int minutes = ts.Minutes;
+
+        if (days >= 1)
+            return $"{days} day{(days > 1 ? "s" : "")} {hours} hour{(hours > 1 ? "s" : "")}";
+        else
+            return $"{hours} hour{(hours > 1 ? "s" : "")} {minutes} minute{(minutes > 1 ? "s" : "")}";
+    }
+
+    public string GetTrialRemainingTime_Short(List<DataHero> _heroes, int heroId)
+    {
+        if (!TimeManager.Instance.IsTimeFetched) return "";
+        var hero = _heroes.FirstOrDefault(h => h.id == heroId);
+        if (!hero.isTrial) return "";
+
+        long now = new DateTimeOffset(TimeManager.Instance.ServerDateTime).ToUnixTimeSeconds();
+        long remaining = hero.trialExpireTimestamp - now;
+        if (remaining <= 0) return "Expired";
+
+        var ts = TimeSpan.FromSeconds(remaining);
+
+        int days = (int)ts.TotalDays;
+        int hours = ts.Hours;
+        int minutes = ts.Minutes;
+
+        if (days >= 1)
+            return $"{days}D {hours}H";
+        else
+            return $"{hours}H {minutes}M";
     }
 
     private void UpdateHero(List<DataHero> _heroes, DataHero updated)
@@ -134,7 +195,7 @@ public class HeroTrialService : IHeroTrialService
         for (int i = 0; i < heroDatas.Count; i++)
         {
             var hero = heroDatas[i];
-            if (hero.isTrial && IsTrialExpired(heroDatas,hero.id))
+            if (hero.isTrial && IsTrialExpired(heroDatas, hero.id))
             {
                 hero.isTrial = false;
                 hero.isUnlock = false;

@@ -185,11 +185,21 @@ public class HeroManager : MonoBehaviour
             {
                 hero.isTrial = false;
                 hero.trialExpireTimestamp = 0;
+                hero.level = 0;
+                var levelData = ReadCSVDataHeroStat.instance.GetHeroLevelData(hero.id, hero.level);
+                if (levelData != null)
+                {
+                    hero.hp = levelData.hp;
+                    hero.currentMP = levelData.masteryPoint;
+                    hero.mp = levelData.masteryPoint;
+                }
             }
             hero.isUnlock = true;
             heroDatas[index] = hero;
 
             SaveUnlockHero();
+            SaveHeroesData();
+            SaveHeroesDataToFirebase();
         }
         else
         {
@@ -262,15 +272,16 @@ public class HeroManager : MonoBehaviour
             Debug.Log("Nâng cấp thất bại! Không đủ tài nguyên hoặc đã max cấp.");
         }
     }
-    public void TestTrial()
-    {
-       heroTrialService.StartTrialSeconds(heroDatas,1005, 30);
-    }
+    // public void TestTrial()
+    // {
+    //    heroTrialService.StartTrialSeconds(heroDatas,1005, 30);
+    // }
 
     #region HERO TRIAL
     public void StartHeroTrial(int heroId, int durationDays)
     {
-         heroTrialService.StartTrial(heroDatas, heroId,durationDays);
+        heroTrialService.StartTrial(heroDatas, heroId,durationDays);
+        ResourceManager.Instance.ConsumeResource(4, heroId, durationDays); // tiêu mastery để kích hoạt trial
         SaveHeroesData();
         SaveHeroesDataToFirebase();
     }
@@ -287,6 +298,14 @@ public class HeroManager : MonoBehaviour
     public string GetTrialRemainingTime(int heroId)
     {
         return heroTrialService.GetTrialRemainingTime(heroDatas, heroId);
+    }
+    public string GetTrialRemainingTimeFull(int heroId)
+    {
+        return heroTrialService.GetTrialRemainingTime_Full(heroDatas, heroId);
+    }
+    public string GetTrialRemainingTimeShort(int heroId)
+    {
+        return heroTrialService.GetTrialRemainingTime_Short(heroDatas, heroId);
     }
 
     public List<(DataHero hero, string remainingTime)> GetAllTrialHeroes()

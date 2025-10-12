@@ -26,7 +26,7 @@ public class ResourceManager : MonoBehaviour
     public static ResourceManager Instance;
     public List<ResourceInfoData> resourceInfos;
     // Key = (type, id) -> quantity
-    private Dictionary<(int, int), int> resourceDict ;
+    private Dictionary<(int, int), int> resourceDict;
 
     void Awake()
     {
@@ -39,24 +39,30 @@ public class ResourceManager : MonoBehaviour
                 { (2, 1002),    0 },
                 { (2, 1003),    0 },
                 { (2, 1004),    0 },
-               
+
                 { (3, 1001),    0 },
                 { (3, 1002),    0 },
                 { (3, 1003),    0 },
                 { (3, 1004),    0 },
 
                 { (2, 1005),    0 },
-                { (3, 1005),    0 }
+                { (3, 1005),    0 },
+
+                { (4, 1001),    0 },
+                { (4, 1002),    0 },
+                { (4, 1003),    0 },
+                { (4, 1004),    0 },
+                { (4, 1005),    0 }
         };
 
-    
+
     }
-    private  void Start()
+    private void Start()
     {
-        
+
         LoadResources();
-    
-       
+
+
     }
     public int GetQuantity(int type, int id)
     {
@@ -75,7 +81,7 @@ public class ResourceManager : MonoBehaviour
             resourceDict[key] = 0;
 
         resourceDict[key] += amount;
-        if (key ==(0, 1))
+        if (key == (0, 1))
         {
             GoldManager.instance.AddGold(amount);
             foreach (var quest in AchievementManager.instance.GetQuestsByType<CollectGoldQuest>())
@@ -85,17 +91,22 @@ public class ResourceManager : MonoBehaviour
         }
         SaveResources();
     }
+    [ContextMenu("🧪 Test Add Resources")]
+    public void ContextMenu_TestAdd()
+    {
+        TestAdd();
+    }
+
     public void TestAdd()
     {
-        SetResource(0,1,100000000);
-        SetResource(2, 1001, 100000000);
-        SetResource(2, 1002, 100000000);
-        SetResource(2, 1003, 100000000);
-        SetResource(2, 1004, 100000000);
-        SetResource(3, 1001, 100000000);
-        SetResource(3, 1002, 100000000);
-        SetResource(3, 1003, 100000000);
-        SetResource(3, 1004, 100000000);
+
+
+        SetResource(4, 1001, 20);
+        SetResource(4, 1002, 20);
+        SetResource(4, 1003, 20);
+        SetResource(4, 1004, 20);
+        SetResource(4, 1005, 20);
+
     }
     public void SetResource(int type, int id, int amount)
     {
@@ -140,8 +151,8 @@ public class ResourceManager : MonoBehaviour
             resourceDict = wrapper.ToDictionary();
 
         }
-        
-        SetResource(0,1,  GoldManager.instance.GetGold());
+
+        SetResource(0, 1, GoldManager.instance.GetGold());
         Debug.Log("da load");
 
     }
@@ -226,7 +237,7 @@ public class ResourceSaveWrapper
         }
         return dict;
     }
-   
+
 
 
 }

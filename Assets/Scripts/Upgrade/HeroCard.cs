@@ -12,26 +12,30 @@ public class HeroCard : MonoBehaviour
     [SerializeField] private TextMeshProUGUI mpTxt;
     [SerializeField] private Image heroImg;
     [SerializeField] public Image redNotiDot;
-    public UpgradeView upgradeView; 
+    [SerializeField] public Image trialBanner;
+    [SerializeField] private TextMeshProUGUI trialTxt;
+
+    public UpgradeView upgradeView;
     public GameObject heroCardview;
-    public void SetData(int heroID,UpgradeView upgradeView,GameObject heroCardView,int level,int health,
-        int mp,Sprite heroSprite)
+    public void SetData(int heroID, UpgradeView upgradeView, GameObject heroCardView, int level, int health,
+        int mp, Sprite heroSprite)
     {
         this.heroID = heroID;
         this.upgradeView = upgradeView;
         this.heroCardview = heroCardView;
-        levelTxt.text = LocalizationManager.instance.GetLocalizedText("level_title") + " " +level.ToString();
+        levelTxt.text = LocalizationManager.instance.GetLocalizedText("level_title") + " " + level.ToString();
         healthTxt.text = health.ToString();
         mpTxt.text = mp.ToString();
         heroImg.sprite = heroSprite;
-      //  redNotiDot.gameObject.SetActive(NewBoughtHeroManager.instance.IsNewHero(heroID));
+        Checktrial();
+        //  redNotiDot.gameObject.SetActive(NewBoughtHeroManager.instance.IsNewHero(heroID));
 
 
     }
     public void OnClickHeroCard()
     {
         SoundManager.instance.PlaySFX("Click Sound");
-       
+
         var heroDatas = HeroManager.instance.heroDatas;
         int index = heroDatas.FindIndex(h => h.id == heroID);
         if (index == -1)
@@ -41,21 +45,27 @@ public class HeroCard : MonoBehaviour
         }
 
         DataHero heroData = heroDatas[index];
+        if (heroData.isTrial)
+        {
+            NotiManager.instance.ShowNotification("Trial Rider can not be enhanced");
+            return;
+        }
+ 
         if (!heroData.isUnlock)
             return;
         int nextLevel = heroData.level + 1;
-       
+
 
         var nextData = ReadCSVDataHeroStat.instance.GetHeroLevelData(heroID, nextLevel);
         var currentData = ReadCSVDataHeroStat.instance.GetHeroLevelData(heroID, heroData.level);
-        if(currentData == null)
+        if (currentData == null)
         {
             return;
         }
         if (nextData == null)
         {
             Debug.Log("✅ Hero đã đạt cấp tối đa.");
-            
+
         }
         upgradeView.gameObject.SetActive(true);
         upgradeView.currentID = heroID;
@@ -74,12 +84,39 @@ public class HeroCard : MonoBehaviour
 
 
     }
+    void OnEnable()
+    {
 
+        Checktrial();
+    }
+    public void Checktrial()
+    {
+         var heroDatas = HeroManager.instance.heroDatas;
+        int index = heroDatas.FindIndex(h => h.id == heroID);
+        if (index == -1)
+        {
+            Debug.LogWarning("❌ Không tìm thấy hero.");
+            return;
+        }
+
+        DataHero heroData = heroDatas[index];
+        if (heroData.isTrial)
+        {
+            trialBanner.gameObject.SetActive(true);
+            trialTxt.SetText($"Time remaining:{HeroManager.instance.GetTrialRemainingTimeShort(heroID)}");
+            
+        }
+        else
+        {
+            trialBanner.gameObject.SetActive(false);
+        }
+
+    }
     public void SetHeroInfo(DataHero hero)
     {
         heroID = hero.id;
         levelTxt.text = $"Lv. {hero.level}";
         healthTxt.text = $"HP: {hero.hp}";
-       
+
     }
 }
