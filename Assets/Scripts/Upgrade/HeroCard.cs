@@ -103,7 +103,7 @@ public class HeroCard : MonoBehaviour
         if (heroData.isTrial)
         {
             trialBanner.gameObject.SetActive(true);
-            trialTxt.SetText($"Time remaining:{HeroManager.instance.GetTrialRemainingTimeShort(heroID)}");
+            trialTxt.SetText($"{HeroManager.instance.GetTrialRemainingTimeShort(heroID)}");
             
         }
         else

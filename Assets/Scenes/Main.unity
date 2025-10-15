@@ -17760,7 +17760,6 @@ MonoBehaviour:
   desItemTxt: {fileID: 0}
   cuurentTrialHeroId: 0
   nameHeroTxt: {fileID: 0}
-  totalItemTxt: {fileID: 0}
   quantityItemTxt: {fileID: 0}
   curentQuantityItemTxt: {fileID: 0}
   heroIcon: {fileID: 0}
@@ -38901,7 +38900,7 @@ MonoBehaviour:
     m_PressedTrigger: Pressed
     m_SelectedTrigger: Selected
     m_DisabledTrigger: Disabled
-  m_Interactable: 0
+  m_Interactable: 1
   m_TargetGraphic: {fileID: 989748259}
   m_FillRect: {fileID: 1931794103}
   m_HandleRect: {fileID: 989748258}
@@ -57270,7 +57269,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -285, y: -131}
+  m_AnchoredPosition: {x: -300, y: -131}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1134657330
@@ -59462,7 +59461,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 77d290919f89f2a49a657665960d9485, type: 3}
+  m_Sprite: {fileID: 21300000, guid: fb1a2a733e937b04eaacc43b08415855, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -79017,7 +79016,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   riderAsset: {fileID: 4900000, guid: 1b8ed9fedea1c424f9c7797c8fbe6b8f, type: 3}
   objectAsset: {fileID: 4900000, guid: 7f40a367a8118fb40b41ddd6694c7ecd, type: 3}
-  commonAsset: {fileID: 4900000, guid: 0499c940514176b458e9f59bcc89c061, type: 3}
+  commonAsset: {fileID: 4900000, guid: 6f1e0f6683afb3c40ac2239b399cd973, type: 3}
   storyAsset: {fileID: 4900000, guid: 47c117dfc26490d47b7aa7fc805d84ac, type: 3}
   questAsset: {fileID: 4900000, guid: 6fcfadc2eedd3314ebce4d11d3fef2b8, type: 3}
   enumTypeAsset: {fileID: 4900000, guid: 21003875ca93c734e97f68cc54d56a26, type: 3}
@@ -79293,6 +79292,18 @@ MonoBehaviour:
     text: {fileID: 1979644055}
   - key: stage_failed_guide
     text: {fileID: 1952728152}
+  - key: item_consumption
+    text: {fileID: 1588185046}
+  - key: shop_receive_package
+    text: {fileID: 390661884}
+  - key: shop_receive_package
+    text: {fileID: 2036073543}
+  - key: confirm_btn
+    text: {fileID: 1418600711}
+  - key: confirm_btn
+    text: {fileID: 1245396840}
+  - key: confirm_btn
+    text: {fileID: 1280808358}
   shopTexts:
   - key: shop_title
     text: {fileID: 933763902}
@@ -80320,7 +80331,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 77d290919f89f2a49a657665960d9485, type: 3}
+  m_Sprite: {fileID: 21300000, guid: fb1a2a733e937b04eaacc43b08415855, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -90684,7 +90695,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 285, y: -136}
+  m_AnchoredPosition: {x: 300, y: -136}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1731414123
@@ -95554,8 +95565,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 50.779995, y: 85.000015}
-  m_SizeDelta: {x: 262.9, y: 45.84}
+  m_AnchoredPosition: {x: 91.64, y: 85.000015}
+  m_SizeDelta: {x: 550.86, y: 45.84}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &1805482853
 GameObject:
@@ -98845,7 +98856,6 @@ MonoBehaviour:
   desItemTxt: {fileID: 372225838}
   cuurentTrialHeroId: 0
   nameHeroTxt: {fileID: 1568152998}
-  totalItemTxt: {fileID: 2027658675}
   quantityItemTxt: {fileID: 1804967832}
   curentQuantityItemTxt: {fileID: 547164876}
   heroIcon: {fileID: 6652429979156232527}
@@ -106756,7 +106766,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &2027658675
 MonoBehaviour:
   m_ObjectHideFlags: 0

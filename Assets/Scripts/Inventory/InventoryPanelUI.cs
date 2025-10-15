@@ -23,7 +23,7 @@ public class InventoryPanelUI : MonoBehaviour
 
     [SerializeField] int cuurentTrialHeroId;
     [SerializeField] TextMeshProUGUI nameHeroTxt;
-    [SerializeField] TextMeshProUGUI totalItemTxt;
+    // [SerializeField] TextMeshProUGUI totalItemTxt;
     [SerializeField] TextMeshProUGUI quantityItemTxt;
     [SerializeField] TextMeshProUGUI curentQuantityItemTxt;
     [SerializeField] Image heroIcon;
@@ -42,6 +42,8 @@ public class InventoryPanelUI : MonoBehaviour
     void Start()
     {
         BuildResourceCells();
+        slide.wholeNumbers = true;
+        slide.onValueChanged.AddListener(OnSliderValueChanged);
 
     }
     private void OnEnable()
@@ -70,6 +72,18 @@ public class InventoryPanelUI : MonoBehaviour
         confirmTrialHeroUnlocked.SetActive(false);
 
 
+    }
+    void OnSliderValueChanged(float value)
+    {
+        // Chỉ cho phép giá trị từ 1 đến maxQuantity
+        int intValue = Mathf.RoundToInt(value);
+        if (intValue < 1)
+        {
+            intValue = 1;
+            slide.value = intValue;
+        }
+        currentQuantity = intValue;
+        UpdateQuantityUI();
     }
     void BuildResourceCells()
     {
@@ -122,10 +136,7 @@ public class InventoryPanelUI : MonoBehaviour
             slide.minValue = 0;
             slide.maxValue = currentQuantity;
             slide.value = maxQuantity;
-            quantityItemTxt.SetText($"<color=#FF0000>{maxQuantity}</color> <color=#000000>day(s)</color>");
-            curentQuantityItemTxt.SetText(
-              $"Quantity: <color=#00FF00>{currentQuantity}</color>/<color=#FF0000>{maxQuantity}</color>"
-                  );
+            UpdateQuantityUI();
 
             quantityItemTxtHeroCard.text = currentQuantity.ToString();
             return;
@@ -192,7 +203,7 @@ public class InventoryPanelUI : MonoBehaviour
         confirmTrialHero.SetActive(true);
         itemActiveInfo.SetActive(false);
         heroTrialIcon.sprite = heroIcon.sprite;
-        trialTimeTxt.SetText($"<color=#000000>Time remaining:</color><color=#FF0000>{HeroManager.instance.GetTrialRemainingTimeFull(cuurentTrialHeroId)}</color> ");
+        trialTimeTxt.SetText($"<color=#000000>{LocalizationManager.instance.GetLocalizedText("time_remaining")}:</color><color=#FF0000>{HeroManager.instance.GetTrialRemainingTimeFull(cuurentTrialHeroId)}</color> ");
         trialLevelTxt.SetText("Level:1");
         RefreshAll();
 
@@ -204,10 +215,7 @@ public class InventoryPanelUI : MonoBehaviour
         {
             currentQuantity++;
             slide.value = currentQuantity;
-            quantityItemTxt.SetText($"<color=#FF0000>{maxQuantity}</color> <color=#000000>day(s)</color>");
-            curentQuantityItemTxt.SetText(
-             $"Quantity: <color=#00BFFF>{currentQuantity}</color><color=#FF0000>/{maxQuantity}</color>"
-                 );
+            UpdateQuantityUI();
         }
     }
 
@@ -217,12 +225,16 @@ public class InventoryPanelUI : MonoBehaviour
         {
             currentQuantity--;
             slide.value = currentQuantity;
-            quantityItemTxt.SetText($"<color=#FF0000>{maxQuantity}</color> <color=#000000>day(s)</color>");
-            curentQuantityItemTxt.SetText(
-            $"Quantity: <color=#00BFFF>{currentQuantity}</color><color=#FF0000>/{maxQuantity}</color>"
-                );
+            UpdateQuantityUI();
         }
     }
-
+    public void UpdateQuantityUI()
+    {
+        quantityItemTxt.SetText($"<color=#000000>{LocalizationManager.instance.GetLocalizedText("total_item")}</color><color=#FF0000>{maxQuantity}</color> <color=#000000>{LocalizationManager.instance.GetLocalizedText("days_item")}</color>");
+      
+            curentQuantityItemTxt.SetText(
+            $"{LocalizationManager.instance.GetLocalizedText("quantity_item")}: <color=#00BFFF>{currentQuantity}</color><color=#FF0000>/{maxQuantity}</color>"
+                );
+    }
     // ...existing code...
 }

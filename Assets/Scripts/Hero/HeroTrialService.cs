@@ -132,9 +132,12 @@ public class HeroTrialService : IHeroTrialService
         int minutes = ts.Minutes;
 
         if (days >= 1)
-            return $"{days} day{(days > 1 ? "s" : "")} {hours} hour{(hours > 1 ? "s" : "")}";
+            // Sử dụng dòng "time_remaining_detail_day" trong CSV
+            return LocalizationManager.instance.GetLocalizedText("time_remaining_detail_day", days, hours);
         else
-            return $"{hours} hour{(hours > 1 ? "s" : "")} {minutes} minute{(minutes > 1 ? "s" : "")}";
+            // Sử dụng dòng "time_remaining_detail_hours" trong CSV
+            return LocalizationManager.instance.GetLocalizedText("time_remaining_detail_hours", hours, minutes);
+
     }
 
     public string GetTrialRemainingTime_Short(List<DataHero> _heroes, int heroId)
@@ -154,9 +157,12 @@ public class HeroTrialService : IHeroTrialService
         int minutes = ts.Minutes;
 
         if (days >= 1)
-            return $"{days}D {hours}H";
+            // Dùng dòng "time_trail_day" trong file CSV
+            return LocalizationManager.instance.GetLocalizedText("time_trail_day", days, hours);
         else
-            return $"{hours}H {minutes}M";
+            // Dùng dòng "time_trail_hours" trong file CSV
+            return LocalizationManager.instance.GetLocalizedText("time_trail_hours", hours, minutes);
+
     }
 
     private void UpdateHero(List<DataHero> _heroes, DataHero updated)
