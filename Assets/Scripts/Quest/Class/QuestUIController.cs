@@ -21,6 +21,8 @@ public class QuestUIController : MonoBehaviour
     [SerializeField] private Sprite stampImage;
     [SerializeField] private TextMeshProUGUI timerText;
     [SerializeField] private GameObject rewardObj;
+    [SerializeField] private GameObject rewardHeroObj;
+    [SerializeField] private Image rewardHeroIcon;
     [SerializeField] private TextMeshProUGUI rewardTxt;
     [SerializeField] private Sprite unselectSprite;
     [SerializeField] private Sprite selectSprite;
@@ -177,6 +179,14 @@ public class QuestUIController : MonoBehaviour
             quests.Remove(quest);
             Destroy(quest.gameObject); // Xóa UI của quest
         }
+        if (quests.Count == 0)
+        {
+            int[] trialHeroIds = { 1001, 1002, 1003, 1004, 1005 };
+            int randomIndex = UnityEngine.Random.Range(0, trialHeroIds.Length);
+            ResourceManager.Instance.AddResource(4, trialHeroIds[randomIndex], 1);
+            rewardHeroIcon.sprite = ResourceManager.Instance.GetIconForResource(4, trialHeroIds[randomIndex]);
+            rewardHeroObj.SetActive(true);
+        }
         GetQuest7Day();
         currentCompleteQuest = 0; // Reset lại số quest hoàn thành
     }
@@ -184,6 +194,7 @@ public class QuestUIController : MonoBehaviour
     {
         rewardObj.SetActive(true);
         yield return new WaitForSeconds(3f);
+        rewardHeroObj.SetActive(false); 
         rewardObj.SetActive(false);
     }
     private void OnEnable()
