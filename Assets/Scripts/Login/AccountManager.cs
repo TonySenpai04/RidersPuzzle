@@ -169,6 +169,7 @@ public class AccountManager : MonoBehaviour
         // ✅ Khởi tạo lại dữ liệu theo tài khoản
         StoryManager.instance.Init(uid);
         NotiManager.instance.Init(uid);
+        RankManager.instance.FetchRank();
     }
 
     private void LoadUserDataFromFirebase()
