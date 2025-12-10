@@ -82,6 +82,12 @@ public abstract class QuestBase
     {
         return Tuple.Create(0,0);
     }
+
+    public virtual void ForceComplete()
+    {
+
+    }
+
     public void OnBeforeSerialize() { }
     public virtual void SaveQuestToFirebase()
     {

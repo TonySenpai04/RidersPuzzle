@@ -35,4 +35,10 @@ public class PlayStageQuest : QuestBase
     {
         return Tuple.Create(currentPlays, requiredPlays);
     }
+
+    public override void ForceComplete()
+    {
+        currentPlays = requiredPlays;
+        SaveQuest();
+    }
 }

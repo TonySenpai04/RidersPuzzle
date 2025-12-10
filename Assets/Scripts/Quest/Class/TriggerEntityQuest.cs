@@ -39,4 +39,10 @@ public class TriggerEntityQuest : QuestBase
     {
         return Tuple.Create(currentTriggers, requiredTriggerCount);
     }
+
+    public override void ForceComplete()
+    {
+        currentTriggers = requiredTriggerCount;
+        SaveQuest();
+    }
 }

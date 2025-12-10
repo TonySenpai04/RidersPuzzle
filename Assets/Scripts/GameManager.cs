@@ -157,6 +157,7 @@ public class GameManager : MonoBehaviour
     {
         if (!hasPlayedWinSound)
         {
+              SaveGameManager.instance.SaveLevelProgress(LevelManager.instance.GetCurrentLevelData().level, true, true);
             SoundManager.instance.PlaySFX("Stage Clear");
            
             foreach (var quest in QuestManager.instance.GetQuestsByType<WinStageNoDamageQuest>())
@@ -192,7 +193,7 @@ public class GameManager : MonoBehaviour
             isEnd = true;
             hasPlayedWinSound = true;
         }
-        // SaveGameManager.instance.SaveLevelProgress(LevelManager.instance.GetCurrentLevelData().level, true, true);
+      
         
     }
 

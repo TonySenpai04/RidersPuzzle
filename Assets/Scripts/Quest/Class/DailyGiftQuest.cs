@@ -30,4 +30,10 @@ public class DailyGiftQuest : QuestBase
     {
         return Tuple.Create(currentCount, requiredItemCount);
     }
+
+    public override void ForceComplete()
+    {
+        currentCount = requiredItemCount;
+        SaveQuest();
+    }
 }

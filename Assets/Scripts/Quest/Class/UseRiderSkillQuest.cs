@@ -29,4 +29,10 @@ public class UseRiderSkillQuest : QuestBase
     {
         return Tuple.Create(currentUsage, requiredSkillUsage);
     }
+
+    public override void ForceComplete()
+    {
+        currentUsage = requiredSkillUsage;
+        SaveQuest();
+    }
 }

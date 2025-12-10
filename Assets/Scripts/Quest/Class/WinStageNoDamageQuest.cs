@@ -33,4 +33,10 @@ public class WinStageNoDamageQuest : QuestBase
     {
         return Tuple.Create(currentWins, requiredWins);
     }
+
+    public override void ForceComplete()
+    {
+        currentWins = requiredWins;
+        SaveQuest();
+    }
 }

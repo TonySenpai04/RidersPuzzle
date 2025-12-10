@@ -369,6 +369,7 @@ public class LevelManager : MonoBehaviour
         Vector2Int positionKey = new Vector2Int(newHiddenObject.row, newHiddenObject.col);
         hiddenObjectInstances[positionKey] = prefab;
     }
+    [ProButton("Unlock All Levels")]
     public void UnlockAllLevels()
     {
         for (int i = 0; i < levels.Count; i++)

@@ -8,6 +8,7 @@ public class LevelProgressData
     public int levelIndex;
     public bool isUnlocked;
     public bool isComplete;
+    public string completionTime;
 }
 
 [Serializable]

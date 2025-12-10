@@ -32,4 +32,10 @@ public class TotalCompleteQuest : QuestBase
     {
         return Tuple.Create(currentComplete, requiredComplete);
     }
+
+    public override void ForceComplete()
+    {
+        currentComplete = requiredComplete;
+        SaveQuest();
+    }
 }

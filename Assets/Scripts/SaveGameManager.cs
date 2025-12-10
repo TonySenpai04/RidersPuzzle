@@ -33,13 +33,26 @@ public class SaveGameManager : MonoBehaviour
         List<LevelProgressData> allProgress = LoadAllProgress();
 
         // Cập nhật dữ liệu cho level hiện tại
+
         int index = allProgress.FindIndex(p => p.levelIndex == levelIndex);
         if (index >= 0)
         {
+            if (!string.IsNullOrEmpty(allProgress[index].completionTime))
+            {
+                progressData.completionTime = allProgress[index].completionTime;
+            }
+            else if (isComplete)
+            {
+                progressData.completionTime = TimeManager.Instance.ServerDateTime.ToString("yyyy-MM-dd HH:mm:ss");
+            }
             allProgress[index] = progressData;
         }
         else
         {
+            if (isComplete)
+            {
+                progressData.completionTime = TimeManager.Instance.ServerDateTime.ToString("yyyy-MM-dd HH:mm:ss");
+            }
             allProgress.Add(progressData);
         }
         FirebaseDataManager.Instance.SaveData(LevelManager.instance.GetAllLevelComplete(), GoldManager.instance.GetGold(),

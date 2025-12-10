@@ -53,6 +53,7 @@ public class QuestManager : MonoBehaviour
         LoadQuests();
 
     }
+    #region Quest Lists
     public void QuestList1()
     {
         activeQuests.Clear();
@@ -94,14 +95,6 @@ public class QuestManager : MonoBehaviour
             LocalizationManager.instance.GetLocalizedText("quest_013_1", 7),
             85, 7));
       
-        //activeQuests.Add(new PlayStageQuest("001", "Play any level with rider Itsui 2 times", 10, 2, "1001", ""));
-        //activeQuests.Add(new PlayStageQuest("002", "Play any level with rider Nigou 2 times", 10, 2, "1002", ""));
-        //activeQuests.Add(new WinStageQuest("003", "Win any level 5 times", 10, 5));
-        //activeQuests.Add(new WinStageNoDamageQuest("004", "Win any level without losing any HP twice", 10, 2, "", ""));
-        //activeQuests.Add(new UseRiderSkillQuest("007", "Use rider skill 5 times", 10, 5, ""));
-        //activeQuests.Add(new TriggerEntityQuest("008", "Go through Pandora's box entity 3 times", 10, 3000, 3, ""));
-        //activeQuests.Add(new DailyGiftQuest("012", "Get free gift in store once", 5, 1));
-        //activeQuests.Add(new TotalCompleteQuest("013", "Complete 6 daily quests", 35, 6));
     }
     public void QuestList2()
     {
@@ -143,15 +136,6 @@ public class QuestManager : MonoBehaviour
         activeQuests.Add(new TotalCompleteQuest("013",
              LocalizationManager.instance.GetLocalizedText("quest_013_1", 6),
              85, 6));
-     
-        //activeQuests.Add(new PlayStageQuest("001", "Play any level with rider Itsui 2 times", 10, 2, "1001", ""));
-        //activeQuests.Add(new PlayStageQuest("002", "Play any level with rider Nigou 2 times", 10, 2, "1002", ""));
-        //activeQuests.Add(new WinStageQuest("003", "Win any level 5 times", 10, 5));
-        // activeQuests.Add(new WinStageNoDamageQuest("004", "Win any level without losing any HP twice", 10, 2, "", ""));
-        //activeQuests.Add(new UseRiderSkillQuest("007", "Use rider skill 5 times", 10, 5, ""));
-        //activeQuests.Add(new TriggerEntityQuest("008", "Go through the Monstera entity 3 times", 10, 2001, 3, ""));
-        //activeQuests.Add(new DailyGiftQuest("012", "Get free gift in store once", 5, 1));
-        //activeQuests.Add(new TotalCompleteQuest("013", "Complete 6 daily quests", 35, 6));
     }
     public void QuestList3()
     {
@@ -195,14 +179,6 @@ public class QuestManager : MonoBehaviour
             LocalizationManager.instance.GetLocalizedText("quest_013_1", 6),
             85, 6));
     
-        //activeQuests.Add(new PlayStageQuest("001", "Play any level with rider Itsui 2 times", 10, 2, "1001", ""));
-        //activeQuests.Add(new PlayStageQuest("002", "Play any level with rider Nigou 2 times", 10, 2, "1002", ""));
-        //activeQuests.Add(new WinStageQuest("003", "Win any level 5 times", 10, 5));
-        //activeQuests.Add(new WinStageNoDamageQuest("004", "Win any level without losing any HP twice", 10, 2, "", ""));
-        //activeQuests.Add(new UseRiderSkillQuest("007", "Use rider skill 5 times", 10, 5, ""));
-        //activeQuests.Add(new TriggerEntityQuest("008", "Go through the Spike entity 3 times", 10, 2003, 3, ""));
-        //activeQuests.Add(new DailyGiftQuest("012", "Get free gift in store once", 5, 1));
-        //activeQuests.Add(new TotalCompleteQuest("013", "Complete 6 daily quests", 35, 6));
     }
     public void QuestList4()
     {
@@ -245,15 +221,8 @@ public class QuestManager : MonoBehaviour
            LocalizationManager.instance.GetLocalizedText("quest_013_1", 6),
            85, 6));
  
-        //activeQuests.Add(new PlayStageQuest("001", "Play any level with rider Itsui 2 times", 10, 2, "1001", ""));
-        //activeQuests.Add(new PlayStageQuest("002", "Play any level with rider Nigou 2 times", 10, 2, "1002", ""));
-        //activeQuests.Add(new WinStageQuest("003", "Win any level 5 times", 10, 5));   
-        //activeQuests.Add(new WinStageNoDamageQuest("004", "Win any level without losing any HP twice", 10, 2, "", ""));
-        //activeQuests.Add(new UseRiderSkillQuest("007", "Use rider skill 5 times", 10, 5, ""));
-        //activeQuests.Add(new TriggerEntityQuest("008", "Go through Bomb entity 3 times", 10, 2002, 3, ""));
-        //activeQuests.Add(new DailyGiftQuest("012", "Get free gift in store once", 5, 1));
-        //activeQuests.Add(new TotalCompleteQuest("013", "Complete 6 daily quests", 35, 6));
     }
+    #endregion
     private IEnumerator WaitForServerTime()
     {
         while (!TimeManager.Instance.IsTimeFetched)
@@ -361,6 +330,7 @@ public class QuestManager : MonoBehaviour
     {
         return activeQuests.FirstOrDefault(h=>h.questId == id);
     }
+    #region Save & Load
     public  void SaveQuestData(QuestData data)
     {
         string json = JsonUtility.ToJson(data);
@@ -463,6 +433,15 @@ public class QuestManager : MonoBehaviour
 
             SaveQuestDataToFirebase(localData); // cũng nên chuyển sang async luôn
             return localData;
+        }
+    }
+    #endregion
+    [ProButton("Complete All Quests")]
+    public void CompleteAllQuests()
+    {
+        foreach (var quest in activeQuests)
+        {
+            quest.ForceComplete();
         }
     }
 
